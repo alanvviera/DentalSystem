@@ -23,7 +23,7 @@ function SignUp() {
                         <button className='bg-primary'>Registrate</button>
                     </form>
                     <div className="form-footer">
-                        <p>Ya tienes una cuenta? <Link href="login/">Inicia sesión</Link></p>
+                        <p>¿Ya tienes una cuenta? <Link href="login/">Inicia sesión</Link></p>
                     </div>
                 </div>
             </div>
