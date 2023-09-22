@@ -110,7 +110,25 @@ section{
   height: 100vh;
   overflow: hidden;
   z-index: -1;
+  
 }
+
+/* Estilos para la imagen en el centro */
+section .middle-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px; /* Ancho deseado de la imagen */
+  height: 800px; /* Alto deseado de la imagen */
+  background-image: url("/background.png"); /* Reemplaza con la URL de tu imagen */
+  background-size: cover;
+  border-radius: 50%; /* Para que la imagen sea circular, ajusta según tus preferencias */
+  border: 2px solid #fff; /* Borde blanco alrededor de la imagen */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor de la imagen */
+  z-index: 1; /* Coloca la imagen encima de las ondas */
+}
+
 
 section .top-wave{
   position: absolute;

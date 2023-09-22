@@ -5,6 +5,7 @@ export default function Login() {
   return (
     <div>
       <section>
+        <div class="middle-image"></div>
         <div className='top-wave'></div>
         <div className='bottom-wave'></div>
       </section>
