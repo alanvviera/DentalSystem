@@ -12,27 +12,22 @@ export default function Login() {
         <div className="container">
           <form>
             <div className="head">
-              <span>Log In</span>
-              <p>With an existing account</p>
+              <span>Iniciar Sesión</span>
+              <p>Con una cuenta existente.</p>
             </div>
             <div className="inputs">
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+              <input type="email" placeholder="Correo electrónico" />
+              <input type="password" placeholder="Contraseña" />
             </div>
             <div>
               <a href="#">
-                Forgot your password?
+                ¿Olvidaste tu contraseña?
               </a>
             </div>
-            <button>Log In</button>
+            <button>Inicia sesión</button>
           </form>
           <div className="form-footer">
-            <p>
-              Don't have an account yet?
-              <Link href="/signup">
-                Create one
-              </Link>
-            </p>
+            <p>¿No tienes una cuenta? <Link href="/signup">Crea una.</Link></p>
           </div>
         </div>
       </div>
