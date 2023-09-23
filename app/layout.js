@@ -4,13 +4,13 @@ import { Montserrat } from 'next/font/google'
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Dental System',
-  description: 'Sistema Integral de Dentistas',
+  title: 'Sistema Dental',
+  description: 'Sistema Dental es una plataforma tecnológica avanzada diseñada específicamente para satisfacer las necesidades de las clínicas dentales modernas. Esta solución integral está destinada a mejorar la eficiencia operativa, agilizar la atención al paciente y permitir una administración efectiva de todos los aspectos relacionados con la práctica odontológica.',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es-MX">
       <body className={montserrat.className}>{children}</body>
     </html>
   )
