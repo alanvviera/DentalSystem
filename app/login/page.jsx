@@ -1,12 +1,12 @@
 import Link from "next/link";
-//import './style.css';
+import './style.css';
 
 export default function Login() {
   return (
     <div>
       <section>
-        <div className=""></div> {/* top-wave */}
-        <div className=""></div> {/* bottom-wave */}
+        <div className="top-wave"></div> {/* top-wave */}
+        <div className="bottom-wave"></div> {/* bottom-wave */}
       </section>
       <div className="flex flex-col justify-center min-h-[100vh]">
         {/* body */}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-//import './style.css'
+import './style.css'
 
 function SignUp() {
     return (

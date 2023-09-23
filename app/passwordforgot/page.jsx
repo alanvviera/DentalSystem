@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
+import "@/app/login/style.css";
 
 export default function PasswordForgot() {
   const [password, setPassword] = useState("");
@@ -19,8 +20,8 @@ export default function PasswordForgot() {
   return (
     <div>
       <section>
-        <div className=""></div> {/* top-wave */}
-        <div className=""></div> {/* bottom-wave */}
+        <div className="top-wave"></div> {/* top-wave */}
+        <div className="bottom-wave"></div> {/* bottom-wave */}
       </section>
       <div className="flex flex-col justify-center min-h-[100vh]">
         {/* body */}
@@ -60,7 +61,6 @@ export default function PasswordForgot() {
                   </button>
                 )}
               </div>
-              <div className={`bg-[#fff] p-2`}></div>
               <div className="relative">
                 <input
                   className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff]"
