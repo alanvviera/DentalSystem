@@ -1,4 +1,4 @@
-.body{
+.body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -6,7 +6,7 @@
 
 .container {
   max-width: 300px;
-  background-color: theme('colors.secondary');
+  background-color: theme("colors.secondary");
   border-radius: 15px;
   overflow: hidden;
   margin: auto auto;
@@ -36,7 +36,7 @@ form .head span {
 
 form .head p {
   font-size: 1.1rem;
-  color: #7C6666;
+  color: #7c6666;
 }
 
 form .inputs {
@@ -59,28 +59,8 @@ form .inputs input {
   font-weight: 200;
 }
 
-form button {
-  background-color: theme('colors.primary');
-  color: white;
-  width: 100%;
-  height: 40px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border: 0;
-  overflow: hidden;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 1s ease-in-out;
-}
-
-form button:hover {
-  background-color: #005ce6;
-}
-
 .form-footer {
-  background-color: theme('colors.tertiary');
+  background-color: theme("colors.tertiary");
   padding: 16px;
   font-size: 1rem;
   text-align: center;
@@ -96,7 +76,7 @@ form button:hover {
   color: #005ce6;
 }
 
-section{
+section {
   /* position: relative;
   width: 100%;
   height: 100vh; */
@@ -105,39 +85,38 @@ section{
   height: 100vh;
   overflow: hidden;
   z-index: -1;
-  
 }
 
-/* Estilos para la imagen en el centro */
+/* Styles for the image in the center */
 section .middle-image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1400px; /* Ancho deseado de la imagen */
-  height: 1000px; /* Alto deseado de la imagen */
-  background-image: url("/background.png"); /* Reemplaza con la URL de tu imagen */
+  width: 1400px; /* Desired image width */
+  height: 1000px; /* Desired image height */
+  background-image: url("/background.png"); /* Replace with the URL of your image */
   background-size: cover;
-  border-radius: 50%; /* Para que la imagen sea circular, ajusta según tus preferencias */
-  border: 2px solid #fff; /* Borde blanco alrededor de la imagen */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra alrededor de la imagen */
-  z-index: 1; /* Coloca la imagen encima de las ondas */
+  border-radius: 50%; /* To make the image circular, adjust according to your preference */
+  border: 2px solid #fff; /* White border around the image */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Shadow around the image */
+  z-index: 1; /* Place the image on top of the waves */
 }
 
-
-section .top-wave{
+section .top-wave {
   position: absolute;
-  top:  0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100px;
   background: url("/wave.png");
   background-size: 1000px 100px;
-  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg) brightness(107%) contrast(88%);
+  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg)
+    brightness(107%) contrast(88%);
   transform: rotate(0.5turn);
 }
 
-section .bottom-wave{
+section .bottom-wave {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -145,5 +124,6 @@ section .bottom-wave{
   height: 100px;
   background: url("/wave.png");
   background-size: 1000px 100px;
-  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg) brightness(107%) contrast(88%);
+  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg)
+    brightness(107%) contrast(88%);
 }

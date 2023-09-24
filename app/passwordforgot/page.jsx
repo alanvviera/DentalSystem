@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import "@/app/login/style.css";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import "./style.css";
 
 export default function PasswordForgot() {
   const [password, setPassword] = useState("");
@@ -44,40 +45,56 @@ export default function PasswordForgot() {
               {" "}
               {/* inputs */}
               <div className="relative">
-                <input
-                  className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff]"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Nueva contraseña"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-                {password && (
-                  <button
-                    className="absolute right-4 top-2 px-2 py-1 border rounded"
-                    onClick={() => setShowPassword(!showPassword)}
-                    type="button"
-                  >
-                    {showPassword ? "Ocultar" : "Mostrar"}
-                  </button>
-                )}
+                <div className="grid grid-cols-1">
+                  <input
+                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Nueva contraseña"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                  {password && (
+                    <button
+                      className="absolute right-0 top-0 px-2 py-1 border rounded"
+                      onClick={() => setShowPassword(!showPassword)}
+                      type="button"
+                      style={{ border: "none" }}
+                    >
+                      {showPassword ? (
+                        <EyeInvisibleOutlined />
+                      ) : (
+                        <EyeOutlined />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="relative">
-                <input
-                  className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff]"
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirme la contraseña"
-                  value={confirmPassword}
-                  onChange={handleConfirmPasswordChange}
-                />
-                {confirmPassword && (
-                  <button
-                    className="absolute right-4 top-2 px-2 py-1 border rounded"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    type="button"
-                  >
-                    {showConfirmPassword ? "Ocultar" : "Mostrar"}
-                  </button>
-                )}
+                <div className="grid grid-cols-1">
+                  <input
+                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirme la contraseña"
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange}
+                  />
+                  {confirmPassword && (
+                    <button
+                      className="absolute right-0 top-0 px-2 py-1 border rounded"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      type="button"
+                      style={{ border: "none" }} // Elimina el borde
+                    >
+                      {showConfirmPassword ? (
+                        <EyeInvisibleOutlined />
+                      ) : (
+                        <EyeOutlined />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
             <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]">

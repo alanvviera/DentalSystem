@@ -111,22 +111,3 @@ section .bottom-wave {
   filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg)
     brightness(107%) contrast(88%);
 }
-
-.show-password-button {
-  position: absolute;
-  top: 50%; 
-  right: 0; 
-  transform: translateY(-50%); 
-  width: 20px; 
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-size: 12px;
-}
-
-.show-password-button:hover {
-  background-color: #f0f0f0;
-}
