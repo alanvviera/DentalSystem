@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
 import { redirect } from "next/dist/server/api-utils";
-import "../style.css"
 import Background from "@/components/Background";
 import FormTextError from "@/components/form/FormTextError";
 
@@ -32,7 +31,7 @@ export default function Login() {
         <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
           {" "}
           {/* container */}
-          <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group" onSubmit={onSubmit} noValidate>
+          <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group" onSubmit={onSubmit} noValidate autoComplete="off">
             <header className="flex flex-col gap-4">
               {" "}
               {/* head */}

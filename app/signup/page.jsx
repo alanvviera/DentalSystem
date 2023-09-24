@@ -26,7 +26,7 @@ function SignUp() {
             <Background />
             <section className="flex flex-col justify-center min-h-[100vh]"> {/* body */}
                 <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto"> {/* form container */}
-                    <form className='flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group' onSubmit={onSubmit} noValidate>
+                    <form className='flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group' onSubmit={onSubmit} noValidate autoComplete="off">
                         <header className="flex flex-col gap-4"> {/* head */}
                             <span className="font-bold text-black text-2xl">Regístrate</span>
                             <p className="text-[#7C6666] text-lg">Crea una cuenta gratis con tu correo.</p>

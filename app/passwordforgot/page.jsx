@@ -59,6 +59,7 @@ export default function PasswordForgot() {
           <form
             className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6"
             onSubmit={handleSubmit}
+            autoComplete="off"
           >
             <header className="flex flex-col gap-4">
               {" "}
