@@ -84,7 +84,7 @@ export default function Login() {
             <p>
               ¿No tienes una cuenta?{" "}
               <Link
-                href="/"
+                href="signup"
                 className="font-bold text-[#0066ff] transition-all ease-in-out duration-3000"
               >
                 Crea una
