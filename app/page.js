@@ -1,6 +1,5 @@
-import Login from "./login/page";
-import SignUp from "./signup/page";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return <Login />;
+export default async function Home({ params }) {
+  redirect('/login');
 }
