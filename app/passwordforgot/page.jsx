@@ -7,11 +7,18 @@ import Background from "@/components/Background";
 import { useForm } from "@/hooks/useForm";
 
 export default function PasswordForgot() {
-  const { password,confirmPassword,showPassword,showConfirmPassword, onChange, cleanFields } = useForm({
+  const {
+    password,
+    confirmPassword,
+    showPassword,
+    showConfirmPassword,
+    onChange,
+    cleanFields,
+  } = useForm({
     password: "",
     confirmPassword: "",
     showPassword: false,
-    showConfirmPassword: false
+    showConfirmPassword: false,
   });
 
   const toggleShowPassword = () => {
@@ -89,7 +96,7 @@ export default function PasswordForgot() {
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
-                  { (
+                  {password && (
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
                       onClick={toggleShowPassword}
@@ -118,7 +125,7 @@ export default function PasswordForgot() {
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
-                  {(
+                  {confirmPassword && (
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
                       onClick={toggleShowConfirmPassword}
@@ -135,7 +142,10 @@ export default function PasswordForgot() {
                 </article>
               </section>
             </section>
-            <button disabled className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30">
+            <button
+              disabled
+              className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30"
+            >
               Enviar
             </button>
           </form>
