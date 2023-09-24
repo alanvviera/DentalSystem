@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import "./style.css";
 
 export default function PasswordForgot() {
   const [password, setPassword] = useState("");
