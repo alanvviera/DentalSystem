@@ -1,31 +1,65 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import FormTextError from "@/components/form/FormTextError";
 import Background from "@/components/Background";
+import { useForm } from "@/hooks/useForm";
 
 export default function PasswordForgot() {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { formState, onChange, cleanFields } = useForm({
+    password: "",
+    confirmPassword: "",
+    showPassword: false,
+    showConfirmPassword: false,
+  });
+
+  const toggleShowPassword = () => {
+    onChange({
+      target: {
+        name: "showPassword",
+        value: !formState.showPassword,
+      },
+    });
+  };
+
+  const toggleShowConfirmPassword = () => {
+    onChange({
+      target: {
+        name: "showConfirmPassword",
+        value: !formState.showConfirmPassword,
+      },
+    });
+  };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    onChange(e);
   };
 
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
+    onChange(e);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // This is the code that is executed when the validations are correct and the form submit is executed
+    console.log(
+      `this is the new password: ${formState.password}, this is the confirm password: ${formState.confirmPassword}`
+    );
+    cleanFields();
   };
 
   return (
     <main>
-      <Background/>
+      <Background />
       <section className="flex flex-col justify-center min-h-[100vh]">
         {/* container */}
         <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
           {" "}
-          <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6">
+          <form
+            className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6"
+            onSubmit={handleSubmit}
+          >
             <header className="flex flex-col gap-4">
               {" "}
               {/* head */}
@@ -44,19 +78,23 @@ export default function PasswordForgot() {
                 <article className="grid grid-cols-1">
                   <input
                     className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
-                    type={showPassword ? "text" : "password"}
+                    type={formState.showPassword ? "text" : "password"}
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
                     placeholder="Nueva contraseña"
-                    value={password}
+                    name="password"
+                    value={formState.password}
                     onChange={handlePasswordChange}
+                    required
                   />
-                  {password && (
+                  <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
+                  {formState.password && (
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={toggleShowPassword}
                       type="button"
                       style={{ border: "none" }}
                     >
-                      {showPassword ? (
+                      {formState.showPassword ? (
                         <EyeInvisibleOutlined />
                       ) : (
                         <EyeOutlined />
@@ -69,21 +107,23 @@ export default function PasswordForgot() {
                 <article className="grid grid-cols-1">
                   <input
                     className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
-                    type={showConfirmPassword ? "text" : "password"}
+                    type={formState.showConfirmPassword ? "text" : "password"}
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
                     placeholder="Confirme la contraseña"
-                    value={confirmPassword}
+                    name="confirmPassword"
+                    value={formState.confirmPassword}
                     onChange={handleConfirmPasswordChange}
+                    required
                   />
-                  {confirmPassword && (
+                  <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
+                  {formState.confirmPassword && (
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
+                      onClick={toggleShowConfirmPassword}
                       type="button"
-                      style={{ border: "none" }} // Elimina el borde
+                      style={{ border: "none" }}
                     >
-                      {showConfirmPassword ? (
+                      {formState.showConfirmPassword ? (
                         <EyeInvisibleOutlined />
                       ) : (
                         <EyeOutlined />
