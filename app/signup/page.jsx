@@ -40,7 +40,7 @@ function SignUp() {
                                     onChange={onChange}
                                     value={user}
                                     placeholder="Nombre completo"
-                                    minLength={4}
+                                    pattern='(.{4,})'
                                     required // required field
                                 />
 
