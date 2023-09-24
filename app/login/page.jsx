@@ -1,29 +1,31 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
+import { redirect } from "next/dist/server/api-utils";
+import "../style.css"
+import Background from "@/components/Background";
 
 export default function Login() {
 
-    const { email, password, onChange, cleanFields } = useForm({
-      email: "",
-      password: ""
-    }
-    );
+  const { email, password, onChange, cleanFields } = useForm({
+    email: "",
+    password: ""
+  }
+  );
 
 
-    function onSubmit(e) {
-      e.preventDefault();
-      // This is the code that is executed when the validations are correct and the form submit is executed
-      console.log(`This is the email: ${email}, this is the password: ${password}`);
-      cleanFields();
-    }
+  function onSubmit(e) {
+    e.preventDefault();
+    // This is the code that is executed when the validations are correct and the form submit is executed
+    console.log(`This is the email: ${email}, this is the password: ${password}`);
+    cleanFields();
+  }
 
   return (
     <main>
-      <section>
-        <article className="top-wave"></article> {/* top-wave */}
-        <article className="bottom-wave"></article> {/* bottom-wave */}
-      </section>
+
+      <Background/>
+
       <section className="flex flex-col justify-center min-h-[100vh]">
         {/* body */}
         <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
@@ -67,7 +69,7 @@ export default function Login() {
                   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                   required
                 />
-                  <p className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                <p className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                   La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.
                 </p>
               </div>
@@ -101,6 +103,6 @@ export default function Login() {
           </section>
         </article>
       </section>
-    </main>
+    </main >
   );
 }

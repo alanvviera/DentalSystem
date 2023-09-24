@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { useForm } from '@/hooks/useForm';
+import Background from '@/components/Background';
 
 function SignUp() {
     const { email, password, user, showPassword, onChange, cleanFields } = useForm({
@@ -21,10 +22,7 @@ function SignUp() {
 
     return (
         <main>
-            <section>
-                <article className='top-wave'></article>
-                <article className='bottom-wave'></article>
-            </section>
+            <Background />
             <section className="flex flex-col justify-center min-h-[100vh]"> {/* body */}
                 <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto"> {/* form container */}
                     <form className='flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group' onSubmit={onSubmit} noValidate>
@@ -76,22 +74,24 @@ function SignUp() {
                                         required // Required field
                                     />
                                     <p className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                                    La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.
+                                        La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.
                                     </p>
                                 </div>
                                 <button
                                     type="button"
                                     name="showPassword"
                                     className="show-password-button"
-                                    onClick={() => onChange({target: {
-                                        name: "showPassword",
-                                        value: !showPassword
-                                    }})}
+                                    onClick={() => onChange({
+                                        target: {
+                                            name: "showPassword",
+                                            value: !showPassword
+                                        }
+                                    })}
                                 >
                                     {showPassword ? '👁️' : '🔒'}
                                 </button>
                             </section>
-                           
+
                         </section>
                         <button className='bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30'>Regístrate</button>
                     </form>

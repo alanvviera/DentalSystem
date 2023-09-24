@@ -1,4 +1,4 @@
-.body {
+/* .body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -74,18 +74,15 @@ form .inputs input {
 
 .form-footer a:hover {
   color: #005ce6;
-}
+} */
 
-section {
-  /* position: relative;
-  width: 100%;
-  height: 100vh; */
+/* section {
   position: absolute;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   z-index: -1;
-}
+} */
 
 /* Styles for the image in the center */
 section .middle-image {
@@ -103,27 +100,3 @@ section .middle-image {
   z-index: 1; /* Place the image on top of the waves */
 }
 
-section .top-wave {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: url("/wave.png");
-  background-size: 1000px 100px;
-  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg)
-    brightness(107%) contrast(88%);
-  transform: rotate(0.5turn);
-}
-
-section .bottom-wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: url("/wave.png");
-  background-size: 1000px 100px;
-  filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg)
-    brightness(107%) contrast(88%);
-}

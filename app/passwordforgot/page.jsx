@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import Background from "@/components/Background";
 
 export default function PasswordForgot() {
   const [password, setPassword] = useState("");
@@ -19,10 +20,7 @@ export default function PasswordForgot() {
 
   return (
     <main>
-      <section>
-        <article className="top-wave"></article> {/* top-wave */}
-        <article className="bottom-wave"></article> {/* bottom-wave */}
-      </section>
+      <Background/>
       <section className="flex flex-col justify-center min-h-[100vh]">
         {/* container */}
         <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
