@@ -134,3 +134,22 @@ section .bottom-wave{
   background-size: 1000px 100px;
   filter: invert(40%) sepia(91%) saturate(465%) hue-rotate(176deg) brightness(107%) contrast(88%);
 }
+
+.show-password-button {
+  position: absolute;
+  top: 50%; /* Centra verticalmente */
+  right: 0; /* Coloca en el lado derecho */
+  transform: translateY(-50%); /* Ajusta la posición vertical */
+  width: 20px; /* Tamaño del cuadro del botón */
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 12px;
+}
+
+.show-password-button:hover {
+  background-color: #f0f0f0;
+}

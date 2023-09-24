@@ -119,8 +119,8 @@ section .middle-image {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1000px; /* Ancho deseado de la imagen */
-  height: 800px; /* Alto deseado de la imagen */
+  width: 1400px; /* Ancho deseado de la imagen */
+  height: 1000px; /* Alto deseado de la imagen */
   background-image: url("/background.png"); /* Reemplaza con la URL de tu imagen */
   background-size: cover;
   border-radius: 50%; /* Para que la imagen sea circular, ajusta según tus preferencias */
