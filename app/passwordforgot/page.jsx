@@ -7,18 +7,18 @@ import Background from "@/components/Background";
 import { useForm } from "@/hooks/useForm";
 
 export default function PasswordForgot() {
-  const { formState, onChange, cleanFields } = useForm({
+  const { password,confirmPassword,showPassword,showConfirmPassword, onChange, cleanFields } = useForm({
     password: "",
     confirmPassword: "",
     showPassword: false,
-    showConfirmPassword: false,
+    showConfirmPassword: false
   });
 
   const toggleShowPassword = () => {
     onChange({
       target: {
         name: "showPassword",
-        value: !formState.showPassword,
+        value: !showPassword,
       },
     });
   };
@@ -27,7 +27,7 @@ export default function PasswordForgot() {
     onChange({
       target: {
         name: "showConfirmPassword",
-        value: !formState.showConfirmPassword,
+        value: !showConfirmPassword,
       },
     });
   };
@@ -57,9 +57,10 @@ export default function PasswordForgot() {
         <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
           {" "}
           <form
-            className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6"
+            className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group"
             onSubmit={handleSubmit}
             autoComplete="off"
+            noValidate
           >
             <header className="flex flex-col gap-4">
               {" "}
@@ -78,24 +79,24 @@ export default function PasswordForgot() {
               <section className="relative">
                 <article className="grid grid-cols-1">
                   <input
-                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
-                    type={formState.showPassword ? "text" : "password"}
+                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10 peer"
+                    type={showPassword ? "text" : "password"}
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
                     placeholder="Nueva contraseña"
                     name="password"
-                    value={formState.password}
+                    value={password}
                     onChange={handlePasswordChange}
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
-                  {formState.password && (
+                  { (
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
                       onClick={toggleShowPassword}
                       type="button"
                       style={{ border: "none" }}
                     >
-                      {formState.showPassword ? (
+                      {showPassword ? (
                         <EyeInvisibleOutlined />
                       ) : (
                         <EyeOutlined />
@@ -107,24 +108,24 @@ export default function PasswordForgot() {
               <section className="relative">
                 <article className="grid grid-cols-1">
                   <input
-                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
-                    type={formState.showConfirmPassword ? "text" : "password"}
+                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10 peer"
+                    type={showConfirmPassword ? "text" : "password"}
                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
                     placeholder="Confirme la contraseña"
                     name="confirmPassword"
-                    value={formState.confirmPassword}
+                    value={confirmPassword}
                     onChange={handleConfirmPasswordChange}
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
-                  {formState.confirmPassword && (
+                  {(
                     <button
                       className="absolute right-0 top-0 px-2 py-1 border rounded"
                       onClick={toggleShowConfirmPassword}
                       type="button"
                       style={{ border: "none" }}
                     >
-                      {formState.showConfirmPassword ? (
+                      {showConfirmPassword ? (
                         <EyeInvisibleOutlined />
                       ) : (
                         <EyeOutlined />
@@ -134,7 +135,7 @@ export default function PasswordForgot() {
                 </article>
               </section>
             </section>
-            <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]">
+            <button disabled className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30">
               Enviar
             </button>
           </form>

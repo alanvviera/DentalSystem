@@ -16,7 +16,7 @@ export const useForm = (initialForm = {}) => {
   };
 
   return {
-    formState,
+    ...formState,
     onChange,
     cleanFields,
   };
