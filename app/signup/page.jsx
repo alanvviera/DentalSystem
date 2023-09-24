@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useForm } from '@/hooks/useForm';
 import Background from '@/components/Background';
+import FormTextError from '@/components/form/FormTextError';
 
 function SignUp() {
     const { email, password, user, showPassword, onChange, cleanFields } = useForm({
@@ -42,9 +43,11 @@ function SignUp() {
                                     minLength={4}
                                     required // required field
                                 />
-                                <p className="mt-2 mb-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                                    Su nombre completo debe de tener minimo 4 caracteres
-                                </p>
+
+                                <FormTextError
+                                    text='El nombre debe de contener mínimo 4 caracteres.'
+                                />
+
                             </div>
                             <div>
                                 <input
@@ -57,9 +60,9 @@ function SignUp() {
                                     pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                                     required // required field
                                 />
-                                <p className="mt-2 mb-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                                    Por favor ingrese un correo válido.
-                                </p>
+                                <FormTextError
+                                    text='Por favor ingrese un correo válido.'
+                                />
                             </div>
                             <section className="relative"> {/* Password field container */}
                                 <div>
@@ -67,15 +70,16 @@ function SignUp() {
                                         className={`outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] pr-10 relative peer`}
                                         type={showPassword ? 'text' : 'password'}
                                         placeholder="Contraseña"
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                                        pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$'
                                         name="password"
                                         value={password}
                                         onChange={onChange}
                                         required // Required field
                                     />
-                                    <p className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                                        La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.
-                                    </p>
+                                    <FormTextError
+                                        text='La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.'
+                                    />
+
                                 </div>
                                 <button
                                     type="button"

@@ -4,6 +4,7 @@ import { useForm } from "@/hooks/useForm";
 import { redirect } from "next/dist/server/api-utils";
 import "../style.css"
 import Background from "@/components/Background";
+import FormTextError from "@/components/form/FormTextError";
 
 export default function Login() {
 
@@ -24,7 +25,7 @@ export default function Login() {
   return (
     <main>
 
-      <Background/>
+      <Background />
 
       <section className="flex flex-col justify-center min-h-[100vh]">
         {/* body */}
@@ -54,9 +55,9 @@ export default function Login() {
                   required
                   pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                 />
-                <p className="mt-2 mb-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                  Por favor ingrese un correo válido.
-                </p>
+                <FormTextError
+                  text='Por favor ingrese un correo válido.'
+                />
               </div>
               <div>
                 <input
@@ -66,12 +67,12 @@ export default function Login() {
                   name="password"
                   value={password}
                   onChange={onChange}
-                  pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                  pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$'
                   required
                 />
-                <p className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                  La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.
-                </p>
+                <FormTextError
+                  text=' La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.'
+                />
               </div>
             </section>
             <section>
