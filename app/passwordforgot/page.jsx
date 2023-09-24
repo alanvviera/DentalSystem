@@ -19,18 +19,17 @@ export default function PasswordForgot() {
   };
 
   return (
-    <div>
+    <main>
       <section>
-        <div className="top-wave"></div> {/* top-wave */}
-        <div className="bottom-wave"></div> {/* bottom-wave */}
+        <article className="top-wave"></article> {/* top-wave */}
+        <article className="bottom-wave"></article> {/* bottom-wave */}
       </section>
-      <div className="flex flex-col justify-center min-h-[100vh]">
-        {/* body */}
-        <div className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
+      <section className="flex flex-col justify-center min-h-[100vh]">
+        {/* container */}
+        <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
           {" "}
-          {/* container */}
           <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6">
-            <div className="flex flex-col gap-4">
+            <header className="flex flex-col gap-4">
               {" "}
               {/* head */}
               <span className="font-bold text-black text-2xl">
@@ -40,12 +39,12 @@ export default function PasswordForgot() {
                 Introduzca una nueva contraseña que utilizará para iniciar
                 sesión.
               </p>
-            </div>
-            <div className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
+            </header>
+            <section className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
               {" "}
               {/* inputs */}
-              <div className="relative">
-                <div className="grid grid-cols-1">
+              <section className="relative">
+                <article className="grid grid-cols-1">
                   <input
                     className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
                     type={showPassword ? "text" : "password"}
@@ -67,10 +66,10 @@ export default function PasswordForgot() {
                       )}
                     </button>
                   )}
-                </div>
-              </div>
-              <div className="relative">
-                <div className="grid grid-cols-1">
+                </article>
+              </section>
+              <section className="relative">
+                <article className="grid grid-cols-1">
                   <input
                     className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10"
                     type={showConfirmPassword ? "text" : "password"}
@@ -94,14 +93,14 @@ export default function PasswordForgot() {
                       )}
                     </button>
                   )}
-                </div>
-              </div>
-            </div>
+                </article>
+              </section>
+            </section>
             <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]">
               Enviar
             </button>
           </form>
-          <div className="bg-tertiary p-4 text-base text-center">
+          <section className="bg-tertiary p-4 text-base text-center">
             {" "}
             {/* form-footer */}
             <p>
@@ -113,9 +112,9 @@ export default function PasswordForgot() {
                 Inicia sesión
               </Link>
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </section>
+        </article>
+      </section>
+    </main>
   );
 }

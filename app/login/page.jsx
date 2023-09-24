@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import './style.css';
 import { useForm } from "@/hooks/useForm";
 
 export default function Login() {
@@ -20,26 +19,26 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <main>
       <section>
-        <div className="top-wave"></div> {/* top-wave */}
-        <div className="bottom-wave"></div> {/* bottom-wave */}
+        <article className="top-wave"></article> {/* top-wave */}
+        <article className="bottom-wave"></article> {/* bottom-wave */}
       </section>
-      <div className="flex flex-col justify-center min-h-[100vh]">
+      <section className="flex flex-col justify-center min-h-[100vh]">
         {/* body */}
-        <div className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
+        <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
           {" "}
           {/* container */}
           <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6" onSubmit={onSubmit}>
-            <div className="flex flex-col gap-4">
+            <header className="flex flex-col gap-4">
               {" "}
               {/* head */}
               <span className="font-bold text-black text-2xl">Inicia sesión</span>
               <p className="text-[#7C6666] text-lg">
                 Con una cuenta existente.
               </p>
-            </div>
-            <div className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
+            </header>
+            <section className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
               {" "}
               {/* inputs */}
               <input
@@ -63,8 +62,8 @@ export default function Login() {
                 required
 
               />
-            </div>
-            <div>
+            </section>
+            <section>
               <p>
                 <Link
                   href="passwordforgot/"
@@ -73,12 +72,12 @@ export default function Login() {
                   ¿Olvidaste tu contraseña?
                 </Link>
               </p>
-            </div>
+            </section>
             <button type="submit" className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]">
               Inicia sesión
             </button>
           </form>
-          <div className="bg-tertiary p-4 text-base text-center">
+          <section className="bg-tertiary p-4 text-base text-center">
             {" "}
             {/* form-footer */}
             <p>
@@ -90,9 +89,9 @@ export default function Login() {
                 Crea una
               </Link>
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </section>
+        </article>
+      </section>
+    </main>
   );
 }
