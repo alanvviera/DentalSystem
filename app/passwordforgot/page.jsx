@@ -12,6 +12,7 @@ export default function PasswordForgot() {
     confirmPassword,
     showPassword,
     showConfirmPassword,
+    showPasswordNotMatch,
     onChange,
     cleanFields,
   } = useForm({
@@ -19,6 +20,7 @@ export default function PasswordForgot() {
     confirmPassword: "",
     showPassword: false,
     showConfirmPassword: false,
+    showPasswordNotMatch: false
   });
 
   const toggleShowPassword = () => {
@@ -49,9 +51,27 @@ export default function PasswordForgot() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(password != confirmPassword){
+      onChange({
+        target: {
+          name: "showPasswordNotMatch",
+          value: false,
+        },
+      });
+      return;
+    }
+    onChange({
+      target: {
+        name: "showPasswordNotMatch",
+        value: true,
+      },
+    });
+
+
     // This is the code that is executed when the validations are correct and the form submit is executed
     console.log(
-      `this is the new password: ${formState.password}, this is the confirm password: ${formState.confirmPassword}`
+      `this is the new password: ${password}, this is the confirm password: ${confirmPassword}`
     );
     cleanFields();
   };
