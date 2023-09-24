@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
 import Background from "@/components/Background";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import FormTextError from "@/components/form/FormTextError";
 
 function SignUp() {
@@ -12,6 +13,17 @@ function SignUp() {
       user: "",
       showPassword: false,
     });
+
+    const toggleShowPassword = () => {
+        onChange({
+          target: {
+            name: "showPassword",
+            value: !showPassword,
+          },
+        });
+      };
+    
+
 
   function onSubmit(e) {
     e.preventDefault();
@@ -78,7 +90,7 @@ function SignUp() {
               <section className="relative">
                 {" "}
                 {/* Password field container */}
-                <div>
+                <div className="relative grid grid-cols-1">
                   <input
                     className={`outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] pr-10 relative peer`}
                     type={showPassword ? "text" : "password"}
@@ -90,6 +102,20 @@ function SignUp() {
                     required // Required field
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
+                  {password && (
+                  <button
+                    className="absolute right-0 top-0 px-2 py-1 border rounded"
+                    onClick={toggleShowPassword}
+                    type="button"
+                    style={{ border: "none" }}
+                  >
+                    {showPassword ? (
+                      <EyeInvisibleOutlined />
+                    ) : (
+                      <EyeOutlined />
+                    )}
+                  </button>
+                )}
                 </div>
               </section>
             </section>

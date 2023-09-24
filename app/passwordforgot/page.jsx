@@ -143,7 +143,6 @@ export default function PasswordForgot() {
               </section>
             </section>
             <button
-              disabled
               className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30"
             >
               Enviar

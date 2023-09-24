@@ -2,16 +2,27 @@
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
 import { redirect } from "next/dist/server/api-utils";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import Background from "@/components/Background";
 import FormTextError from "@/components/form/FormTextError";
 
 export default function Login() {
 
-  const { email, password, onChange, cleanFields } = useForm({
+  const { email, password, showPassword, onChange, cleanFields } = useForm({
     email: "",
-    password: ""
+    password: "",
+    showPassword: false
   }
   );
+
+  const toggleShowPassword = () => {
+    onChange({
+      target: {
+        name: "showPassword",
+        value: !showPassword,
+      },
+    });
+  };
 
 
   function onSubmit(e) {
@@ -58,10 +69,10 @@ export default function Login() {
                   text='Por favor ingrese un correo válido.'
                 />
               </div>
-              <div>
+              <div className="relative grid grid-cols-1">
                 <input
                   className=" outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] peer"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Contraseña"
                   name="password"
                   value={password}
@@ -72,6 +83,20 @@ export default function Login() {
                 <FormTextError
                   text=' La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.'
                 />
+                {password && (
+                  <button
+                    className="absolute right-0 top-0 px-2 py-1 border rounded"
+                    onClick={toggleShowPassword}
+                    type="button"
+                    style={{ border: "none" }}
+                  >
+                    {showPassword ? (
+                      <EyeInvisibleOutlined />
+                    ) : (
+                      <EyeOutlined />
+                    )}
+                  </button>
+                )}
               </div>
             </section>
             <section>
