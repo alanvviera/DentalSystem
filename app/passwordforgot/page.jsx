@@ -67,7 +67,7 @@ export default function PasswordForgot() {
               </div>
             </section>
             <Link
-              href={isEmailValid ? "newpassword/" : ""}
+              href={isEmailValid ? "successfulemail/" : ""}
               className="w-full flex-grow "
             >
               <p>
