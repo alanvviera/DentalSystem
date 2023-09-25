@@ -63,28 +63,26 @@ function SignUp() {
     <main>
       <Background />
       <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
-        {" "}
-        {/* body */}
+        {/* form container */}
         <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl  overflow-hidden m-auto lg:bg-secondary">
           {" "}
-          {/* form container */}
           <form
             className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group"
             onSubmit={onSubmit}
             noValidate
             autoComplete="off"
           >
+            {/*form header */}
             <header className="flex flex-col gap-4">
               {" "}
-              {/* head */}
               <span className="font-bold text-black text-2xl">Regístrate</span>
               <p className="text-[#7C6666] text-lg">
                 Crea una cuenta gratis con tu correo.
               </p>
             </header>
+            {/* inputs */}
             <section className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
               {" "}
-              {/* inputs */}
               <div>
                 <input
                   className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] peer"
@@ -96,7 +94,6 @@ function SignUp() {
                   pattern="(.{4,})"
                   required // required field
                 />
-
                 <FormTextError text="El nombre debe de contener mínimo 4 caracteres." />
               </div>
               <div>
@@ -112,9 +109,7 @@ function SignUp() {
                 />
                 <FormTextError text="Por favor ingrese un correo válido." />
               </div>
-              <section className="relative">
-                {" "}
-                {/* Password field container */}
+              {/* Password field container */}
                 <div className="relative grid grid-cols-1">
                   <input
                     className={`outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] pr-10 relative peer`}
@@ -144,9 +139,7 @@ function SignUp() {
                     </button>
                   )}
                 </div>
-              </section>
-              <section className="relative">
-                <article className="grid grid-cols-1">
+                <div className="relative grid grid-cols-1">
                   <input
                     className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10 peer"
                     type={showConfirmPassword ? "text" : "password"}
@@ -160,7 +153,7 @@ function SignUp() {
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
                   {confirmPassword && (
                     <button
-                      className="absolute right-0 top-0 px-2 py-1 border rounded"
+                      className="absolute right-0 top-0 px-2 py-1 border-none"
                       onClick={() => {
                         toggleShowPassword(
                           "showConfirmPassword",
@@ -168,7 +161,6 @@ function SignUp() {
                         );
                       }}
                       type="button"
-                      style={{ border: "none" }}
                     >
                       {showConfirmPassword ? (
                         <EyeInvisibleOutlined />
@@ -177,26 +169,27 @@ function SignUp() {
                       )}
                     </button>
                   )}
-                </article>
-              </section>
+                </div>
             </section>
             {showPasswordNotMatch && (
-              <div role="alert">
+              <section role="alert">
                 <div className="bg-red-500 text-white font-bold rounded-t px-2 py-2 text-sm">
                   Lo sentimos
                 </div>
                 <div className="border border-t-0 text-sm border-red-400 rounded-b bg-red-100 px-3 py-2 text-red-700">
                   <p>Las contraseñas no coinciden.</p>
                 </div>
-              </div>
+              </section>
             )}
-            <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30">
+            <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl 
+            text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] 
+            group-invalid:pointer-events-none group-invalid:opacity-30">
               Regístrate
             </button>
           </form>
+          {/* form-footer */}
           <section className="w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
             {" "}
-            {/* form-footer */}
             <p>
               ¿Ya tienes una cuenta?{" "}
               <Link

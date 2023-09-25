@@ -22,26 +22,26 @@ export default function SuccessfulEmail() {
         loading: false,
         success: true,
       });
-    }, 3000); // Cambia el tiempo de espera según tus necesidades
+    }, 3000);
   }, []);
 
   return (
     <main>
       <Background />
       <section className="flex flex-col justify-center min-h-screen bg-secondary lg:bg-transparent">
-        {/* body */}
+        {/* Message container */}
         <article className="relative w-full max-w-[60%] mx-auto p-8 rounded-2xl overflow-hidden bg-secondary">
           {state.loading && (
-            <div className="text-center py-8">
+            <section className="text-center py-8">
               <LoadingOutlined style={{ fontSize: "48px" }} />
               <p className="text-2xl mt-4">Cargando...</p>
-            </div>
+            </section>
           )}
           {state.success && (
-            <div className="text-center py-8">
+            <section className="text-center py-8">
               <CheckOutlined style={{ fontSize: "48px", color: "green" }} />
               <p className="text-2xl mt-4">
-                El correo se ha enviado de manera correcta.
+                El correo se ha enviado correctamente.
               </p>
               <Link href="/login">
                 <button className="bg-primary text-white py-3 px-6 mt-8 rounded-md text-xl">
@@ -50,7 +50,7 @@ export default function SuccessfulEmail() {
                   </div>
                 </button>
               </Link>
-            </div>
+            </section>
           )}
         </article>
       </section>
