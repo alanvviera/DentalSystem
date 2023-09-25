@@ -55,10 +55,10 @@ function SignUp() {
   return (
     <main>
       <Background />
-      <section className="flex flex-col justify-center min-h-[100vh]">
+      <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
         {" "}
         {/* body */}
-        <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
+        <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl  overflow-hidden m-auto lg:bg-secondary">
           {" "}
           {/* form container */}
           <form
@@ -180,7 +180,7 @@ function SignUp() {
               Regístrate
             </button>
           </form>
-          <section className="bg-tertiary p-4 text-base text-center">
+          <section className="w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
             {" "}
             {/* form-footer */}
             <p>

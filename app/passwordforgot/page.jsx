@@ -73,9 +73,9 @@ export default function PasswordForgot() {
   return (
     <main>
       <Background />
-      <section className="flex flex-col justify-center min-h-[100vh]">
+      <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
         {/* container */}
-        <article className="bg-secondary max-w-[300px] rounded-2xl overflow-hidden m-auto">
+        <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl  overflow-hidden m-auto lg:bg-secondary">
           {" "}
           <form
             className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group"
@@ -173,7 +173,7 @@ export default function PasswordForgot() {
               Enviar
             </button>
           </form>
-          <section className="bg-tertiary p-4 text-base text-center">
+          <section className="w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
             {" "}
             {/* form-footer */}
             <p>
