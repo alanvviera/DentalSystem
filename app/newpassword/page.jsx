@@ -87,7 +87,7 @@ export default function NewPassword() {
                     <header className="flex flex-col gap-4">
                         {" "}
                         <span className="font-bold text-black text-2xl">
-                          ¿Ha olvidado su contraseña?
+                          Reestablecer contraseña
                         </span>
                         <p className="text-[#7C6666] text-lg">
                           Introduzca una nueva contraseña que utilizará para iniciar
