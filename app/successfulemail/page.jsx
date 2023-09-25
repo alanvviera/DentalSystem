@@ -3,9 +3,9 @@ import Link from "next/link";
 import Background from "@/components/Background";
 import { useEffect, useState } from "react";
 import {
+  MailOutlined,
   CheckOutlined,
   LoadingOutlined,
-  HomeOutlined,
 } from "@ant-design/icons";
 
 export default function SuccessfulEmail() {
@@ -39,15 +39,13 @@ export default function SuccessfulEmail() {
           )}
           {state.success && (
             <section className="text-center py-8">
-              <CheckOutlined style={{ fontSize: "48px", color: "green" }} />
+              <MailOutlined className="text-9xl text-primary" />
               <p className="text-2xl mt-4">
-                El correo se ha enviado correctamente.
+                Se ha enviado un enlace de confirmación a tu correo electrónico.
               </p>
               <Link href="/login">
                 <button className="bg-primary text-white py-3 px-6 mt-8 rounded-md text-xl">
-                  <div className="flex items-center">
-                    <HomeOutlined style={{ fontSize: "24px" }} />
-                  </div>
+                  <p>Regresar a Inicio de sesión</p>
                 </button>
               </Link>
             </section>
