@@ -41,33 +41,27 @@ export default function PasswordForgot() {
     });
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePassword = (e) => {
     onChange(e);
   };
 
-  const handleConfirmPasswordChange = (e) => {
-    onChange(e);
-  };
+  const showMessageOfError = (value) => {
+    onChange({
+      target: {
+        name: "showPasswordNotMatch",
+        value: value,
+      },
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(password != confirmPassword){
-      onChange({
-        target: {
-          name: "showPasswordNotMatch",
-          value: false,
-        },
-      });
+    if (password != confirmPassword) {
+      showMessageOfError(true);
       return;
     }
-    onChange({
-      target: {
-        name: "showPasswordNotMatch",
-        value: true,
-      },
-    });
-
+    showMessageOfError(false);
 
     // This is the code that is executed when the validations are correct and the form submit is executed
     console.log(
@@ -101,6 +95,7 @@ export default function PasswordForgot() {
               </p>
             </header>
             <section className="overflow-hidden bg-[#fff] w-[100%] mx-4 my-2 border-none rounded-lg outline-0">
+
               {" "}
               {/* inputs */}
               <section className="relative">
@@ -112,7 +107,7 @@ export default function PasswordForgot() {
                     placeholder="Nueva contraseña"
                     name="password"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={handlePassword}
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
@@ -141,7 +136,7 @@ export default function PasswordForgot() {
                     placeholder="Confirme la contraseña"
                     name="confirmPassword"
                     value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
+                    onChange={handlePassword}
                     required
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
@@ -162,6 +157,16 @@ export default function PasswordForgot() {
                 </article>
               </section>
             </section>
+            {
+              showPasswordNotMatch && (<div role="alert">
+                <div className="bg-red-500 text-white font-bold rounded-t px-2 py-2 text-sm">
+                  Lo sentimos
+                </div>
+                <div className="border border-t-0 text-sm border-red-400 rounded-b bg-red-100 px-3 py-2 text-red-700">
+                  <p>Las contraseñas no coinciden.</p>
+                </div>
+              </div>)
+            }
             <button
               className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30"
             >
