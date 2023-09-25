@@ -89,12 +89,12 @@ export default function PasswordForgot() {
             {" "}
             {/* form-footer */}
             <p>
-              ¿No tienes una cuenta?{" "}
+              ¿Ya tienes una cuenta?{" "}
               <Link
-                href="signup"
+                href="login/"
                 className="font-bold text-[#0066ff] transition-all ease-in-out duration-3000"
               >
-                Crea una
+                Inicia sesión
               </Link>
             </p>
           </section>
