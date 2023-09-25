@@ -6,33 +6,51 @@ import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import FormTextError from "@/components/form/FormTextError";
 
 function SignUp() {
-  const { email, password, user, showPassword, onChange, cleanFields } =
+  const { email, password, confirmPassword, user, showPassword, showConfirmPassword,
+    showPasswordNotMatch, onChange, cleanFields } =
     useForm({
       email: "",
       password: "",
+      confirmPassword: "",
       user: "",
       showPassword: false,
+      showConfirmPassword: false,
+      showPasswordNotMatch: false
     });
 
-    const toggleShowPassword = () => {
-        onChange({
-          target: {
-            name: "showPassword",
-            value: !showPassword,
-          },
-        });
-      };
-    
+  const toggleShowPassword = (name, value) => {
+    onChange({
+      target: {
+        name,
+        value
+      },
+    });
+  };
 
+  const showMessageOfError = (value) => {
+    onChange({
+      target: {
+        name: "showPasswordNotMatch",
+        value: value,
+      },
+    });
+  }
 
   function onSubmit(e) {
     e.preventDefault();
     // This is the code that is executed when the validations are correct and the form submit is executed
+    if (password != confirmPassword) {
+      showMessageOfError(true);
+      return;
+    }
+    showMessageOfError(false);
+
     console.log(
-      `This is the email: ${email}, this is the password: ${password}, this is the user: ${user}`
+      `This is the email: ${email}, this is the password: ${password}, this is the confirmPassword: ${confirmPassword}, this is the user: ${user}`
     );
     cleanFields();
   }
+
 
   return (
     <main>
@@ -103,22 +121,61 @@ function SignUp() {
                   />
                   <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
                   {password && (
-                  <button
-                    className="absolute right-0 top-0 px-2 py-1 border rounded"
-                    onClick={toggleShowPassword}
-                    type="button"
-                    style={{ border: "none" }}
-                  >
-                    {showPassword ? (
-                      <EyeInvisibleOutlined />
-                    ) : (
-                      <EyeOutlined />
-                    )}
-                  </button>
-                )}
+                    <button
+                      className="absolute right-0 top-0 px-2 py-1 border rounded"
+                      onClick={() => { toggleShowPassword("showPassword", !showPassword) }}
+                      type="button"
+                      style={{ border: "none" }}
+                    >
+                      {showPassword ? (
+                        <EyeInvisibleOutlined />
+                      ) : (
+                        <EyeOutlined />
+                      )}
+                    </button>
+                  )}
                 </div>
               </section>
+              <section className="relative">
+                <article className="grid grid-cols-1">
+                  <input
+                    className="outline-0 py-2 px-[15px] w-[100%] h-[40px] font-extralight border-b border-solid border-[#8080804c] bg-[#fff] pr-10 peer"
+                    type={showConfirmPassword ? "text" : "password"}
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
+                    placeholder="Confirme la contraseña"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={onChange}
+                    required
+                  />
+                  <FormTextError text="La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
+                  {confirmPassword && (
+                    <button
+                      className="absolute right-0 top-0 px-2 py-1 border rounded"
+                      onClick={() => { toggleShowPassword("showConfirmPassword", !showConfirmPassword) }}
+                      type="button"
+                      style={{ border: "none" }}
+                    >
+                      {showConfirmPassword ? (
+                        <EyeInvisibleOutlined />
+                      ) : (
+                        <EyeOutlined />
+                      )}
+                    </button>
+                  )}
+                </article>
+              </section>
             </section>
+            {
+              showPasswordNotMatch && (<div role="alert">
+                <div className="bg-red-500 text-white font-bold rounded-t px-2 py-2 text-sm">
+                  Lo sentimos
+                </div>
+                <div className="border border-t-0 text-sm border-red-400 rounded-b bg-red-100 px-3 py-2 text-red-700">
+                  <p>Las contraseñas no coinciden.</p>
+                </div>
+              </div>)
+            }
             <button className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30">
               Regístrate
             </button>
