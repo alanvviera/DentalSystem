@@ -7,13 +7,11 @@ import Background from "@/components/Background";
 import FormTextError from "@/components/form/FormTextError";
 
 export default function Login() {
-
   const { email, password, showPassword, onChange, cleanFields } = useForm({
     email: "",
     password: "",
-    showPassword: false
-  }
-  );
+    showPassword: false,
+  });
 
   const toggleShowPassword = () => {
     onChange({
@@ -24,17 +22,17 @@ export default function Login() {
     });
   };
 
-
   function onSubmit(e) {
     e.preventDefault();
     // This is the code that is executed when the validations are correct and the form submit is executed
-    console.log(`This is the email: ${email}, this is the password: ${password}`);
+    console.log(
+      `This is the email: ${email}, this is the password: ${password}`
+    );
     cleanFields();
   }
 
   return (
     <main>
-
       <Background />
 
       <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
@@ -42,11 +40,18 @@ export default function Login() {
         <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl overflow-hidden m-auto lg:bg-secondary">
           {" "}
           {/* container */}
-          <form className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group" onSubmit={onSubmit} noValidate autoComplete="off">
+          <form
+            className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group"
+            onSubmit={onSubmit}
+            noValidate
+            autoComplete="off"
+          >
             <header className="flex flex-col gap-4">
               {" "}
               {/* head */}
-              <span className="font-bold text-black text-2xl">Inicia sesión</span>
+              <span className="font-bold text-black text-2xl">
+                Inicia sesión
+              </span>
               <p className="text-[#7C6666] text-lg">
                 Con una cuenta existente.
               </p>
@@ -65,9 +70,7 @@ export default function Login() {
                   required
                   pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                 />
-                <FormTextError
-                  text='Por favor ingrese un correo válido.'
-                />
+                <FormTextError text="Por favor ingrese un correo válido." />
               </div>
               <div className="relative grid grid-cols-1">
                 <input
@@ -77,12 +80,10 @@ export default function Login() {
                   name="password"
                   value={password}
                   onChange={onChange}
-                  pattern='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$'
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$"
                   required
                 />
-                <FormTextError
-                  text=' La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial.'
-                />
+                <FormTextError text=" La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial." />
                 {password && (
                   <button
                     className="absolute right-0 top-0 px-2 py-1 border rounded"
@@ -90,11 +91,7 @@ export default function Login() {
                     type="button"
                     style={{ border: "none" }}
                   >
-                    {showPassword ? (
-                      <EyeInvisibleOutlined />
-                    ) : (
-                      <EyeOutlined />
-                    )}
+                    {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
                   </button>
                 )}
               </div>
@@ -109,7 +106,10 @@ export default function Login() {
                 </Link>
               </p>
             </section>
-            <button type="submit" className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30">
+            <button
+              type="submit"
+              className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6] group-invalid:pointer-events-none group-invalid:opacity-30"
+            >
               Inicia sesión
             </button>
           </form>
@@ -128,6 +128,6 @@ export default function Login() {
           </section>
         </article>
       </section>
-    </main >
+    </main>
   );
 }
