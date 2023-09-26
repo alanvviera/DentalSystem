@@ -30,7 +30,7 @@ export default function SuccessfulEmail() {
       <Background />
       <section className="flex flex-col justify-center min-h-screen bg-secondary lg:bg-transparent">
         {/* Message container */}
-        <article className="relative w-full max-w-[60%] mx-auto p-8 rounded-2xl overflow-hidden bg-secondary">
+        <article className="relative w-full max-w-[60%] mx-auto lg:p-8 rounded-2xl overflow-hidden bg-secondary">
           {state.loading && (
             <section className="text-center py-8">
               <LoadingOutlined style={{ fontSize: "48px" }} />
@@ -38,13 +38,13 @@ export default function SuccessfulEmail() {
             </section>
           )}
           {state.success && (
-            <section className="text-center py-8">
+            <section className="text-center">
               <MailOutlined className="text-9xl text-primary" />
               <p className="text-2xl mt-4">
                 Se ha enviado un enlace de confirmación a tu correo electrónico.
               </p>
               <Link href="/login">
-                <button className="bg-primary text-white py-3 px-6 mt-8 rounded-md text-xl">
+                <button className="bg-primary text-white py-3 px-6 mt-8 rounded-2xl text-xl">
                   <p>Regresar a Inicio de sesión</p>
                 </button>
               </Link>
