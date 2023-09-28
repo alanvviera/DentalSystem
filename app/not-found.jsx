@@ -1,29 +1,28 @@
 /**
- * Componente de página de error 404.
- * @returns {JSX.Element} Elemento JSX que representa la página de error.
+ * Error 404 Page.
+ * @returns {JSX.Element} JSX Element that represents Error 404 page.
  */
 import Background from "@/components/Background";
 
-export default function ErrorPage() {
+export default function NotFoundPage() {
   return (
     <main>
       <Background />
-      {/* Sección principal */}
+      {/* Container */}
       <section className="flex flex-col justify-center min-h-screen bg-secondary lg:bg-transparent">
-        {/* Contenedor de texto centralizado */}
-        <div className="text-center">
-          {/* Título del error */}
+        {/* Header */}
+        <header className="text-center">
           <span className="font-bold text-primary text-8xl">
-            Error 404
+            <h1>Error 404</h1>
           </span>
-        </div>
-        {/* Espaciado superior para el mensaje */}
-        <div className="text-center mt-4">
-          {/* Mensaje de página no encontrada */}
-          <span className="font-bold text-primary text-4xl">
-            Página no encontrada
+        </header>
+        {/* Text content section */}
+        <section className="text-center mt-4">
+          {/* Error 404 Message */}
+          <span className="font-bold text-black text-4xl">
+            <h1>Página no encontrada</h1>
           </span>
-        </div>
+        </section>
       </section>
     </main>
   );
