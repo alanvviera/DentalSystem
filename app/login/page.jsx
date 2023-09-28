@@ -1,12 +1,21 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
-import { redirect } from "next/dist/server/api-utils";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import Background from "@/components/Background";
 import FormTextError from "@/components/form/FormTextError";
+import { useRouter } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
 
 export default function Login() {
+  
+  const {data: session, status} = useSession();
+  const router = useRouter();
+
+  if(status !== 'loading' && status === 'authenticated') {
+    router.push('/')
+  }
+  
   const { email, password, showPassword, onChange, cleanFields } = useForm({
     email: "",
     password: "",
@@ -105,6 +114,20 @@ export default function Login() {
                 group-invalid:pointer-events-none group-invalid:opacity-30"
               >
                 Inicia sesión
+              </button>
+              <button
+                onClick={() => signIn("github")}
+                className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl 
+                text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]"
+              >
+                Inicia sesión con Github
+              </button>
+              <button
+                onClick={() => signIn("google")}
+                className="bg-primary text-white w-full h-10 pt-2 pb-2 border-0 overflow-hidden rounded-3xl 
+                text-base font-semibold cursor-pointer transition-all ease-in-out duration-1000 hover:bg-[#005ce6]"
+              >
+                Inicia sesión con Google
               </button>
             </form>
             <section className=" w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
