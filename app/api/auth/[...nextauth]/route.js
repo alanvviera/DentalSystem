@@ -4,6 +4,9 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
+  session: {
+    maxAge: 60 * 3, // 3 minutes
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
