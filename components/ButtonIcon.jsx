@@ -6,7 +6,7 @@ export const ButtonIcon = ({ text, icon, onClick, href }) => {
     return (
         <Link 
         href={href}
-        className='flex items-center bg-[#415E9B] p-2 border rounded-lg' onClick={()=>onClick()}>
+        className='flex items-center bg-[#7899e0] p-2 border rounded-lg' onClick={()=>onClick()}>
             {
                 icon
             }
