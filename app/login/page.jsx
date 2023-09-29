@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
-import { EyeOutlined, EyeInvisibleOutlined, FacebookFilled, GoogleCircleFilled } from "@ant-design/icons";
+import { EyeOutlined, EyeInvisibleOutlined, 
+  FacebookFilled, GoogleCircleFilled, GithubFilled} from "@ant-design/icons";
 import Background from "@/components/Background";
 import FormTextError from "@/components/form/FormTextError";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { ButtonIcon } from "@/components/ButtonIcon";
 
 export default function Login() {
@@ -131,43 +132,38 @@ export default function Login() {
                 Inicia sesión con Google
               </button> */}
           </form>
-
-          <div className="flex justify-evenly mb-5">
+          {/*Authetication options*/}
+          <section className="flex justify-center flex-wrap gap-2 pb-5">
             <ButtonIcon
-            href={"/api/auth/signin/facebook"}
               onClick={
-                () => {
-                  console.log("Print");
-
-                }
+                () => signIn("facebook")
               }
               icon={<FacebookFilled
-                size={50}
-                className="mr-3"
-                style={{ fontSize: '16px', color: '#ffffff' }}
+                className="mr-3 text-xl text-white"
               />}
               text={"Facebook"}
             />
             <ButtonIcon
-            href={"/api/auth/signin/google"}
               onClick={
-                () => {
-                  console.log("Print");
-
-                }
+                () => signIn("google")
               }
               icon={<GoogleCircleFilled
-                size={50}
-                className="mr-3"
-                style={{ fontSize: '16px', color: '#ffffff' }}
+                className="mr-3 text-xl text-white"
               />}
               text={"Google"}
             />
-          </div>
-
+            <ButtonIcon
+              onClick={
+                () => signIn("github")
+              }
+              icon={<GithubFilled
+                className="mr-3 text-xl text-white"
+              />}
+              text={"Github"}
+            />
+          </section>
+          {/* form-footer section */}
           <section className=" w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
-            {" "}
-            {/* form-footer */}
             <p>
               ¿No tienes una cuenta?{" "}
               <Link
