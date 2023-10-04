@@ -152,7 +152,7 @@ export default function Login() {
               />}
               text={"Google"}
             />
-            <ButtonIcon
+            {/* <ButtonIcon
               onClick={
                 () => signIn("github")
               }
@@ -160,7 +160,7 @@ export default function Login() {
                 className="mr-3 text-xl text-white"
               />}
               text={"Github"}
-            />
+            /> */}
           </section>
           {/* form-footer section */}
           <section className=" w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">

@@ -2,7 +2,7 @@ import { FacebookFilled } from '@ant-design/icons'
 import Link from 'next/link'
 import React from 'react'
 
-export const ButtonIcon = ({ text, icon, onClick, href = "#" }) => {
+export const ButtonIcon = ({ text="", icon, onClick, href = "#" }) => {
     return (
         <Link
             href={href}
