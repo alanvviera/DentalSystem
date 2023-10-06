@@ -1,9 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useForm } from "@/hooks/useForm";
 import Background from "@/components/Background";
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import FormTextError from "@/components/form/FormTextError";
 import CustomForm from "@/components/form/CustomForm";
 import { CustomInput } from "@/components/form/CustomInput";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";

@@ -27,8 +27,6 @@ export default function PasswordForgot() {
   return (
     <main>
       <Background />
-
-
       <CustomForm
         onSubmit={onSubmit}
         title={"¿Ha olvidado su contraseña?"}
