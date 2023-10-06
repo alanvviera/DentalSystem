@@ -127,7 +127,9 @@ function SignUp() {
           showAlert={showPasswordNotMatch}
           title={"Lo sentimos"}
           subtile={"Las contraseñas no coinciden."}
-        />}
+        />
+      
+      }
       />
     </main>
   );
