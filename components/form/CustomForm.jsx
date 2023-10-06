@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const CustomForm = ({ onSubmit, title, subTile, textSubmit, textForgetPassword, inputsForm = [], bottomComponent }) => {
+const CustomForm = ({ onSubmit, title, subTile, textSubmit, textForgetPassword, inputsForm = [], bottomComponent, topComponent }) => {
     return (
         <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
             <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl overflow-hidden m-auto lg:bg-secondary">
@@ -35,6 +35,10 @@ const CustomForm = ({ onSubmit, title, subTile, textSubmit, textForgetPassword, 
                         >
                             {textForgetPassword}
                         </Link> : null
+                    }
+
+                    {
+                        topComponent ? topComponent : null
                     }
 
                     <button
