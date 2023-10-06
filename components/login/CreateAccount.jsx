@@ -2,6 +2,7 @@ import React from 'react'
 import { ButtonIcon } from '../ButtonIcon'
 import { FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 export const CreateAccount = () => {
     return (
