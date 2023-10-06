@@ -1,4 +1,4 @@
-import React from 'react'
+"use client";
 import FormTextError from './FormTextError'
 
 export const CustomInput = ({onChange, type, name, placeholder, pattern, formTextError,value}) => {
@@ -12,7 +12,7 @@ export const CustomInput = ({onChange, type, name, placeholder, pattern, formTex
                 onChange={onChange}
                 value={value}
                 required
-                pattern={"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"}
+                pattern={pattern}
             />
             <FormTextError text={formTextError} />
         </>

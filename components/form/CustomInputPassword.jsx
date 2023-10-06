@@ -1,7 +1,7 @@
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons'
 import FormTextError from './FormTextError'
 
-export const CustomInputPassword = ({showPassword = false, placeholder, name, password, onChange, placeholderError, toggleShowPassword, pattern}) => {
+export const CustomInputPassword = ({showPassword, placeholder, name, password, onChange, placeholderError, toggleShowPassword, pattern}) => {
     return (
         <div className="relative grid grid-cols-1">
             <input
