@@ -4,6 +4,10 @@ import { useForm } from "@/hooks/useForm";
 import Background from "@/components/Background";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import FormTextError from "@/components/form/FormTextError";
+import CustomForm from "@/components/form/CustomForm";
+import { CustomInput } from "@/components/form/CustomInput";
+import { CustomInputPassword } from "@/components/form/CustomInputPassword";
+import { patternEmail, patternPassword } from "@/constans/formPattern";
 
 function SignUp() {
   const {
@@ -62,6 +66,9 @@ function SignUp() {
   return (
     <main>
       <Background />
+
+
+
       <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
         {/* form container */}
         <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl  overflow-hidden m-auto lg:bg-secondary">
