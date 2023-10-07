@@ -4,8 +4,8 @@ import Background from "@/components/Background";
 import CustomForm from "@/components/form/CustomForm";
 import { CustomInput } from "@/components/form/CustomInput";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";
-import { patternEmail, patternPassword, patternUser } from "@/constans/formPattern";
-import { LoginAccount } from "@/components/singup/LoginAccount";
+import { patternEmail, patternPassword, patternUser } from "@/constants/formPattern";
+import { LoginAccount } from "@/components/signup/LoginAccount";
 import { CustomAlert } from "@/components/CustomAlert";
 
 function SignUp() {
