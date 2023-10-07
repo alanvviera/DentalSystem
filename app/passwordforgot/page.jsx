@@ -4,7 +4,7 @@ import { useForm } from "@/hooks/useForm";
 import Background from "@/components/Background";
 import CustomForm from "@/components/form/CustomForm";
 import { CustomInput } from "@/components/form/CustomInput";
-import { patternEmail } from "@/constans/formPattern";
+import { patternEmail } from "@/constants/formPattern";
 import { useRouter } from "next/navigation";
 
 export default function PasswordForgot() {
@@ -32,7 +32,6 @@ export default function PasswordForgot() {
         title={"¿Ha olvidado su contraseña?"}
         subTile={"Escriba su dirección de correo electrónico."}
         textSubmit={"Continuar"}
-        textForgetPassword={"¿Olvidaste tu contraseña?"}
         inputsForm={[
           <CustomInput
             type={"email"}
