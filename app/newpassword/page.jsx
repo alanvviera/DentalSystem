@@ -3,8 +3,8 @@ import React from "react";
 import Background from "@/components/Background";
 import { useForm } from "@/hooks/useForm";
 import CustomForm from "@/components/form/CustomForm";
-import { patternPassword } from "@/constans/formPattern";
-import { LoginAccount } from "@/components/singup/LoginAccount";
+import { patternPassword } from "@/constants/formPattern";
+import { LoginAccount } from "@/components/signup/LoginAccount";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";
 import { CustomAlert } from "@/components/CustomAlert";
 
