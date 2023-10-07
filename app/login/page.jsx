@@ -1,20 +1,24 @@
 "use client";
+import { useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useForm } from "@/hooks/useForm";
 import Background from "@/components/Background";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import CustomForm from "@/components/form/CustomForm";
 import { CustomInput } from "@/components/form/CustomInput";
-import { patternEmail, patternPassword } from "@/constans/formPattern";
+import { patternEmail, patternPassword } from "@/constants/formPattern";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";
-import { CreateAccount } from "@/components/login/CreateAccount";
+import { SignInOptions } from "@/components/login/SignInOptions";
+
 
 export default function Login() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || "/"
 
-  const { data: session, status } = useSession();
+  const {status} = useSession();
   const router = useRouter();
 
-  if (status !== 'loading' && status === 'authenticated') {
+  if(status !== 'loading' && status === 'authenticated') {
     router.push('/')
   }
 
@@ -74,7 +78,7 @@ export default function Login() {
           />
         ]
         }
-        bottomComponent={<CreateAccount/>}
+        bottomComponent={<SignInOptions callbackUrl={callbackUrl}/>}
       />
     </main>
   );
