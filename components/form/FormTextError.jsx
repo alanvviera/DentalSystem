@@ -1,3 +1,10 @@
+/**
+ * FormTextError component for displaying an error message in a form.
+ *
+ * @param {Object} props - Component properties.
+ * @param {string} [props.text=""] - The error message text to display.
+ * @returns {JSX.Element} JSX element representing the error message.
+ */
 
 const FormTextError = ({text=""}) => {
     return (

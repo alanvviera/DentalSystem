@@ -1,6 +1,21 @@
 import Link from 'next/link'
 import React from 'react'
 
+/**
+ * CustomForm component for displaying a custom form.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Function} props.onSubmit - Function to handle form submission.
+ * @param {string} props.title - Title of the form.
+ * @param {string} props.subTile - Subtitle or description of the form.
+ * @param {string} props.textSubmit - Text for the submit button.
+ * @param {string} props.textForgetPassword - Text for the forget password link (optional).
+ * @param {JSX.Element[]} props.inputsForm - Array of input elements for the form.
+ * @param {JSX.Element} props.bottomComponent - Component to be displayed at the bottom of the form (optional).
+ * @param {JSX.Element} props.topComponent - Component to be displayed at the top of the form (optional).
+ * @returns {JSX.Element} JSX element representing the custom form.
+ */
+
 const CustomForm = ({ onSubmit, title, subTile, textSubmit, textForgetPassword, inputsForm = [], bottomComponent, topComponent }) => {
     return (
         <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">

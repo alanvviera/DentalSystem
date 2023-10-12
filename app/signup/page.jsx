@@ -8,6 +8,9 @@ import { patternEmail, patternPassword, patternUser } from "@/constants/formPatt
 import { LoginAccount } from "@/components/signup/LoginAccount";
 import { CustomAlert } from "@/components/CustomAlert";
 
+/**
+ * Component for user registration.
+ */
 function SignUp() {
   const {
     email,
@@ -29,6 +32,11 @@ function SignUp() {
     showPasswordNotMatch: false,
   });
 
+  /**
+   * Toggle password visibility.
+   * @param {string} name - The name of the field to toggle visibility.
+   * @param {boolean} value - The new visibility state.
+   */
   const toggleShowPassword = (name, value) => {
     onChange({
       target: {
@@ -38,6 +46,10 @@ function SignUp() {
     });
   };
 
+  /**
+   * Show or hide a password not matching error message.
+   * @param {boolean} value - Indicates whether to show the error message.
+   */
   const showMessageOfError = (value) => {
     onChange({
       target: {
@@ -47,10 +59,14 @@ function SignUp() {
     });
   };
 
+  /**
+   * Handle form submission.
+   * @param {Event} e - Form submission event.
+   */
   function onSubmit(e) {
     e.preventDefault();
-    // This is the code that is executed when the validations are correct and the form submit is executed
-    if (password != confirmPassword) {
+    // This is the code that is executed when the validations are correct and the form is submitted.
+    if (password !== confirmPassword) {
       showMessageOfError(true);
       return;
     }

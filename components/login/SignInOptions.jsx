@@ -3,6 +3,13 @@ import { ButtonIcon } from '../ButtonIcon'
 import { FacebookFilled, GoogleCircleFilled } from '@ant-design/icons'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
+/**
+ * SignInOptions component for displaying authentication options.
+ *
+ * @param {Object} props - Component properties.
+ * @param {string} [callbackUrl="/"] - The URL to which the user will be redirected after authentication.
+ * @returns {JSX.Element} JSX element representing the authentication options.
+ */
 
 export const SignInOptions = ({callbackUrl = "/"}) => {
     return (

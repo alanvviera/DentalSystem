@@ -1,3 +1,7 @@
+/**
+ * This component is the login page.
+ */
+
 "use client";
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
@@ -9,25 +13,28 @@ import { CustomInput } from "@/components/form/CustomInput";
 import { patternEmail, patternPassword } from "@/constants/formPattern";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";
 import { SignInOptions } from "@/components/login/SignInOptions";
-
-
 export default function Login() {
+  // Get search parameters from the URL
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || "/"
+  const callbackUrl = searchParams.get('callbackUrl') || "/";
 
-  const {status} = useSession();
+  // Check the user's session status
+  const { status } = useSession();
   const router = useRouter();
 
-  if(status !== 'loading' && status === 'authenticated') {
-    router.push('/')
+  // Redirect the user if they are already authenticated
+  if (status !== 'loading' && status === 'authenticated') {
+    router.push('/');
   }
 
+  // Manage form fields
   const { email, password, showPassword, onChange, cleanFields } = useForm({
     email: "",
     password: "",
     showPassword: false,
   });
 
+  // Toggle password visibility
   const toggleShowPassword = () => {
     onChange({
       target: {
@@ -37,9 +44,13 @@ export default function Login() {
     });
   };
 
+  /**
+   * Handle form submission.
+   * @param {Event} e - Form submission event.
+   */
   function onSubmit(e) {
     e.preventDefault();
-    // This is the code that is executed when the validations are correct and the form submit is executed
+    // This is the code that is executed when validations are correct and the form is submitted
     console.log(
       `This is the email: ${email}, this is the password: ${password}`
     );
@@ -83,4 +94,3 @@ export default function Login() {
     </main>
   );
 }
-

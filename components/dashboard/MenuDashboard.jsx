@@ -4,6 +4,13 @@ import { signOut } from "next-auth/react"
 import { CenterLoading } from "../CenterLoading"
 import { LogoutOutlined } from "@ant-design/icons"
 
+/**
+ * MenuDashboard component for the dashboard navigation.
+ * @param {Object} props - Component properties.
+ * @param {Object} props.session - User session data.
+ * @returns {JSX.Element} JSX element representing the dashboard navigation menu.
+ */
+
 const MenuDashboard = ({ session }) => {
 
     if (session == undefined) return <CenterLoading />

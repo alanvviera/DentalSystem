@@ -7,13 +7,20 @@ import { CustomInput } from "@/components/form/CustomInput";
 import { patternEmail } from "@/constants/formPattern";
 import { useRouter } from "next/navigation";
 
+/**
+ * Component for handling password reset requests.
+ * @returns {JSX.Element} JSX element representing the password reset page.
+ */
 export default function PasswordForgot() {
   const router = useRouter();
   const { email, onChange, cleanFields } = useForm({
     email: "",
   });
 
-
+  /**
+   * Handle form submission.
+   * @param {Event} e - Form submission event.
+   */
   function onSubmit(e) {
     e.preventDefault();
 
@@ -21,7 +28,7 @@ export default function PasswordForgot() {
     console.log(`This is the email: ${email}`);
     cleanFields();
     // Redirect here if necessary
-    router.push("successfulemail/");
+    router.push("successful-email/");
   }
 
   return (
@@ -52,6 +59,9 @@ export default function PasswordForgot() {
   );
 }
 
+/**
+ * Component for returning to the login page.
+ */
 export const ReturnAndLogin = () => {
   return (
     <section className="w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
@@ -65,5 +75,5 @@ export const ReturnAndLogin = () => {
         </Link>
       </p>
     </section>
-  )
+  );
 }

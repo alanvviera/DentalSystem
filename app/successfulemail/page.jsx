@@ -8,6 +8,9 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
+/**
+ * Component for displaying a successful email message.
+ */
 export default function SuccessfulEmail() {
   const [state, setState] = useState({
     loading: true,
