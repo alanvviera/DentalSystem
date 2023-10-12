@@ -8,11 +8,9 @@ export default function Home() {
 
   return (
    <>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <MenuDashboard 
     session={session}
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
    </>
   );
 }
