@@ -5,10 +5,10 @@ import { LoadingOutlined } from "@ant-design/icons"
  *
  * @returns {JSX.Element} JSX element representing the centered loading spinner.
  */
-export const CenterLoading = () => {
+export const LoadingScreen = () => {
   return (
-    <div className="flex justify-center items-center content-center h-screen">
-    <LoadingOutlined style={{ fontSize: 50 }} twoToneColor={"#34e7e7"} />
-  </div>
+    <div className="h-screen flex justify-center items-center">
+      <LoadingOutlined style={{ fontSize: 50 }} twoToneColor={"#34e7e7"} />
+    </div>
   )
 }
