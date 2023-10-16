@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import getServerSession from 'next-auth/next'
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
@@ -23,7 +24,7 @@ import FacebookProvider from "next-auth/providers/facebook";
  */
 export const authOptions = {
   session: {
-    maxAge: 60 * 3, // 3 minutes
+    maxAge: 5, // 3 minutes
   },
   providers: [
     // GithubProvider({
@@ -47,7 +48,6 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
 /**
  * Handler for authentication using NextAuth.js with the specified options.
  *
