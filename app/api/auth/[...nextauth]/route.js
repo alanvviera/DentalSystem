@@ -24,7 +24,7 @@ import FacebookProvider from "next-auth/providers/facebook";
  */
 export const authOptions = {
   session: {
-    maxAge: 5, // 3 minutes
+    maxAge: 3*60, // 3 minutes
   },
   providers: [
     // GithubProvider({
