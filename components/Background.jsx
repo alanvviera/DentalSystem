@@ -1,3 +1,8 @@
+/**
+ * Background component for rendering a background with wave images.
+ *
+ * @returns {JSX.Element} JSX element representing the background with wave images.
+ */
 const Background = () => {
   return (
     <section className="absolute w-full h-screen overflow-hidden z-[-1]">

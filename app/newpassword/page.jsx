@@ -7,7 +7,9 @@ import { patternPassword } from "@/constants/formPattern";
 import { LoginAccount } from "@/components/signup/LoginAccount";
 import { CustomInputPassword } from "@/components/form/CustomInputPassword";
 import { CustomAlert } from "@/components/CustomAlert";
-
+/**
+ * Component for resetting the password.
+ */
 export default function NewPassword() {
   const {
     password,
@@ -25,6 +27,9 @@ export default function NewPassword() {
     showPasswordNotMatch: false,
   });
 
+  /**
+   * Toggle password visibility.
+   */
   const toggleShowPassword = () => {
     onChange({
       target: {
@@ -34,6 +39,9 @@ export default function NewPassword() {
     });
   };
 
+  /**
+   * Toggle confirm password visibility.
+   */
   const toggleShowConfirmPassword = () => {
     onChange({
       target: {
@@ -43,6 +51,10 @@ export default function NewPassword() {
     });
   };
 
+  /**
+   * Show or hide a password not matching error message.
+   * @param {boolean} value - Indicates whether to show the error message.
+   */
   const showMessageOfError = (value) => {
     onChange({
       target: {
@@ -52,18 +64,22 @@ export default function NewPassword() {
     });
   };
 
+  /**
+   * Handle form submission.
+   * @param {Event} e - Form submission event.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       showMessageOfError(true);
       return;
     }
     showMessageOfError(false);
 
-    // This is the code that is executed when the validations are correct and the form submit is executed
+    // This is the code that is executed when the validations are correct and the form is submitted
     console.log(
-      `this is the new password: ${password}, this is the confirm password: ${confirmPassword}`
+      `This is the new password: ${password}, this is the confirm password: ${confirmPassword}`
     );
     cleanFields();
   };
@@ -73,40 +89,38 @@ export default function NewPassword() {
       <Background />
       <CustomForm
         onSubmit={handleSubmit}
-        title={" Reestablecer contraseña"}
-        subTile={"Introduzca una nueva contraseña que utilizará para iniciar sesión."}
-        textSubmit={"Enviar"}
+        title={"Reset Password"}
+        subTitle={"Enter a new password to use for logging in."}
+        textSubmit={"Submit"}
         inputsForm={[
           <CustomInputPassword
             showPassword={showPassword}
             name={"password"}
-            placeholder={"Nueva contraseña"}
+            placeholder={"New Password"}
             onChange={onChange}
             password={password}
             pattern={patternPassword}
-            placeholderError={"La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial."}
+            placeholderError={"Password must contain at least eight characters, one letter, one number, and one special character."}
             toggleShowPassword={toggleShowPassword}
           />,
           <CustomInputPassword
             showPassword={showConfirmPassword}
             name={"confirmPassword"}
-            placeholder={"Confirme la contraseña"}
+            placeholder={"Confirm Password"}
             onChange={onChange}
             password={confirmPassword}
             pattern={patternPassword}
-            placeholderError={"La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial."}
+            placeholderError={"Password must contain at least eight characters, one letter, one number, and one special character."}
             toggleShowPassword={toggleShowConfirmPassword}
           />
-
         ]
         }
         bottomComponent={<LoginAccount />}
         topComponent={<CustomAlert
           showAlert={showPasswordNotMatch}
-          title={"Lo sentimos"}
-          subtile={"Las contraseñas no coinciden."}
+          title={"Sorry"}
+          subTitle={"Passwords do not match."}
         />
-
         }
       />
     </main>

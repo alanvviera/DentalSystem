@@ -1,5 +1,15 @@
 import React from 'react'
 
+/**
+ * Component to display an alert message with a title and subtitle.
+ *
+ * @param {Object} props - Component properties.
+ * @param {boolean} props.showAlert - A boolean flag to determine if the alert should be shown.
+ * @param {string} props.title - The title of the alert.
+ * @param {string} props.subtile - The subtitle of the alert.
+ * @returns {JSX.Element|null} JSX element representing the alert or null if showAlert is false.
+ */
+
 export const CustomAlert = ({showAlert, title, subtile}) => {
   return (
     (showAlert && (

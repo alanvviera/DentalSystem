@@ -1,19 +1,12 @@
-"use client";
-import { signOut, useSession } from "next-auth/react";
+import { redirect } from 'next/navigation'
+
+/**
+ * Home component representing the main page of the application.
+ *
+ * @component
+ * @returns {JSX.Element} JSX element for the Home page.
+ */
 
 export default function Home() {
-  const { data: session} = useSession();
-
-  return (
-    <section>
-      {session ? (
-        <section>
-          <h1>{session.user.name}</h1>
-          <button onClick={() => signOut()}>Cerrar sesión</button>
-        </section>
-      ) : (
-        <p>Esperando inicio de sesión</p>
-      )}
-    </section>
-  );
+  redirect('/dashboard/home')
 }
