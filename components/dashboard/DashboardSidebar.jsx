@@ -36,7 +36,7 @@ const DashboardSidebar = ({session}) => {
         }
     ]
     return (
-            <section className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r 
+            <section className="hidden md:flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r 
             rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
                 <a href="#" className="flex items-center px-4 -mx-2">
                         <img className="object-cover mx-2 rounded-full h-9 w-9" src={image}  alt="avatar" />

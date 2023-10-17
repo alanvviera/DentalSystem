@@ -56,7 +56,7 @@ const HamburgerMenu = ({ session }) => {
   };
 
   return (
-    <section className={`lg:hidden w-full sticky top-0 flex flex-col px-4 py-3
+    <section className={`md:hidden w-full sticky top-0 flex flex-col px-4 py-3
     bg-white border-b dark:bg-gray-900 dark:border-gray-700`}>
       <button
         onClick={handleOpen}
