@@ -1,4 +1,4 @@
-import AuthProvider from '@/components/authprovider/AuthProvider'
+import AuthProvider from '../components/authprovider/AuthProvider'
 import './globals.css'
 import { Montserrat } from 'next/font/google'
 

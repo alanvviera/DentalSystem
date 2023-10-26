@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Background from "@/components/Background";
+import Background from "../../components/Background";
 import { useEffect, useState } from "react";
 import {
   MailOutlined,

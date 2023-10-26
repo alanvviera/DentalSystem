@@ -2,14 +2,14 @@
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
-import { useForm } from "@/hooks/useForm";
+import { useForm } from '../../hooks';
 import { useState } from 'react';
-import Background from "@/components/Background";
-import CustomForm from "@/components/form/CustomForm";
-import { CustomInput } from "@/components/form/CustomInput";
-import { patternEmail, patternPassword } from "@/constants/formPattern";
-import { CustomInputPassword } from "@/components/form/CustomInputPassword";
-import { SignInOptions } from "@/components/login/SignInOptions";
+import Background from "../../components/Background";
+import CustomForm from "../../components/form/CustomForm";
+import { CustomInput } from "../../components/form/CustomInput";
+import { patternEmail, patternPassword } from "../../constants/formPattern";
+import { CustomInputPassword } from "../../components/form/CustomInputPassword";
+import { SignInOptions } from "../../components/login/SignInOptions";
 import { signIn } from 'next-auth/react';
 
 
@@ -67,6 +67,7 @@ export default function Login() {
       <Background />
       {/* form */}
       <CustomForm
+        topComponent={null}
         onSubmit={handleSubmit}
         title={"Inicia sesión"}
         subTile={"Con una cuenta existente."}

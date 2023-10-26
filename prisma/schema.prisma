@@ -89,7 +89,7 @@ model doctor {
   license      Int?
   faculty      String?       @db.VarChar(45)
   dates        dates[]
-  user_data    user_data     @relation(fields: [id_user_FK], references: [id_user], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
+  user_data    user_data     @relation(fields: [id_user_FK], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
   specialties  specialties[]
 
   @@index([id_user_FK], map: "fk_user_idx")
@@ -107,7 +107,7 @@ model employees {
   study_level     String?   @db.MediumText
   document        Bytes?    @db.MediumBlob
   local           local     @relation(fields: [id_local_FK], references: [id], onUpdate: Restrict, map: "id_employees_FK")
-  user_data       user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "id_user_FK")
+  user_data       user_data @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "id_user_FK")
 
   @@index([id_user_FK], map: "id_user_FK_idx")
 }
@@ -174,7 +174,7 @@ model login {
   device         String?   @db.MediumText
   google_email   String?   @unique(map: "Google Correo_UNIQUE") @db.VarChar(45)
   facebook_email String?   @unique(map: "facebook_email_UNIQUE") @db.VarChar(45)
-  user_data      user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "user_FK")
+  user_data      user_data @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "user_FK")
   signup         signup[]
 
   @@index([id_user_FK], map: "user_FK_idx")
@@ -207,7 +207,7 @@ model patient {
   emergency_number        String?            @db.VarChar(45)
   dates                   dates[]
   package_type            package_type?
-  user_data               user_data          @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_id_user")
+  user_data               user_data          @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "fk_id_user")
   patient_payments        patient_payments[]
   patient_services        patient_services[]
 
@@ -278,7 +278,7 @@ model type_insurance {
 
 model user_data {
   id           Int         @id @default(autoincrement())
-  id_user      Int         @unique(map: "id_user_UNIQUE")
+  id_user      String      @unique(map: "id_user_UNIQUE") @default(uuid())
   name         String      @db.VarChar(45)
   last_name    String      @db.VarChar(45)
   email        String      @unique(map: "email_UNIQUE") @db.VarChar(60)

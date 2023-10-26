@@ -1,12 +1,12 @@
 "use client";
-import { useForm } from "@/hooks/useForm";
-import Background from "@/components/Background";
-import CustomForm from "@/components/form/CustomForm";
-import { CustomInput } from "@/components/form/CustomInput";
-import { CustomInputPassword } from "@/components/form/CustomInputPassword";
-import { patternEmail, patternPassword, patternUser } from "@/constants/formPattern";
-import { LoginAccount } from "@/components/signup/LoginAccount";
-import { CustomAlert } from "@/components/CustomAlert";
+import { useForm } from "../../hooks/useForm";
+import Background from "../../components/Background";
+import CustomForm from "../../components/form/CustomForm";
+import { CustomInput } from "../../components/form/CustomInput";
+import { CustomInputPassword } from "../../components/form/CustomInputPassword";
+import { patternEmail, patternPassword, patternUser } from "../../constants/formPattern";
+import { LoginAccount } from "../../components/signup/LoginAccount";
+import { CustomAlert } from "../../components/CustomAlert";
 
 function SignUp() {
   const {
@@ -119,7 +119,7 @@ function SignUp() {
           />
         ]
         }
-        bottomComponent={<LoginAccount showPasswordNotMatch={showPasswordNotMatch} />}
+        bottomComponent={<LoginAccount/>}
         topComponent={<CustomAlert
           showAlert={showPasswordNotMatch}
           title={"Lo sentimos"}
