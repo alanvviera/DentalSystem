@@ -1,34 +1,21 @@
 import NextAuth, {NextAuthOptions} from "next-auth";
 import CredentialsProvider  from "next-auth/providers/credentials";
-import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import { prisma } from "@/libs/prisma";
+import { NextResponse } from "next/server";
 
 export const authOptions = {
-  session: {
-    maxAge: 60 * 3, // 3 minutes
-    strategy: 'jwt'
-  },
   providers: [
     CredentialsProvider({
       type: 'credentials',
       credentials: {},
-      authorize(credentials, req){
-        const {email, password} = credentials 
-        //Aqui va la logica del login
+      authorize: async (credentials, req) => {
+        const { email, password } = credentials;
 
-        if(email !== "waldo@gmail.com" || password !== "Oswaldo7!") {
-          return null;
-        }
-
-        //Si lo anterior salio bien, se retornara
-        return {id: '123445678', name: 'Waldo Zen', email: 'waldo@gmail.com'}
+        //Busqueda de credenciales db
       }
     }),
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_ID,
-    //   clientSecret: process.env.GITHUB_SECRET,
-    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
