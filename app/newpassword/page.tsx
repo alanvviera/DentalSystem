@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import Background from "@/components/Background";
-import { useForm } from "@/hooks/useForm";
-import CustomForm from "@/components/form/CustomForm";
-import { patternPassword } from "@/constants/formPattern";
-import { LoginAccount } from "@/components/signup/LoginAccount";
-import { CustomInputPassword } from "@/components/form/CustomInputPassword";
-import { CustomAlert } from "@/components/CustomAlert";
+import Background from "../../components/Background";
+import { useForm } from "../../hooks/useForm";
+import CustomForm from "../../components/form/CustomForm";
+import { patternPassword } from "../../constants/formPattern";
+import { LoginAccount } from "../../components/signup/LoginAccount";
+import { CustomInputPassword } from "../../components/form/CustomInputPassword";
+import { CustomAlert } from "../../components/CustomAlert";
 
 export default function NewPassword() {
   const {
@@ -72,6 +72,7 @@ export default function NewPassword() {
     <main>
       <Background />
       <CustomForm
+        textForgetPassword={''}
         onSubmit={handleSubmit}
         title={" Reestablecer contraseña"}
         subTile={"Introduzca una nueva contraseña que utilizará para iniciar sesión."}
