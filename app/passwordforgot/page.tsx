@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useForm } from "@/hooks/useForm";
-import Background from "@/components/Background";
-import CustomForm from "@/components/form/CustomForm";
-import { CustomInput } from "@/components/form/CustomInput";
-import { patternEmail } from "@/constants/formPattern";
+import { useForm } from "../../hooks/useForm";
+import Background from "../../components/Background";
+import CustomForm from "../../components/form/CustomForm";
+import { CustomInput } from "../../components/form/CustomInput";
+import { patternEmail } from "../../constants/formPattern";
 import { useRouter } from "next/navigation";
 
 export default function PasswordForgot() {
@@ -28,6 +28,8 @@ export default function PasswordForgot() {
     <main>
       <Background />
       <CustomForm
+        textForgetPassword={''}
+        topComponent
         onSubmit={onSubmit}
         title={"¿Ha olvidado su contraseña?"}
         subTile={"Escriba su dirección de correo electrónico."}

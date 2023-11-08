@@ -43,7 +43,7 @@ export default function Login() {
   const [userInfo, setUserInfo] = useState({email: '', password: ''})
 
   
-  const handleSubmit = async (e) => {
+/*   const handleSubmit = async (e) => {
     e.preventDefault();
     //Validacion de la userInfo
     const res = await signIn('credentials', {
@@ -51,7 +51,32 @@ export default function Login() {
       password: userInfo.password,
       redirect: false
     });
-  }
+  } */
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Realiza una solicitud POST al servidor de autenticación
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userInfo.email,
+        password: userInfo.password,
+      }),
+    });
+  
+    if (response.ok) {
+      // Inicio de sesión exitoso
+      router.push("/");
+    } else {
+      // Maneja el error de inicio de sesión
+      console.error("Error en el inicio de sesión");
+      // Puedes mostrar un mensaje de error al usuario si es necesario
+    }
+  };
 
   // function onSubmit(e) {
   //   e.preventDefault();

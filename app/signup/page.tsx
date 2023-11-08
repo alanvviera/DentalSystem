@@ -8,6 +8,7 @@ import { patternEmail, patternPassword, patternUser } from "../../constants/form
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
 
+
 function SignUp() {
   const {
     email,
@@ -47,19 +48,49 @@ function SignUp() {
     });
   };
 
-  function onSubmit(e) {
+  async function onSubmit(e) {
     e.preventDefault();
-    // This is the code that is executed when the validations are correct and the form submit is executed
-    if (password != confirmPassword) {
+
+    if (password !== confirmPassword) {
       showMessageOfError(true);
       return;
     }
+
     showMessageOfError(false);
 
-    console.log(
-      `This is the email: ${email}, this is the password: ${password}, this is the confirmPassword: ${confirmPassword}, this is the user: ${user}`
-    );
-    cleanFields();
+    // Crear un objeto que represente los datos del nuevo usuario
+    const newUser = {
+      name: user,
+      email,
+      password,
+    };
+
+    try {
+      // Realiza una solicitud POST a la API utilizando fetch
+      const response = await fetch("api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      // Verifica la respuesta de la API
+      if (response.status === 201) {
+        // Registro exitoso, puedes redirigir al usuario a la página de inicio de sesión u realizar otras acciones
+        console.log("Registro exitoso");
+        cleanFields();
+      } else {
+        // La API respondió con un error, muestra un mensaje de error al usuario
+        const responseData = await response.json(); // Lee el cuerpo de la respuesta en formato JSON si lo hay
+        console.error("Error en el registro:", responseData);
+        // Puedes mostrar el mensaje de error en un componente de alerta, por ejemplo.
+      }
+      } catch (error) {
+      // Ocurrió un error en la solicitud
+      console.error("Error en la solicitud:", error);
+      // Puedes mostrar un mensaje de error genérico en este caso.
+      }
   }
 
   return (
