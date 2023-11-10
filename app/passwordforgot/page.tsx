@@ -54,7 +54,7 @@ export default function PasswordForgot() {
   );
 }
 
-export const ReturnAndLogin = () => {
+const ReturnAndLogin = () => {
   return (
     <section className="w-full bg-tertiary p-4 text-base text-center md:bottom-0 md:min-h-[50px] md:rounded-lg">
       <p>
@@ -69,3 +69,5 @@ export const ReturnAndLogin = () => {
     </section>
   )
 }
+
+
