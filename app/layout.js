@@ -1,4 +1,5 @@
 import AuthProvider from '@/components/authprovider/AuthProvider'; // Import AuthProvider component
+import '@mantine/core/styles.css';
 import './globals.css'; // Import global CSS styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 
