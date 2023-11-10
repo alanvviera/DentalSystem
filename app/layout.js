@@ -1,18 +1,9 @@
 import AuthProvider from '@/components/authprovider/AuthProvider'; // Import AuthProvider component
 import './globals.css'; // Import global CSS styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
-import '@mantine/core/styles.css'; //Import Mantine Styles
-import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
-import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
-
 
 // Initialize Montserrat font with specific subsets
 const montserrat = Montserrat({ subsets: ['latin'] });
-
-// Mantine theme
-const theme = createTheme({
-  /** Put your mantine theme override here */
-});
 
 /**
  * Object containing metadata for the application.
@@ -38,13 +29,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es-MX">
-      <head>
-      <ColorSchemeScript />
-      </head>
       <body className={montserrat.className}>
-        <MantineProvider theme={theme}>
-          <AuthProvider>{children}</AuthProvider>
-        </MantineProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
