@@ -3,7 +3,7 @@ import '@mantine/core/styles.css'; //Import Mantine Styles
 import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
-import { CollapseDesktop } from '@/components/andre/LayoutAndre';
+import { CollapseDesktop } from '@/components/SideBarComponent/LayoutAndre';
 import { HomeOutlined, TagsOutlined, FileTextOutlined, SettingOutlined, LogoutOutlined, SearchOutlined } from "@ant-design/icons"
 
 
