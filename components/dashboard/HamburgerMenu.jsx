@@ -57,7 +57,7 @@ const HamburgerMenu = ({ session }) => {
 
   return (
     <section className={`md:hidden w-full sticky top-0 flex flex-col px-4 py-3
-    bg-white border-b dark:bg-gray-900 dark:border-gray-700`}>
+    bg-white border-b dark:bg-gray-900 dark:border-gray-700`}style={{ zIndex: 1000 }}>
       <button
         onClick={handleOpen}
         className="flex px-2 gap-4 justify-start items-center text-2xl text-black dark:text-gray-300"
