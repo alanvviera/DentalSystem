@@ -15,35 +15,57 @@ const Appointments = () => {
 
   // Datos de ejemplo para citas y pacientes
   const upcomingAppointments = [
-    { title: 'Jose Arturo Castro Jimenez', imageUrl: 'url1' },
-    { title: 'Cita 2', imageUrl: 'url2' },
+    {
+      title: 'Jose Arturo Castro Jimenez',
+      imageUrl: 'url1',
+      total: 150,
+      adeudo: 50,
+      fechaHora: '2023-11-14 15:30',
+
+    },
+    {
+      title: 'Jose Alfrego Gimenez ',
+      imageUrl: 'url1',
+      fechaHora: '2023-11-15 16:00',
+    },
+    {
+      imageUrl: 'url1',
+      title: 'Jose Alfrego Gimenez ',
+    },
   ];
 
   const completedAppointments = [
-    { title: 'Cita Realizada 1', imageUrl: 'url3' }
+    {
+      title: 'Cita Realizada 1',
+      imageUrl: 'url3',
+      total: 200,
+      adeudo: 0,
+      fechaHora: '2023-11-10 10:00',
+      
+    },
   ];
 
-  const patients = [
-    { title: 'Paciente 1', imageUrl: 'url5' },
-    { title: 'Paciente 2', imageUrl: 'url6' },
-    { title: 'Paciente 3', imageUrl: 'url7' },
+ 
+
+  const asociado = [
+    { title: 'Dental Gama', imageUrl: 'url5', direccion: 'Calle Guadalupe Victoria', numeroEdificio: '31', telefono: '646-154-6755' },
+    { title: 'Dental Gama', imageUrl: 'url5', direccion: 'Calle Guadalupe Victoria', numeroEdificio: '31', telefono: '646-154-6755' },
+    { title: 'Dental Gama', imageUrl: 'url5', direccion: 'Calle Guadalupe Victoria', numeroEdificio: '31', telefono: '646-154-6755' },
   ];
 
   return (
     <div className='m-auto' style={{ marginTop: '20px' }}>
-        {/* Uso del componente de apilamiento para citas pendientes */}
-        <StackComponent title="Citas Pendientes" items={upcomingAppointments.map((appt, index) => <TileComponent key={index} {...appt} />)} />
-
-        {/* Uso del componente de mosaicos para pacientes */}
-        <StackComponent title="Pacientes" items={patients.map((patient, index) => <TileComponent key={index} {...patient} />)} />
-
-        {/* Uso del componente de secciones para citas */}
-        <SectionedTilesComponent
-          title='Citas Realizadas'
-          upcomingTiles={upcomingAppointments}
-          completedTiles={completedAppointments}
-        />
-      </div>
+      <SectionedTilesComponent title="Citas Pedientes" />
+      <StackComponent
+        title="Citas Pendientes"
+        items={upcomingAppointments.map((appt, index) => ({ type: 'TileComponent', props: { key: index, ...appt } }))}
+      />
+      <SectionedTilesComponent title="Asociado" />
+      <StackComponent
+        title="Citas Pendientes"
+        items={asociado.map((appt, index) => ({ type: 'TileComponent', props: { key: index, ...appt } }))}
+      />
+    </div>
   );
 };
 
