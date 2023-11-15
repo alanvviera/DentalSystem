@@ -1,25 +1,25 @@
 import { useForm } from '@mantine/form';
-import { NumberInput, TextInput, Button, Box, Title } from '@mantine/core';
+import { Button, Box, Title } from '@mantine/core';
 import { validateAge, validateEmail, validateName } from './valuesValidate';
-import TextInputText from './TextInputText';
+import TextInputText from './inputs/TextInputText';
+import TextInputNumber from './inputs/TextInputNumber';
+import TextInputPassword from './inputs/TextInputPassword';
 import { typeInputForm } from './customMantineInput';
-import TextInputNumber from './TextInputNumber';
-import TextInputPassword from './TextInputPassword';
 
 export default function MantineForm({ initialValuesForKeys = { name: '', email: '', age: 0 }, validateForKeys = {
     name: validateName,
     email: validateEmail,
     age: validateAge
-}, onSubmit = () => { }, listCustomInputMantine = [], labelSubmit, title = "",colorSubmit="blue" }, ) {
+}, onSubmit = () => { }, listCustomInputMantine = [], labelSubmit, title = "",colorSubmit="blue",extraClass="" } ) {
     const form = useForm({
         initialValues: { ...initialValuesForKeys },
         // functions will be used to validate values at corresponding key
         validate: { ...validateForKeys },
     });
-
+// maw={340} mx="auto"
     return (
-        <Box maw={340} mx="auto">
-            <Title order={4}>{title}</Title>
+        <Box className={`bg-gradient-to-b from-cyan-100 via-sky-200 to-blue-200 p-3 w-full min-h-screen md:w-60 md:min-h-min ${extraClass}`}>
+            <Title className='text-center' order={4}>{title}</Title>
             <form onSubmit={form.onSubmit(() => onSubmit(form))}>
                 {
                     listCustomInputMantine.map(inputMantine => {
