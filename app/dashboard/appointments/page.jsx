@@ -7,6 +7,7 @@ import StackComponent from '@/components/visorstack/StackElements';
 import TileComponent from '@/components/visorstack/Tile';
 import SectionedTilesComponent from '@/components/visorstack/TileSection';
 import '@mantine/core/styles.css';
+import { Box, Text } from '@mantine/core';
 
 const Appointments = () => {
   const { data: session, status } = useSession();
@@ -34,19 +35,6 @@ const Appointments = () => {
     },
   ];
 
-  const completedAppointments = [
-    {
-      title: 'Cita Realizada 1',
-      imageUrl: 'url3',
-      total: 200,
-      adeudo: 0,
-      fechaHora: '2023-11-10 10:00',
-      
-    },
-  ];
-
- 
-
   const asociado = [
     { title: 'Dental Gama', imageUrl: 'url5', direccion: 'Calle Guadalupe Victoria', numeroEdificio: '31', telefono: '646-154-6755' },
     { title: 'Dental Gama', imageUrl: 'url5', direccion: 'Calle Guadalupe Victoria', numeroEdificio: '31', telefono: '646-154-6755' },
@@ -54,17 +42,22 @@ const Appointments = () => {
   ];
 
   return (
-    <div className='m-auto' style={{ marginTop: '20px' }}>
-      <SectionedTilesComponent title="Citas Pedientes" />
-      <StackComponent
-        title="Citas Pendientes"
-        items={upcomingAppointments.map((appt, index) => ({ type: 'TileComponent', props: { key: index, ...appt } }))}
-      />
+    <div style={{ margin: '20px' }}>
+      <SectionedTilesComponent title="Citas Pendientes" />
+      <StackComponent >
+        {upcomingAppointments.map((appt, index) => (<TileComponent key={index} title={appt.title}
+          topRightText={appt.fechaHora}
+          bottomRightText1={appt.adeudo && `Adeudo: ${appt.adeudo}`}
+          bottomRightText2={appt.total && `Total: ${appt.total}`} />))}
+      </StackComponent>
       <SectionedTilesComponent title="Asociado" />
-      <StackComponent
-        title="Citas Pendientes"
-        items={asociado.map((appt, index) => ({ type: 'TileComponent', props: { key: index, ...appt } }))}
-      />
+      <StackComponent title="Citas Pendientes">
+        {asociado.map((appt, index) => (<TileComponent key={index} title={appt.title}>
+          <Text size='md'> Dirección: {appt.direccion} </Text>
+          <Text size='md'> Numero del edificio: {appt.numeroEdificio} </Text>
+          <Text size='md'> Telefono: {appt.telefono} </Text>
+        </TileComponent>))}
+      </StackComponent>
     </div>
   );
 };

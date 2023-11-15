@@ -7,7 +7,7 @@ const TileComponent = ({
   bottomRightText1,
   bottomRightText2,
   topRightText,
-  content,
+  children,
 }) => {
   return (
     <Card
@@ -35,12 +35,9 @@ const TileComponent = ({
       <Text py="12px" size="22px" fw={600}>
         {title}
       </Text>
-
-      {content && (
-        <Box c="dimmed" fw={300}>
-          {content}
-        </Box>
-      )}
+      <Box c="dimmed" fw={300}>
+          {children}
+      </Box>
 
       {(bottomRightText1 || bottomRightText2) && (
         <Group justify="end" mt="lg" fw={500} c="#555">
