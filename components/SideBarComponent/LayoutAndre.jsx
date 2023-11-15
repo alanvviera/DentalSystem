@@ -37,7 +37,7 @@ export function CollapseDesktop({children, routes}) {
         <Group h="100%" px="md" gap={'lg'}>
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          <UserOutlined mb={5} />
+          <UserOutlined />
           {NamePath()}
           <Text fw={500} size="lg">
             {tl}
@@ -45,19 +45,23 @@ export function CollapseDesktop({children, routes}) {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Box>
+        <Box py={5}>
           {routes.map((item, index)=>(
             <NavLink
+              py={10}
+              my={15}
               component={Link}
               key={index}
               active={index === active}
               label={item.title}
               href={item.url}
               leftSection={item.icon}
+              variant='subtles'
+              color='blue'
               onClick={()=>setActive(index)}
             />
           ))}
-          <Button leftSection={<LogoutOutlined/>} fullWidth={true} variant="outline" color='dark'>Cerrar Sesión</Button>
+          <Button leftSection={<LogoutOutlined/>} py={10} my={15} fullWidth={true} variant="subtles" color='blue'>Cerrar Sesión</Button>
         </Box>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
@@ -65,12 +69,3 @@ export function CollapseDesktop({children, routes}) {
   );
 }
 
-{/* 
-            <button    
-                className={`flex items-center px-4 py-2 mt-1 w-full text-gray-600 transition-colors
-                duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 
-                dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700`}>
-                <LogoutOutlined/>
-                <span className="mx-4 font-medium">Cerrar Sesión</span>
-            </button>
-*/}
