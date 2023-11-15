@@ -12,7 +12,7 @@ const FormExampleCreate = () => {
     if (status === "loading") return <LoadingScreen />
 
     return (
-        <div className='flex flex-row w-full justify-center content-center items-center'>
+        <div className='m-5'>
             <MantineForm
                 initialValuesForKeys={{ client: "", clinic: "", appointmentType: "", nameDentist: "", date: "", hours: "", description: "" }}
                 validateForKeys={{
@@ -35,7 +35,7 @@ const FormExampleCreate = () => {
                         new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
                     ]
                 }
-                title='Altas'
+                title='Dar de alta a paciente'
                 onSubmit={(form) => {
                     //All fields were validated
                     console.log(form.values);

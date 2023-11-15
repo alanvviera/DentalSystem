@@ -6,15 +6,15 @@ import MantineForm from '@/components/mantineForm/MantineForm';
 import { allValuesAvailable, validateName } from '@/components/mantineForm/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '@/components/mantineForm/customMantineInput';
 
-const FormExampleUpdate = ({ extraClass = "" }) => {
+const FormExampleUpdate = () => {
 
     const { data: session, status } = useSession();
     if (status === "loading") return <LoadingScreen />
 
     return (
-        <div className='flex flex-row w-full justify-center content-center items-center'>
+        <div className='m-5'>
             <MantineForm
-                extraClass={extraClass}
+                title={"Actualizar paciente"}
                 initialValuesForKeys={{ client: "Ricardo arjona", clinic: "Clinica sin dientes", appointmentType: "Extracíon de muelas", nameDentist: "Ricardo milos", date: "25 de julio del 2023", hours: "1:40 PM", description: "Debe de ser atentido por el doctor Similares del consultorio 8" }}
                 validateForKeys={{
                     client: validateName,
@@ -36,7 +36,6 @@ const FormExampleUpdate = ({ extraClass = "" }) => {
                         new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
                     ]
                 }
-                title='Actualizar registro'
                 onSubmit={(form) => {
                     //All fields were validated
                     console.log(form.values);
