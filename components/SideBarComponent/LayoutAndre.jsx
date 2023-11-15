@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function CollapseDesktop({children, routes, header_bg, header_text,burger_color, navbar_bg, navbar_text, logout_button, logout_text}) {
+export function CollapseDesktop({children, routes, headerBg, headerTextColor, burgerColor, navbarBg, navbarTextColor, logoutButton, logoutTextColor}) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   const isActive = (param) => usePathname() === param
@@ -33,10 +33,10 @@ export function CollapseDesktop({children, routes, header_bg, header_text,burger
       }}
       padding="md"
     >
-      <AppShell.Header bg={header_bg} c={header_text}>
+      <AppShell.Header bg={headerBg} c={headerTextColor}>
         <Group h="100%" px="md" gap={'lg'}>
-          <Burger color={burger_color} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger color={burger_color} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+          <Burger color={burgerColor} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+          <Burger color={burgerColor} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
           <UserOutlined />
           {NamePath()}
           <Text fw={500} size="lg">
@@ -44,7 +44,7 @@ export function CollapseDesktop({children, routes, header_bg, header_text,burger
           </Text>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md" bg={navbar_bg} c={navbar_text}>
+      <AppShell.Navbar p="md" bg={navbarBg} c={navbarTextColor}>
         <Box py={5}>
           {routes.map((item, index)=>(
             <NavLink
@@ -59,7 +59,7 @@ export function CollapseDesktop({children, routes, header_bg, header_text,burger
               onClick={toggleMobile}
             />
           ))}
-          <Button leftSection={<LogoutOutlined/>} py={10} my={15} fullWidth={true} variant='filled' color={logout_button} c={logout_text}>Cerrar Sesión</Button>
+          <Button leftSection={<LogoutOutlined/>} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>
         </Box>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>

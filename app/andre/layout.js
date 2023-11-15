@@ -70,9 +70,9 @@ export default function RootLayout({ children }) {
       <body className={montserrat.className}>
       <MantineProvider theme={theme}>
         <AuthProvider>
-          <CollapseDesktop routes={routes} header_bg={'blue.5'}
-            header_text={'white'} burger_color={'dark'} navbar_bg={'gray.1'} navbar_text={'dark'}
-            logout_button={'blue.4'} logout_text={'dark'}
+          <CollapseDesktop routes={routes} headerBg={'blue.5'}
+            headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.1'} navbarTextColor={'dark'}
+            logoutButton={'blue.4'} logoutTextColor={'dark'}
           >
             {children}
           </CollapseDesktop>
