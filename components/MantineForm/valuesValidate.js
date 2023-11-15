@@ -15,11 +15,13 @@ const validatePassword = (value, values) => {
     return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password === 0) ? "Las contraseñas no pueden estar vacias" : null);
 }
 
+const allValuesAvailable = (value)=> null;
+
 
 export {
     validateName,
     validateEmail,
     validateAge,
-    validatePassword
-
+    validatePassword,
+    allValuesAvailable
 }
