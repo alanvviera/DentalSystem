@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function CollapseDesktop({children, routes}) {
+export function CollapseDesktop({children, routes, header_bg, header_text,burger_color, navbar_bg, navbar_text, logout_button, logout_text}) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   const isActive = (param) => usePathname() === param
@@ -33,10 +33,10 @@ export function CollapseDesktop({children, routes}) {
       }}
       padding="md"
     >
-      <AppShell.Header>
+      <AppShell.Header bg={header_bg} c={header_text}>
         <Group h="100%" px="md" gap={'lg'}>
-          <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+          <Burger color={burger_color} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+          <Burger color={burger_color} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
           <UserOutlined />
           {NamePath()}
           <Text fw={500} size="lg">
@@ -44,7 +44,7 @@ export function CollapseDesktop({children, routes}) {
           </Text>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
+      <AppShell.Navbar p="md" bg={navbar_bg} c={navbar_text}>
         <Box py={5}>
           {routes.map((item, index)=>(
             <NavLink
@@ -52,16 +52,14 @@ export function CollapseDesktop({children, routes}) {
               my={15}
               component={Link}
               key={index}
-              active={index === active}
               label={item.title}
               href={item.url}
               leftSection={item.icon}
               variant='subtles'
-              color='blue'
-              onClick={()=>setActive(index)}
+              onClick={toggleMobile}
             />
           ))}
-          <Button leftSection={<LogoutOutlined/>} py={10} my={15} fullWidth={true} variant="subtles" color='blue'>Cerrar Sesión</Button>
+          <Button leftSection={<LogoutOutlined/>} py={10} my={15} fullWidth={true} variant='filled' color={logout_button} c={logout_text}>Cerrar Sesión</Button>
         </Box>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
