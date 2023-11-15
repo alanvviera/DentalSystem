@@ -1,9 +1,10 @@
 import AppointmentCard from "@/components/dashboard2/AppointmentCard";
 import CustomCard from "@/components/dashboard2/CustomCard";
+import CustomTable from "@/components/dashboard2/CustomTable";
 import DebtCard from "@/components/dashboard2/DebtCard";
 import PendingAppointmentsCard from "@/components/dashboard2/PendingAppointmentsCard";
 import ProfileBanner from "@/components/dashboard2/ProfileBanner";
-import { Grid, GridCol } from "@mantine/core";
+import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
 const page = () => {
@@ -21,7 +22,11 @@ const page = () => {
   };
   return (
     <div>
-      <ProfileBanner title="Bienvenido, usuario uno" description="Pequeña descripcion en curso" avatar showSettingsButton/>
+      <ProfileBanner title="Bienvenido, usuario uno" avatar showSettingsButton>
+        <CustomCard title="Hola">
+          <CustomTable items={items} headers={headers} />
+        </CustomCard>
+      </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
         <GridCol span={{ base: 12, sm: 12, lg: 4 }}>
           <DebtCard data={debt_data} />

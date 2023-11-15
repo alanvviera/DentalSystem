@@ -9,13 +9,13 @@ import {
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
-const CustomTable = ({items, headers, baseLink = ""}) => {
+const CustomTable = ({items, headers, baseLink = "#"}) => {
   const router = useRouter();
   const rows = items.map((item) => (
     <TableTr
       style={{ cursor: "pointer" }}
       onClick={() => {
-        router.push(`${baseLink}/`);
+        router.push(`${baseLink}`);
       }}
       key={item.name}
     >

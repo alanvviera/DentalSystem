@@ -4,9 +4,9 @@ import { Card, Group, Text, Button, ActionIcon, Flex } from "@mantine/core";
 const CustomCard = ({
   title,
   children,
-  showAddButton = false,
+  showAddButton,
   addButtonLink = "#",
-  showMoreButton = false,
+  showMoreButton,
   moreButtonPosition = "bottom",
   moreButtonLink = "#",
 }) => {
