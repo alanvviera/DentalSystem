@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 
-const ProfileBanner = ({children, avatar, title, description, showSettingsButton, settingsLink="#", bg = "blue.7", textColor = "white"}) => {
+const ProfileBanner = ({children, showAvatar, avatarImageUrl, title, description, showSettingsButton, settingsLink="#", bg = "blue.7", textColor = "white"}) => {
   return (
     <Box bg={bg} c={textColor}>
       {showSettingsButton && <Box ta="right">
@@ -17,7 +17,7 @@ const ProfileBanner = ({children, avatar, title, description, showSettingsButton
         </ActionIcon>
       </Box>}
       <Group w="100%" px="30px" pt="20px" pb="40px">
-      {avatar && <Avatar size="20vh" variant="filled" />}
+      {showAvatar && <Avatar src={avatarImageUrl} size="20vh" variant="filled" />}
       <Box w="80%">
         <Text size="30px" fw={700} truncate="end">
           {title}

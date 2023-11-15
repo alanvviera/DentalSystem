@@ -1,3 +1,5 @@
+"use client"
+import { LoadingScreen } from "@/components/LoadingScreen";
 import AppointmentCard from "@/components/dashboard2/AppointmentCard";
 import CustomCard from "@/components/dashboard2/CustomCard";
 import CustomTable from "@/components/dashboard2/CustomTable";
@@ -5,6 +7,7 @@ import DebtCard from "@/components/dashboard2/DebtCard";
 import PendingAppointmentsCard from "@/components/dashboard2/PendingAppointmentsCard";
 import ProfileBanner from "@/components/dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const page = () => {
@@ -20,10 +23,13 @@ const page = () => {
     debt: 3405,
     date: "2023-02-04",
   };
+  const {data: session, status} = useSession();
+  if (status === "loading") return <LoadingScreen/>
+  const {user: {name,email,image}} = session;
   return (
     <div>
-      <ProfileBanner title="Bienvenido, usuario uno" avatar showSettingsButton>
-        <CustomCard title="Hola">
+      <ProfileBanner title={`Bienvenido, ${name}`} description={email} showAvatar avatarImageUrl={image} showSettingsButton>
+        <CustomCard title="Tabla ejemplo">
           <CustomTable items={items} headers={headers} />
         </CustomCard>
       </ProfileBanner>
