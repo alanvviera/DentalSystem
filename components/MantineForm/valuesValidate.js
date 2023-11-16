@@ -15,7 +15,12 @@ const validatePassword = (value, values) => {
     return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password === 0) ? "Las contraseñas no pueden estar vacias" : null);
 }
 
-const allValuesAvailable = (value)=> null;
+const allValuesAvailable = (value) => null;
+
+const validateDate = (value) => {
+
+    return ((value === null || value === undefined || value === "") ? "Por favor seleccione una fecha" : null);
+}
 
 
 export {
@@ -23,5 +28,6 @@ export {
     validateEmail,
     validateAge,
     validatePassword,
-    allValuesAvailable
+    allValuesAvailable,
+    validateDate
 }

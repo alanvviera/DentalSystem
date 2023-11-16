@@ -2,6 +2,7 @@ import AuthProvider from '@/components/authprovider/AuthProvider'; // Import Aut
 import '@mantine/core/styles.css'; //Import Mantine Styles
 import './globals.css'; // Import global CSS styles
 import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
+import '@mantine/dates/styles.css'; //Import package Matine dates styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
 

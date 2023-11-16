@@ -5,6 +5,7 @@ import TextInputText from './inputs/TextInputText';
 import TextInputNumber from './inputs/TextInputNumber';
 import TextInputPassword from './inputs/TextInputPassword';
 import { typeInputForm } from './customMantineInput';
+import TextDataPicker from './inputs/TextDataPicker';
 
 export default function MantineForm({ initialValuesForKeys = { name: '', email: '', age: 0 }, validateForKeys = {
     name: validateName,
@@ -58,6 +59,17 @@ export default function MantineForm({ initialValuesForKeys = { name: '', email: 
                                     }
                                     form={form}
                                 />;
+                                case typeInputForm.DATEPICKER:
+                                    return <TextDataPicker
+                                        key={inputMantine.valueKey}
+                                        {
+                                        ...inputMantine
+                                        }
+                                        {
+                                        ...inputMantine.extraClassname
+                                        }
+                                        form={form}
+                                    />;
                             default:
                                 return <p>This typeInputForm don't exist: ${inputMantine.typeInputForm}</p>
                         }

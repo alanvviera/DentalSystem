@@ -11,5 +11,6 @@ export default class CustomInputMantine{
 export const typeInputForm = {
     TEXT: "TEXT",
     NUMBER: "NUMBER",
-    PASSWORD: "PASSWORD"
+    PASSWORD: "PASSWORD",
+    DATEPICKER: "DATEPICKER"
 }
