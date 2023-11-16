@@ -3,10 +3,10 @@ import React from 'react'
 import { useSession } from 'next-auth/react';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import { Button, Space, Title, } from '@mantine/core';
-import VisualizeData from '@/components/visualizeData/VisualizeData';
-import { LabelDataText } from '@/components/visualizeData/labelsData/LabelDataText';
+import VisualizeData from '@/components/visualize-data/VisualizeData';
+import { LabelDataText } from '@/components/visualize-data/labelsData/LabelDataText';
 import FormExampleUpdate from '../update/page';
-import VisualizeDataButton from '@/components/visualizeData/buttonsData/VisualizeDataButton';
+import VisualizeDataButton from '@/components/visualize-data/buttonsData/VisualizeDataButton';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import FormExampleCreate from '../create/page';
 

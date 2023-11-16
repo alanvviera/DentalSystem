@@ -2,11 +2,11 @@
 import React from 'react'
 import { useSession } from 'next-auth/react';
 import { LoadingScreen } from '@/components/LoadingScreen';
-import MantineForm from '@/components/mantineForm/MantineForm';
-import { allValuesAvailable, validateDate, validateName, validateNumber } from '@/components/mantineForm/valuesValidate';
-import CustomInputMantine, { typeInputForm } from '@/components/mantineForm/customMantineInput';
+import MantineForm from '@/components/mantine-form/MantineForm';
+import { allValuesAvailable, validateDate, validateName, validateNumber } from '@/components/mantine-form/valuesValidate';
+import CustomInputMantine, { typeInputForm } from '@/components/mantine-form/customMantineInput';
 
-const FormExampleCreate = () => {
+const FormExampleUpdate = () => {
 
     const { data: session, status } = useSession();
     if (status === "loading") return <LoadingScreen />
@@ -14,8 +14,10 @@ const FormExampleCreate = () => {
     return (
         <div className='m-5'>
             <MantineForm
-                // title={"Crear paciente"} //Form title
-                initialValuesForKeys={{ client: "", clinic: "", appointmentType: "", nameDentist: "", date: "", hours: "", description: "" }}
+                title={"Actualizar paciente"}
+                initialValuesForKeys={{ client: "Ricardo arjona", clinic: "Clinica sin dientes", appointmentType: "Extracíon de muelas",
+                nameDentist: "Ricardo milos", date: "1701388800000", hours: "14640000",
+                description: "Debe de ser atentido por el doctor Similares del consultorio 8" }}
                 validateForKeys={{
                     client: validateName,
                     clinic: allValuesAvailable,
@@ -31,8 +33,8 @@ const FormExampleCreate = () => {
                         new CustomInputMantine("Nombre de la clinica", "Clinica", "clinic", typeInputForm.TEXT),
                         new CustomInputMantine("Tipo de la cita", "Tipo de la cita", "appointmentType", typeInputForm.TEXT),
                         new CustomInputMantine("Nombre del dentista", "El nombre del dentista", "nameDentist", typeInputForm.TEXT),
-                        new CustomInputMantine("Fecha", "Fecha", "date", typeInputForm.DATEPICKER),
-                        new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME),
+                        new CustomInputMantine("Fecha", "Fecha", "date", typeInputForm.DATEPICKER,new Date(1701388800000)),
+                        new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME, 14640000),
                         new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
                     ]
                 }
@@ -46,4 +48,4 @@ const FormExampleCreate = () => {
         </div>
     )
 }
-export default FormExampleCreate
+export default FormExampleUpdate
