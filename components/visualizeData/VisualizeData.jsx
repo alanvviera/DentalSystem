@@ -4,7 +4,7 @@ const VisualizeData = ({ actionsTop, content, actionBottom, }) => {
 
     <div className='min-h-screen min-w-full'>
       {
-        actionsTop && (<div className='flex flex-row justify-end'>
+        actionsTop && (<div className='flex flex-row justify-end mb-2'>
           {
             actionsTop
           }

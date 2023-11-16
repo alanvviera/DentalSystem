@@ -2,11 +2,11 @@ import React from 'react'
 import { Card, Text, Badge, Group } from '@mantine/core';
 import { DownOutlined, } from '@ant-design/icons';
 
-export const LabelDataText = ({ type = "", title = "",  }) => {
+export const LabelDataText = ({ type = "", title = "", }) => {
     return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder className='m-3' >
-            <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>{type}</Text>
+        <Card shadow="sm" padding="sm" radius="md" withBorder className='m-3'  >
+            <Group justify="space-between"  >
+                <Text fw={500} size='sm'  >{type}</Text>
                 <Badge color="blue" variant="light">
                     <DownOutlined />
                 </Badge>

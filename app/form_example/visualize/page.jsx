@@ -25,7 +25,6 @@ const FormExampleVisualize = () => {
                 }
                 content={<>
                     <Title order={4} className='text-center font-bold' c="dimmed" >Detalles de la cita</Title>
-                    <Space h={"15px"} />
                     <LabelDataText title='Ricardo arjona' type='Nombre del cliente' ></LabelDataText>
                     <LabelDataText title='Clinica sin dientes' type='Clinica' ></LabelDataText>
                     <LabelDataText title='Extracíon de muelas' type='Tipo de cita' ></LabelDataText>
