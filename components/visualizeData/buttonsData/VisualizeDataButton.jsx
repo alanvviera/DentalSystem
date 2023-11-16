@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-const VisualizeDataButton = ({ showComponent,title,icon,titleModal,classNameButton }) => {
+const VisualizeDataButton = ({ showComponent, title, icon, titleModal, classNameButton }) => {
     const [opened, { open, close }] = useDisclosure(false);
     return <>
         <Modal.Root opened={opened} onClose={close} className='bg-transparent ' centered
@@ -11,8 +11,8 @@ const VisualizeDataButton = ({ showComponent,title,icon,titleModal,classNameButt
             />
             <Modal.Content    >
                 <Modal.Header  >
-                    <Modal.Title w={500} c={"dimmed"}>{titleModal}</Modal.Title>
-                    <Modal.CloseButton  />
+                    {titleModal && (<Modal.Title w={500} c={"dimmed"}>{titleModal}</Modal.Title>)}
+                    <Modal.CloseButton />
                 </Modal.Header>
                 <Modal.Body    >
                     {

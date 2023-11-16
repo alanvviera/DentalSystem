@@ -14,6 +14,7 @@ const FormExampleCreate = () => {
     return (
         <div className='m-5'>
             <MantineForm
+                // title={"Crear paciente"} //Form title
                 initialValuesForKeys={{ client: "", clinic: "", appointmentType: "", nameDentist: "", date: "", hours: "", description: "" }}
                 validateForKeys={{
                     client: validateName,
@@ -35,7 +36,6 @@ const FormExampleCreate = () => {
                         new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
                     ]
                 }
-                title='Dar de alta a paciente'
                 onSubmit={(form) => {
                     //All fields were validated
                     console.log(form.values);

@@ -8,6 +8,7 @@ import { LabelDataText } from '@/components/visualizeData/labelsData/LabelDataTe
 import FormExampleUpdate from '../update/page';
 import VisualizeDataButton from '@/components/visualizeData/buttonsData/VisualizeDataButton';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
+import FormExampleCreate from '../create/page';
 
 const FormExampleVisualize = () => {
     const { data: session, status } = useSession();
@@ -17,9 +18,9 @@ const FormExampleVisualize = () => {
         <div className='m-5'>
             <VisualizeData
                 actionsTop={(<>
-                    <VisualizeDataButton titleModal={"Aqui va el titulo del modal"} showComponent={<FormExampleUpdate />} title={"Editar"} classNameButton={{ variant: "gradient", gradient: { from: 'blue', to: 'cyan', deg: 137 }, color: 'blue' }} icon={<EditFilled style={{ color: "white", fontSize: "15px" }} />} />
+                    <VisualizeDataButton showComponent={<FormExampleUpdate />} title={"Editar"} classNameButton={{ variant: "gradient", gradient: { from: 'blue', to: 'cyan', deg: 137 }, color: 'blue' }} icon={<EditFilled style={{ color: "white", fontSize: "15px" }} />} />
                     <Space w={"4px"} />
-                    <VisualizeDataButton titleModal={"Aqui va el titulo del modal"} showComponent={<FormExampleUpdate />} title={"Eliminar"} classNameButton={{ variant: "gradient", gradient: { from: 'red', to: 'pink', deg: 234 }, color: 'red' }} icon={< DeleteFilled style={{ color: "white", fontSize: "15px" }} />} />
+                    <VisualizeDataButton titleModal={"Aqui va el titulo del modal"} showComponent={<FormExampleCreate />} title={"Eliminar"} classNameButton={{ variant: "gradient", gradient: { from: 'red', to: 'pink', deg: 234 }, color: 'red' }} icon={< DeleteFilled style={{ color: "white", fontSize: "15px" }} />} />
                 </>)
                 }
                 content={<>
