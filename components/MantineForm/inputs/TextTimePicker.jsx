@@ -6,7 +6,7 @@ import { IconClock } from '@tabler/icons-react';
 const TextTimePicker = ({ label = "date", placeHolder = "date", valueKey = "date", form, extraClassname = {} }) => {
 
     return (
-        <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }}>
+        <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC', }}>
         <TimeInput
             label={label}
             placeholder={placeHolder}

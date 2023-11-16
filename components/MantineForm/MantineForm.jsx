@@ -60,28 +60,28 @@ export default function MantineForm({ initialValuesForKeys = { name: '', email: 
                                     }
                                     form={form}
                                 />;
-                                case typeInputForm.DATEPICKER:
-                                    return <TextDataPicker
-                                        key={inputMantine.valueKey}
-                                        {
-                                        ...inputMantine
-                                        }
-                                        {
-                                        ...inputMantine.extraClassname
-                                        }
-                                        form={form}
-                                    />;
-                                    case typeInputForm.DATETIME:
-                                        return <TextTimePicker
-                                            key={inputMantine.valueKey}
-                                            {
-                                            ...inputMantine
-                                            }
-                                            {
-                                            ...inputMantine.extraClassname
-                                            }
-                                            form={form}
-                                        />;
+                            case typeInputForm.DATEPICKER:
+                                return <TextDataPicker
+                                    key={inputMantine.valueKey}
+                                    {
+                                    ...inputMantine
+                                    }
+                                    {
+                                    ...inputMantine.extraClassname
+                                    }
+                                    form={form}
+                                />;
+                            case typeInputForm.DATETIME:
+                                return <TextTimePicker
+                                    key={inputMantine.valueKey}
+                                    {
+                                    ...inputMantine
+                                    }
+                                    {
+                                    ...inputMantine.extraClassname
+                                    }
+                                    form={form}
+                                />;
                             default:
                                 return <p>This typeInputForm don't exist: ${inputMantine.typeInputForm}</p>
                         }

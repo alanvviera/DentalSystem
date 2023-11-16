@@ -1,10 +1,10 @@
 export default class CustomInputMantine{
-    constructor(label,placeHolder,valueKey,typeInputForm,extraClassname){
+    constructor(label,placeHolder,valueKey,typeInputForm,initialDate){
         this.label = label;
         this.placeHolder= placeHolder;
         this.valueKey= valueKey;
         this.typeInputForm = typeInputForm;
-        this.extraClassname = extraClassname;
+        this.initialDate = initialDate;
     }
 }
 
