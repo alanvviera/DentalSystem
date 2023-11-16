@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Button, Box, Title } from '@mantine/core';
+import { Button, Box, Title, Space } from '@mantine/core';
 import { validateAge, validateEmail, validateName } from './valuesValidate';
 import TextInputText from './inputs/TextInputText';
 import TextInputNumber from './inputs/TextInputNumber';
@@ -64,8 +64,9 @@ export default function MantineForm({ initialValuesForKeys = { name: '', email: 
 
                     })
                 }
+                <Space h={"5px"} />
                 {
-                    labelSubmit === undefined ? null : (<Button type="submit" mt="sm" color={colorSubmit}  fullWidth>
+                    labelSubmit === undefined ? null : (<Button type="submit" mt="sm" color={colorSubmit} fullWidth>
                         {labelSubmit}
                     </Button>)
                 }

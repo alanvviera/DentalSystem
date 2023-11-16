@@ -11,6 +11,7 @@ function TextInputNumber({label="Age",placeHolder="Age", valueKey="age",form,ext
     max={99}
     {...form.getInputProps(valueKey)}
     {...extraClassname}
+    className='my-3'
 />
   )
 }

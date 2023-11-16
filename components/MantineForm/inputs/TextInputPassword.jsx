@@ -8,7 +8,7 @@ function TextInputPassword({ label = "Password", placeHolder = "Password", value
       placeholder={placeHolder}
       {...form.getInputProps(valueKey)}
       {...extraClassname}
-  
+      className='my-3'
     />
   )
 }
