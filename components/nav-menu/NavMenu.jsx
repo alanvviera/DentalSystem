@@ -4,13 +4,10 @@ import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/co
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
-import { useState } from 'react';
 
-export function CollapseDesktop({children, routes, headerBg, headerTextColor, burgerColor, navbarBg, navbarTextColor, logoutButton, logoutTextColor}) {
+export function NavMenu({children, routes, headerBg, headerTextColor, burgerColor, navbarBg, navbarTextColor, logoutButton, logoutTextColor}) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-  const isActive = (param) => usePathname() === param
-  const [active, setActive] = useState(0);
   let filter;
   let tl;
 

@@ -3,7 +3,7 @@ import '@mantine/core/styles.css'; //Import Mantine Styles
 import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
-import { CollapseDesktop } from '@/components/SideBarComponent/LayoutAndre';
+import { NavMenu } from '@/components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined, FileTextOutlined, SettingOutlined, LogoutOutlined, SearchOutlined } from "@ant-design/icons"
 
 
@@ -41,22 +41,22 @@ export default function RootLayout({ children }) {
   const routes = [
     {
         title: "Inicio",
-        url: "/andre/Home",
+        url: "/menu-example/Home",
         icon: <HomeOutlined/>
     },
     {
         title: "Citas",
-        url: "/andre/appointments",
+        url: "/menu-example/appointments",
         icon: <TagsOutlined/>
     },
     {
         title: "Perfil",
-        url: "/andre/settings",
+        url: "/menu-example/settings",
         icon: <SettingOutlined/>
     },
     {
         title: "Historial Clinico",
-        url: "/andre/documents",
+        url: "/menu-example/documents",
         icon: <FileTextOutlined/>
     }
 ]
@@ -70,12 +70,12 @@ export default function RootLayout({ children }) {
       <body className={montserrat.className}>
       <MantineProvider theme={theme}>
         <AuthProvider>
-          <CollapseDesktop routes={routes} headerBg={'blue.5'}
+          <NavMenu routes={routes} headerBg={'blue.5'}
             headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.1'} navbarTextColor={'dark'}
             logoutButton={'blue.4'} logoutTextColor={'dark'}
           >
             {children}
-          </CollapseDesktop>
+          </NavMenu>
         </AuthProvider>
         </MantineProvider>
       </body>

@@ -1,8 +1,6 @@
 import { redirect } from 'next/navigation'
-import React from 'react'
 
 const Dashboard = () => {
-  redirect('/andre/Home')
+  redirect('/menu-example/Home')
 }
-
 export default Dashboard
