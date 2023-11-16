@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, SimpleGrid, Box } from '@mantine/core';
 
-const StackComponent = ({ title, children }) => {
+const CustomStack = ({ title, children }) => {
   return (
     <Box>
       <Text style={{ marginBottom: '10px', color: '#333', fontSize: '24px' }}>
@@ -14,4 +14,4 @@ const StackComponent = ({ title, children }) => {
   );
 };
 
-export default StackComponent;
+export default CustomStack;

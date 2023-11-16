@@ -1,7 +1,7 @@
 import React from 'react';
-import { Title, Container, Divider, Box } from '@mantine/core';
+import { Title, Divider, Box } from '@mantine/core';
 
-const SectionedTilesComponent = ({ title }) => {
+const TilesSection = ({ title }) => {
   return (
     <Box my={20}>
       <Title order={2} style={{ marginBottom: '10px', color: '#333', fontSize: '24px', textAlign: 'left' }}>
@@ -12,4 +12,4 @@ const SectionedTilesComponent = ({ title }) => {
   );
 };
 
-export default SectionedTilesComponent;
+export default TilesSection;

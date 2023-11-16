@@ -9,7 +9,7 @@ import TilesSection from "@/components/tiles-viewer/TileSection";
 import CustomStack from "@/components/tiles-viewer/CustomStack";
 import CustomTile from "@/components/tiles-viewer/CustomTile";
 
-const Appointments = () => {
+const SamplePage = () => {
   const { data: session, status } = useSession();
 
   if (status === "loading") return <LoadingScreen />;
@@ -86,4 +86,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default SamplePage;

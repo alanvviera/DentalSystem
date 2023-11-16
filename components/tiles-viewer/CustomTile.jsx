@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Group, Text, Box } from '@mantine/core';
 
-const TileComponent = ({
+const CustomTile = ({
   title,
   onClick,
   bottomRightText1,
@@ -66,4 +66,4 @@ const TileComponent = ({
   );
 };
 
-export default TileComponent;
+export default CustomTile;
