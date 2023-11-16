@@ -12,5 +12,6 @@ export const typeInputForm = {
     TEXT: "TEXT",
     NUMBER: "NUMBER",
     PASSWORD: "PASSWORD",
-    DATEPICKER: "DATEPICKER"
+    DATEPICKER: "DATEPICKER",
+    DATETIME: "DATETIME"
 }

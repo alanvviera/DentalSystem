@@ -21,7 +21,10 @@ const validateDate = (value) => {
 
     return ((value === null || value === undefined || value === "") ? "Por favor seleccione una fecha" : null);
 }
+const validateNumber = (value) => {
 
+    return ((value === null || value === undefined || value === "") ? "Por favor seleccione una hora" : null);
+}
 
 export {
     validateName,
@@ -29,5 +32,6 @@ export {
     validateAge,
     validatePassword,
     allValuesAvailable,
-    validateDate
+    validateDate,
+    validateNumber
 }

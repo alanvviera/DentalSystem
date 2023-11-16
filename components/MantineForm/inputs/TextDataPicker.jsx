@@ -1,27 +1,30 @@
 import { useState } from 'react';
-import { DatePickerInput } from '@mantine/dates';
+import { DatePickerInput, DatesProvider } from '@mantine/dates';
 
 
-const TextDataPicker = ({ label = "date", placeHolder = "date", valueKey = "date", form, extraClassname = {} }) => {
+const TextDataPicker = ({ label = "date", placeHolder = "date", valueKey = "date", form, extraClassname = {},timeInMiliseconds=null }) => {
   const [value, setValue] = useState(null);
 
   return (
-    <DatePickerInput
-      label={label}
-      placeholder={placeHolder}
-      value={value}
-      onChange={(dateNumber) => {
+    <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }}>
+      <DatePickerInput
+        label={label}
+        placeholder={placeHolder}
+        value={value}
+        onChange={(dateNumber) => {
 
-        form.setValues({
-          [valueKey]: dateNumber
-        });
+          form.setValues({
+            [valueKey]: dateNumber.getTime().toString()
+          });
 
-        setValue(dateNumber);
+          setValue(dateNumber);
 
-      }}
-      minDate={new Date()}
-      error={form.getInputProps(valueKey)["error"]}
-    />
+        }}
+        minDate={new Date()}
+        error={form.getInputProps(valueKey)["error"]}
+      />
+    </DatesProvider>
+
   )
 }
 

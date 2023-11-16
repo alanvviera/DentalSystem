@@ -3,7 +3,7 @@ import React from 'react'
 import { useSession } from 'next-auth/react';
 import { LoadingScreen } from '@/components/LoadingScreen';
 import MantineForm from '@/components/mantineForm/MantineForm';
-import { allValuesAvailable, validateDate, validateName } from '@/components/mantineForm/valuesValidate';
+import { allValuesAvailable, validateDate, validateName, validateNumber } from '@/components/mantineForm/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '@/components/mantineForm/customMantineInput';
 
 const FormExampleCreate = () => {
@@ -22,7 +22,7 @@ const FormExampleCreate = () => {
                     appointmentType: allValuesAvailable,
                     nameDentist: validateName,
                     date: validateDate,
-                    hours: allValuesAvailable,
+                    hours: validateNumber,
                     description: allValuesAvailable
                 }}
                 listCustomInputMantine={
@@ -32,7 +32,7 @@ const FormExampleCreate = () => {
                         new CustomInputMantine("Tipo de la cita", "Tipo de la cita", "appointmentType", typeInputForm.TEXT),
                         new CustomInputMantine("Nombre del dentista", "El nombre del dentista", "nameDentist", typeInputForm.TEXT),
                         new CustomInputMantine("Fecha", "Fecha", "date", typeInputForm.DATEPICKER),
-                        new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.TEXT),
+                        new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME),
                         new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
                     ]
                 }
