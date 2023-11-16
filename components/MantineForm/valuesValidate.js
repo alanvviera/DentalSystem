@@ -22,8 +22,7 @@ const validateDate = (value) => {
     return ((value === null || value === undefined || value === "") ? "Por favor seleccione una fecha" : null);
 }
 const validateNumber = (value) => {
-
-    return ((value === null || value === undefined || value === "") ? "Por favor seleccione una hora" : null);
+    return ((value === null || value === undefined || value ==="NaN" || value === "") ? "Por favor seleccione una hora" : null);
 }
 
 export {
