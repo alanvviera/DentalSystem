@@ -1,8 +1,16 @@
-import AuthProvider from '../components/authprovider/AuthProvider'
-import './globals.css'
-import { Montserrat } from 'next/font/google'
+import AuthProvider from '../components/authprovider/AuthProvider'; // Import AuthProvider component
+import '@mantine/core/styles.css'; //Import Mantine Styles
+import './globals.css'; // Import global CSS styles
+import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
+import '@mantine/dates/styles.css'; //Import package Matine dates styles
+import { Montserrat } from 'next/font/google'; // Import Montserrat font
+import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
 
 const montserrat = Montserrat({ subsets: ['latin'] })
+
+const theme = createTheme({
+  /** Your theme override here */
+});
 
 export const metadata = {
   title: 'Sistema Dental',
@@ -13,9 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX">
       <body className={montserrat.className}>
+      <MantineProvider theme={theme}>
         <AuthProvider>
           {children}
         </AuthProvider>
+        </MantineProvider>
       </body>
     </html>
   )
