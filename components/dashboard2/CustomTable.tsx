@@ -14,16 +14,18 @@ interface CustomTableProps {
   items: Array<Record<string, any>>;
   headers: string[];
   baseLink?: string;
+  itemId?: string;
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ items, headers, baseLink = '#' }) => {
+const CustomTable: React.FC<CustomTableProps> = ({ items, headers, baseLink = '#', itemId }) => {
   const router = useRouter();
 
   const rows = items.map((item) => (
     <TableTr
       style={{ cursor: 'pointer' }}
       onClick={() => {
-        router.push(`${baseLink}`);
+        if(itemId) {router.push(`${baseLink}/${item[itemId]}`);}
+        else {router.push(`${baseLink}`);}
       }}
       key={item.name}
     >

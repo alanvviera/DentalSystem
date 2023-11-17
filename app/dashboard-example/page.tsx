@@ -46,10 +46,10 @@ const Page: React.FC = () => {
           <DebtCard data={debtData} />
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
-          <AppointmentCard headers={headers} items={items} />
+          <AppointmentCard baseLink="/dashboard-example" itemId="position" headers={headers} items={items} />
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 12 }}>
-          <PendingAppointmentsCard headers={headers} items={items} />
+          <PendingAppointmentsCard headers={headers} items={items} baseLink="/dashboard-example" itemId="position"/>
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 12 }}>
 
