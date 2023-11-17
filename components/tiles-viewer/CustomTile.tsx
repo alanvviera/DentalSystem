@@ -3,7 +3,7 @@ import { Card, Group, Text, Box } from '@mantine/core';
 
 interface CustomTileProps {
   title?: string;
-  onClick?: () => void;
+  baseLink?: string;
   bottomRightText1?: string;
   bottomRightText2?: string;
   topRightText?: string;
@@ -12,7 +12,7 @@ interface CustomTileProps {
 
 const CustomTile: FC<CustomTileProps> = ({
   title,
-  onClick,
+  baseLink,
   bottomRightText1,
   bottomRightText2,
   topRightText,
@@ -20,7 +20,8 @@ const CustomTile: FC<CustomTileProps> = ({
 }) => {
   return (
     <Card
-      onClick={onClick}
+      component="a"
+      href={baseLink}
       withBorder
       radius="md"
       shadow="md"

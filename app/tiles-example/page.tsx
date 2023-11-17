@@ -73,6 +73,7 @@ const SamplePage: FC = () => {
         {upcomingAppointments.map((appt: Appointment, index: number) => (
           <CustomTile
             key={index}
+            baseLink="#"
             title={appt.title}
             topRightText={appt.fechaHora}
             bottomRightText1={appt.adeudo && `Adeudo: ${appt.adeudo}`}
