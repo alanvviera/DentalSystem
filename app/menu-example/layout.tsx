@@ -1,5 +1,3 @@
-
-import { ReactNode } from 'react';
 import AuthProvider from '../../components/authprovider/AuthProvider';
 import '@mantine/core/styles.css';
 import { MantineProvider, createTheme, ColorSchemeScript } from '@mantine/core';
@@ -22,7 +20,7 @@ const theme = createTheme({
  * @property {string} title - The title of the application.
  * @property {string} description - A description of the application.
  */
-export const metadata = {
+export const metadata: object = {
   title: 'Sistema Dental',
   description:
     'Sistema Dental is an advanced technological platform specifically designed to meet the needs of modern dental clinics. This comprehensive solution is intended to improve operational efficiency, streamline patient care, and enable effective management of all aspects related to dental practice.',
@@ -36,26 +34,31 @@ export const metadata = {
  * @param {ReactNode} props.children - The child components to be rendered inside the layout.
  * @returns {JSX.Element} JSX element for the RootLayout.
  */
-const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+
+type RootLayoutProps = {
+  children: React.ReactNode
+};
+
+const RootLayout = ({ children }: RootLayoutProps) => {
 
   const routes = [
     {
-        title: "Home",
+        title: "Inicio",
         url: "/menu-example/Home",
         icon: <HomeOutlined/>
     },
     {
-        title: "Appointments",
+        title: "Citas",
         url: "/menu-example/appointments",
         icon: <TagsOutlined/>
     },
     {
-        title: "Profile",
+        title: "Perfil",
         url: "/menu-example/settings",
         icon: <SettingOutlined/>
     },
     {
-        title: "Clinical History",
+        title: "Historial clínico",
         url: "/menu-example/documents",
         icon: <FileTextOutlined/>
     }

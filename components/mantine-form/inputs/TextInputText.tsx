@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput } from '@mantine/core';
 
-interface TextInputTextProps {
+type TextInputTextProps = {
   label?: string;
   placeHolder?: string;
   valueKey?: string;
@@ -9,14 +9,13 @@ interface TextInputTextProps {
   extraClassname?: any; // Tipo de extraClassname puede variar
 }
 
-const TextInputText: React.FC<TextInputTextProps> = ({
+const TextInputText = ({
   label = "Name",
   placeHolder = "Name",
   valueKey = "name",
   form,
   extraClassname = {}
-}) => {
-  return (
+}:TextInputTextProps) => (
     <TextInput
       label={label}
       placeholder={placeHolder}
@@ -25,6 +24,5 @@ const TextInputText: React.FC<TextInputTextProps> = ({
       className='my-3'
     />
   );
-};
 
 export default TextInputText;

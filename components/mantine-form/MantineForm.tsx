@@ -9,7 +9,7 @@ import { typeInputForm } from './customMantineInput';
 import TextDataPicker from './inputs/TextDataPicker';
 import TextTimePicker from './inputs/TextTimePicker';
 
-interface MantineFormProps {
+type MantineFormProps = {
   initialValuesForKeys?: {  };
   validateForKeys?: {
 
@@ -21,7 +21,7 @@ interface MantineFormProps {
   title?: string;
 }
 
-const MantineForm: React.FC<MantineFormProps> = ({
+const MantineForm = ({
   initialValuesForKeys = { name: '', email: '', age: 0 },
   validateForKeys = {
 
@@ -31,7 +31,7 @@ const MantineForm: React.FC<MantineFormProps> = ({
   labelSubmit,
   colorSubmit = "blue",
   title
-}) => {
+}: MantineFormProps) => {
   const form = useForm({
     initialValues: { ...initialValuesForKeys },
     // functions will be used to validate values at corresponding key

@@ -1,13 +1,12 @@
 import React, { ReactNode } from 'react';
 
-interface VisualizeDataProps {
+type VisualizeDataProps = {
   actionsTop?: ReactNode;
   content?: ReactNode;
   actionBottom?: ReactNode;
 }
 
-const VisualizeData: React.FC<VisualizeDataProps> = ({ actionsTop, content, actionBottom }) => {
-  return (
+const VisualizeData = ({ actionsTop, content, actionBottom }:VisualizeDataProps) => (
     <div className='min-h-screen min-w-full'>
       {actionsTop && (
         <div className='flex flex-row justify-end mb-2'>
@@ -18,6 +17,5 @@ const VisualizeData: React.FC<VisualizeDataProps> = ({ actionsTop, content, acti
       {actionBottom && actionBottom}
     </div>
   );
-};
 
 export default VisualizeData;

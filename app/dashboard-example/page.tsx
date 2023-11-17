@@ -7,19 +7,19 @@ import ProfileBanner from "../../components/dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
-interface Item {
+type Item = {
   position: number;
   mass: number;
   symbol: string;
   name: string;
 }
 
-interface DebtData {
+type DebtData = {
   debt: number;
   date: string;
 }
 
-const Page: React.FC = () => {
+const Page = () => {
   const headers = ["Element position", "Element name", "Symbol", "Atomic"];
   const items: Item[] = [
     { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },

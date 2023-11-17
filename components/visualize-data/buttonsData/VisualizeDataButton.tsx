@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-interface VisualizeDataButtonProps {
+type VisualizeDataButtonProps = {
   showComponent: React.ReactNode;
   title: string;
   icon: React.ReactNode;
@@ -10,13 +10,13 @@ interface VisualizeDataButtonProps {
   classNameButton?: Object | undefined;
 }
 
-const VisualizeDataButton: React.FC<VisualizeDataButtonProps> = ({
+const VisualizeDataButton = ({
   showComponent,
   title,
   icon,
   titleModal,
   classNameButton
-}) => {
+}: VisualizeDataButtonProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   
   return (

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Card, Group, Text, Button, ActionIcon, Flex } from '@mantine/core';
 
-interface CustomCardProps {
+type CustomCardProps = {
   title?: string;
   children?: React.ReactNode;
   showAddButton?: boolean;
@@ -12,7 +12,7 @@ interface CustomCardProps {
   moreButtonLink?: string;
 }
 
-const CustomCard: React.FC<CustomCardProps> = ({
+const CustomCard = ({
   title,
   children,
   showAddButton,
@@ -20,8 +20,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
   showMoreButton,
   moreButtonPosition = 'bottom',
   moreButtonLink = '#',
-}) => {
-  return (
+}: CustomCardProps) => (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Flex align="center" justify="space-between">
         <Text truncate="end" c="blue" size="xl" fw={500}>
@@ -56,6 +55,4 @@ const CustomCard: React.FC<CustomCardProps> = ({
       )}
     </Card>
   );
-};
-
 export default CustomCard;

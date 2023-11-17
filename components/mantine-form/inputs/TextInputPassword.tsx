@@ -1,7 +1,7 @@
 import React from 'react';
 import { PasswordInput } from '@mantine/core';
 
-interface TextInputPasswordProps {
+type TextInputPasswordProps = {
   label?: string;
   placeHolder?: string;
   valueKey?: string;
@@ -9,14 +9,13 @@ interface TextInputPasswordProps {
   extraClassname?: any; // Tipo de extraClassname puede variar
 }
 
-const TextInputPassword: React.FC<TextInputPasswordProps> = ({
+const TextInputPassword = ({
   label = "Password",
   placeHolder = "Password",
   valueKey = "password",
   form,
   extraClassname = {}
-}) => {
-  return (
+}: TextInputPasswordProps) => (
     <PasswordInput
       label={label}
       placeholder={placeHolder}
@@ -25,6 +24,4 @@ const TextInputPassword: React.FC<TextInputPasswordProps> = ({
       className='my-3'
     />
   );
-};
-
 export default TextInputPassword;

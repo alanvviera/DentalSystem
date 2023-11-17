@@ -1,13 +1,12 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Text, SimpleGrid, Box } from '@mantine/core';
 
-interface CustomStackProps {
+type CustomStackProps = {
   title?: string;
   children?: ReactNode;
 }
 
-const CustomStack: FC<CustomStackProps> = ({ title, children }) => {
-  return (
+const CustomStack = ({ title, children }: CustomStackProps) => (
     <Box>
       <Text style={{ marginBottom: '10px', color: '#333', fontSize: '24px' }}>
         {title}
@@ -17,6 +16,5 @@ const CustomStack: FC<CustomStackProps> = ({ title, children }) => {
       </SimpleGrid>
     </Box>
   );
-};
 
 export default CustomStack;

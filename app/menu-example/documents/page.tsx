@@ -1,9 +1,7 @@
 import React from 'react';
 
-const Documents: React.FC = () => {
-  return (
+const Documents= () => (
     <div>Documents</div>
   );
-};
 
 export default Documents;

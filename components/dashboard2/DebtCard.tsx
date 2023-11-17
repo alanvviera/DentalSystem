@@ -2,14 +2,14 @@ import React from 'react';
 import { Text, Title } from '@mantine/core';
 import CustomCard from './CustomCard';
 
-interface DebtCardProps {
+type DebtCardProps = {
   data: {
     debt: number;
     date?: string;
   };
 }
 
-const DebtCard: React.FC<DebtCardProps> = ({ data }) => {
+const DebtCard = ({ data }: DebtCardProps) => {
   const formatter = new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',

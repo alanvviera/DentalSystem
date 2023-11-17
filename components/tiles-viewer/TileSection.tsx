@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Title, Divider, Box } from '@mantine/core';
 
-interface TilesSectionProps {
+type TilesSectionProps = {
   title?: string;
 }
 
-const TilesSection: FC<TilesSectionProps> = ({ title }) => {
-  return (
+const TilesSection = ({ title }: TilesSectionProps) => (
     <Box my={20}>
       <Title order={2} style={{ marginBottom: '10px', color: '#333', fontSize: '24px', textAlign: 'left' }}>
         {title}
@@ -14,6 +13,5 @@ const TilesSection: FC<TilesSectionProps> = ({ title }) => {
       <Divider style={{height: '4px', background: '#ddd' }} />
     </Box>
   );
-};
 
 export default TilesSection;

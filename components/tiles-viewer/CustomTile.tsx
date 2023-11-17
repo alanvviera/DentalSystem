@@ -1,7 +1,7 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Card, Group, Text, Box } from '@mantine/core';
 
-interface CustomTileProps {
+type CustomTileProps = {
   title?: string;
   baseLink?: string;
   bottomRightText1?: string;
@@ -10,15 +10,14 @@ interface CustomTileProps {
   children?: ReactNode;
 }
 
-const CustomTile: FC<CustomTileProps> = ({
+const CustomTile = ({
   title,
   baseLink,
   bottomRightText1,
   bottomRightText2,
   topRightText,
   children,
-}) => {
-  return (
+}:CustomTileProps) => (
     <Card
       component="a"
       href={baseLink}
@@ -74,6 +73,5 @@ const CustomTile: FC<CustomTileProps> = ({
 
     </Card>
   );
-};
 
 export default CustomTile;

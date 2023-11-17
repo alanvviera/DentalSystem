@@ -4,9 +4,7 @@ import MantineForm from '../../../components/mantine-form/MantineForm';
 import { allValuesAvailable, validateDate, validateName, validateNumber } from '../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../components/mantine-form/customMantineInput';
 
-const FormExampleCreate: React.FC = () => {
-
-  return (
+const FormExampleCreate = () => (
     <div className='m-5'>
       <MantineForm
         initialValuesForKeys={{
@@ -44,7 +42,6 @@ const FormExampleCreate: React.FC = () => {
         labelSubmit='Crear'
       />
     </div>
-  );
-};
+);
 
 export default FormExampleCreate;

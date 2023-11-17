@@ -1,9 +1,7 @@
 import React from 'react';
 
-const Cosa: React.FC = () => {
-  return (
+const Home = () => (
     <div>Inicio</div>
   );
-};
 
-export default Cosa;
+export default Home;

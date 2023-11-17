@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DatePickerInput, DatesProvider } from '@mantine/dates';
 
-interface TextDataPickerProps {
+type TextDataPickerProps = {
   label?: string;
   placeHolder?: string;
   valueKey?: string;
@@ -10,18 +10,18 @@ interface TextDataPickerProps {
   initialDate?: Date | null;
 }
 
-const TextDataPicker: React.FC<TextDataPickerProps> = ({
+const TextDataPicker = ({
   label = "date",
   placeHolder = "date",
   valueKey = "date",
   form,
   extraClassname = {},
   initialDate = null
-}) => {
+}: TextDataPickerProps) => {
   const [value, setValue] = useState<Date | null>(initialDate);
 
   return (
-    <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }} children={undefined}>
+    <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }}>
       <DatePickerInput
         label={label}
         placeholder={placeHolder}

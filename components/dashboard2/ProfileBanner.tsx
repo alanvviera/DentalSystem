@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { SettingOutlined } from '@ant-design/icons';
 import { Avatar, Box, ActionIcon, Group, Text } from '@mantine/core';
 
-interface ProfileBannerProps {
+type ProfileBannerProps = {
   children?: React.ReactNode;
   showAvatar?: boolean;
   avatarImageUrl?: string | null;
@@ -14,7 +14,7 @@ interface ProfileBannerProps {
   textColor?: string;
 }
 
-const ProfileBanner: React.FC<ProfileBannerProps> = ({
+const ProfileBanner = ({
   children,
   showAvatar,
   avatarImageUrl,
@@ -24,8 +24,7 @@ const ProfileBanner: React.FC<ProfileBannerProps> = ({
   settingsLink = '#',
   bg = 'blue.7',
   textColor = 'white',
-}) => {
-  return (
+}: ProfileBannerProps) => (
     <Box bg={bg} c={textColor}>
       {showSettingsButton && (
         <Box ta="right">
@@ -50,6 +49,5 @@ const ProfileBanner: React.FC<ProfileBannerProps> = ({
       </Group>
     </Box>
   );
-};
 
 export default ProfileBanner;

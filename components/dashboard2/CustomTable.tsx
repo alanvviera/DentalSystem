@@ -10,16 +10,15 @@ import {
 } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
-interface CustomTableProps {
+type CustomTableProps = {
   items: Array<Record<string, any>>;
   headers: string[];
   baseLink?: string;
   itemId?: string;
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ items, headers, baseLink = '#', itemId }) => {
+const CustomTable = ({ items, headers, baseLink = '#', itemId }: CustomTableProps) => {
   const router = useRouter();
-
   const rows = items.map((item) => (
     <TableTr
       style={{ cursor: 'pointer' }}

@@ -1,9 +1,7 @@
 import React from 'react';
 
-const Appointments: React.FC = () => {
-  return (
+const Appointments = () => (
     <div>Appointments</div>
   );
-};
 
 export default Appointments;

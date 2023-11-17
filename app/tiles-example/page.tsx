@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 import "@mantine/core/styles.css";
 import { Text } from "@mantine/core";
 import TilesSection from "../../components/tiles-viewer/TileSection";
 import CustomStack from "../../components/tiles-viewer/CustomStack";
 import CustomTile from "../../components/tiles-viewer/CustomTile";
 
-interface Appointment {
+type Appointment = {
   title: string;
   imageUrl?: string;
   total?: number;
@@ -13,7 +13,7 @@ interface Appointment {
   fechaHora?: string;
 }
 
-interface Asociado {
+type Asociado = {
   title: string;
   imageUrl?: string;
   direccion: string;
@@ -21,7 +21,7 @@ interface Asociado {
   telefono: string;
 }
 
-const SamplePage: FC = () => {
+const SamplePage = () => {
   // Example data
   const upcomingAppointments: Appointment[] = [
     {

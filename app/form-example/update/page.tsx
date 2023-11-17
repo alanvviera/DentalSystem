@@ -4,10 +4,7 @@ import MantineForm from '../../../components/mantine-form/MantineForm';
 import CustomInputMantine, { typeInputForm } from '../../../components/mantine-form/customMantineInput';
 import { allValuesAvailable, validateDate, validateName, validateNumber } from '../../../components/mantine-form/valuesValidate';
 
-const FormExampleUpdate: React.FC = () => {
-
-
-  return (
+const FormExampleUpdate = () => (
     <div className='m-5'>
       <MantineForm
         title={"Actualizar paciente"}
@@ -47,6 +44,5 @@ const FormExampleUpdate: React.FC = () => {
       />
     </div>
   );
-};
 
 export default FormExampleUpdate;

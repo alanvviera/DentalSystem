@@ -6,8 +6,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(utc);
-
-interface TextTimePickerProps {
+type TextTimePickerProps = {
   label?: string;
   placeHolder?: string;
   valueKey?: string;
@@ -23,9 +22,8 @@ const TextTimePicker: React.FC<TextTimePickerProps> = ({
   form,
   extraClassname = {},
   initialDate
-}) => {
-  return (
-    <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }} children={undefined}>
+}: TextTimePickerProps) => (
+    <DatesProvider settings={{ locale: 'mx', firstDayOfWeek: 0, weekendDays: [0], timezone: 'UTC' }}>
       <TimeInput
         label={label}
         defaultValue={initialDate && `${dayjs(initialDate).utc().format("HH:mm")}`}
@@ -40,6 +38,5 @@ const TextTimePicker: React.FC<TextTimePickerProps> = ({
       />
     </DatesProvider>
   );
-};
 
 export default TextTimePicker;

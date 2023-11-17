@@ -9,10 +9,7 @@ import VisualizeData from '../../../components/visualize-data/VisualizeData';
 import VisualizeDataButton from '../../../components/visualize-data/buttonsData/VisualizeDataButton';
 import LabelDataText from '../../../components/visualize-data/labelsData/LabelDataText';
 
-const FormExampleVisualize: React.FC = () => {
-
-
-  return (
+const FormExampleVisualize = () => (
     <div className='m-5'>
       <VisualizeData
         actionsTop={
@@ -57,6 +54,5 @@ const FormExampleVisualize: React.FC = () => {
       />
     </div>
   );
-};
 
 export default FormExampleVisualize;
