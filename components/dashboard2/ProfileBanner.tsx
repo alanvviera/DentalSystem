@@ -4,10 +4,10 @@ import { Avatar, Box, ActionIcon, Group, Text } from '@mantine/core';
 
 interface ProfileBannerProps {
   children?: React.ReactNode;
-  showAvatar: boolean;
+  showAvatar?: boolean;
   avatarImageUrl?: string | null;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   showSettingsButton: boolean;
   settingsLink?: string;
   bg?: string;

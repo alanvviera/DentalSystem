@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Card, Group, Text, Button, ActionIcon, Flex } from '@mantine/core';
 
 interface CustomCardProps {
-  title: string;
+  title?: string;
   children?: React.ReactNode;
   showAddButton?: boolean;
   addButtonLink?: string;
