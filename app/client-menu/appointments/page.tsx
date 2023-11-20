@@ -29,7 +29,7 @@ const Page = () => {
         
         <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
           <GridCol  span={{ base: 12, sm: 6, lg: 12  }}>
-            <AppointmentCard baseLink="/client-menu/appointments" itemId="position" headers={headers} items={items} />
+            <AppointmentCard baseLink="/client-menu/appointments" itemId="position" addButtonLink="/client-menu/appointments/create" headers={headers} items={items} />
           </GridCol>
         </Grid>
       </div>

@@ -45,9 +45,8 @@ const Page = () => {
           <DebtCard data={debtData} moreButtonLink="client-menu/debt" />
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
-          <AppointmentCard baseLink="/client-menu/appointments" itemId="position" headers={headers} items={items} />
+          <AppointmentCard baseLink="/client-menu/appointments" moreButtonLink="/client-menu/appointments" addButtonLink="/client-menu/appointments/create" itemId="position" headers={headers} items={items} />
         </GridCol>
-        
       </Grid>
     </div>
   );
