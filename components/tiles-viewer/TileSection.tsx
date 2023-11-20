@@ -7,10 +7,10 @@ type TilesSectionProps = {
 
 const TilesSection = ({ title }: TilesSectionProps) => (
     <Box my={20}>
-      <Title order={2} style={{ marginBottom: '10px', color: '#333', fontSize: '24px', textAlign: 'left' }}>
+      <Title order={2} style={{ marginBottom: '10px', color: '#3390FF', fontSize: '24px', textAlign: 'left' }}>
         {title}
       </Title>
-      <Divider style={{height: '4px', background: '#ddd' }} />
+      <Divider style={{height: '4px', background: '#3390FF' }} />
     </Box>
   );
 

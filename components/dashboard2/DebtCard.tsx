@@ -7,16 +7,17 @@ type DebtCardProps = {
     debt: number;
     date?: string;
   };
+  moreButtonLink?: string;
 }
 
-const DebtCard = ({ data }: DebtCardProps) => {
+const DebtCard = ({ data, moreButtonLink }: DebtCardProps) => {
   const formatter = new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',
   });
 
   return (
-    <CustomCard title="Adeudo" showMoreButton>
+    <CustomCard title="Adeudo" showMoreButton moreButtonLink={moreButtonLink}>
       <Title order={1}>{formatter.format(data.debt)} </Title>
       {data.debt && <Text size="lg" c="dimmed">
         {new Date(data.date).toLocaleDateString('es-mx', {
