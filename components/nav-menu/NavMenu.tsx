@@ -35,12 +35,8 @@ export const NavMenu = ({
   logoutButton,
   logoutTextColor
 }: NavMenuProps) => {
-  useEffect(() => {
-    toggleMobile();
-  }, [])
 
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [opened, { toggle }] = useDisclosure();
   let filter: Route[] | undefined;
   let tl: string | undefined;
 
@@ -57,14 +53,13 @@ export const NavMenu = ({
       navbar={{
         width: 300,
         breakpoint: 'sm',
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+        collapsed: { mobile: !opened},
       }}
       padding="md"
     >
       <AppShell.Header bg={headerBg} c={headerTextColor} withBorder={false}>
         <Group h="100%" px="md" gap={'lg'}>
-          <Burger color={burgerColor} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger color={burgerColor} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+          <Burger color={burgerColor} opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Text fw={500} size="lg">
             {
               namePath()
@@ -84,7 +79,7 @@ export const NavMenu = ({
               href={item.url}
               leftSection={item.icon}
               variant='subtles'
-              onClick={toggleMobile}
+              onClick={toggle}
             />
           ))}
           <Button leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>

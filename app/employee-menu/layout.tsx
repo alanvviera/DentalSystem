@@ -1,14 +1,7 @@
 import AuthProvider from '../../components/authprovider/AuthProvider';
 import '@mantine/core/styles.css';
-import { MantineProvider, createTheme, ColorSchemeScript } from '@mantine/core';
 import { NavMenu } from '../../components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined,  AccountBookOutlined, BuildOutlined } from "@ant-design/icons"
-
-
-// Mantine theme
-const theme = createTheme({
-  /** Put your mantine theme override here */
-});
 
 /**
  * Object containing metadata for the application.
@@ -62,22 +55,11 @@ const RootLayout = ({ children }: RootLayoutProps) => {
 ];
 
   return (
-    <html lang="es-MX">
-      <head>
-      <ColorSchemeScript />
-      </head>
-      <body>
-      <MantineProvider theme={theme}>
-        <AuthProvider>
           <NavMenu routes={routes} headerBg={'blue.5'}
             headerTextColor={'white'} burgerColor={'white'} navbarBg={'gray.1'} navbarTextColor={'dark'}
           >
             {children}
           </NavMenu>
-        </AuthProvider>
-        </MantineProvider>
-      </body>
-    </html>
   );
 }
 
