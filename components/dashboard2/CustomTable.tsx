@@ -20,22 +20,23 @@ type CustomTableProps = {
 
 const CustomTable = ({ items, headers, baseLink = '#', itemId, showItemId}: CustomTableProps) => {
   const router = useRouter();
-  const newItems = showItemId? items : items.map((item)=> {
-    const new_item = {...item};
-    delete new_item[itemId];
-    return new_item;
-  });
+  const newItems = showItemId? [...items] : items.map((item) => {
+    const newItem = {...item};
+    delete newItem[itemId];
+    return newItem;
+  })
+
   const rows = newItems.map((item, index) => (
     <TableTr
+      key={index}
       style={{ cursor: 'pointer' }}
       onClick={() => {
         if(itemId) {router.push(`${baseLink}/${items[index][itemId]}`);}
         else {router.push(`${baseLink}`);}
       }}
-      key={item.name}
     >
-      {Object.values(item).map((value, index) => (
-        <TableTd key={index}>{value}</TableTd>
+      {Object.values(item).map((value, key) => (
+        <TableTd key={key}>{value}</TableTd>
       ))}
     </TableTr>
   ));
