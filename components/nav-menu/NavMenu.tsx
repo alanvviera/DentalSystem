@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/core';
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
+import {LogoutOutlined } from "@ant-design/icons"
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
 
@@ -45,7 +45,8 @@ export const NavMenu = ({
   let tl: string | undefined;
 
   function namePath(): string {
-    filter = routes.filter(x => x.url == usePathname());
+    const path = usePathname();
+    filter = routes.filter(x => path.includes(x.url));
     filter.map((t) => { tl = t.title });
     return tl;
   }
@@ -60,11 +61,10 @@ export const NavMenu = ({
       }}
       padding="md"
     >
-      <AppShell.Header bg={headerBg} c={headerTextColor}>
+      <AppShell.Header bg={headerBg} c={headerTextColor} withBorder={false}>
         <Group h="100%" px="md" gap={'lg'}>
           <Burger color={burgerColor} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger color={burgerColor} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          <UserOutlined />
           <Text fw={500} size="lg">
             {
               namePath()

@@ -10,12 +10,13 @@ type ClinicsCardProps = {
   itemId?: string;
   addButtonLink?: string;
   moreButtonLink?: string;
+  showItemsId?: boolean;
 }
 
-const ClinicsCard = ({ headers, items, baseLink, addButtonLink, moreButtonLink, itemId = undefined}:ClinicsCardProps) => (
+const ClinicsCard = ({ headers, items, baseLink, addButtonLink, moreButtonLink, itemId, showItemsId}:ClinicsCardProps) => (
     <CustomCard title="Clínicas" showAddButton addButtonLink={addButtonLink} moreButtonLink={moreButtonLink} showMoreButton moreButtonPosition='bottom'>
       <TableScrollContainer type="native" minWidth={500}>
-        <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId}/>
+        <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId} showItemId={showItemsId}/>
       </TableScrollContainer>
     </CustomCard>
   );

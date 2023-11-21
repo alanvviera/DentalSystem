@@ -5,10 +5,16 @@ import ProfileBanner from "../../components/dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
-type Item = {
-  position: number;
-  mass: number;
-  symbol: string;
+type Appointment = {
+  id: number;
+  client: string;
+  type: string;
+  date: string;
+  hour: string;
+}
+
+type Clinic = {
+  id: number;
   name: string;
 }
 type User = {
@@ -16,31 +22,54 @@ type User = {
   email: string;
   role: string;
 }
+
+const getData = () => {
+  return {
+    user: { name: "Elton tito", email: "example@contoso.com", role: "Doctor" },
+    pendingAppointments: [
+      { id: 2347, client: "Jack Storm", type: "Capacitacion", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Juan Manuel Lopez Perez", type: "Cita medica", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Matilda Castro", type: "Cita medica", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Gilabert Torres", type: "Servicios", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Maria", type: "Cita medica", date: "19/10/2023", hour: "10:30" }],
+    appointments: [
+      { id: 2347, client: "Jack Storm", type: "Capacitacion", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Juan Manuel Lopez Perez", type: "Cita medica", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Matilda Castro", type: "Cita medica", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Gilabert Torres", type: "Servicios", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Maria", type: "Cita medica", date: "19/10/2023", hour: "10:30" },
+    ],
+    clinics: [
+      { id: 2347, name: "Clinica uno" },
+      { id: 2347, name: "Clinica dos" },
+    ]
+  };
+}
+
 const Page = () => {
-  const user: User = {name: "Elton tito", email: "example@contoso.com", role: "Doctor"};
-  const {name, email, role} = user
-  const headers = ["Element position", "Element name", "Symbol", "Atomic"];
-  const items: Item[] = [
-    { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-    { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-    { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-    { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-  ];
+  const { user, appointments, pendingAppointments, clinics } = getData();
+  const { name, email, role } = user
+  const topPendingAppointments = pendingAppointments.map((appointment) => 
+  ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
+  const topAppointments = appointments.map((appointment) => 
+  ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
+  const topClinics = clinics.map((clinic) => ({ id: clinic.id, name: clinic.name }));
+  const appointmentHeaders = ["Cliente", "Tipo", "Fecha", "Hora"];
+  const clinicHeaders = ["Nombre"];
 
   return (
     <div>
       <ProfileBanner title={`${name}`} description={`${role} - ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
+        <GridCol span={{ base: 12, md: 6, lg: 12 }}>
+          <PendingAppointmentsCard headers={appointmentHeaders} items={topPendingAppointments} baseLink="/employee-menu/appointments" itemId="id" moreButtonLink="/employee-menu/appointments" />
+        </GridCol>
         <GridCol span={{ base: 12, md: 12, lg: 6 }}>
-          <AppointmentCard headers={headers} items={items} baseLink="/employee-menu/appointments" itemId="position" moreButtonLink="/employee-menu/appointments" addButtonLink="/employee-menu/appointments/create"/>
+          <AppointmentCard headers={appointmentHeaders} items={topAppointments} baseLink="/employee-menu/appointments" itemId="id" moreButtonLink="/employee-menu/appointments" addButtonLink="/employee-menu/appointments/create" />
         </GridCol>
         <GridCol span={{ base: 12, md: 6, lg: 6 }}>
-          <ClinicsCard headers={headers} items={items} baseLink="/employee-menu/clinics" itemId="position" moreButtonLink="/employee-menu/clinics" addButtonLink="/employee-menu/clinics/register"/>
-        </GridCol>
-        <GridCol span={{ base: 12, md: 6, lg: 12 }}>
-          <PendingAppointmentsCard headers={headers} items={items} baseLink="/employee-menu/appointments" itemId="position"  moreButtonLink="/employee-menu/appointments"/>
+          <ClinicsCard headers={clinicHeaders} items={topClinics} baseLink="/employee-menu/clinics" itemId="id" moreButtonLink="/employee-menu/clinics" addButtonLink="/employee-menu/clinics/register" />
         </GridCol>
       </Grid>
     </div>

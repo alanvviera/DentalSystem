@@ -15,15 +15,21 @@ type CustomTableProps = {
   headers: string[];
   baseLink?: string;
   itemId?: string;
+  showItemId?: boolean;
 }
 
-const CustomTable = ({ items, headers, baseLink = '#', itemId }: CustomTableProps) => {
+const CustomTable = ({ items, headers, baseLink = '#', itemId, showItemId}: CustomTableProps) => {
   const router = useRouter();
-  const rows = items.map((item) => (
+  const newItems = showItemId? items : items.map((item)=> {
+    const new_item = {...item};
+    delete new_item[itemId];
+    return new_item;
+  });
+  const rows = newItems.map((item, index) => (
     <TableTr
       style={{ cursor: 'pointer' }}
       onClick={() => {
-        if(itemId) {router.push(`${baseLink}/${item[itemId]}`);}
+        if(itemId) {router.push(`${baseLink}/${items[index][itemId]}`);}
         else {router.push(`${baseLink}`);}
       }}
       key={item.name}
