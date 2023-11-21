@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Base de datos simulada (puedes reemplazar esto con una base de datos real)
-const citas: any[] = [];
+const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       }
       
       // Crear la cita
-      const nuevaCita = {
+      const newAppointment = await prisma.dates.create({
         patient_name,
         clinic_name,
         type,
@@ -32,17 +32,14 @@ export async function POST(req: NextRequest) {
         date_of_date,
         appointment_time,
         subject,
-      };
+      });
 
-      // Almacenar la cita en la base de datos simulada
-      citas.push(nuevaCita);
-
-      return NextResponse.json({ message: 'Cita registrada con éxito', cita: nuevaCita }, { status: 201 });
+      return NextResponse.json({ message: 'Successfully appointment', cita: newAppointment }, { status: 201 });
     }
 
-    return NextResponse.json({ error: 'Método no permitido' }, { status: 405 });
+    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Error de servidor' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
