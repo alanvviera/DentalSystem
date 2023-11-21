@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/core';
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
@@ -35,15 +35,19 @@ export const NavMenu = ({
   logoutButton,
   logoutTextColor
 }: NavMenuProps) => {
+  useEffect(() => {
+    toggleMobile();
+  }, [])
+
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   let filter: Route[] | undefined;
   let tl: string | undefined;
 
-  function namePath(): React.ReactNode {
-    filter = routes.filter(x => x.url == usePathname())
-    filter.map((t) => {tl = t.title})
-    return <></>
+  function namePath(): string {
+    filter = routes.filter(x => x.url == usePathname());
+    filter.map((t) => { tl = t.title });
+    return tl;
   }
 
   return (
@@ -61,11 +65,10 @@ export const NavMenu = ({
           <Burger color={burgerColor} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger color={burgerColor} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
           <UserOutlined />
-          {
-            namePath()
-          }
           <Text fw={500} size="lg">
-            {tl}
+            {
+              namePath()
+            }
           </Text>
         </Group>
       </AppShell.Header>
