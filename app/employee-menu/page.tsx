@@ -49,11 +49,13 @@ const getData = () => {
 const Page = () => {
   const { user, appointments, pendingAppointments, clinics } = getData();
   const { name, email, role } = user
+
   const topPendingAppointments = pendingAppointments.map((appointment) => 
   ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
   const topAppointments = appointments.map((appointment) => 
   ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
   const topClinics = clinics.map((clinic) => ({ id: clinic.id, name: clinic.name }));
+  
   const appointmentHeaders = ["Cliente", "Tipo", "Fecha", "Hora"];
   const clinicHeaders = ["Nombre"];
 
