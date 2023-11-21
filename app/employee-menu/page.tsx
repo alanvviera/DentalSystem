@@ -11,8 +11,14 @@ type Item = {
   symbol: string;
   name: string;
 }
-
+type User = {
+  name: string;
+  email: string;
+  role: string;
+}
 const Page = () => {
+  const user: User = {name: "Elton tito", email: "example@contoso.com", role: "Doctor"};
+  const {name, email, role} = user
   const headers = ["Element position", "Element name", "Symbol", "Atomic"];
   const items: Item[] = [
     { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
@@ -24,7 +30,7 @@ const Page = () => {
 
   return (
     <div>
-      <ProfileBanner title={`Bienvenido, usuario`} description="Aqui va una pequeña descripcion..." showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
+      <ProfileBanner title={`${name}`} description={`${role} - ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
         <GridCol span={{ base: 12, md: 12, lg: 6 }}>

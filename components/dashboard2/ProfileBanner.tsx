@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { SettingOutlined } from '@ant-design/icons';
-import { Avatar, Box, ActionIcon, Group, Text } from '@mantine/core';
+import { Avatar, Box, ActionIcon, Group, Text, Flex } from '@mantine/core';
 
 type ProfileBannerProps = {
   children?: React.ReactNode;
@@ -25,28 +25,28 @@ const ProfileBanner = ({
   bg = 'blue.7',
   textColor = 'white',
 }: ProfileBannerProps) => (
-    <Box bg={bg} c={textColor}>
+    <Box bg={bg} c={textColor} px="xl" py="lg">
       {showSettingsButton && (
         <Box ta="right">
-          <ActionIcon variant="transparent" component="a" href={settingsLink} c="white" mr="20px" mt="15px">
+          <ActionIcon variant="transparent" component="a" href={settingsLink} c="white">
             <SettingOutlined style={{ fontSize: '25px' }} />
           </ActionIcon>
         </Box>
       )}
-      <Group w="100%" px="30px" pt="20px" pb="40px">
-        {showAvatar && <Avatar src={avatarImageUrl || undefined} size="20vh" variant="filled" />}
-        <Box w="80%">
-          <Text size="30px" fw={700} truncate="end">
+      <Flex direction="row" align="center">
+        {showAvatar && <Avatar src={avatarImageUrl || undefined} size="16vh" variant="filled" />}
+        <Box w="75%" ml="lg">
+          <Text size="30px" fw={700}>
             {title}
           </Text>
-          <Text size="xl" fw={500} truncate="end">
+          <Text size="xl" fw={500}>
             {description}
           </Text>
         </Box>
-        <Box w="100%" mt={15}>
+      </Flex>
+      <Box w="100%" mt={15}>
           {children}
-        </Box>
-      </Group>
+      </Box>
     </Box>
   );
 
