@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomCard from './CustomCard';
-import { TableScrollContainer } from '@mantine/core';
+import { TableScrollContainer, Text } from '@mantine/core';
 import CustomTable from './CustomTable';
 
 type PendingAppointmentCardProps = {
@@ -14,9 +14,11 @@ type PendingAppointmentCardProps = {
 
 const PendingAppointmentCard = ({ headers, items, baseLink, itemId, moreButtonLink, showItemsId}:PendingAppointmentCardProps) => (
     <CustomCard title="Citas pendientes" showMoreButton moreButtonPosition='top' moreButtonLink={moreButtonLink}>
-      <TableScrollContainer type="native" minWidth={500}>
-        <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId} showItemId={showItemsId}/>
-      </TableScrollContainer>
+      {items.length > 0 ? (<TableScrollContainer type="native" minWidth={500}>
+          <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId} showItemId={showItemsId} />
+        </TableScrollContainer>) : (
+          <Text>Sin elementos para mostrar</Text>
+        )}
     </CustomCard>
   );
 
