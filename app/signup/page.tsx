@@ -4,9 +4,10 @@ import Background from "../../components/Background";
 import CustomForm from "../../components/form/CustomForm";
 import { CustomInput } from "../../components/form/CustomInput";
 import { CustomInputPassword } from "../../components/form/CustomInputPassword";
-import { patternEmail, patternPassword, patternUser } from "../../constants/formPattern";
+import { patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
+import { Space } from "@mantine/core";
 
 
 function SignUp() {
@@ -20,6 +21,7 @@ function SignUp() {
     showPasswordNotMatch,
     onChange,
     cleanFields,
+    numTel,
   } = useForm({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ function SignUp() {
     showPassword: false,
     showConfirmPassword: false,
     showPasswordNotMatch: false,
+    numTel: ""
   });
 
   const toggleShowPassword = (name, value) => {
@@ -86,11 +89,11 @@ function SignUp() {
         console.error("Error en el registro:", responseData);
         // Puedes mostrar el mensaje de error en un componente de alerta, por ejemplo.
       }
-      } catch (error) {
+    } catch (error) {
       // Ocurrió un error en la solicitud
       console.error("Error en la solicitud:", error);
       // Puedes mostrar un mensaje de error genérico en este caso.
-      }
+    }
   }
 
   return (
@@ -98,7 +101,7 @@ function SignUp() {
       <Background />
       <CustomForm
         onSubmit={onSubmit}
-        title={"Regístrate"}
+        title={"Regístrate como empleado"}
         subTile={"Crea una cuenta gratis con tu correo."}
         textSubmit={"Regístrate"}
         textForgetPassword={false}
@@ -120,6 +123,15 @@ function SignUp() {
             onChange={onChange}
             value={email}
             pattern={patternEmail}
+          />,
+          <CustomInput
+            type={"tel"}
+            placeholder={"Número de telefono; ejem: 646-123-45-67"}
+            name={"numTel"}
+            formTextError={"Por favor ingrese un telefono válido."}
+            onChange={onChange}
+            value={numTel}
+            pattern={patternNumberTel}
           />,
           <CustomInputPassword
             showPassword={showPassword}
@@ -150,14 +162,18 @@ function SignUp() {
           />
         ]
         }
-        bottomComponent={<LoginAccount/>}
+
+        bottomComponent={<div>
+          <LoginAccount extraClass="pt-3 pb-3" />
+          <LoginAccount title="Registrate como doctor " subtile="Registrate" href="/signup-doctor"/>
+        </div>}
         topComponent={<CustomAlert
           showAlert={showPasswordNotMatch}
           title={"Lo sentimos"}
           subtile={"Las contraseñas no coinciden."}
         />
-      
-      }
+
+        }
       />
     </main>
   );
