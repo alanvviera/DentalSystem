@@ -7,7 +7,7 @@ type VisualizeDataProps = {
 }
 
 const VisualizeData = ({ actionsTop, content, actionBottom }:VisualizeDataProps) => (
-    <div className='min-h-screen min-w-full'>
+    <div className='min-w-full'>
       {actionsTop && (
         <div className='flex flex-row justify-end mb-2'>
           {actionsTop}
