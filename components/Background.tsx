@@ -1,6 +1,6 @@
 const Background = () => {
   return (
-    <section className="absolute w-full h-screen overflow-hidden z-[-1]">
+    <section className="w-full z-[-1]">
     <article className="absolute top-0 left-0 w-full h-[100px] bg-[length:1000px_100px] transform rotate-180" style={
       {
         backgroundImage: "url('/wave.png')",
