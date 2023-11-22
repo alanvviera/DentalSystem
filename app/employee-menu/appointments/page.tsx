@@ -115,7 +115,7 @@ const AppointmentsPage = () => {
       </Button>
       </Group>
       <TilesSection title="En curso" />
-      <CustomStack>
+      {inProgress.length > 0 ? (<CustomStack>
         {inProgress.map((appt: Appointment, index: number) => (
           <CustomTile
             key={index}
@@ -130,9 +130,11 @@ const AppointmentsPage = () => {
             })} - ${appt.hour}`}
           />
         ))}
-      </CustomStack>
+      </CustomStack>): (
+        <Text size='xl' fw={500} ml={10} c="gray.7">Sin citas</Text>
+      )}
       <TilesSection title="Pendientes" />
-      <CustomStack>
+      {pending.length > 0 ? (<CustomStack>
         {pending.map((appt: Appointment, index: number) => (
           <CustomTile
             key={index}
@@ -147,9 +149,11 @@ const AppointmentsPage = () => {
             })} - ${appt.hour}`}
           />
         ))}
-      </CustomStack>
-      <TilesSection title="Completadas" />
-      <CustomStack>
+      </CustomStack>): (
+        <Text size='xl' fw={500} ml={10} c="gray.7">Sin citas</Text>
+      )}
+            <TilesSection title="Completadas" />
+      {completed.length > 0 ? (<CustomStack>
         {completed.map((appt: Appointment, index: number) => (
           <CustomTile
             key={index}
@@ -164,7 +168,9 @@ const AppointmentsPage = () => {
             })} - ${appt.hour}`}
           />
         ))}
-      </CustomStack>
+      </CustomStack>): (
+        <Text size='xl' fw={500} ml={10} c="gray.7">Sin citas</Text>
+      )}
     </main>
   )
 }
