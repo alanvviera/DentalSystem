@@ -60,7 +60,7 @@ const Page = () => {
   const clinicHeaders = ["Nombre"];
 
   return (
-    <div>
+    <main>
       <ProfileBanner title={`${name}`} description={`${role} - ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
@@ -74,7 +74,7 @@ const Page = () => {
           <ClinicsCard headers={clinicHeaders} items={topClinics} baseLink="/employee-menu/clinics" itemId="id" moreButtonLink="/employee-menu/clinics" addButtonLink="/employee-menu/clinics/register" />
         </GridCol>
       </Grid>
-    </div>
+    </main>
   );
 };
 

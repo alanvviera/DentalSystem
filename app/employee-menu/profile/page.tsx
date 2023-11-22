@@ -1,5 +1,5 @@
 "use client"
-import { Button, Box } from '@mantine/core'
+import { Button, Box, Title } from '@mantine/core'
 import React from 'react'
 import MantineForm from '../../../components/mantine-form/MantineForm';
 import { allValuesAvailable, validateDate, validateEmail, validateName, validateNumber, validatePassword } from '../../../components/mantine-form/valuesValidate';
@@ -7,7 +7,8 @@ import CustomInputMantine, { typeInputForm } from '../../../components/mantine-f
 
 const EmployeeProfilePage = () => {
   return (
-    <Box px={10}>
+    <div style={{margin: "20px"}}>
+      <Title>Perfil</Title>
       <MantineForm
         initialValuesForKeys={{
           name: "Elton Tito",
@@ -44,7 +45,7 @@ const EmployeeProfilePage = () => {
         labelSubmit='Confirmar cambios'
       />
       <Button variant='default' fullWidth mt={10}>Cancelar</Button>
-    </Box>
+    </div>
   )
 }
 

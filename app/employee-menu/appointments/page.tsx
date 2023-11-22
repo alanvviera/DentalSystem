@@ -2,7 +2,8 @@ import React from 'react'
 import TilesSection from '../../../components/tiles-viewer/TileSection';
 import CustomStack from '../../../components/tiles-viewer/CustomStack';
 import CustomTile from '../../../components/tiles-viewer/CustomTile';
-import { Text } from '@mantine/core';
+import { ActionIcon, Button, Group, Text, Title } from '@mantine/core';
+import { PlusOutlined } from '@ant-design/icons';
 
 type Appointment = {
   id: number;
@@ -100,14 +101,20 @@ const compareAppointments = (a: Appointment, b: Appointment): number => {
 }
 
 
-const page = () => {
+const AppointmentsPage = () => {
   const {pending, completed, inProgress} = getData();
   pending.sort(compareAppointments);
   inProgress.sort(compareAppointments);
   completed.sort(compareAppointments).reverse();
   return (
-    <div style={{ margin: "20px" }}>
-      <TilesSection title="Citas en curso" />
+    <main style={{ margin: "20px" }}>
+      <Group justify='space-between'>
+      <Title>Citas</Title>
+      <Button leftSection={<PlusOutlined />} component='a' href='/employee-menu/appointments/create'>
+        Agregar
+      </Button>
+      </Group>
+      <TilesSection title="En curso" />
       <CustomStack>
         {inProgress.map((appt: Appointment, index: number) => (
           <CustomTile
@@ -124,7 +131,7 @@ const page = () => {
           />
         ))}
       </CustomStack>
-      <TilesSection title="Citas Pendientes" />
+      <TilesSection title="Pendientes" />
       <CustomStack>
         {pending.map((appt: Appointment, index: number) => (
           <CustomTile
@@ -141,7 +148,7 @@ const page = () => {
           />
         ))}
       </CustomStack>
-      <TilesSection title="Citas Completadas" />
+      <TilesSection title="Completadas" />
       <CustomStack>
         {completed.map((appt: Appointment, index: number) => (
           <CustomTile
@@ -158,8 +165,8 @@ const page = () => {
           />
         ))}
       </CustomStack>
-    </div>
+    </main>
   )
 }
 
-export default page
+export default AppointmentsPage
