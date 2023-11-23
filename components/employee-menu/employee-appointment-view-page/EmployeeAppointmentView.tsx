@@ -1,16 +1,15 @@
-"use client";
-import React from "react";
-import { Button, Space, Title } from "@mantine/core";
-import VisualizeData from "../../../../components/visualize-data/VisualizeData";
-import VisualizeDataButton from "../../../../components/visualize-data/buttonsData/VisualizeDataButton";
-import FormExampleUpdate from "../../../form-example/update/page";
-import { ArrowLeftOutlined, DeleteFilled, EditFilled } from "@ant-design/icons";
-import FormExampleCreate from "../../../form-example/create/page";
-import LabelDataText from "../../../../components/visualize-data/labelsData/LabelDataText";
-import CreateAppointmentPage from "../create/page";
+"use client"
+import React from 'react'
+import VisualizeData from '../../visualize-data/VisualizeData';
+import { Button, Space, Title } from '@mantine/core';
+import { ArrowLeftOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
+import VisualizeDataButton from '../../visualize-data/buttonsData/VisualizeDataButton';
+import CreateAppointmentPage from '../../../app/employee-menu/appointments/create/page';
+import FormExampleCreate from '../../../app/form-example/create/page';
+import LabelDataText from '../../visualize-data/labelsData/LabelDataText';
 
-const FormExampleVisualize = () => (
-  <div style={{ marginLeft: "20px", marginRight: "20px" }}>
+const EmployeeAppointmentView = ({appointment}) => {
+  return (<div style={{ marginLeft: "20px", marginRight: "20px" }}>
     <VisualizeData
       actionsTop={
         <>
@@ -47,12 +46,12 @@ const FormExampleVisualize = () => (
       content={
         <>
           <Title>Detalles de la cita</Title>
-          <LabelDataText title="Ricardo arjona" type="Nombre del cliente" />
-          <LabelDataText title="Clinica sin dientes" type="Clinica" />
-          <LabelDataText title="Extracíon de muelas" type="Tipo de cita" />
-          <LabelDataText title="Ricardo milos" type="Nombre del dentista" />
-          <LabelDataText title="25 de julio del 2023" type="Fecha" />
-          <LabelDataText title="1:40 PM" type="Hora" />
+          <LabelDataText title={appointment.patient_name} type="Cliente"/>
+          <LabelDataText title={appointment.clinic_name} type="Clinica" />
+          <LabelDataText title={appointment.type} type="Tipo de cita" />
+          <LabelDataText title={appointment.doctor_name} type="Atiende" />
+          <LabelDataText title={appointment.date_of_date} type="Fecha" />
+          <LabelDataText title={appointment.appointment_time} type="Hora" />
           <LabelDataText
             title="Debe de ser atentido por el doctor Similares del consultorio 8"
             type="Descripción"
@@ -60,7 +59,7 @@ const FormExampleVisualize = () => (
         </>
       }
     />
-  </div>
-);
+  </div>);
+}
 
-export default FormExampleVisualize;
+export default EmployeeAppointmentView

@@ -15,7 +15,13 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const CreateAppointmentPage = () => (
   <main style={{ marginLeft: "20px", marginRight: "20px" }}>
-    <Button px={0} component="a" href="/employee-menu/appointments" leftSection={<ArrowLeftOutlined />} variant="subtle">
+    <Button
+      px={0}
+      component="a"
+      href="/employee-menu/appointments"
+      leftSection={<ArrowLeftOutlined />}
+      variant="subtle"
+    >
       Volver a Citas
     </Button>
     <Title>Programar cita</Title>
@@ -48,7 +54,7 @@ const CreateAppointmentPage = () => (
         new CustomInputMantine(
           "Seleccionar clínica",
           "",
-          "clinic",
+          "clinic_name",
           typeInputForm.TEXT
         ),
         new CustomInputMantine("Tipo de cita", "", "type", typeInputForm.TEXT),
@@ -58,12 +64,7 @@ const CreateAppointmentPage = () => (
           "doctor_name",
           typeInputForm.TEXT
         ),
-        new CustomInputMantine(
-          "Fecha",
-          "",
-          "date_of_date",
-          typeInputForm.DATEPICKER
-        ),
+        new CustomInputMantine("Fecha", "", "date_of_date", typeInputForm.DATEPICKER),
         new CustomInputMantine(
           "Hora",
           "",
@@ -77,14 +78,44 @@ const CreateAppointmentPage = () => (
           typeInputForm.TEXT
         ),
       ]}
-      onSubmit={(form: any) => {
-        // All fields were validated
+      onSubmit={async (form: any) => {
         console.log(form.values);
-        form.setInitialValues();
+        const {
+          patient_name,
+          clinic_name,
+          type,
+          doctor_name,
+          date_of_date,
+          appointment_time,
+          subject,
+        } = form.values;
+        /*
+          const response = await fetch(route, {
+            method: "POST",
+            body: JSON.stringify(
+              {
+                patient_name,
+                clinic_name,
+                type,
+                doctor_name,
+                date_of_date,
+                appointment_time,
+                subject,
+              }
+            ),
+          });
+          return response.json();
+      */
       }}
       labelSubmit="Crear"
     />
-    <Button variant="default" component="a" href="/employee-menu/appointments"  fullWidth mt={10}>
+    <Button
+      variant="default"
+      component="a"
+      href="/employee-menu/appointments"
+      fullWidth
+      mt={10}
+    >
       Cancelar
     </Button>
   </main>
