@@ -5,6 +5,7 @@ import { MantineProvider, createTheme } from '@mantine/core'; //Import MantinePr
 import '@mantine/dates/styles.css'; //Import package Matine dates styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
+import { ModalsProvider } from '@mantine/modals';
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -21,10 +22,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX">
       <body className={montserrat.className}>
-      <MantineProvider theme={theme}>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <MantineProvider theme={theme}>
+          <ModalsProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>
