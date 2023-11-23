@@ -7,11 +7,8 @@ import MantineForm from '../../../../../../components/mantine-form/MantineForm';
 import { validaFieldsNotEmpty, validateDate, validateEmail, validateNumberInteger, validateNumberTel } from '../../../../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../../components/mantine-form/customMantineInput';
 
-const EditClinicsPage = ({ params }) => {
-    const clinicId = params["clinic-id"];
-
-    //Data Example
-    const dataEmployeeExample = {
+const getData = async (employeeId: String) => {
+    return {
         name: "John Wick",
         email: "john56@gmail.com",
         numTel: "646-125-78-96",
@@ -19,10 +16,25 @@ const EditClinicsPage = ({ params }) => {
         activity: "Médico dentista",
         medicalDegree: "Licenciatura y doctorado",
         addrress: "Valle verde #116",
-        dateBirthday: "25/16/2020",
+        dateBirthday: "1701388800000",
         gender: "Hombre",
         state: "Baja California",
         speciality: "Cirujano dental"
+    };
+}
+
+const EditClinicsPage = async ({ params }) => {
+    const clinicId = params["clinic-id"];
+    const employeeId = params["employee-id"]
+
+    //Data Example
+    const dataEmployeeExample = await getData(employeeId);
+
+    //OnSubmit
+    const onSubmit = (form: any) => {
+        // All fields were validated
+        console.log(form.values);
+        form.setInitialValues();
     }
 
     return (
@@ -50,16 +62,21 @@ const EditClinicsPage = ({ params }) => {
                     speciality: validaFieldsNotEmpty
                 }}
                 listCustomInputMantine={[
-                    new CustomInputMantine("Dirección de la clínica", "Tu dirección", "addressClinic", typeInputForm.TEXT),
-                    new CustomInputMantine("Número de edificio", "Agregue su número de edificio", "buildingNumber", typeInputForm.TEXT),
-                    new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "tel", typeInputForm.TEXT),
-                    new CustomInputMantine("Estatus", "Ingrese el estatus de su clínica", "status", typeInputForm.TEXT),
-
+                    //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText
+                    new CustomInputMantine("Nombre completo", "Nombre completo", "name", typeInputForm.TEXT),
+                    new CustomInputMantine("Correo electrónico", "Correo electrónico", "email", typeInputForm.TEXT),
+                    new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "numTel", typeInputForm.TEXT),
+                    new CustomInputMantine("CURP", "Ingrese el curp", "curp", typeInputForm.TEXT),
+                    new CustomInputMantine("Cargo", "Cargo", "activity", typeInputForm.TEXT),
+                    new CustomInputMantine("Licencia medica", "Licencia medica", "medicalDegree", typeInputForm.TEXT),
+                    new CustomInputMantine("Dirección", "Dirección", "addrress", typeInputForm.TEXT),
+                    new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER, new Date(Number(dataEmployeeExample.dateBirthday))),
+                    new CustomInputMantine("Genero", "Genero", "gender", typeInputForm.TEXT),
+                    new CustomInputMantine("Lugar de estado", "Lugar de estado", "state", typeInputForm.TEXT),
+                    new CustomInputMantine("Especialidad", "Especialidad", "speciality", typeInputForm.TEXT),
                 ]}
                 onSubmit={(form: any) => {
-                    // All fields were validated
-                    console.log(form.values);
-                    form.setInitialValues();
+                    onSubmit(form);
                 }}
                 labelSubmit='Crear'
             />
