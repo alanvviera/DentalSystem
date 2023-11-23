@@ -5,11 +5,8 @@ import { validaFieldsNotEmpty, validateNumberInteger, validateNumberTel } from '
 import { Button, Title } from "@mantine/core";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../components/mantine-form/MantineForm';
-import { useRouter } from 'next/navigation';
 
 const EditClinicsPage = () => {
-
-    const router = useRouter();
 
     //Data Example
     const dataForm = {
@@ -21,7 +18,7 @@ const EditClinicsPage = () => {
 
     return (
         <main style={{ margin: "20px" }}>
-            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" onClick={()=>router.back()} >
+            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href='/employee-menu/clinics' >
                 Volver a clinicas
             </Button>
             <Title>Editar información de la clínica</Title>
