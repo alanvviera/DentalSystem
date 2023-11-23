@@ -78,8 +78,11 @@ const EditClinicsPage = async ({ params }) => {
                 onSubmit={(form: any) => {
                     onSubmit(form);
                 }}
-                labelSubmit='Crear'
+                labelSubmit='Guardar cambios'
             />
+            <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/employees/`} fullWidth mt={10}>
+                Cancelar
+            </Button>
         </main>
     );
 };
