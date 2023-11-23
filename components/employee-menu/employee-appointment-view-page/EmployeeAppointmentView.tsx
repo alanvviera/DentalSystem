@@ -4,9 +4,9 @@ import VisualizeData from '../../visualize-data/VisualizeData';
 import { Button, Space, Title } from '@mantine/core';
 import { ArrowLeftOutlined, DeleteFilled, EditFilled } from '@ant-design/icons';
 import VisualizeDataButton from '../../visualize-data/buttonsData/VisualizeDataButton';
-import CreateAppointmentPage from '../../../app/employee-menu/appointments/create/page';
-import FormExampleCreate from '../../../app/form-example/create/page';
 import LabelDataText from '../../visualize-data/labelsData/LabelDataText';
+import EmployeeAppointmentUpdate from './EmployeeAppointmentUpdate';
+import EmployeeAppointmentDelete from './EmployeeAppointmentDelete';
 
 const EmployeeAppointmentView = ({appointment}) => {
   return (<div style={{ marginLeft: "20px", marginRight: "20px" }}>
@@ -22,7 +22,8 @@ const EmployeeAppointmentView = ({appointment}) => {
             Volver a Citas
           </Button>
           <VisualizeDataButton
-            showComponent={<CreateAppointmentPage />}
+            titleModal='Reprogramar cita'
+            showComponent={<EmployeeAppointmentUpdate appointment={appointment} />}
             title={"Editar"}
             classNameButton={{
               variant: "subtle",
@@ -32,8 +33,8 @@ const EmployeeAppointmentView = ({appointment}) => {
           />
           <Space w={"4px"} />
           <VisualizeDataButton
-            titleModal={"Aqui va el titulo del modal"}
-            showComponent={<FormExampleCreate/>}
+            titleModal={"¿Desea eliminar este registro?"}
+            showComponent={<EmployeeAppointmentDelete appointmentId={appointment.id} />}
             title={"Eliminar"}
             classNameButton={{
               variant: "subtle",

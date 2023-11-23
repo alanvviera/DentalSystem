@@ -4,7 +4,7 @@ import EmployeeAppointmentView from "../../../../components/employee-menu/employ
 const getData = async (id: number) => {
   //const res = await fetch(`route/${id}`);
   const res = {
-    id: id,
+    id,
     patient_name: "Ricardo arjona",
     clinic_name: "Clinica sin dientes",
     type: "Extracíon de muelas",
