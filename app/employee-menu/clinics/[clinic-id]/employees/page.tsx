@@ -6,30 +6,34 @@ import VisualizeData from '../../../../../components/visualize-data/VisualizeDat
 import LabelDataText from '../../../../../components/visualize-data/labelsData/LabelDataText';
 import { useRouter } from 'next/navigation';
 
-const EmployeesPage = ({ params }) => {
+const getData = async ()=>{
+return  [
+    {
+        idEmployee: "dsdaxXe2mmadfasd23",
+        name: "Son goku",
+    },
+    {
+        idEmployee: "xmLñ23%42dax62321f",
+        name: "Broly"
+    },
+    {
+        idEmployee: "KbVrrox156134&52-23sx",
+        name: "Gohan"
+    },
+    {
+        idEmployee: "Xmendsa323232aXkmk2ñ5.lplm",
+        name: "Goten's"
+    }
+
+];
+}
+
+const EmployeesPage =async ({ params }) => {
     const router = useRouter()
     const clinicId = params["clinic-id"];
 
     //Data Example
-    const listEmployeesExample = [
-        {
-            idEmployee: "dsdaxXe2mmadfasd23",
-            name: "Son goku",
-        },
-        {
-            idEmployee: "xmLñ23%42dax62321f",
-            name: "Broly"
-        },
-        {
-            idEmployee: "KbVrrox156134&52-23sx",
-            name: "Gohan"
-        },
-        {
-            idEmployee: "Xmendsa323232aXkmk2ñ5.lplm",
-            name: "Goten's"
-        }
-
-    ];
+    const listEmployeesExample =await getData();
 
     return (
         <main style={{ margin: "20px" }}>

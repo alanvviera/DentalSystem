@@ -6,15 +6,20 @@ import { Button, Title } from "@mantine/core";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../components/mantine-form/MantineForm';
 
-const EditClinicsPage = () => {
 
-    //Data Example
-    const dataForm = {
+const getData = async () => {
+    return {
         addressClinic: "Calle buenos aires",
         buildingNumber: "28",
         tel: "646-123-45-67",
         status: "Activo"
-    }
+    };
+}
+
+const EditClinicsPage = async () => {
+
+    //Data Example
+    const dataForm = await getData();
 
     return (
         <main style={{ margin: "20px" }}>
