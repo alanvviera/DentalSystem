@@ -49,7 +49,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
         <div className="flex flex-col items-center justify-between pt-4">
             <div style={{ width: '100%', minHeight: 'min-content', overflow: 'auto' }}>
                 <SearchComponent data={elements} setFilteredData={handleSetFilteredData} />
-                <Table stickyHeader stickyHeaderOffset={60} className="bg-[#F1F7FE]" style={{ minWidth: '600px' }}>
+                <Table striped withTableBorder  withColumnBorders stickyHeader stickyHeaderOffset={60} className="bg-[#F1F7FE]" style={{ minWidth: '600px' }}>
                     <Table.Thead>
                         <Table.Tr>
                             {headers.map((header, index) => (
