@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import SearchComponent from './SearchComponent'; // Ajusta la ruta según tu estructura de archivos
 import { Table } from '@mantine/core';
+import { useRouter } from 'next/navigation';
 
 interface CustomTableProps {
     headers: string[];
@@ -25,6 +26,7 @@ interface Element {
 
 const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
     const [filteredData, setFilteredData] = useState<Element[]>(elements);
+    const router = useRouter();
 
     // Esta función se utilizará para establecer los datos filtrados
     const handleSetFilteredData = (data: Element[]) => {
@@ -34,8 +36,8 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
     const columns: (keyof Element)[] = Object.keys(elements[0] || {}) as (keyof Element)[];
 
     const rows = filteredData.map((element) => (
-        <Table.Tr key={element.id.toString()} onClick={(data) => {
-            console.log(element.id)
+        <Table.Tr style={{ cursor: 'pointer' }} key={element.id.toString()} onClick={(data) => {
+            router.push(`inventory/${element.id.toString()}`)
         }} >
             {columns.map((column, index) => (
                 <Table.Td key={column.toString()}>{element[column]}</Table.Td>
