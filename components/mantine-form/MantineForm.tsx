@@ -61,6 +61,8 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  allowDecimal={inputMantine.allowDecimal}
+                  maxValue={inputMantine.maxValue}
                 />
               );
 

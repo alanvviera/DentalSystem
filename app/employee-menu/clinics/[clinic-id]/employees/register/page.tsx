@@ -3,10 +3,10 @@ import React from 'react';
 import { Button, Title } from "@mantine/core";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../../../components/mantine-form/MantineForm';
-import { validaFieldsNotEmpty, validateDate, validateEmail, validateNumberInteger, validateNumberTel } from '../../../../../../components/mantine-form/valuesValidate';
+import { validaFieldsNotEmpty, validateDate, validateEmail, validateNumberTel } from '../../../../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../../components/mantine-form/customMantineInput';
 
-const RegisterClinicsPage = async ({ params }) => {
+const RegisterClinicsPage = ({ params }) => {
     const clinicId = params["clinic-id"];
 
     //OnSubmit
@@ -51,7 +51,7 @@ const RegisterClinicsPage = async ({ params }) => {
                     speciality: validaFieldsNotEmpty
                 }}
                 listCustomInputMantine={[
-                    //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText
+                    //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText, 5 -allowDecimal, 6 - maxValue
                     new CustomInputMantine("Nombre completo", "Nombre completo", "name", typeInputForm.TEXT),
                     new CustomInputMantine("Correo electrónico", "Correo electrónico", "email", typeInputForm.TEXT),
                     new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "numTel", typeInputForm.TEXT),

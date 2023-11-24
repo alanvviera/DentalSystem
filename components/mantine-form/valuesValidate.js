@@ -4,7 +4,7 @@ const validateName = (value) => {
 }
 
 const validaFieldsNotEmpty = (value) => {
-    return (value.length < 5 ? "Por favor llene el campo solicitado" : null);
+    return (value.length < 4 ? "Por favor llene el campo solicitado" : null);
 }
 
 const validateEmail = (value) => {
@@ -17,6 +17,10 @@ const validateAge = (value) => {
 
 const validateNumberInteger = (value) => {
     return (/^\d+$/.test(value) ? null : "Por favor seleccione un número");
+}
+
+const validatePrice = (value)=>{
+    return (/(\-?\d+\.?\d{0,2})/.test(value)?null:"Por favor ingrese un precio correcto");
 }
 
 const validatePassword = (value, values) => {
@@ -40,6 +44,7 @@ const validateNumberTel = (value) => {
 export {
     validateName,
     validateEmail,
+    validatePrice,
     validateAge,
     validatePassword,
     allValuesAvailable,

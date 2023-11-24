@@ -3,10 +3,10 @@ import React from 'react';
 import { Button, Title } from "@mantine/core";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../../../components/mantine-form/MantineForm';
-import { validaFieldsNotEmpty, validateDate, validateEmail, validateNumberInteger, validateNumberTel } from '../../../../../../components/mantine-form/valuesValidate';
+import { validaFieldsNotEmpty, validateNumberInteger, validatePrice, } from '../../../../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../../components/mantine-form/customMantineInput';
 
-const AddInventoryPage = async ({ params }) => {
+const AddInventoryPage = ({ params }) => {
     const clinicId = params["clinic-id"];
 
     //OnSubmit
@@ -18,60 +18,63 @@ const AddInventoryPage = async ({ params }) => {
 
     return (
         <main style={{ margin: "20px" }}>
-            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/employees`} >
-                Volver a personal
+            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/inventory`} >
+                Volver a inventario
             </Button>
-            <Title>Agregar personal</Title>
+            <Title>Agregar insumo</Title>
             <MantineForm
                 initialValuesForKeys={{
                     name: "",
-                    email: "",
-                    numTel: "",
-                    curp: "",
-                    activity: "",
-                    medicalDegree: "",
-                    addrress: "",
-                    dateBirthday: "",
-                    gender: "",
-                    state: "",
-                    speciality: ""
-
+                    qr: "",
+                    category: "",
+                    provider: "",
+                    acquisitionDate: "",
+                    expirationDate: "",
+                    cost: "",
+                    price: "",
+                    stock: "",
+                    maxStock: "",
+                    minStock: "",
+                    observations: ""
                 }}
                 validateForKeys={{
                     name: validaFieldsNotEmpty,
-                    email: validateEmail,
-                    numTel: validateNumberTel,
-                    curp: validaFieldsNotEmpty,
-                    activity: validaFieldsNotEmpty,
-                    medicalDegree: validaFieldsNotEmpty,
-                    addrress: validaFieldsNotEmpty,
-                    dateBirthday: validateDate,
-                    gender: validaFieldsNotEmpty,
-                    state: validaFieldsNotEmpty,
-                    speciality: validaFieldsNotEmpty
+                    qr: validaFieldsNotEmpty,
+                    category: validaFieldsNotEmpty,
+                    provider: validaFieldsNotEmpty,
+                    acquisitionDate: validaFieldsNotEmpty,
+                    expirationDate: validaFieldsNotEmpty,
+                    cost: validatePrice,
+                    price: validatePrice,
+                    stock: validateNumberInteger,
+                    maxStock: validateNumberInteger,
+                    minStock: validateNumberInteger,
+                    observations: validaFieldsNotEmpty
                 }}
                 listCustomInputMantine={[
-                    //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText
-                    new CustomInputMantine("Nombre completo", "Nombre completo", "name", typeInputForm.TEXT),
-                    new CustomInputMantine("Correo electrónico", "Correo electrónico", "email", typeInputForm.TEXT),
-                    new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "numTel", typeInputForm.TEXT),
-                    new CustomInputMantine("CURP", "Ingrese el curp", "curp", typeInputForm.TEXT),
-                    new CustomInputMantine("Cargo", "Cargo", "activity", typeInputForm.TEXT),
-                    new CustomInputMantine("Licencia medica", "Licencia medica", "medicalDegree", typeInputForm.TEXT),
-                    new CustomInputMantine("Dirección", "Dirección", "addrress", typeInputForm.TEXT),
-                    new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER,),
-                    new CustomInputMantine("Genero", "Genero", "gender", typeInputForm.TEXT),
-                    new CustomInputMantine("Lugar de estado", "Lugar de estado", "state", typeInputForm.TEXT),
-                    new CustomInputMantine("Especialidad", "Especialidad", "speciality", typeInputForm.TEXT),
+                    //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText, 5 -allowDecimal, 6 - maxValue
+                    new CustomInputMantine("Nombre del medicamento", "Nombre del medicamento", "name", typeInputForm.TEXT),
+                    new CustomInputMantine("Codigo QR", "QR", "qr", typeInputForm.TEXT),
+                    new CustomInputMantine("Categoria del medicamento", "Categoria", "category", typeInputForm.TEXT),
+                    new CustomInputMantine("Proveedor", "Proveedor", "provider", typeInputForm.TEXT),
+                    new CustomInputMantine("Fecha de adquisición", "Fecha de adquisición", "acquisitionDate", typeInputForm.DATEPICKER),
+                    new CustomInputMantine("Fecha de expiración", "Fecha de expiración", "expirationDate", typeInputForm.DATEPICKER),
+                    new CustomInputMantine("Costo", "Costo", "cost", typeInputForm.NUMBER, undefined, true, 1000000),
+                    new CustomInputMantine("Precio", "Precio", "price", typeInputForm.NUMBER, undefined, true, 1000000),
+                    new CustomInputMantine("Stock", "Stock", "stock", typeInputForm.NUMBER, undefined, false, 1000000),
+                    new CustomInputMantine("Maximo stock", "Maximo stock", "maxStock", typeInputForm.NUMBER, undefined, false, 1000000),
+                    new CustomInputMantine("Minimo stock", "Minimo stock", "minStock", typeInputForm.NUMBER, undefined, false, 1000000),
+                    new CustomInputMantine("Observaciones", "Observaciones", "observations", typeInputForm.TEXT),
+
                 ]}
                 onSubmit={(form: any) => {
                     onSubmit(form);
                 }}
-                labelSubmit='Registrar'
+                labelSubmit='Agregar'
             />
-            <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/employees/`} fullWidth mt={10}>
+            {/* <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/employees/`} fullWidth mt={10}>
                 Cancelar
-            </Button>
+            </Button> */}
         </main>
     );
 };
