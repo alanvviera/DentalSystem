@@ -19,8 +19,16 @@ export async function POST (req: NextRequest) {
       return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
     }
 
+    if (user.type_user === 'patient') {
+      return NextResponse.redirect('/patient-dashboard');
+    } else if (user.type_user === 'empleado') {
+      return NextResponse.redirect('/employee-dashboard');
+    } else {
+      return NextResponse.json({ error: 'Tipo de usuario no valido' }, { status: 401 })
+    }
+    
     // El inicio de sesión fue exitoso
-    return NextResponse.json({ message: 'Inicio de sesión exitoso' }, { status: 200 });
+    //return NextResponse.json({ message: 'Inicio de sesión exitoso' }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error de servidor' }, { status: 500 });

@@ -41,8 +41,6 @@ async function sendEmail(to: string, verificationCode: string) {
       }
     }
 
-
-
 export async function POST (req: NextRequest) {
   try {
     const { email } = await req.json();

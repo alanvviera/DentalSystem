@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 
 export async function GET (req: NextRequest) {
 
-    const userId = req.user.sub;
-    const userProfile = await prisma.user_data.findUnique({where: {id_user}});
+    const userId = prisma.user_data.sub;
+    const userProfile = await prisma.user_data.findUnique({where: {userId}});
 
     if (!userProfile) {
         return NextResponse.json({ error: 'User profile not found' }, { status: 404 });

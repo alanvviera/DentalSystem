@@ -5,7 +5,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function GET (req: NextRequest) {
+export async function GET(req: NextRequest) {
+
+  const userId = req.nextUrl.searchParams.get('id')
   
   const session = getSession();
 
@@ -15,7 +17,13 @@ export async function GET (req: NextRequest) {
   
   try {
 
-    const dashboardData = await prisma.user_data.findUnique({where: {id_user}});
+    const dashboardData = await prisma.user_data.findUnique({
+      where: {id: parseInt(userId)},
+      select: {
+        fullname: true, //falta la imagen de perfil
+        //Falta incluir los demas tablas citas y pendientes
+      }
+    });
 
     if (!dashboardData) {
       return NextResponse.json({ error: 'Dashboard data not found' }, { status: 404});

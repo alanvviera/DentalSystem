@@ -1,0 +1,245 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table company_dentist {
+  id Int [pk, increment]
+  id_company_dentist Int [unique, not null]
+  owner_name String
+  rfc String [unique]
+  regimen String
+  local local [not null]
+}
+
+Table dates {
+  id Int [pk, increment]
+  id_dates Int [unique, not null]
+  id_doctor_FK Int [not null]
+  id_patient_FK Int [not null]
+  patient_name String
+  clinic_name String
+  type String
+  doctor_name String
+  date_of_date DateTime
+  appointment_time DateTime
+  subject String
+  doctor doctor [not null]
+  patient patient [not null]
+}
+
+Table doctor {
+  id Int [pk, increment]
+  id_doctor Int [unique, not null]
+  id_user_FK Int [unique, not null]
+  license String
+  specialty String
+  faculty String
+  school String
+  dates dates [not null]
+  user_data user_data [not null]
+}
+
+Table employees {
+  id Int [pk, increment]
+  id_employees Int [unique, not null]
+  id_user_FK Int [not null]
+  id_local_FK Int [unique, not null]
+  employee_number Int
+  charge String
+  employee_type String
+  curp String
+  study_level String
+  document Bytes
+  local local [not null]
+  user_data user_data [not null]
+}
+
+Table inventory {
+  id Int [pk, increment]
+  id_inventory Int [unique, not null]
+  id_local_FK Int [not null]
+  product_name String [not null]
+  qr Bytes
+  category String [not null]
+  provider String
+  acquisition_date DateTime
+  expiration_date DateTime
+  cost Float [not null]
+  price Float [not null]
+  stock_quantity Int
+  minimum_stock Int
+  maximum_stock Int
+  observations String
+  local local [not null]
+  inventory_movements inventory_movements [not null]
+}
+
+Table inventory_movements {
+  id Int [pk, increment]
+  id_inventory_movements Int [unique, not null]
+  id_inventory_FK Int [not null]
+  sold String
+  returned String
+  comment String
+  date DateTime
+  inventory inventory [not null]
+}
+
+Table local {
+  id Int [pk, increment]
+  id_local Int [unique, not null]
+  id_company_dentist_FK Int [not null]
+  name String [not null]
+  address String
+  map String
+  building_number Int
+  phone_number String
+  photos Bytes
+  status String
+  employees employees
+  inventory inventory [not null]
+  company_dentist company_dentist [not null]
+}
+
+Table login {
+  id Int [pk, increment]
+  user_id Int [unique, not null]
+  id_user_FK Int [not null]
+  google_email String [unique]
+  facebook_email String [unique]
+  user_data user_data [not null]
+  password_forgotten password_forgotten
+  signup signup [not null]
+}
+
+Table new_password {
+  id Int [pk, increment]
+  id_new_password Int [unique, not null]
+  id_password_forgotten_FK Int [not null]
+  newpassword String
+  confirmpassword String
+  password_forgotten password_forgotten [not null]
+}
+
+Table password_forgotten {
+  id Int [pk, increment]
+  id_password_forgotten Int [unique, not null]
+  id_login_Fk Int [unique, not null]
+  email String
+  new_password new_password [not null]
+  login login [not null]
+}
+
+Table patient {
+  id Int [pk, increment]
+  id_patient Int [unique, not null]
+  id_user_FK Int [not null]
+  allergies String
+  emergency_name String
+  cardiac Bytes
+  health_insurance_number String
+  medical_history Bytes
+  radiographs Bytes
+  photo_history Bytes
+  medical_conditions Bytes
+  emergency_number String
+  dates dates [not null]
+  user_data user_data [not null]
+  patient_debt patient_debt [not null]
+  patient_services patient_services [not null]
+}
+
+Table patient_debt {
+  id Int [pk, increment]
+  id_patient_debt Int [unique, not null]
+  id_patient_FK Int [not null]
+  total_debt Float
+  total Int
+  date_paid DateTime
+  doctor_name String
+  debt Int
+  patient patient [not null]
+}
+
+Table patient_services {
+  id Int [pk, increment]
+  id_patient_services Int [unique, not null]
+  id_patient_FK Int [not null]
+  services String
+  packages String
+  insurance String
+  debt_amount Float
+  patient patient [not null]
+}
+
+Table signup {
+  id Int [pk, increment]
+  id_signup Int [unique, not null]
+  id_login_FK Int [not null]
+  fullname String
+  email String
+  phone_number String
+  confirmpassword String
+  login login [not null]
+}
+
+Table user_data {
+  id Int [pk, increment]
+  id_user String [unique, not null]
+  fullname String [not null]
+  email String [unique, not null]
+  password String [not null]
+  phone_number String
+  home_address String
+  birthday DateTime
+  gender String
+  type_user String
+  doctor doctor
+  employees employees [not null]
+  login login [not null]
+  patient patient [not null]
+  user_type user_type [not null]
+}
+
+Table user_type {
+  id Int [pk, increment]
+  id_user_type Int [unique, not null]
+  user_data_FK String [not null]
+  admin String
+  doctor String
+  employees String
+  patient String
+  user_data user_data [not null]
+}
+
+Ref: dates.id_doctor_FK > doctor.id_user_FK
+
+Ref: dates.id_patient_FK > patient.id_patient
+
+Ref: doctor.id_user_FK - user_data.id
+
+Ref: employees.id_local_FK - local.id
+
+Ref: employees.id_user_FK > user_data.id
+
+Ref: inventory.id_local_FK > local.id_local
+
+Ref: inventory_movements.id_inventory_FK > inventory.id_inventory
+
+Ref: local.id_company_dentist_FK > company_dentist.id_company_dentist
+
+Ref: login.id_user_FK > user_data.id
+
+Ref: new_password.id_password_forgotten_FK > password_forgotten.id_password_forgotten
+
+Ref: password_forgotten.id_login_Fk - login.user_id
+
+Ref: patient.id_user_FK > user_data.id
+
+Ref: patient_debt.id_patient_FK > patient.id_patient
+
+Ref: patient_services.id_patient_FK > patient.id_patient
+
+Ref: signup.id_login_FK > login.user_id [delete: No Action]
+
+Ref: user_type.user_data_FK > user_data.id_user
