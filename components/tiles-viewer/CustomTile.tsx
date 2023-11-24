@@ -7,6 +7,8 @@ type CustomTileProps = {
   bottomRightText1?: string;
   bottomRightText2?: string;
   topRightText?: string;
+  fontSize?: string;
+  topRightFontSize?: string; // Nuevo prop para el tamaño de la fuente
   children?: ReactNode;
 }
 
@@ -16,6 +18,8 @@ const CustomTile = ({
   bottomRightText1,
   bottomRightText2,
   topRightText,
+  fontSize = '14px',
+  topRightFontSize = '14px', // Valor por defecto para el tamaño de la fuente
   children,
 }:CustomTileProps) => (
     <Card
@@ -34,7 +38,7 @@ const CustomTile = ({
         <Group justify='end'>
           <Text
             c="dimmed"
-            size="14px"
+            size=  {topRightFontSize}
           >
             {topRightText}
           </Text>
@@ -53,7 +57,7 @@ const CustomTile = ({
           {bottomRightText1 && (
             <Text
               style={{
-                fontSize: '14px',
+                fontSize: fontSize,
               }}
             >
               {bottomRightText1}
@@ -62,7 +66,7 @@ const CustomTile = ({
           {bottomRightText2 && (
             <Text
               style={{
-                fontSize: '14px',
+                fontSize: fontSize,
               }}
             >
               {bottomRightText2}

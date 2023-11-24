@@ -44,7 +44,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   const routes = [
     {
         title: "Inicio",
-        url: "/client-menu/",
+        url: "/client-menu",
         icon: <HomeOutlined/>
     },
     {
@@ -66,29 +66,18 @@ const RootLayout = ({ children }: RootLayoutProps) => {
    
     {
         title: "Historial clínico",
-        url: "/menu-example/medicalHistory",
+        url: "/client-menu/medicalHistory",
         icon: <FileTextOutlined/>
     }
 ];
 
   return (
-    <html lang="es-MX">
-      <head>
-      <ColorSchemeScript />
-      </head>
-      <body className={montserrat.className}>
-      <MantineProvider theme={theme}>
-        <AuthProvider>
-          <NavMenu routes={routes} headerBg={'blue.5'}
+    <NavMenu routes={routes} headerBg={'blue.5'}
             headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.2'} navbarTextColor={'dark'}
             logoutButton={'blue.4'} logoutTextColor={'dark'}
           >
             {children}
           </NavMenu>
-        </AuthProvider>
-        </MantineProvider>
-      </body>
-    </html>
   );
 }
 
