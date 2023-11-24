@@ -19,14 +19,14 @@ type Appointment = {
 const Page = () => {
   const upcomingAppointments: Appointment[] = [
     {
-      title: "Jose Arturo Castro Jimenez",
+      title: "Limpieza Dental",
       imageUrl: "url1",
       total: 150,
       adeudo: 50,
       fechaHora: "2023-11-14 15:30",
     },
     {
-      title: "Jose Alfrego Gimenez ",
+      title: "Radiografías macilofacial ",
       imageUrl: "url1",
       total: 150,
       adeudo: 50,
@@ -34,9 +34,10 @@ const Page = () => {
     },
     {
       imageUrl: "url1",
-      title: "Jose Alfrego Gimenez ",
+      title: "Extracción Dental",
       total: 150,
       adeudo: 50,
+      fechaHora: "2023-11-15 16:00",
     },
   ];
 
@@ -51,11 +52,11 @@ const Page = () => {
   return (
     <div>
       {/* Texto "Adeudo" más grande y en negritas con el componente Title */}
-      <Title order={1} align="center" style={{ color: '#3498db' }}>
+      <Title order={1} ta="center" style={{ color: '#3498db' }}>
         Adeudo
       </Title>
       {/* Mostrar la suma de los adeudos pendientes */}
-      <Title order={2} align="center" style={{ color: '#333333' }}>
+      <Title order={2} ta="center" style={{ color: '#333333' }}>
         {`Total Adeudos: ${sumaAdeudos}`}
       </Title>
       {/* Mostrar las citas pendientes con CustomStack y CustomTile */}
@@ -68,6 +69,9 @@ const Page = () => {
               topRightText={appt.fechaHora}
               bottomRightText1={appt.adeudo && `Adeudo: ${appt.adeudo}`}
               bottomRightText2={appt.total && `Total: ${appt.total}`}
+              topRightFontSize="20px"
+              // Personalizar el tamaño de la fuente para bottomRightText1 y bottomRightText2
+              fontSize="22px"
             />
           </GridCol>
         ))}
