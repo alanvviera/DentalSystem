@@ -1,15 +1,14 @@
 "use client";
 import React from 'react';
-import { Button, Title } from "@mantine/core";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Button, Flex, Title, Text } from "@mantine/core";
+import { ArrowLeftOutlined, DeleteFilled } from "@ant-design/icons";
 import MantineForm from '../../../../../../components/mantine-form/MantineForm';
 import { validaFieldsNotEmpty, validateNumberInteger, validatePrice, } from '../../../../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../../components/mantine-form/customMantineInput';
+import { modals, } from '@mantine/modals';
 
 
 const getDataProductId = async (idProduct: String) => {
-
-    console.log(`Id product: ${idProduct}`);
 
     return {
         idProduct: "",
@@ -40,12 +39,37 @@ const ProductInventoryPage = async ({ params }) => {
         form.setInitialValues();
     }
 
+    const onDelete = () => {
+        console.log(`Delete product with id ${inventoryId}`);
+    }
+
+    const openDeleteModal = () =>
+        modals.openConfirmModal({
+            title: `¿Estas seguro de eliminar el medicamento ${productExample.name}?`,
+            centered: true,
+            children: (
+                <Text size="sm">
+                    Esta opción no es reversible.
+                </Text>
+            ),
+            labels: { confirm: 'Eliminar producto', cancel: "Cancelar" },
+            confirmProps: { color: 'red' },
+            onCancel: () => { },
+            onConfirm: () => onDelete(),
+        });
+
     return (
         <main style={{ margin: "20px" }}>
-            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/inventory`} >
-                Volver a inventario
-            </Button>
+            <Flex justify={"space-between"}>
+                <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/inventory`} >
+                    Volver a inventario
+                </Button>
+                <Button justify="center" color='red' px={0} component="a" rightSection={<DeleteFilled />} variant="filled" pl={"xs"} pr={"xs"} onClick={openDeleteModal} >
+                    Eliminar
+                </Button>
+            </Flex>
             <Title>Insumo</Title>
+
             <MantineForm
                 initialValuesForKeys={{
                     ...productExample
@@ -70,8 +94,8 @@ const ProductInventoryPage = async ({ params }) => {
                     new CustomInputMantine("Codigo QR", "QR", "qr", typeInputForm.TEXT),
                     new CustomInputMantine("Categoria del medicamento", "Categoria", "category", typeInputForm.TEXT),
                     new CustomInputMantine("Proveedor", "Proveedor", "provider", typeInputForm.TEXT),
-                    new CustomInputMantine("Fecha de adquisición", "Fecha de adquisición", "acquisitionDate", typeInputForm.DATEPICKER,new Date(Number(productExample.acquisitionDate))),
-                    new CustomInputMantine("Fecha de expiración", "Fecha de expiración", "expirationDate", typeInputForm.DATEPICKER,new Date(Number(productExample.expirationDate))),
+                    new CustomInputMantine("Fecha de adquisición", "Fecha de adquisición", "acquisitionDate", typeInputForm.DATEPICKER, new Date(Number(productExample.acquisitionDate))),
+                    new CustomInputMantine("Fecha de expiración", "Fecha de expiración", "expirationDate", typeInputForm.DATEPICKER, new Date(Number(productExample.expirationDate))),
                     new CustomInputMantine("Costo", "Costo", "cost", typeInputForm.NUMBER, undefined, true, 1000000),
                     new CustomInputMantine("Precio", "Precio", "price", typeInputForm.NUMBER, undefined, true, 1000000),
                     new CustomInputMantine("Stock", "Stock", "stock", typeInputForm.NUMBER, undefined, false, 1000000),
@@ -83,11 +107,11 @@ const ProductInventoryPage = async ({ params }) => {
                 onSubmit={(form: any) => {
                     onSubmit(form);
                 }}
-                labelSubmit='Agregar'
+                labelSubmit='Guardar cambios'
             />
-            {/* <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/employees/`} fullWidth mt={10}>
+            <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/inventory/`} fullWidth mt={10}>
                 Cancelar
-            </Button> */}
+            </Button>
         </main>
     );
 };
