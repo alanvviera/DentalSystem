@@ -6,20 +6,20 @@ import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
 type Item = {
-    position: number;
-    mass: number;
-    symbol: string;
-    name: string;
-  }
+  nombre: string;
+  hora: string;
+  concepto: string;
   
-const Page = () => {
-    const headers = ["Element position", "Element name", "Symbol", "Atomic"];
+}
+  
+  const Page = () => {
+    const headers = ["Nombre", "Hora", "Concepto", ""];
     const items: Item[] = [
-      { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-      { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-      { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-      { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-      { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
+      { nombre: "Jose Arturo Beltran", hora: "9:15", concepto: "Limpieza Dental" },
+      { nombre: "Juan Angel Gimenez", hora: "12:15", concepto: "Extracción" },
+      { nombre: "Raul Alonso Jimenez", hora: "13:50", concepto: "Valoración" },
+      { nombre: "Guillermo Ochoa", hora: "15:00", concepto: "Endodoncia" },
+      { nombre: "Tito Ron", hora: "16:40", concepto: "Valoración" },
     ];
   
     
