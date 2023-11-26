@@ -59,9 +59,9 @@ const RegisterClientPage = ({ params }) => {
                 }}
                 labelSubmit='Registrar'
             />
-            {/* <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/employees/`} fullWidth mt={10}>
+         <Button variant="default" component="a" href={`/employee-menu/clinics/${clinicId}/clients/`} fullWidth mt={10}>
                 Cancelar
-            </Button> */}
+            </Button>
         </main>
     );
 };
