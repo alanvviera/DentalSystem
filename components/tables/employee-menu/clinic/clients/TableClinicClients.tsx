@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react';
-import SearchComponent from './SearchComponent'; // Ajusta la ruta según tu estructura de archivos
+import SearchComponent from '../../../../SearchComponent'; // Ajusta la ruta según tu estructura de archivos
 import { Table } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
-interface CustomTableProps {
+interface TableClinicClientsProps {
     headers: string[];
     elements: Element[]
 }
@@ -12,19 +12,12 @@ interface CustomTableProps {
 interface Element {
     id: string;
     name: string;
-    //   qr: string;
-    //   category: string;
-    //   provider: string;
-    acquisitionDate: string;
-    expirationDate: string;
-    cost: number;
-    //   price: number;
-    stock: number;
-    //   maxStock: number;
-    //   minStock: number;
+    tel: string;
+    email: string
+
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
+const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elements }) => {
     const [filteredData, setFilteredData] = useState<Element[]>(elements);
     const router = useRouter();
 
@@ -68,4 +61,4 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
     );
 }
 
-export default CustomTable;
+export default TableClinicClients;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Group, Title } from "@mantine/core";
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
-import CustomTable from '../../../../../components/CustomTable';
+import TableInventory from '../../../../../components/tables/employee-menu/clinic/inventory/TableInventory';
 
 const getData = async () => {
 
@@ -61,7 +61,7 @@ const InventoryPage = async ({params}) => {
                     Agregar
                 </Button>
             </Group>
-            <CustomTable headers={headers} elements={dataExampleFromServer} />
+            <TableInventory headers={headers} elements={dataExampleFromServer} />
         </main>
     )
 }
