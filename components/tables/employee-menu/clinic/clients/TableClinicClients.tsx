@@ -30,7 +30,7 @@ const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elemen
 
     const rows = filteredData.map((element) => (
         <Table.Tr style={{ cursor: 'pointer' }} key={element.id.toString()} onClick={(data) => {
-            router.push(`inventory/${element.id.toString()}`)
+            router.push(`clients/${element.id.toString()}`)
         }} >
             {columns.map((column, index) => (
                 <Table.Td key={column.toString()}>{element[column]}</Table.Td>

@@ -49,7 +49,7 @@ const InventoryPage = async ({params}) => {
             </Button>
             <Group justify='space-between'>
                 <Title>Clientes</Title>
-                <Button leftSection={<PlusOutlined />} component='a' href={`/employee-menu/clinics/${clinicId}/inventory/add`}>
+                <Button leftSection={<PlusOutlined />} component='a' href={`/employee-menu/clinics/${clinicId}/clients/register`}>
                     Agregar
                 </Button>
             </Group>
