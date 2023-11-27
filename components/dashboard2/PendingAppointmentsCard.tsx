@@ -13,7 +13,7 @@ type PendingAppointmentCardProps = {
 }
 
 const PendingAppointmentCard = ({ headers, items, baseLink, itemId, moreButtonLink, showItemsId}:PendingAppointmentCardProps) => (
-    <CustomCard title="Citas pendientes" showMoreButton moreButtonPosition='top' moreButtonLink={moreButtonLink}>
+    <CustomCard title="Citas de hoy" showMoreButton moreButtonPosition='top' moreButtonLink={moreButtonLink}>
       {items.length > 0 ? (<TableScrollContainer type="native" minWidth={500}>
           <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId} showItemId={showItemsId} />
         </TableScrollContainer>) : (

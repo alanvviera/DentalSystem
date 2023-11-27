@@ -1,6 +1,6 @@
 import React from 'react';
-import { SettingOutlined } from '@ant-design/icons';
-import { Avatar, Box, ActionIcon, Group, Text, Flex } from '@mantine/core';
+import { EditFilled, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Box, ActionIcon, Group, Text, Flex, Divider, Button } from '@mantine/core';
 
 type ProfileBannerProps = {
   children?: React.ReactNode;
@@ -25,29 +25,30 @@ const ProfileBanner = ({
   bg = 'blue.7',
   textColor = 'white',
 }: ProfileBannerProps) => (
-    <Box bg={bg} c={textColor} px="xl" py="lg">
-      {showSettingsButton && (
-        <Box ta="right">
-          <ActionIcon variant="transparent" component="a" href={settingsLink} c="white">
-            <SettingOutlined style={{ fontSize: '25px' }} />
-          </ActionIcon>
-        </Box>
-      )}
-      <Flex direction="row" align="center">
-        {showAvatar && <Avatar src={avatarImageUrl || undefined} size="16vh" variant="filled" />}
-        <Box w="75%" ml="lg">
-          <Text size="30px" fw={700}>
-            {title}
-          </Text>
-          <Text size="xl" fw={500}>
-            {description}
-          </Text>
-        </Box>
-      </Flex>
-      <Box w="100%" mt={15}>
-          {children}
+  <Box bg={bg} c={textColor} px="xl" py="lg" style={{ borderRadius: "8px" }}>
+    <Flex gap={15} direction={{ base: "column", md: "row" }} align="center">
+      {showAvatar && <Avatar src={avatarImageUrl || undefined} size="110px" variant="filled" />}
+      <Box w="100%" ta={{base: "center", md: "left"}}>
+        <Text size="30px" fw={700}>
+          {title}
+        </Text>
+        <Text size="lg" fw={500}>
+          {description}
+        </Text>
       </Box>
+      {showSettingsButton && (
+        <>
+          <ActionIcon variant="subtle" component="a" href={settingsLink} c="white" display={{base: "none", md:"block"}}>
+            <EditOutlined style={{ fontSize: '25px' }} />
+          </ActionIcon>
+          <Button variant='subtle' c="white" leftSection={<EditOutlined style={{ fontSize: '25px'}}/>} display={{base: "block", md:"none"}}>Editar</Button>
+        </>
+      )}
+    </Flex>
+    <Box w="100%">
+      {children}
     </Box>
-  );
+  </Box>
+);
 
 export default ProfileBanner;
