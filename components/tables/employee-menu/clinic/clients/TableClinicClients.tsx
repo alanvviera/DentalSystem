@@ -1,9 +1,10 @@
 'use client'
 import React, { useState } from 'react';
-import SearchComponent from './SearchComponent'; // Ajusta la ruta según tu estructura de archivos
+import SearchComponent from '../../../../SearchComponent'; // Ajusta la ruta según tu estructura de archivos
 import { Table } from '@mantine/core';
+import { useRouter } from 'next/navigation';
 
-interface CustomTableProps {
+interface TableClinicClientsProps {
     headers: string[];
     elements: Element[]
 }
@@ -11,20 +12,14 @@ interface CustomTableProps {
 interface Element {
     id: string;
     name: string;
-    //   qr: string;
-    //   category: string;
-    //   provider: string;
-    acquisitionDate: string;
-    expirationDate: string;
-    cost: number;
-    //   price: number;
-    stock: number;
-    //   maxStock: number;
-    //   minStock: number;
+    tel: string;
+    email: string
+
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
+const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elements }) => {
     const [filteredData, setFilteredData] = useState<Element[]>(elements);
+    const router = useRouter();
 
     // Esta función se utilizará para establecer los datos filtrados
     const handleSetFilteredData = (data: Element[]) => {
@@ -34,8 +29,8 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
     const columns: (keyof Element)[] = Object.keys(elements[0] || {}) as (keyof Element)[];
 
     const rows = filteredData.map((element) => (
-        <Table.Tr key={element.id.toString()} onClick={(data) => {
-            console.log(element.id)
+        <Table.Tr style={{ cursor: 'pointer' }} key={element.id.toString()} onClick={(data) => {
+            router.push(`clients/${element.id.toString()}`)
         }} >
             {columns.map((column, index) => (
                 <Table.Td key={column.toString()}>{element[column]}</Table.Td>
@@ -47,7 +42,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
         <div className="flex flex-col items-center justify-between pt-4">
             <div style={{ width: '100%', minHeight: 'min-content', overflow: 'auto' }}>
                 <SearchComponent data={elements} setFilteredData={handleSetFilteredData} />
-                <Table stickyHeader stickyHeaderOffset={60} className="bg-[#F1F7FE]" style={{ minWidth: '600px' }}>
+                <Table striped withTableBorder  withColumnBorders stickyHeader stickyHeaderOffset={60} className="bg-[#F1F7FE]" style={{ minWidth: '600px' }}>
                     <Table.Thead>
                         <Table.Tr>
                             {headers.map((header, index) => (
@@ -66,4 +61,4 @@ const CustomTable: React.FC<CustomTableProps> = ({ headers, elements }) => {
     );
 }
 
-export default CustomTable;
+export default TableClinicClients;

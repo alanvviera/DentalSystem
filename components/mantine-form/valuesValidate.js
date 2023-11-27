@@ -4,7 +4,7 @@ const validateName = (value) => {
 }
 
 const validaFieldsNotEmpty = (value) => {
-    return (value.length < 5 ? "Por favor llene el campo solicitado" : null);
+    return (value.length < 4 ? "Por favor llene el campo solicitado" : null);
 }
 
 const validateEmail = (value) => {
@@ -19,8 +19,12 @@ const validateNumberInteger = (value) => {
     return (/^\d+$/.test(value) ? null : "Por favor seleccione un número");
 }
 
+const validatePrice = (value)=>{
+    return (/(\-?\d+\.?\d{0,2})/.test(value)?null:"Por favor ingrese un precio correcto");
+}
+
 const validatePassword = (value, values) => {
-    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password === 0) ? "Las contraseñas no pueden estar vacías" : null);
+    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password.length === 0) ? "Las contraseñas no pueden estar vacías" : (value.length < 8 || values.password.length < 8)? "La contraseña debe de tener mínimo 8 caracteres": null );
 }
 
 const allValuesAvailable = (value) => null;
@@ -40,6 +44,7 @@ const validateNumberTel = (value) => {
 export {
     validateName,
     validateEmail,
+    validatePrice,
     validateAge,
     validatePassword,
     allValuesAvailable,

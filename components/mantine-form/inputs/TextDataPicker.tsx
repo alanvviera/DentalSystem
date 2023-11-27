@@ -35,6 +35,7 @@ const TextDataPicker = ({
         }}
         // minDate={new Date()}
         error={form.getInputProps(valueKey)["error"]}
+        {...extraClassname}
       />
     </DatesProvider>
   );
