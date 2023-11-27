@@ -1,17 +1,14 @@
 import AppointmentCard from "../../components/dashboard2/AppointmentCard";
-import CustomCard from "../../components/dashboard2/CustomCard";
-import CustomTable from "../../components/dashboard2/CustomTable";
 import DebtCard from "../../components/dashboard2/DebtCard";
-import PendingAppointmentsCard from "../../components/dashboard2/PendingAppointmentsCard";
 import ProfileBanner from "../../components/dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
-type Item = {
-  nombre: string;
+type Appoint = {
+  descripcion?: string;
+  fecha: string;
   hora: string;
-  concepto: string;
-  
+  doctor: string;
 }
 
 type DebtData = {
@@ -21,13 +18,9 @@ type DebtData = {
 }
 
 const Page = () => {
-  const headers = ["Nombre", "Hora", "Concepto", ""];
-  const items: Item[] = [
-    { nombre: "Jose Arturo Beltran", hora: "9:15", concepto: "Limpieza Dental" },
-    { nombre: "Juan Angel Gimenez", hora: "12:15", concepto: "Extracción" },
-    { nombre: "Raul Alonso Jimenez", hora: "13:50", concepto: "Valoración" },
-    { nombre: "Guillermo Ochoa", hora: "15:00", concepto: "Endodoncia" },
-    { nombre: "Tito Ron", hora: "16:40", concepto: "Valoración" },
+  const headers = ["Tipo de cita", "Fecha", "Hora", "Doctor Asignado"];
+  const citas: Appoint[] = [
+    { descripcion: "Valoración ortodoncia", fecha: "2023-11-25", hora: "10:30", doctor: "Eladio Carreon"},
   ];
 
   const debtData: DebtData = {
@@ -45,7 +38,7 @@ const Page = () => {
           <DebtCard data={debtData} moreButtonLink="client-menu/debt" />
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
-          <AppointmentCard baseLink="/client-menu/appointments" moreButtonLink="/client-menu/appointments" addButtonLink="/client-menu/appointments/create" itemId="position" headers={headers} items={items} />
+          <AppointmentCard baseLink="/client-menu/appointments" moreButtonLink="/client-menu/appointments" addButtonLink="/client-menu/appointments/create" itemId="position" headers={headers} items={citas} />
         </GridCol>
       </Grid>
     </div>

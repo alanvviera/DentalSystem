@@ -1,40 +1,45 @@
-import AppointmentCard from "../../../components/dashboard2/AppointmentCard";
-import CustomCard from "../../../components/dashboard2/CustomCard";
-import CustomTable from "../../../components/dashboard2/CustomTable";
-import PendingAppointmentCard from "../../../components/dashboard2/PendingAppointmentsCard";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
+import TilesSection from "../../../components/tiles-viewer/TileSection";
+import CustomTile from "../../../components/tiles-viewer/CustomTile";
 
-type Item = {
-  nombre: string;
+type Appoint = {
+  id: number,
+  descripcion?: string;
+  fecha: string;
   hora: string;
-  concepto: string;
-  
-}
-  
-  const Page = () => {
-    const headers = ["Nombre", "Hora", "Concepto", ""];
-    const items: Item[] = [
-      { nombre: "Jose Arturo Beltran", hora: "9:15", concepto: "Limpieza Dental" },
-      { nombre: "Juan Angel Gimenez", hora: "12:15", concepto: "Extracción" },
-      { nombre: "Raul Alonso Jimenez", hora: "13:50", concepto: "Valoración" },
-      { nombre: "Guillermo Ochoa", hora: "15:00", concepto: "Endodoncia" },
-      { nombre: "Tito Ron", hora: "16:40", concepto: "Valoración" },
-    ];
-  
-    
-  
-    return (
-      <div>
-        
-        <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
-          <GridCol  span={{ base: 12, sm: 6, lg: 12  }}>
-            <AppointmentCard baseLink="/client-menu/appointments" itemId="position" addButtonLink="/client-menu/appointments/create" headers={headers} items={items} />
-          </GridCol>
-        </Grid>
-      </div>
-    );
-  };
-  
-  export default Page;
+  doctor: string;
+};
 
+const Page = () => {
+  const citas: Appoint[] = [
+    { id:1, descripcion: "Valoración ortodoncia", fecha: "2023-11-25", hora: "10:30", doctor: "Eladio Carreon"},
+    { id:2, descripcion: "Extracción de muela", fecha: "2023-11-28", hora: "10:30", doctor: "Duki Gonzales"},
+    { id:3, descripcion: "Radiografias dentales", fecha: "2023-12-01", hora: "11:30", doctor: "Chalino Sanchez"},
+  ];
+  
+  return (
+    <div style={{ margin: "20px" }}>
+      <TilesSection title="Citas" />
+      <Grid>
+        {citas.map((appt: Appoint, index: number) => (
+          <GridCol span={12} key={index}>
+            <CustomTile key={index} title={appt.descripcion}>
+              <Text size="md">
+                <strong>Fecha:</strong> {appt.fecha}
+              </Text>
+              <Text size="md">
+                <strong>Hora:</strong> {appt.hora}
+              </Text>
+              <Text size="md">
+                <strong>Doctor Asignado:</strong> {appt.doctor}
+              </Text>
+            </CustomTile>
+          </GridCol>
+        ))}
+      </Grid>
+    </div>
+  );
+};
+  
+export default Page;
