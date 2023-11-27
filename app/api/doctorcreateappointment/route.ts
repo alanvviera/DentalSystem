@@ -10,31 +10,30 @@ export async function POST(req: NextRequest) {
   try {
     
     const {
-      id_dates,
-      patient_name,
+      name,
       clinic_name,
       type,
       doctor_name,
-      date_of_date,
-      appointment_time,
+      date,
+      hour,
       subject,
     } = await req.json();
 
     // Validar que se proporcionen todos los campos necesarios
-    if (!patient_name || !clinic_name || !type || !doctor_name || !date_of_date || !appointment_time || !subject) {
+    if (!name || !clinic_name || !type || !doctor_name || !date || !hour || !subject) {
       return NextResponse.json({ error: 'Todos los campos son obligatorios' }, { status: 400 });
     }
     
     // Crear la cita
-    const newAppointment = await prisma.dates.create({ 
+    const newAppointment = await prisma.appointments.create({
       data: {
         //id_dates, es un dato generado de manera aleatoria
-        patient_name,
-        clinic_name,
+        //name, 
+        //clinic_name,
         type,
         doctor_name,
-        date_of_date,
-        appointment_time,
+        date,
+        hour,
         subject,
       }
     });

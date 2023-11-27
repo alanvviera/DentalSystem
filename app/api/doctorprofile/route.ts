@@ -34,13 +34,14 @@ export async function PUT (req: NextRequest) {
     //Falta authenticacion de usuario
 
     const {
-        fullname,
+        name,
+        last_name,
         email,
         password,
+        curp,
         phone_number,
-        birthday,
         home_address,
-        type_user,
+        birthday,
         gender,
         license,
         school,
@@ -52,14 +53,15 @@ export async function PUT (req: NextRequest) {
             data: {
                 user_data: {
                     update: {
-                        fullname,
+                        name,
+                        last_name,
                         email,
                         password,
+                        curp,
                         phone_number,
                         home_address,
-                        type_user,
-                        gender,
                         birthday,
+                        gender,
                     }
                 },
                 license,

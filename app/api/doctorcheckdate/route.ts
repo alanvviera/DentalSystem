@@ -6,12 +6,12 @@ const prisma = new PrismaClient();
 export async function GET (req: NextRequest) {
     
     try {
-        const appointments = await prisma.dates.findMany({
+        const appointments = await prisma.appointments.findMany({
             select: {
                 id: true,
-                date_of_date: true,
-                appointment_time: true,
-                patient: true
+                date: true,
+                hour: true,
+                //name: true
             },
         });
 

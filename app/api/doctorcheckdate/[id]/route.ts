@@ -10,15 +10,15 @@ export async function GET (req: NextRequest) {
   try {
     
     // Obtener detalles de la cita específica
-    const appointment = await prisma.dates.findUnique({
+    const appointment = await prisma.appointments.findUnique({
       where: { id: parseInt(appointmentId) },
       select: {
-        patient_name: true,
-        clinic_name: true,
+        //name: true,
+        //clinic_name: true,
         type: true,
         doctor_name: true,
-        date_of_date: true,
-        appointment_time: true,
+        date: true,
+        hour: true,
         subject: true,
       }
     });
@@ -39,26 +39,26 @@ export async function PUT (req: NextRequest) {
   const appointmentId = req.nextUrl.searchParams.get('id')
 
   const {
-    patient_name,
-    clinic_name,
+    //name,
+    //clinic_name,
     type,
     doctor_name,
-    date_of_date,
-    appointment_time,
+    date,
+    hour,
     subject,
   } = await req.json();
 
   try {
 
-    const appointment = await prisma.dates.update({
+    const appointment = await prisma.appointments.update({
       where: { id: parseInt(appointmentId) },
       data: {
-        patient_name,
-        clinic_name,
+        //name,
+        //clinic_name,
         type,
         doctor_name,
-        date_of_date,
-        appointment_time,
+        date,
+        hour,
         subject,
       }
     });
@@ -78,7 +78,7 @@ export async function DELETE (req: NextRequest) {
   const appointmentId = req.nextUrl.searchParams.get('id');
 
   try {
-    const appointment = await prisma.dates.delete({
+    const appointment = await prisma.appointments.delete({
       where: { id: parseInt(appointmentId) },
     });
 

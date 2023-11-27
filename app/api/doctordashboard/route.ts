@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     const dashboardData = await prisma.user_data.findUnique({
       where: {id: parseInt(userId)},
       select: {
-        fullname: true, //falta la imagen de perfil
+        name: true, //falta la imagen de perfil
         //Falta incluir los demas tablas citas y pendientes
       }
     });
