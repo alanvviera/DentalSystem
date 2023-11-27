@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import "@mantine/core/styles.css";
 import { Grid, GridCol, Text } from "@mantine/core";
@@ -6,6 +7,7 @@ import CustomStack from "../../../components/tiles-viewer/CustomStack";
 import CustomTile from "../../../components/tiles-viewer/CustomTile";
 
 type History = {
+  id: number;
   clinica: string;
   imageUrl?: string;
   fecha: string;
@@ -17,6 +19,7 @@ type History = {
 const Page = () => {
   const history: History[] = [
     {
+      id: 1,
       clinica: "Dental Gama",
       imageUrl: "",
       fecha: "2023-04-21",
@@ -25,6 +28,7 @@ const Page = () => {
       receta: "No aplica",
     },
     {
+      id: 2,
       clinica: "Medichal Tecnologies",
       imageUrl: "",
       fecha: "2023-07-14",
@@ -33,6 +37,7 @@ const Page = () => {
       receta: "Medicamento: Ibuprofeno 400 mg \nCantidad: 20 tabletas \nInstrucciones: Tomar 1 tableta cada 8 horas con alimentos.",
     },
     {
+      id: 3,
       clinica: "Smiles",
       imageUrl: "",
       fecha: "2023-01-02",
@@ -48,7 +53,7 @@ const Page = () => {
       <Grid>
         {history.map((appt: History, index: number) => (
           <GridCol span={12} key={index}>
-            <CustomTile title={appt.clinica}>
+            <CustomTile title={appt.clinica} baseLink={`/client-menu/medicalHistory/${appt.id}`}>
               <Text size="md">
                 <strong>Fecha:</strong> {appt.fecha}
               </Text>

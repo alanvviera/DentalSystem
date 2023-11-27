@@ -41,6 +41,7 @@ const Page = () => (
       form.setInitialValues();
     }}
     labelSubmit='Actualizar'
+    
   />
 </div>
 );

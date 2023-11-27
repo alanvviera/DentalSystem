@@ -15,7 +15,7 @@ const Page = () => {
   const citas: Appoint[] = [
     { id:1, descripcion: "Valoración ortodoncia", fecha: "2023-11-25", hora: "10:30", doctor: "Eladio Carreon"},
     { id:2, descripcion: "Extracción de muela", fecha: "2023-11-28", hora: "10:30", doctor: "Duki Gonzales"},
-    { id:3, descripcion: "Radiografias dentales", fecha: "2023-12-01", hora: "11:30", doctor: "Chalino Sanchez"},
+    { id:5, descripcion: "Radiografias dentales", fecha: "2023-12-01", hora: "11:30", doctor: "Chalino Sanchez"},
   ];
   
   return (
@@ -24,7 +24,10 @@ const Page = () => {
       <Grid>
         {citas.map((appt: Appoint, index: number) => (
           <GridCol span={12} key={index}>
-            <CustomTile key={index} title={appt.descripcion}>
+            <CustomTile 
+              key={index} 
+              title={appt.descripcion} 
+              baseLink={`/client-menu/appointments/${appt.id}`}>
               <Text size="md">
                 <strong>Fecha:</strong> {appt.fecha}
               </Text>

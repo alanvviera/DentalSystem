@@ -9,6 +9,7 @@ type DebtData = {
 }
 
 type Appointment = {
+  id: number,
   title: string;
   imageUrl?: string;
   total?: number;
@@ -19,6 +20,7 @@ type Appointment = {
 const Page = () => {
   const upcomingAppointments: Appointment[] = [
     {
+      id: 1,
       title: "Limpieza Dental",
       imageUrl: "url1",
       total: 150,
@@ -26,6 +28,7 @@ const Page = () => {
       fechaHora: "2023-11-14 15:30",
     },
     {
+      id: 2,
       title: "Radiografías macilofacial ",
       imageUrl: "url1",
       total: 150,
@@ -33,6 +36,7 @@ const Page = () => {
       fechaHora: "2023-11-15 16:00",
     },
     {
+      id: 3,
       imageUrl: "url1",
       title: "Extracción Dental",
       total: 150,
@@ -64,7 +68,7 @@ const Page = () => {
         {upcomingAppointments.map((appt: Appointment, index: number) => (
           <GridCol span={12} key={index}>
             <CustomTile
-              baseLink="#"
+              baseLink={`/client-menu/debt/${appt.id}`}
               title={appt.title}
               topRightText={appt.fechaHora}
               bottomRightText1={appt.adeudo && `Adeudo: ${appt.adeudo}`}
