@@ -1,40 +1,45 @@
-import AppointmentCard from "../../../components/dashboard2/AppointmentCard";
-import CustomCard from "../../../components/dashboard2/CustomCard";
-import CustomTable from "../../../components/dashboard2/CustomTable";
-import PendingAppointmentCard from "../../../components/dashboard2/PendingAppointmentsCard";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
+import TilesSection from "../../../components/tiles-viewer/TileSection";
+import CustomTile from "../../../components/tiles-viewer/CustomTile";
 
-type Item = {
-    position: number;
-    mass: number;
-    symbol: string;
-    name: string;
-  }
-  
+type Appoint = {
+  id: number,
+  descripcion?: string;
+  fecha: string;
+  hora: string;
+  doctor: string;
+};
+
 const Page = () => {
-    const headers = ["Element position", "Element name", "Symbol", "Atomic"];
-    const items: Item[] = [
-      { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-      { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-      { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-      { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-      { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-    ];
+  const citas: Appoint[] = [
+    { id:1, descripcion: "Valoración ortodoncia", fecha: "2023-11-25", hora: "10:30", doctor: "Eladio Carreon"},
+    { id:2, descripcion: "Extracción de muela", fecha: "2023-11-28", hora: "10:30", doctor: "Duki Gonzales"},
+    { id:3, descripcion: "Radiografias dentales", fecha: "2023-12-01", hora: "11:30", doctor: "Chalino Sanchez"},
+  ];
   
-    
-  
-    return (
-      <div>
-        
-        <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
-          <GridCol  span={{ base: 12, sm: 6, lg: 12  }}>
-            <AppointmentCard baseLink="/client-menu/appointments" itemId="position" addButtonLink="/client-menu/appointments/create" headers={headers} items={items} />
+  return (
+    <div style={{ margin: "20px" }}>
+      <TilesSection title="Citas" />
+      <Grid>
+        {citas.map((appt: Appoint, index: number) => (
+          <GridCol span={12} key={index}>
+            <CustomTile key={index} title={appt.descripcion}>
+              <Text size="md">
+                <strong>Fecha:</strong> {appt.fecha}
+              </Text>
+              <Text size="md">
+                <strong>Hora:</strong> {appt.hora}
+              </Text>
+              <Text size="md">
+                <strong>Doctor Asignado:</strong> {appt.doctor}
+              </Text>
+            </CustomTile>
           </GridCol>
-        </Grid>
-      </div>
-    );
-  };
+        ))}
+      </Grid>
+    </div>
+  );
+};
   
-  export default Page;
-
+export default Page;
