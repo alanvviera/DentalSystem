@@ -45,7 +45,7 @@ const InventoryPage = async ({params}) => {
     return (
         <main style={{ margin: "20px" }}>
             <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href='/employee-menu/clinics' >
-                Volver a clinicas
+                Volver a clinica
             </Button>
             <Group justify='space-between'>
                 <Title>Clientes</Title>

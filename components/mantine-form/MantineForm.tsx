@@ -10,7 +10,7 @@ import TextDataPicker from './inputs/TextDataPicker';
 import TextTimePicker from './inputs/TextTimePicker';
 
 type MantineFormProps = {
-  initialValuesForKeys?: {  };
+  initialValuesForKeys?: {};
   validateForKeys?: {
 
   };
@@ -19,6 +19,7 @@ type MantineFormProps = {
   labelSubmit?: string;
   colorSubmit?: string;
   title?: string;
+  extraClassName?: Object
 }
 
 const MantineForm = ({
@@ -26,11 +27,12 @@ const MantineForm = ({
   validateForKeys = {
 
   },
-  onSubmit = (value:any) => {},
+  onSubmit = (value: any) => { },
   listCustomInputMantine = [],
   labelSubmit,
   colorSubmit = "blue",
-  title
+  title,
+  extraClassName
 }: MantineFormProps) => {
   const form = useForm({
     initialValues: { ...initialValuesForKeys },
@@ -51,6 +53,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -63,6 +66,7 @@ const MantineForm = ({
                   form={form}
                   allowDecimal={inputMantine.allowDecimal}
                   maxValue={inputMantine.maxValue}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -73,6 +77,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -83,6 +88,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -93,6 +99,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 

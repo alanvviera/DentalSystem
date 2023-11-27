@@ -35,6 +35,7 @@ const TextTimePicker: React.FC<TextTimePickerProps> = ({
           });
         }}
         error={form.getInputProps(valueKey)["error"]}
+        {...extraClassname}
       />
     </DatesProvider>
   );

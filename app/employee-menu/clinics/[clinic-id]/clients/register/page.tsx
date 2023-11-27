@@ -18,8 +18,8 @@ const RegisterClientPage = ({ params }) => {
 
     return (
         <main style={{ margin: "20px" }}>
-            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/inventory`} >
-                Volver a inventario
+            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}/clients`} >
+                Volver a clientes
             </Button>
             <Title>Agregar cliente</Title>
             <MantineForm

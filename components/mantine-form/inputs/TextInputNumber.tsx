@@ -31,6 +31,8 @@ const TextInputNumber = ({
     {...extraClassname}
     className='my-3'
     allowDecimal={allowDecimal}
+    {...extraClassname}
+
   />
 );
 
