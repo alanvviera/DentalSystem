@@ -30,7 +30,7 @@ const Page = () => {
 
   return (
     <div>
-      <ProfileBanner title={`Bienvenido, usuario`} description="" showAvatar avatarImageUrl={null} showSettingsButton>
+      <ProfileBanner title={`Bienvenido, usuario`} description="" showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/client-menu/profile">
       
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
