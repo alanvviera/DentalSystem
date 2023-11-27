@@ -25,7 +25,7 @@ type User = {
 
 const getData = () => {
   return {
-    user: { name: "Elton tito", email: "example@contoso.com", role: "Doctor" },
+    user: { name: "Usuario uno", email: "example@contoso.com", role: "Doctor" },
     pendingAppointments: [
       { id: 2347, client: "Jack Storm", type: "Capacitacion", date: "04/01/2024", hour: "10:30" },
       { id: 2677, client: "Juan Manuel Lopez Perez", type: "Cita medica", date: "20/12/2023", hour: "11:30" },
@@ -61,16 +61,16 @@ const Page = () => {
 
   return (
     <main>
-      <ProfileBanner title={`${name}`} description={`${role} - ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
+      <ProfileBanner title={`${name}`} description={`${role} | ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/employee-menu/profile">
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
         <GridCol span={{ base: 12, md: 6, lg: 12 }}>
           <PendingAppointmentsCard headers={appointmentHeaders} items={topPendingAppointments} baseLink="/employee-menu/appointments" itemId="id" moreButtonLink="/employee-menu/appointments" />
         </GridCol>
-        <GridCol span={{ base: 12, md: 12, lg: 6 }}>
+        <GridCol span={{ base: 12, md: 6, lg: 6 }}>
           <AppointmentCard headers={appointmentHeaders} items={topAppointments} baseLink="/employee-menu/appointments" itemId="id" moreButtonLink="/employee-menu/appointments" addButtonLink="/employee-menu/appointments/create" />
         </GridCol>
-        <GridCol span={{ base: 12, md: 6, lg: 6 }}>
+        <GridCol span={{ base: 12, md: 12, lg: 6 }}>
           <ClinicsCard headers={clinicHeaders} items={topClinics} baseLink="/employee-menu/clinics" itemId="id" moreButtonLink="/employee-menu/clinics" addButtonLink="/employee-menu/clinics/register" />
         </GridCol>
       </Grid>
