@@ -8,7 +8,7 @@ const validaFieldsNotEmpty = (value) => {
 }
 
 const validateEmail = (value) => {
-    return (/^\S+@\S+$/.test(value) ? null : 'Correo inválido');
+    return (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ? null : 'Correo inválido');
 }
 
 const validateAge = (value) => {
@@ -19,12 +19,12 @@ const validateNumberInteger = (value) => {
     return (/^\d+$/.test(value) ? null : "Por favor seleccione un número");
 }
 
-const validatePrice = (value)=>{
-    return (/(\-?\d+\.?\d{0,2})/.test(value)?null:"Por favor ingrese un precio correcto");
+const validatePrice = (value) => {
+    return (/(\-?\d+\.?\d{0,2})/.test(value) ? null : "Por favor ingrese un precio correcto");
 }
 
 const validatePassword = (value, values) => {
-    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password.length === 0) ? "Las contraseñas no pueden estar vacías" : (value.length < 8 || values.password.length < 8)? "La contraseña debe de tener mínimo 8 caracteres": null );
+    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password.length === 0) ? "Las contraseñas no pueden estar vacías" : (value.length < 8 || values.password.length < 8) ? "La contraseña debe de tener mínimo 8 caracteres" : null);
 }
 
 const allValuesAvailable = (value) => null;
