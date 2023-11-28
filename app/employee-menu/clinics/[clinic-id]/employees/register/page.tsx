@@ -32,7 +32,7 @@ const RegisterClinicsPage = ({ params }) => {
                     medicalDegree: "",
                     addrress: "",
                     dateBirthday: "",
-                    sexo: "",
+                    sex: "",
                     state: "",
                     speciality: ""
 
@@ -46,7 +46,7 @@ const RegisterClinicsPage = ({ params }) => {
                     medicalDegree: validaFieldsNotEmpty,
                     addrress: validaFieldsNotEmpty,
                     dateBirthday: validateDate,
-                    sexo: validaFieldsNotEmpty,
+                    sex: validaFieldsNotEmpty,
                     state: validaFieldsNotEmpty,
                     speciality: validaFieldsNotEmpty
                 }}
@@ -60,7 +60,7 @@ const RegisterClinicsPage = ({ params }) => {
                     new CustomInputMantine("Licencia medica", "Licencia medica", "medicalDegree", typeInputForm.TEXT),
                     new CustomInputMantine("Dirección", "Dirección", "addrress", typeInputForm.TEXT),
                     new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER, ),
-                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sexo", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre","Mujer"] ),
+                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sex", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre","Mujer"] ),
                     new CustomInputMantine("Lugar de estado", "Lugar de estado", "state", typeInputForm.TEXT),
                     new CustomInputMantine("Especialidad", "Especialidad", "speciality", typeInputForm.TEXT),
                 ]}

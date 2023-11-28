@@ -17,7 +17,7 @@ const getData = async (employeeId: String) => {
         medicalDegree: "Licenciatura y doctorado",
         addrress: "Valle verde #116",
         dateBirthday: "1701388800000",
-        gender: "Hombre",
+        sex: "Hombre",
         state: "Baja California",
         speciality: "Cirujano dental"
     };
@@ -80,7 +80,7 @@ const EditClinicsPage = async ({ params }) => {
                     medicalDegree: validaFieldsNotEmpty,
                     addrress: validaFieldsNotEmpty,
                     dateBirthday: validateDate,
-                    gender: validaFieldsNotEmpty,
+                    sex: validaFieldsNotEmpty,
                     state: validaFieldsNotEmpty,
                     speciality: validaFieldsNotEmpty
                 }}
@@ -94,7 +94,7 @@ const EditClinicsPage = async ({ params }) => {
                     new CustomInputMantine("Licencia medica", "Licencia medica", "medicalDegree", typeInputForm.TEXT),
                     new CustomInputMantine("Dirección", "Dirección", "addrress", typeInputForm.TEXT),
                     new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER, new Date(Number(dataEmployeeExample.dateBirthday))),
-                    new CustomInputMantine("Genero", "Genero", "gender", typeInputForm.TEXT),
+                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sex", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre","Mujer"] ),
                     new CustomInputMantine("Lugar de estado", "Lugar de estado", "state", typeInputForm.TEXT),
                     new CustomInputMantine("Especialidad", "Especialidad", "speciality", typeInputForm.TEXT),
                 ]}
