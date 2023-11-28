@@ -12,7 +12,7 @@ const getData = async () => {
         id: "239x9mj21xa2llg",
         name: "Tigre el toño",
         tel: "646-789-63-52",
-        gender: "Hombre",
+        sex: "Hombre",
         address: "Las palmas #23",
         dateBirhday: "1669514810000",
         email: "zucaritas@hotmail.com",
@@ -66,7 +66,7 @@ const ViewClientsPage = async ({ params }) => {
                 validateForKeys={{
                     name: validaFieldsNotEmpty,
                     tel: validateNumberTel,
-                    gender: validaFieldsNotEmpty,
+                    sex: validaFieldsNotEmpty,
                     address: validaFieldsNotEmpty,
                     dateBirhday: validateDate,
                     email: validateEmail,
@@ -75,7 +75,7 @@ const ViewClientsPage = async ({ params }) => {
                     //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText, 5 -allowDecimal, 6 - maxValue
                     new CustomInputMantine("Nombre completo", "Nombre completo", "name", typeInputForm.TEXT,),
                     new CustomInputMantine("Telefono", "Telefono, ejem: 646-123-45-67", "tel", typeInputForm.TEXT),
-                    new CustomInputMantine("Genero", "Genero", "gender", typeInputForm.TEXT),
+                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sex", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre","Mujer"] ),
                     new CustomInputMantine("Dirección", "Dirección", "address", typeInputForm.TEXT),
                     new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirhday", typeInputForm.DATEPICKER, new Date(Number(clientData.dateBirhday))),
                     new CustomInputMantine("Correo electronico", "Correo electronico", "email", typeInputForm.TEXT),
