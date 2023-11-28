@@ -8,6 +8,7 @@ type TextDataPickerProps = {
   form: any; 
   extraClassname?: any;
   initialDate?: Date | null;
+  minDate?: Date
 }
 
 const TextDataPicker = ({
@@ -16,7 +17,8 @@ const TextDataPicker = ({
   valueKey = "date",
   form,
   extraClassname = {},
-  initialDate = null
+  initialDate = null,
+  minDate
 }: TextDataPickerProps) => {
   const [value, setValue] = useState<Date | null>(initialDate);
 
@@ -26,6 +28,7 @@ const TextDataPicker = ({
         label={label}
         placeholder={placeHolder}
         value={value}
+        minDate={minDate}
         onChange={(dateNumber) => {
           form.setValues({
             [valueKey]: dateNumber.getTime().toString()

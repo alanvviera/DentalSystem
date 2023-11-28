@@ -8,6 +8,7 @@ import TextInputPassword from './inputs/TextInputPassword';
 import { typeInputForm } from './customMantineInput';
 import TextDataPicker from './inputs/TextDataPicker';
 import TextTimePicker from './inputs/TextTimePicker';
+import SelectItems from './inputs/SelectItems';
 
 type MantineFormProps = {
   initialValuesForKeys?: {};
@@ -89,6 +90,7 @@ const MantineForm = ({
                   {...inputMantine.extraClassname}
                   form={form}
                   extraClassname={extraClassName}
+                  minDate={inputMantine.minDate}
                 />
               );
 
@@ -102,6 +104,20 @@ const MantineForm = ({
                   extraClassname={extraClassName}
                 />
               );
+
+
+            case typeInputForm.SELECTITEMS:
+              return (
+                <SelectItems
+                  key={inputMantine.valueKey}
+                  {...inputMantine}
+                  {...inputMantine.extraClassname}
+                  form={form}
+                  extraClassname={extraClassName}
+                  dataList={inputMantine.listItems}
+                />
+              );
+
 
             default:
               return <p>This typeInputForm doesn't exist: ${inputMantine.typeInputForm}</p>;
