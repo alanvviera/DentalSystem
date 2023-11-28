@@ -97,7 +97,7 @@ function SignUp() {
   }
 
   return (
-    <main>
+    <main className="relative">
       <Background />
       <CustomForm
         onSubmit={onSubmit}
