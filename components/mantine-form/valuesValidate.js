@@ -34,7 +34,7 @@ const validateDate = (value) => {
     return ((value === null || value === undefined || value === "") ? "Por favor seleccione una fecha" : null);
 }
 const validateNumber = (value) => {
-    return ((value === null || value === undefined || value === "NaN" || value === "") ? "Por favor seleccione una hora" : null);
+    return ((value === null || value === undefined || value === "NaN" || value === "" || (isNaN(value) && typeof value=='number')) ? "Por favor seleccione una hora" : null);
 }
 
 const validateNumberTel = (value) => {
