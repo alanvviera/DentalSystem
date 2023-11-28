@@ -7,9 +7,9 @@ import { PlusOutlined } from "@ant-design/icons";
 
 type Appointment = {
   id: number;
-  patient_name: string;
-  date_of_date: string;
-  appointment_time: string;
+  client_name: string;
+  date: string;
+  hour: string;
 };
 
 const getData = async () => {
@@ -21,67 +21,67 @@ const getData = async () => {
   const pendingData: Appointment[] = [
     {
       id: 1,
-      patient_name: "Jose Arturo Castro Jimenez",
-      date_of_date: "2023-11-17",
-      appointment_time: "15:30",
+      client_name: "Jose Arturo Castro Jimenez",
+      date: "2023-11-17",
+      hour: "15:30",
     },
     {
       id: 4,
-      patient_name: "Alice Johnson",
-      date_of_date: "2023-11-17",
-      appointment_time: "12:20",
+      client_name: "Alice Johnson",
+      date: "2023-11-17",
+      hour: "12:20",
     },
     {
       id: 7,
-      patient_name: "Daniel Brown",
-      date_of_date: "2023-11-20",
-      appointment_time: "11:15",
+      client_name: "Daniel Brown",
+      date: "2023-11-20",
+      hour: "11:15",
     },
     {
       id: 10,
-      patient_name: "Alexander White",
-      date_of_date: "2023-11-23",
-      appointment_time: "17:30",
+      client_name: "Alexander White",
+      date: "2023-11-23",
+      hour: "17:30",
     },
   ];
   const completedData: Appointment[] = [
     {
       id: 2,
-      patient_name: "Maria Rodriguez",
-      date_of_date: "2023-11-15",
-      appointment_time: "10:00",
+      client_name: "Maria Rodriguez",
+      date: "2023-11-15",
+      hour: "10:00",
     },
     {
       id: 5,
-      patient_name: "Carlos Sanchez",
-      date_of_date: "2023-11-18",
-      appointment_time: "09:30",
+      client_name: "Carlos Sanchez",
+      date: "2023-11-18",
+      hour: "09:30",
     },
     {
       id: 8,
-      patient_name: "Sophia Davis",
-      date_of_date: "2023-11-21",
-      appointment_time: "13:45",
+      client_name: "Sophia Davis",
+      date: "2023-11-21",
+      hour: "13:45",
     },
   ];
   const inProgressData: Appointment[] = [
     {
       id: 3,
-      patient_name: "John Smith",
-      date_of_date: "2023-11-16",
-      appointment_time: "14:45",
+      client_name: "John Smith",
+      date: "2023-11-16",
+      hour: "14:45",
     },
     {
       id: 6,
-      patient_name: "Laura Martinez",
-      date_of_date: "2023-11-16",
-      appointment_time: "16:00",
+      client_name: "Laura Martinez",
+      date: "2023-11-16",
+      hour: "16:00",
     },
     {
       id: 9,
-      patient_name: "Emma Wilson",
-      date_of_date: "2023-11-16",
-      appointment_time: "08:45",
+      client_name: "Emma Wilson",
+      date: "2023-11-16",
+      hour: "08:45",
     },
   ];
 
@@ -92,15 +92,15 @@ const getData = async () => {
 };
 
 const compareAppointments = (a: Appointment, b: Appointment): number => {
-  const dateA: Date = new Date(a.date_of_date);
-  const dateB: Date = new Date(b.date_of_date);
+  const dateA: Date = new Date(a.date);
+  const dateB: Date = new Date(b.date);
 
   if (dateA.getTime() !== dateB.getTime()) {
     return dateA.getTime() - dateB.getTime();
   } else {
     // Si las fechas son iguales, ordenar por 'hour'
-    const hourA: string[] = a.appointment_time.split(":");
-    const hourB: string[] = b.appointment_time.split(":");
+    const hourA: string[] = a.hour.split(":");
+    const hourB: string[] = b.hour.split(":");
 
     return (
       parseInt(hourA[0]) - parseInt(hourB[0]) ||
@@ -113,13 +113,13 @@ const viewAppointments = (appt: Appointment) => (
   <CustomTile
     key={appt.id}
     baseLink={`/employee-menu/appointments/${appt.id}`}
-    title={appt.patient_name}
-    topRightText={`${new Date(appt.date_of_date).toLocaleDateString("es-mx", {
+    title={appt.client_name}
+    topRightText={`${new Date(appt.date).toLocaleDateString("es-mx", {
       weekday: "long",
       year: "numeric",
       month: "short",
       day: "numeric",
-    })} - ${appt.appointment_time}`}
+    })} - ${appt.hour}`}
   />
 );
 

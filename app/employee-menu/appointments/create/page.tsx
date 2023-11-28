@@ -1,124 +1,23 @@
-"use client";
-import React from "react";
-import MantineForm from "../../../../components/mantine-form/MantineForm";
-import {
-  allValuesAvailable,
-  validateDate,
-  validateName,
-  validateNumber,
-} from "../../../../components/mantine-form/valuesValidate";
-import CustomInputMantine, {
-  typeInputForm,
-} from "../../../../components/mantine-form/customMantineInput";
-import { Button, Title } from "@mantine/core";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import React from 'react'
+import EmployeeAppointmentCreate from '../../../../components/employee-menu/appointments/EmployeeAppointmentCreate';
 
-const CreateAppointmentPage = () => (
-  <main style={{ marginLeft: "20px", marginRight: "20px" }}>
-    <Button
-      px={0}
-      component="a"
-      href="/employee-menu/appointments"
-      leftSection={<ArrowLeftOutlined />}
-      variant="subtle"
-    >
-      Volver a Citas
-    </Button>
-    <Title>Programar cita</Title>
-    <MantineForm
-      initialValuesForKeys={{
-        patient_name: "",
-        clinic_name: "",
-        type: "",
-        doctor_name: "",
-        date_of_date: "",
-        appointment_time: "",
-        subject: "",
-      }}
-      validateForKeys={{
-        patient_name: validateName,
-        clinic_name: allValuesAvailable,
-        type: allValuesAvailable,
-        doctor_name: validateName,
-        date_of_date: validateDate,
-        appointment_time: validateNumber,
-        subject: allValuesAvailable,
-      }}
-      listCustomInputMantine={[
-        new CustomInputMantine(
-          "Nombre del cliente",
-          "",
-          "patient_name",
-          typeInputForm.TEXT
-        ),
-        new CustomInputMantine(
-          "Seleccionar clínica",
-          "",
-          "clinic_name",
-          typeInputForm.TEXT
-        ),
-        new CustomInputMantine("Tipo de cita", "", "type", typeInputForm.TEXT),
-        new CustomInputMantine(
-          "Nombre del dentista",
-          "",
-          "doctor_name",
-          typeInputForm.TEXT
-        ),
-        new CustomInputMantine("Fecha", "", "date_of_date", typeInputForm.DATEPICKER),
-        new CustomInputMantine(
-          "Hora",
-          "",
-          "appointment_time",
-          typeInputForm.DATETIME
-        ),
-        new CustomInputMantine(
-          "Descripción",
-          "",
-          "subject",
-          typeInputForm.TEXT
-        ),
-      ]}
-      onSubmit={async (form: any) => {
-        console.log(form.values);
-        const {
-          patient_name,
-          clinic_name,
-          type,
-          doctor_name,
-          date_of_date,
-          appointment_time,
-          subject,
-        } = form.values;
-        /*
-          const response = await fetch(route, {
-            method: "POST",
-            body: JSON.stringify(
-              {
-                patient_name,
-                clinic_name,
-                type,
-                doctor_name,
-                date_of_date,
-                appointment_time,
-                subject,
-              }
-            ),
-          });
-          return response.json();
-      */
-      }}
-      labelSubmit="Crear"
-    />
-    <Button
-      variant="default"
-      component="a"
-      href="/employee-menu/appointments"
-      fullWidth
-      mt={10}
-    >
-      Cancelar
-    </Button>
-  </main>
-);
+const getData = async () => {
+  //const res = await fetch(`route/${id}`);
+  const clinicList = ["Clinica sin dientes", "Clinica dos"];
+  const typeList = ["Extraccion de muelas", "tipo dos"];
 
-export default CreateAppointmentPage;
+  const res = {clinicList, typeList}
+
+  return res;
+} 
+
+const CreateAppointmentPage = async () => {
+  const {clinicList, typeList} = await getData();
+  return (
+    <main style={{marginLeft: "20px", marginRight: "20px"}}>
+      <EmployeeAppointmentCreate clinicList={clinicList} typeList={typeList} />
+    </main>
+  )
+}
+
+export default CreateAppointmentPage

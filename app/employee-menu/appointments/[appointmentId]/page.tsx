@@ -1,22 +1,28 @@
 import React from "react";
-import EmployeeAppointmentView from "../../../../components/employee-menu/employee-appointment-view-page/EmployeeAppointmentView";
+import EmployeeAppointmentView from "../../../../components/employee-menu/appointments/EmployeeAppointmentView";
 
 const getData = async (id: number) => {
   //const res = await fetch(`route/${id}`);
-  const res = {
-    id,
-    patient_name: "Ricardo arjona",
-    clinic_name: "Clinica sin dientes",
-    type: "Extracíon de muelas",
+  const appointment = {
+    id_appointments: id,
+    client_name: "Ricardo arjona",
+    local_name: "Clinica sin dientes",
+    type: "Extraccion de muelas",
     doctor_name: "Ricardo milos",
-    date_of_date: "25 de julio del 2023",
-    appointment_time: "13:40",
+    date: "25 de julio del 2023",
+    hour: "13:40",
     subject: "Debe de ser atentido por el doctor Similares del consultorio 8",
+    status: "Pendiente",
   }
+  const clinicList = ["Clinica sin dientes", "Clinica dos"];
+  const typeList = ["Extraccion de muelas", "tipo dos"];
+
+  const res = {appointment, clinicList, typeList}
+
   return res;
 }
 
 export default async function EmployeeAppointmentPage({ params }: { params: { appointmentId: number } }) {
-  const appointment = await getData(params.appointmentId);
-  return <EmployeeAppointmentView appointment={appointment} />
+  const {appointment, clinicList, typeList} = await getData(params.appointmentId);
+  return <EmployeeAppointmentView appointment={appointment} clinicList={clinicList} typeList={typeList} />
 }

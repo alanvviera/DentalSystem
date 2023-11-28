@@ -8,6 +8,7 @@ import {
   validateEmail,
   validateName,
   validateNumber,
+  validateNumberTel,
   validatePassword,
 } from "../../mantine-form/valuesValidate";
 import CustomInputMantine, {
@@ -23,7 +24,7 @@ const EmployeeProfileForm = ({ profile }) => {
         validateForKeys={{
           name: validateName,
           email: validateEmail,
-          phone: validateNumber,
+          phone: validateNumberTel,
           password: validatePassword,
           birthDate: validateDate,
           address: allValuesAvailable,
@@ -42,7 +43,7 @@ const EmployeeProfileForm = ({ profile }) => {
             "email",
             typeInputForm.TEXT
           ),
-          new CustomInputMantine("Teléfono", "", "phone", typeInputForm.NUMBER),
+          new CustomInputMantine("Teléfono", "Ejemplo: 646-123-45-67", "phone", typeInputForm.TEXT),
           new CustomInputMantine(
             "Contraseña",
             "",
