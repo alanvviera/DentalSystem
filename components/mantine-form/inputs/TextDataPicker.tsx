@@ -31,7 +31,7 @@ const TextDataPicker = ({
         minDate={minDate}
         onChange={(dateNumber) => {
           form.setValues({
-            [valueKey]: dateNumber.getTime().toString()
+            [valueKey]: dateNumber.getTime()
           });
 
           setValue(dateNumber);

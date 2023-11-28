@@ -31,7 +31,7 @@ const TextTimePicker: React.FC<TextTimePickerProps> = ({
         leftSection={<IconClock style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
         onChange={(dateNumber) => {
           form.setValues({
-            [valueKey]: dateNumber.target.valueAsNumber.toString()
+            [valueKey]: dateNumber.target.valueAsNumber
           });
         }}
         error={form.getInputProps(valueKey)["error"]}

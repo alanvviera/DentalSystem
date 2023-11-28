@@ -37,6 +37,7 @@ const CreateAppointment =async ({ params }) => {
                     selectClinic: "",
                     typeAppointment: "",
                     dateAppointment: "",
+                    nameDentist: "",
                     timeAppointment: "",
                     description: ""
                 }}
@@ -45,6 +46,7 @@ const CreateAppointment =async ({ params }) => {
                     selectClinic: validaFieldsNotEmpty,
                     typeAppointment: validaFieldsNotEmpty,
                     dateAppointment: validateDate,
+                    nameDentist: validaFieldsNotEmpty,
                     timeAppointment: validateNumber,
                     description: validaFieldsNotEmpty
                 }}
@@ -53,6 +55,7 @@ const CreateAppointment =async ({ params }) => {
                     new CustomInputMantine("Nombre del cliente", "Nombre del cliente", "nameClient", typeInputForm.TEXT),
                     new CustomInputMantine("Selecciona la clínica", "Seleccione una clínica", "selectClinic", typeInputForm.SELECTITEMS, undefined, undefined, undefined,dataClinicExample.listClinics ),
                     new CustomInputMantine("Tipo de cita", "Seleccione una tipo de cita", "typeAppointment", typeInputForm.SELECTITEMS, undefined, undefined, undefined,dataClinicExample.listTypeAppointments ),
+                    new CustomInputMantine("Nombre del dentista", "Nombre del dentista", "nameDentist", typeInputForm.TEXT),
                     new CustomInputMantine("Fecha de cita", "Fecha de cita", "dateAppointment", typeInputForm.DATEPICKER, undefined, undefined, undefined, undefined, new Date()),
                     new CustomInputMantine("Hora de cita", "Hora de cita", "timeAppointment", typeInputForm.DATETIME),
                     new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
