@@ -1,59 +1,35 @@
 "use client";
-import React from 'react';
-import CustomInputMantine, { typeInputForm } from '../../../../components/mantine-form/customMantineInput';
-import { validaFieldsNotEmpty, validateNumberInteger, validateNumberTel } from '../../../../components/mantine-form/valuesValidate';
-import { Button, Title } from "@mantine/core";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import MantineForm from '../../../../components/mantine-form/MantineForm';
+import { Button, Title } from '@mantine/core';
+import VisualizeData from "../../../../components/visualize-data/VisualizeData";
+import LabelDataText from "../../../../components/visualize-data/labelsData/LabelDataText";
+import { useRouter } from 'next/navigation';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 
-const getData = async () => {
-    return {
-        addressClinic: "Calle buenos aires",
-        buildingNumber: "28",
-        tel: "646-123-45-67",
-        status: "Activo"
-    };
-}
+const ClinicPage = ({ params }) => {
 
-const EditClinicsPage = async () => {
-
-    //Data Example
-    const dataForm = await getData();
+    const router = useRouter();
+    const clinicId = params["clinic-id"];
 
     return (
         <main style={{ margin: "20px" }}>
             <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href='/employee-menu/clinics' >
-                Volver a clinicas
+                Volver a clínicas
             </Button>
-            <Title>Editar información de la clínica</Title>
-            <MantineForm
-                initialValuesForKeys={{
-                    ...dataForm
-
-                }}
-                validateForKeys={{
-                    addressClinic: validaFieldsNotEmpty,
-                    buildingNumber: validateNumberInteger,
-                    tel: validateNumberTel,
-                    status: validaFieldsNotEmpty
-                }}
-                listCustomInputMantine={[
-                    new CustomInputMantine("Dirección de la clínica", "Tu dirección", "addressClinic", typeInputForm.TEXT),
-                    new CustomInputMantine("Número de edificio", "Agregue su número de edificio", "buildingNumber", typeInputForm.TEXT),
-                    new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "tel", typeInputForm.TEXT),
-                    new CustomInputMantine("Estatus", "Ingrese el estatus de su clínica", "status", typeInputForm.TEXT),
-
-                ]}
-                onSubmit={(form: any) => {
-                    // All fields were validated
-                    console.log(form.values);
-                    form.setInitialValues();
-                }}
-                labelSubmit='Crear'
+            <VisualizeData
+                content={
+                    <>
+                        <Title>Clinica</Title>
+                        <LabelDataText title='Ve la información de tu clinica' type='Información personal' subIcon={<Title style={{ cursor: 'pointer' }} onClick={() => router.push(`/employee-menu/clinics/${clinicId}/profile`)} order={6} >Editar</Title>} />
+                        <LabelDataText title='Ve el personal de tu clinica' type='Personal' subIcon={<Title style={{ cursor: 'pointer' }} onClick={() => router.push(`/employee-menu/clinics/${clinicId}/employees`)} order={6} >Ver mas</Title>} />
+                        <LabelDataText title='Manera tu inventario' type='Inventario' subIcon={<Title style={{ cursor: 'pointer' }} onClick={() => router.push(`/employee-menu/clinics/${clinicId}/inventory`)} order={6} >Ver mas</Title>} />
+                        <LabelDataText title='Administra a tus clientes' type='Clientes' subIcon={<Title style={{ cursor: 'pointer' }} onClick={() => router.push(`/employee-menu/clinics/${clinicId}/clients`)} order={6} >Ver mas</Title>} />
+                        <LabelDataText title='Ve las citas pendientes' type='Pendientes' subIcon={<Title style={{ cursor: 'pointer' }} onClick={() => router.push(`/employee-menu/clinics/${clinicId}/appointments`)} order={6} >Ver mas</Title>} />
+                    </>
+                }
             />
         </main>
-    );
-};
+    )
+}
 
-export default EditClinicsPage;
+export default ClinicPage;

@@ -37,8 +37,8 @@ const EmployeesPage =async ({ params }) => {
 
     return (
         <main style={{ margin: "20px" }}>
-            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href='/employee-menu/clinics' >
-                Volver a clinicas
+            <Button px={0} component="a" leftSection={<ArrowLeftOutlined />} variant="subtle" href={`/employee-menu/clinics/${clinicId}`} >
+                Volver a clínica
             </Button>
             <Group justify='space-between'>
                 <Title>Personal</Title>
