@@ -9,12 +9,11 @@ export async function POST (req: NextRequest){
 
     try {
         const { 
-            id_user,
-            fullname, 
+            name, 
+            last_name,
             email, 
             password,
             phone_number,
-            type_user,
             home_address,
             birthday,
             gender,
@@ -23,7 +22,7 @@ export async function POST (req: NextRequest){
         const existingUser = await prisma.user_data.findUnique({ where: { email } });
 
         // Validación de datos de entrada
-        if (!fullname || !email || !password || !phone_number || !type_user || !home_address || !birthday || !gender) {
+        if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender) {
             return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
         }
 
@@ -37,11 +36,11 @@ export async function POST (req: NextRequest){
         const newUser = await prisma.user_data.create({
             data: {
                 //id_user, es un dato generado de manera aleatoria
-                fullname,
+                name,
+                last_name,
                 email,
                 password: hashedPassword,
                 phone_number,
-                type_user,
                 home_address,
                 birthday,
                 gender,

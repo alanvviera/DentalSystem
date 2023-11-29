@@ -1,17 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth"
+import { authOptions } from '../auth/[...nextauth]/route';
 
 const prisma = new PrismaClient();
 
 export async function GET (req: NextRequest) {
+
+    const session = await getServerSession(authOptions);
     
     try {
-        const appointments = await prisma.appointments.findMany({
+        const appointments = await prisma.appointment.findMany({
+            where: {
+                id_user_FK: session.user.id
+            },
             select: {
-                id: true,
+                id_appointment: true,
                 date: true,
                 hour: true,
-                //name: true
+                user_data: {
+                    select: {
+                        name: true,
+                    },
+                },
             },
         });
 

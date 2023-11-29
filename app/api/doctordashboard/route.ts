@@ -1,15 +1,14 @@
 // pages/api/auth/login.ts
 import { PrismaClient } from '@prisma/client';
-import { getSession } from 'next-auth/react';
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from "next-auth"
+import { authOptions } from '../auth/[...nextauth]/route';
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
 
-  const userId = req.nextUrl.searchParams.get('id')
-  
-  const session = getSession();
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, {status: 401})
@@ -17,11 +16,18 @@ export async function GET(req: NextRequest) {
   
   try {
 
-    const dashboardData = await prisma.user_data.findUnique({
-      where: {id: parseInt(userId)},
+    const dashboardData = await prisma.appointment.findMany({
+      where: {
+        id_user_FK: session.user.id
+      },
       select: {
-        name: true, //falta la imagen de perfil
-        //Falta incluir los demas tablas citas y pendientes
+        date: true,
+        hour: true,
+        user_data: {
+          select: {
+            name: true
+          }
+        }
       }
     });
 

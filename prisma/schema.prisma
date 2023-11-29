@@ -13,37 +13,37 @@ datasource db {
 
 model doctor {
   id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_doctor     Int             @unique(map: "id_doctor_UNIQUE")
-  id_user_FK    Int             @unique(map: "id_user_FK_UNIQUE")
+  id_doctor     String          @unique(map: "id_doctor_UNIQUE") @default(uuid())
+  id_user_FK    String          @unique(map: "id_user_FK_UNIQUE")
   license       String?         @db.VarChar(75)
   specialty     String?         @db.VarChar(75)
   school        String?         @db.VarChar(50)
-  appointments  appointments[]
+  appointment  appointment[]
   client_doctor client_doctor[]
   debt          debt[]
-  user_data     user_data       @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "fk_user")
+  user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user")
 
   @@index([id_user_FK], map: "user_data_fk_idx")
 }
 
-model employees {
+model employee {
   id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_employees Int       @unique(map: "id_employees_UNIQUE")
-  id_user_FK   Int       @unique(map: "id_user_FK_UNIQUE")
-  id_local_FK  Int       @unique(map: "id_local_FK_UNIQUE")
+  id_employee String    @unique(map: "id_employee_UNIQUE") @default(uuid())
+  id_user_FK   String    @unique(map: "id_user_FK_UNIQUE")
+  id_local_FK  String    @unique(map: "id_local_FK_UNIQUE")
   charge       String?   @db.VarChar(45)
   study_level  String?   @db.MediumText
   document     Bytes?    @db.MediumBlob
-  local        local     @relation(fields: [id_local_FK], references: [id], onUpdate: Restrict, map: "id_employees_FK")
-  user_data    user_data @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "id_user_FK")
+  local        local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_employee_FK")
+  user_data    user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "id_user_FK")
 
   @@index([id_user_FK], map: "id_user_FK_idx")
 }
 
 model inventory {
   id               Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_inventory     Int       @unique(map: "id_inventory_UNIQUE")
-  id_local_FK      Int       @unique(map: "id_local_FK_UNIQUE")
+  id_inventory     String    @unique(map: "id_inventory_UNIQUE") @default(uuid())
+  id_local_FK      String    @unique(map: "id_local_FK_UNIQUE")
   product_name     String    @db.VarChar(45)
   qr               Bytes?    @db.MediumBlob
   category         String    @db.MediumText
@@ -54,7 +54,7 @@ model inventory {
   stock_quantity   Int?
   minimum_stock    Int?
   maximum_stock    Int?
-  observations     String?   @db.LongText
+  observation      String?   @db.LongText
   local            local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_inventory_FK")
 
   @@index([id_local_FK], map: "id_inventory_FK_idx")
@@ -62,7 +62,7 @@ model inventory {
 
 model local {
   id              Int            @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_local        Int            @unique(map: "id_local_UNIQUE")
+  id_local        String         @unique(map: "id_local_UNIQUE") @default(uuid())
   name            String         @db.VarChar(75)
   address         String?        @db.LongText
   map             String?        @db.MediumText
@@ -70,102 +70,106 @@ model local {
   phone_number    String?        @db.VarChar(20)
   photos          Bytes?         @db.MediumBlob
   status          String?        @db.VarChar(45)
-  appointments    appointments[]
-  employees       employees?
+  appointment    appointment[]
+  employee       employee?
   inventory       inventory?
 }
 
 model user_data {
-  id           Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_user      String     @unique(map: "id_user_UNIQUE") @db.VarChar(192)
-  name         String     @db.VarChar(45)
-  last_name    String     @db.VarChar(45)
-  email        String     @unique(map: "email_UNIQUE") @db.VarChar(60)
-  password     String     @db.MediumText
-  curp         String?    @unique(map: "curp_UNIQUE") @db.VarChar(19)
-  phone_number String?    @db.VarChar(20)
-  home_address String?    @db.MediumText
-  birthday     DateTime?  @db.Date
-  gender       String?    @db.VarChar(45)
-  client       client?
-  doctor       doctor?
-  employees    employees?
+  id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_user       String          @unique(map: "id_user_UNIQUE") @default(uuid())
+  name          String          @db.VarChar(45)
+  last_name     String          @db.VarChar(45)
+  email         String          @unique(map: "email_UNIQUE") @db.VarChar(60)
+  password      String          @db.MediumText
+  curp          String?         @unique(map: "curp_UNIQUE") @db.VarChar(19)
+  phone_number  String?         @db.VarChar(20)
+  home_address  String?         @db.MediumText
+  birthday      DateTime?       @db.Date
+  gender        String?         @db.VarChar(45)
+  profile_image String?         @db.TinyText
+  appointment  appointment[]
+  client        client?
+  client_doctor client_doctor[]
+  debt          debt[]
+  doctor        doctor?
+  employee     employee?
 }
 
-model appointments {
-  id              Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_appointments Int       @unique(map: "id_dates_UNIQUE")
-  id_doctor_FK    Int
-  id_client_FK    Int
-  id_local_FK     Int
-  type            String?   @db.VarChar(45)
-  doctor_name     String?   @db.VarChar(45)
-  date            DateTime? @db.Date
-  hour            DateTime? @db.Time(0)
-  subject         String?   @db.MediumText
-  client          client    @relation(fields: [id_client_FK], references: [id_client], onDelete: NoAction, onUpdate: NoAction, map: "client")
-  doctor          doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
-  local           local     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
+model appointment {
+  id                    Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_appointment        String    @unique(map: "id_appointment_UNIQUE") @default(uuid())
+  id_doctor_FK          String
+  id_user_FK            String
+  id_local_FK           String
+  type                  String?   @db.VarChar(45)
+  doctor_name           String?   @db.VarChar(45)
+  client_name           String?   @db.VarChar(45)
+  local_name            String?   @db.VarChar(45)
+  date                  DateTime? @db.Date
+  hour                  DateTime? @db.Time(0)
+  subject               String?   @db.MediumText
+  status                String?   @db.VarChar(45)
+  user_data             user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
+  doctor                doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
+  local                 local     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
 
   @@index([id_doctor_FK], map: "doctor_idx")
-  @@index([id_client_FK], map: "id_patient_FK_idx")
   @@index([id_local_FK], map: "local_idx")
+  @@index([id_user_FK], map: "client_idx")
 }
 
 model client {
-  id                      Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_client               Int             @unique(map: "id_patient_UNIQUE")
-  id_user_FK              Int             @unique(map: "id_user_FK_UNIQUE")
-  allergies               String?         @db.VarChar(45)
-  emergency_name          String?         @db.MediumText
-  emergency_number        String?         @db.VarChar(45)
-  health_problems         Bytes?          @db.MediumBlob
-  health_insurance_number String?         @db.VarChar(50)
+  id                      Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_user_FK              String    @unique(map: "id_user_FK_UNIQUE")
+  allergies               String?   @db.VarChar(45)
+  emergency_name          String?   @db.MediumText
+  emergency_number        String?   @db.VarChar(45)
+  health_problems         Bytes?    @db.MediumBlob
+  health_insurance_number String?   @db.VarChar(50)
   medical_history         Bytes?
-  radiographs             Bytes?          @db.MediumBlob
-  photo_history           Bytes?          @db.MediumBlob
+  radiographs             Bytes?    @db.MediumBlob
+  photo_history           Bytes?    @db.MediumBlob
   medical_conditions      Bytes?
-  appointments            appointments[]
-  user_data               user_data       @relation(fields: [id_user_FK], references: [id], onUpdate: Restrict, map: "fk_id_user")
-  client_doctor           client_doctor[]
-  debt                    debt[]
+  user_data               user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_id_user")
 
   @@index([id_user_FK], map: "fk_id_user_idx")
 }
 
 model client_doctor {
-  id           Int    @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_client_FK Int
-  id_doctor_FK Int
-  client       client @relation(fields: [id_client_FK], references: [id_client], onDelete: NoAction, onUpdate: NoAction, map: "idclient")
-  doctor       doctor @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "iddoctor")
+  id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_client_FK String
+  id_doctor_FK String
+  client       user_data @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "idclient")
+  doctor       doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "iddoctor")
 
-  @@index([id_client_FK], map: "id_client_FK_idx")
   @@index([id_doctor_FK], map: "id_doctor_FK_idx")
-  @@map("client-doctor")
+  @@index([id_client_FK], map: "idclient_idx")
+  @@map("client_doctor")
 }
 
 model debt {
   id           Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_debt      Int        @unique(map: "id_patient_payments_UNIQUE")
-  id_client_FK Int
+  id_debt      String     @unique(map: "id_patient_payments_UNIQUE") @default(uuid())
+  id_client_FK String
   amount_debt  Float      @db.Float
-  id_doctor_FK Int
-  completed    Int?       @db.TinyInt
+  id_doctor_FK String
+  completed    String?    @db.TinyText
   doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "ID_DOCTOR_FK")
-  client       client     @relation(fields: [id_client_FK], references: [id_client], onUpdate: Restrict, map: "id_CLIENT_FK")
-  payments     payments[]
+  client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "id_CLIENT_FK")
+  payment     payment[]
 
   @@index([id_doctor_FK], map: "ID_DOCTOR_FK_idx")
-  @@index([id_client_FK], map: "id_payments_FK_idx")
+  @@index([id_client_FK], map: "id_CLIENT_FK_idx")
 }
 
-model payments {
-  id         Int   @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  idpayments Int   @unique(map: "idpayments_UNIQUE")
-  id_debt_fk Int
-  amount     Float @db.Float
-  debt       debt  @relation(fields: [id_debt_fk], references: [id_debt], onDelete: NoAction, onUpdate: NoAction, map: "id_payments")
+model payment {
+  id          Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_payment String   @unique(map: "idpayment_UNIQUE") @default(uuid())
+  id_debt_fk  String
+  amount      Float    @db.Float
+  date        DateTime @db.Date
+  debt        debt     @relation(fields: [id_debt_fk], references: [id_debt], onDelete: NoAction, onUpdate: NoAction, map: "id_payment")
 
-  @@index([id_debt_fk], map: "id_payments_idx")
+  @@index([id_debt_fk], map: "id_payment_idx")
 }

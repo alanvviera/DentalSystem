@@ -1,17 +1,51 @@
-import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from "next-auth"
+import { AuthOptions } from 'next-auth';
 
-const prisma = new PrismaClient();
+const prisma: PrismaClient = new PrismaClient();
 
-export async function GET (req: NextRequest) {
+//Falta auth
 
-    const userId = prisma.user_data.sub;
-    const userProfile = await prisma.user_data.findUnique({where: {userId}});
 
-    if (!userProfile) {
-        return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
+export async function PUT (req: NextRequest) { 
+    
+    const user = await req.json();
+
+    const {
+        name,
+        last_name,
+        email,
+        password,
+        curp,
+        phone_number,
+        home_address,
+        birthday,
+        gender,
+    } = await req.json();
+
+    try {
+        const updatedProfile = await prisma.client.update({
+            where: { id_user_FK: user.id_user },
+            data: {
+                user_data: {
+                    update: {
+                        name,
+                        last_name,
+                        email,
+                        password,
+                        curp,
+                        phone_number,
+                        home_address,
+                        birthday,
+                        gender,
+                    }
+                },
+            }
+        });
+        return NextResponse.json({ updatedProfile }, { status: 200 });  
+    } catch (error) {
+        console.log('Error updating user profile: ', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-    return NextResponse.json({ userProfile }, { status: 200 })
-
 }
-

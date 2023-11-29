@@ -4,22 +4,22 @@
 
 Table doctor {
   id Int [pk, increment]
-  id_doctor Int [unique, not null]
-  id_user_FK Int [unique, not null]
+  id_doctor String [unique, not null]
+  id_user_FK String [unique, not null]
   license String
   specialty String
   school String
-  appointments appointments [not null]
-  client_doctor client-doctor [not null]
+  appointment appointment [not null]
+  client_doctor client_doctor [not null]
   debt debt [not null]
   user_data user_data [not null]
 }
 
-Table employees {
+Table employee {
   id Int [pk, increment]
-  id_employees Int [unique, not null]
-  id_user_FK Int [unique, not null]
-  id_local_FK Int [unique, not null]
+  id_employee String [unique, not null]
+  id_user_FK String [unique, not null]
+  id_local_FK String [unique, not null]
   charge String
   study_level String
   document Bytes
@@ -29,8 +29,8 @@ Table employees {
 
 Table inventory {
   id Int [pk, increment]
-  id_inventory Int [unique, not null]
-  id_local_FK Int [unique, not null]
+  id_inventory String [unique, not null]
+  id_local_FK String [unique, not null]
   product_name String [not null]
   qr Bytes
   category String [not null]
@@ -41,13 +41,13 @@ Table inventory {
   stock_quantity Int
   minimum_stock Int
   maximum_stock Int
-  observations String
+  observation String
   local local [not null]
 }
 
 Table local {
   id Int [pk, increment]
-  id_local Int [unique, not null]
+  id_local String [unique, not null]
   name String [not null]
   address String
   map String
@@ -55,8 +55,8 @@ Table local {
   phone_number String
   photos Bytes
   status String
-  appointments appointments [not null]
-  employees employees
+  appointment appointment [not null]
+  employee employee
   inventory inventory
 }
 
@@ -72,31 +72,37 @@ Table user_data {
   home_address String
   birthday DateTime
   gender String
+  profile_image String
+  appointment appointment [not null]
   client client
+  client_doctor client_doctor [not null]
+  debt debt [not null]
   doctor doctor
-  employees employees
+  employee employee
 }
 
-Table appointments {
+Table appointment {
   id Int [pk, increment]
-  id_appointments Int [unique, not null]
-  id_doctor_FK Int [not null]
-  id_client_FK Int [not null]
-  id_local_FK Int [not null]
+  id_appointment String [unique, not null]
+  id_doctor_FK String [not null]
+  id_user_FK String [not null]
+  id_local_FK String [not null]
   type String
   doctor_name String
+  client_name String
+  local_name String
   date DateTime
   hour DateTime
   subject String
-  client client [not null]
+  status String
+  user_data user_data [not null]
   doctor doctor [not null]
   local local [not null]
 }
 
 Table client {
   id Int [pk, increment]
-  id_client Int [unique, not null]
-  id_user_FK Int [unique, not null]
+  id_user_FK String [unique, not null]
   allergies String
   emergency_name String
   emergency_number String
@@ -106,62 +112,60 @@ Table client {
   radiographs Bytes
   photo_history Bytes
   medical_conditions Bytes
-  appointments appointments [not null]
   user_data user_data [not null]
-  client_doctor client-doctor [not null]
-  debt debt [not null]
 }
 
-Table client-doctor {
+Table client_doctor {
   id Int [pk, increment]
-  id_client_FK Int [not null]
-  id_doctor_FK Int [not null]
-  client client [not null]
+  id_client_FK String [not null]
+  id_doctor_FK String [not null]
+  client user_data [not null]
   doctor doctor [not null]
 }
 
 Table debt {
   id Int [pk, increment]
-  id_debt Int [unique, not null]
-  id_client_FK Int [not null]
+  id_debt String [unique, not null]
+  id_client_FK String [not null]
   amount_debt Float [not null]
-  id_doctor_FK Int [not null]
-  completed Int
+  id_doctor_FK String [not null]
+  completed String
   doctor doctor [not null]
-  client client [not null]
-  payments payments [not null]
+  client user_data [not null]
+  payment payment [not null]
 }
 
-Table payments {
+Table payment {
   id Int [pk, increment]
-  idpayments Int [unique, not null]
-  id_debt_fk Int [not null]
+  id_payment String [unique, not null]
+  id_debt_fk String [not null]
   amount Float [not null]
+  date DateTime [not null]
   debt debt [not null]
 }
 
-Ref: doctor.id_user_FK - user_data.id
+Ref: doctor.id_user_FK - user_data.id_user
 
-Ref: employees.id_local_FK - local.id
+Ref: employee.id_local_FK - local.id_local
 
-Ref: employees.id_user_FK - user_data.id
+Ref: employee.id_user_FK - user_data.id_user
 
 Ref: inventory.id_local_FK - local.id_local
 
-Ref: appointments.id_client_FK > client.id_client [delete: No Action]
+Ref: appointment.id_user_FK > user_data.id_user
 
-Ref: appointments.id_doctor_FK > doctor.id_doctor [delete: No Action]
+Ref: appointment.id_doctor_FK > doctor.id_doctor [delete: No Action]
 
-Ref: appointments.id_local_FK > local.id_local [delete: No Action]
+Ref: appointment.id_local_FK > local.id_local [delete: No Action]
 
-Ref: client.id_user_FK - user_data.id
+Ref: client.id_user_FK - user_data.id_user
 
-Ref: client-doctor.id_client_FK > client.id_client [delete: No Action]
+Ref: client_doctor.id_client_FK > user_data.id_user
 
-Ref: client-doctor.id_doctor_FK > doctor.id_doctor [delete: No Action]
+Ref: client_doctor.id_doctor_FK > doctor.id_doctor [delete: No Action]
 
 Ref: debt.id_doctor_FK > doctor.id_doctor [delete: No Action]
 
-Ref: debt.id_client_FK > client.id_client
+Ref: debt.id_client_FK > user_data.id_user
 
-Ref: payments.id_debt_fk > debt.id_debt [delete: No Action]
+Ref: payment.id_debt_fk > debt.id_debt [delete: No Action]
