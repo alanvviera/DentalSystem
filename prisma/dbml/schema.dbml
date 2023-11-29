@@ -73,6 +73,7 @@ Table user_data {
   birthday DateTime
   gender String
   profile_image String
+  type_user user_type [not null]
   appointment appointment [not null]
   client client
   client_doctor client_doctor [not null]
@@ -96,8 +97,8 @@ Table appointment {
   subject String
   status String
   user_data user_data [not null]
-  doctor doctor [not null]
-  local local [not null]
+  doctor doctor
+  local local
 }
 
 Table client {
@@ -133,6 +134,7 @@ Table debt {
   doctor doctor [not null]
   client user_data [not null]
   payment payment [not null]
+  date DateTime [not null]
 }
 
 Table payment {
@@ -142,6 +144,13 @@ Table payment {
   amount Float [not null]
   date DateTime [not null]
   debt debt [not null]
+}
+
+Enum user_type {
+  CLIENT
+  EMPLOYEE
+  DOCTOR
+  ADMIN
 }
 
 Ref: doctor.id_user_FK - user_data.id_user

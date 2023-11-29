@@ -1,10 +1,38 @@
-// pages/api/appointments.ts
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
 const prisma = new PrismaClient();
+
+export async function GET (req: NextRequest) {
+
+  const session = await getServerSession(authOptions);
+
+  try {
+
+    const clientLocals = await prisma.appointment.findMany({
+      where:{
+        id_user_FK: session.user.id
+      },
+      select: {
+        local: {
+          select:{
+            id_local: true,
+            name: true,
+          }
+        }
+      }
+    })
+    return NextResponse.json({ clientLocals }, { status: 201 });
+  } catch (error) {
+
+    console.error(error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    
+  }
+
+}
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);

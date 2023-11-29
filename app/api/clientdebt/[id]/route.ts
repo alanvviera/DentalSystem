@@ -9,12 +9,13 @@ const prisma = new PrismaClient();
 export async function GET (req: NextRequest) {
 
     const session = await getServerSession(authOptions);
+    const appointmentId = req.nextUrl.searchParams.get('id')
 
   try {
     
     // Obtener detalles de la cita específica
     const debt = await prisma.debt.findUnique({
-      where: { id: session.user.id },
+      where: { id_user_FK: session.user.id,id: parseInt(appointmentId), },
       select: {
         id: true,
         amount_debt: true,

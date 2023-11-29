@@ -44,6 +44,7 @@ export async function POST (req: NextRequest){
                 home_address,
                 birthday,
                 gender,
+                type_user: 'EMPLOYEE'
             },
         });
         

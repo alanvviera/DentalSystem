@@ -7,7 +7,7 @@ const prisma = new PrismaClient({log: ['query', 'info', 'warn', 'error']});
 
 export async function POST (req: NextRequest){
     try {
-        const { name, email, password } = await req.json();
+        const { name, last_name, email, password } = await req.json();
         const existingUser = await prisma.user_data.findUnique({ where: { email } });
 
         // Validación de datos de entrada
@@ -25,9 +25,10 @@ export async function POST (req: NextRequest){
         const newUser = await prisma.user_data.create({
             data: {
                 name,
-                last_name: '',
+                last_name,
                 email,
                 password: hashedPassword,
+                type_user: 'CLIENT'
             },
         });
         

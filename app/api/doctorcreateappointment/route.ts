@@ -30,9 +30,6 @@ export async function POST(req: NextRequest) {
     
     // Crear la cita
     const newAppointment = await prisma.appointment.create({
-      where: {
-        id_user_FK: session.user.id
-      },
       data: {
         //id_dates, es un dato generado de manera aleatoria
         client_name,
@@ -42,6 +39,7 @@ export async function POST(req: NextRequest) {
         date,
         hour,
         subject,
+        user_data:{connect:{id_user: session.user.id}}
       }
     });
     

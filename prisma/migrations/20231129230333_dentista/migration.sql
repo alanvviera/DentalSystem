@@ -87,6 +87,7 @@ CREATE TABLE `user_data` (
     `birthday` DATE NULL,
     `gender` VARCHAR(45) NULL,
     `profile_image` TINYTEXT NULL,
+    `type_user` ENUM('CLIENT', 'EMPLOYEE', 'DOCTOR', 'ADMIN') NOT NULL,
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_user_UNIQUE`(`id_user`),
@@ -159,6 +160,7 @@ CREATE TABLE `debt` (
     `amount_debt` FLOAT NOT NULL,
     `id_doctor_FK` VARCHAR(191) NOT NULL,
     `completed` TINYTEXT NULL,
+    `date` DATE NOT NULL,
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_patient_payments_UNIQUE`(`id_debt`),

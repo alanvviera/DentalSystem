@@ -28,7 +28,7 @@ model doctor {
 
 model employee {
   id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_employee String    @unique(map: "id_employee_UNIQUE") @default(uuid())
+  id_employee  String    @unique(map: "id_employee_UNIQUE") @default(uuid())
   id_user_FK   String    @unique(map: "id_user_FK_UNIQUE")
   id_local_FK  String    @unique(map: "id_local_FK_UNIQUE")
   charge       String?   @db.VarChar(45)
@@ -88,6 +88,7 @@ model user_data {
   birthday      DateTime?       @db.Date
   gender        String?         @db.VarChar(45)
   profile_image String?         @db.TinyText
+  type_user     user_type
   appointment  appointment[]
   client        client?
   client_doctor client_doctor[]
@@ -96,23 +97,30 @@ model user_data {
   employee     employee?
 }
 
+enum user_type {
+  CLIENT
+  EMPLOYEE
+  DOCTOR
+  ADMIN
+}
+
 model appointment {
-  id                    Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_appointment        String    @unique(map: "id_appointment_UNIQUE") @default(uuid())
+  id                    Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_appointment        String     @unique(map: "id_appointment_UNIQUE") @default(uuid())
   id_doctor_FK          String
   id_user_FK            String
   id_local_FK           String
-  type                  String?   @db.VarChar(45)
-  doctor_name           String?   @db.VarChar(45)
-  client_name           String?   @db.VarChar(45)
-  local_name            String?   @db.VarChar(45)
-  date                  DateTime? @db.Date
-  hour                  DateTime? @db.Time(0)
-  subject               String?   @db.MediumText
-  status                String?   @db.VarChar(45)
-  user_data             user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
-  doctor                doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
-  local                 local     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
+  type                  String?    @db.VarChar(45)
+  doctor_name           String?    @db.VarChar(45)
+  client_name           String?    @db.VarChar(45)
+  local_name            String?    @db.VarChar(45)
+  date                  DateTime?  @db.Date
+  hour                  DateTime?  @db.Time(0)
+  subject               String?    @db.MediumText
+  status                String?    @db.VarChar(45)
+  user_data             user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
+  doctor                doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
+  local                 local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
 
   @@index([id_doctor_FK], map: "doctor_idx")
   @@index([id_local_FK], map: "local_idx")
@@ -157,7 +165,8 @@ model debt {
   completed    String?    @db.TinyText
   doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "ID_DOCTOR_FK")
   client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "id_CLIENT_FK")
-  payment     payment[]
+  payment      payment[]
+  date         DateTime   @db.Date
 
   @@index([id_doctor_FK], map: "ID_DOCTOR_FK_idx")
   @@index([id_client_FK], map: "id_CLIENT_FK_idx")
@@ -165,7 +174,7 @@ model debt {
 
 model payment {
   id          Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_payment String   @unique(map: "idpayment_UNIQUE") @default(uuid())
+  id_payment  String   @unique(map: "idpayment_UNIQUE") @default(uuid())
   id_debt_fk  String
   amount      Float    @db.Float
   date        DateTime @db.Date
