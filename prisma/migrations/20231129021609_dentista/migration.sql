@@ -87,6 +87,7 @@ CREATE TABLE `user_data` (
     `birthday` DATE NULL,
     `gender` VARCHAR(45) NULL,
     `profile_image` TINYTEXT NULL,
+    `type_user` ENUM('CLIENT', 'EMPLOYEE', 'DOCTOR', 'ADMIN') NOT NULL,
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_user_UNIQUE`(`id_user`),
