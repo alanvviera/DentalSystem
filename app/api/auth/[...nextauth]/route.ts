@@ -24,7 +24,8 @@ export const authOptions = {
           return { 
             id: user.id_user, 
             name: user.name, 
-            email: user.email 
+            email: user.email,
+            type_user: user.type_user
           };
         }
         return null;
@@ -43,7 +44,7 @@ export const authOptions = {
     signIn: "/login" 
   },
   callbacks: {
-    async session({ session, user, token }) {
+    async session({ session, user}) {
       session.user = user;
       return session;
     },
@@ -52,6 +53,7 @@ export const authOptions = {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
+        token.type_user = user.type_user;
       }
       return token;
     }
