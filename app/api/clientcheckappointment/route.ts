@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 export async function GET(req: NextRequest) {
 
   const session = await getServerSession(authOptions);
+  const appointmentId = req.nextUrl.searchParams.get('id')
 
   try {
     const appointmentsCompleted = await prisma.appointment.findMany({
@@ -41,7 +42,7 @@ export async function GET(req: NextRequest) {
     const appointmentsOngoing = await prisma.appointment.findMany({
       where: {
          id_user_FK : session.user.id,
-         status: 'Ongoing',
+         status: 'ongoing',
        },
       select: {
         id: true,
@@ -52,7 +53,49 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ appointmentsCompleted, appointmentsPending, appointmentsOngoing }, { status: 200 });
+    const appointmentsCancel = await prisma.appointment.findMany({
+      where: {
+         id_user_FK : session.user.id,
+         status: 'canceled',
+       },
+      select: {
+        id: true,
+        doctor_name: true,
+        date: true,
+        hour: true,
+         status: true,
+      },
+    });
+
+    const appointmentsReject = await prisma.appointment.findMany({
+      where: {
+         id_user_FK : session.user.id,
+         status: 'rejected',
+       },
+      select: {
+        id: true,
+        doctor_name: true,
+        date: true,
+        hour: true,
+         status: true,
+      },
+    });
+
+    const appointmentsConfirm = await prisma.appointment.findMany({
+      where: {
+         id_user_FK : session.user.id,
+         status: 'confirmed',
+       },
+      select: {
+        id: true,
+        doctor_name: true,
+        date: true,
+        hour: true,
+         status: true,
+      },
+    });
+
+    return NextResponse.json({ appointmentsCompleted, appointmentsPending, appointmentsOngoing, appointmentsConfirm, appointmentsCancel, appointmentsReject }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: error.message || 'Error de servidor' }, { status: 500 });

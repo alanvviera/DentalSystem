@@ -28,7 +28,7 @@ model doctor {
 
 model employee {
   id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_employee String    @unique(map: "id_employee_UNIQUE") @default(uuid())
+  id_employee  String    @unique(map: "id_employee_UNIQUE") @default(uuid())
   id_user_FK   String    @unique(map: "id_user_FK_UNIQUE")
   id_local_FK  String    @unique(map: "id_local_FK_UNIQUE")
   charge       String?   @db.VarChar(45)
@@ -165,7 +165,8 @@ model debt {
   completed    String?    @db.TinyText
   doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "ID_DOCTOR_FK")
   client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "id_CLIENT_FK")
-  payment     payment[]
+  payment      payment[]
+  date         DateTime   @db.Date
 
   @@index([id_doctor_FK], map: "ID_DOCTOR_FK_idx")
   @@index([id_client_FK], map: "id_CLIENT_FK_idx")
@@ -173,7 +174,7 @@ model debt {
 
 model payment {
   id          Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_payment String   @unique(map: "idpayment_UNIQUE") @default(uuid())
+  id_payment  String   @unique(map: "idpayment_UNIQUE") @default(uuid())
   id_debt_fk  String
   amount      Float    @db.Float
   date        DateTime @db.Date

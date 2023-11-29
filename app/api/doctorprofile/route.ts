@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
         select : {
             user_data: true,
             license: true,
-            school: true,
+            school: true,  
         }
     })
 

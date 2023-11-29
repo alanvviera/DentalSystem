@@ -134,6 +134,7 @@ Table debt {
   doctor doctor [not null]
   client user_data [not null]
   payment payment [not null]
+  date DateTime [not null]
 }
 
 Table payment {
