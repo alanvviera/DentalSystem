@@ -1,0 +1,171 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table doctor {
+  id Int [pk, increment]
+  id_doctor String [unique, not null]
+  id_user_FK String [unique, not null]
+  license String
+  specialty String
+  school String
+  appointment appointment [not null]
+  client_doctor client_doctor [not null]
+  debt debt [not null]
+  user_data user_data [not null]
+}
+
+Table employee {
+  id Int [pk, increment]
+  id_employee String [unique, not null]
+  id_user_FK String [unique, not null]
+  id_local_FK String [unique, not null]
+  charge String
+  study_level String
+  document Bytes
+  local local [not null]
+  user_data user_data [not null]
+}
+
+Table inventory {
+  id Int [pk, increment]
+  id_inventory String [unique, not null]
+  id_local_FK String [unique, not null]
+  product_name String [not null]
+  qr Bytes
+  category String [not null]
+  provider String
+  acquisition_date DateTime
+  expiration_date DateTime
+  cost Float [not null]
+  stock_quantity Int
+  minimum_stock Int
+  maximum_stock Int
+  observation String
+  local local [not null]
+}
+
+Table local {
+  id Int [pk, increment]
+  id_local String [unique, not null]
+  name String [not null]
+  address String
+  map String
+  building_number Int
+  phone_number String
+  photos Bytes
+  status String
+  appointment appointment [not null]
+  employee employee
+  inventory inventory
+}
+
+Table user_data {
+  id Int [pk, increment]
+  id_user String [unique, not null]
+  name String [not null]
+  last_name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  curp String [unique]
+  phone_number String
+  home_address String
+  birthday DateTime
+  gender String
+  profile_image String
+  appointment appointment [not null]
+  client client
+  client_doctor client_doctor [not null]
+  debt debt [not null]
+  doctor doctor
+  employee employee
+}
+
+Table appointment {
+  id Int [pk, increment]
+  id_appointment String [unique, not null]
+  id_doctor_FK String [not null]
+  id_user_FK String [not null]
+  id_local_FK String [not null]
+  type String
+  doctor_name String
+  client_name String
+  local_name String
+  date DateTime
+  hour DateTime
+  subject String
+  status String
+  user_data user_data [not null]
+  doctor doctor [not null]
+  local local [not null]
+}
+
+Table client {
+  id Int [pk, increment]
+  id_user_FK String [unique, not null]
+  allergies String
+  emergency_name String
+  emergency_number String
+  health_problems Bytes
+  health_insurance_number String
+  medical_history Bytes
+  radiographs Bytes
+  photo_history Bytes
+  medical_conditions Bytes
+  user_data user_data [not null]
+}
+
+Table client_doctor {
+  id Int [pk, increment]
+  id_client_FK String [not null]
+  id_doctor_FK String [not null]
+  client user_data [not null]
+  doctor doctor [not null]
+}
+
+Table debt {
+  id Int [pk, increment]
+  id_debt String [unique, not null]
+  id_client_FK String [not null]
+  amount_debt Float [not null]
+  id_doctor_FK String [not null]
+  completed String
+  doctor doctor [not null]
+  client user_data [not null]
+  payment payment [not null]
+}
+
+Table payment {
+  id Int [pk, increment]
+  id_payment String [unique, not null]
+  id_debt_fk String [not null]
+  amount Float [not null]
+  date DateTime [not null]
+  debt debt [not null]
+}
+
+Ref: doctor.id_user_FK - user_data.id_user
+
+Ref: employee.id_local_FK - local.id_local
+
+Ref: employee.id_user_FK - user_data.id_user
+
+Ref: inventory.id_local_FK - local.id_local
+
+Ref: appointment.id_user_FK > user_data.id_user
+
+Ref: appointment.id_doctor_FK > doctor.id_doctor [delete: No Action]
+
+Ref: appointment.id_local_FK > local.id_local [delete: No Action]
+
+Ref: client.id_user_FK - user_data.id_user
+
+Ref: client_doctor.id_client_FK > user_data.id_user
+
+Ref: client_doctor.id_doctor_FK > doctor.id_doctor [delete: No Action]
+
+Ref: debt.id_doctor_FK > doctor.id_doctor [delete: No Action]
+
+Ref: debt.id_client_FK > user_data.id_user
+
+Ref: payment.id_debt_fk > debt.id_debt [delete: No Action]

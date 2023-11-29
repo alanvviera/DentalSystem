@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       type: 'credentials',
@@ -57,6 +57,9 @@ const handler = NextAuth({
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+
+const handler = NextAuth(authOptions);
 
 export {handler as GET, handler as POST}
