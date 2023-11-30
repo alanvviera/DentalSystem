@@ -6,6 +6,7 @@ import PendingAppointmentsCard from "../../components/dashboard2/PendingAppointm
 import ProfileBanner from "../../components/dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
+import { useSession } from "next-auth/react";
 
 type Item = {
   position: number;
@@ -33,6 +34,14 @@ const Page = () => {
     debt: 3405,
     date: "2023-02-04",
   };
+
+  const {data: session} = useSession()
+
+  if(session.user.type_user === 'DOCTOR')
+    return <DashboardDoctor/>
+
+  if(session.user.type_user === 'CLIENT')
+    return <DashboardClient/>
 
   return (
     <div>
