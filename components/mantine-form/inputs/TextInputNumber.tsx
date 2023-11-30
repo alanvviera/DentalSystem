@@ -7,6 +7,8 @@ type TextInputNumberProps = {
   valueKey?: string;
   form: any; // Tipo de form puede variar según la implementación real
   extraClassname?: any; // Tipo de extraClassname puede variar
+  allowDecimal?: boolean;
+  maxValue?: number
 }
 
 const TextInputNumber = ({
@@ -14,18 +16,24 @@ const TextInputNumber = ({
   placeHolder = "Age",
   valueKey = "age",
   form,
-  extraClassname = {}
-}:TextInputNumberProps) => (
-    <NumberInput
-      mt="sm"
-      label={label}
-      placeholder={placeHolder}
-      min={0}
-      max={99}
-      {...form.getInputProps(valueKey)}
-      {...extraClassname}
-      className='my-3'
-    />
-  );
+  extraClassname = {},
+  allowDecimal = true,
+  maxValue = 99
+}: TextInputNumberProps) => (
+  <NumberInput
+    allowNegative={false}
+    mt="sm"
+    label={label}
+    placeholder={placeHolder}
+    min={0}
+    max={maxValue}
+    {...form.getInputProps(valueKey)}
+    {...extraClassname}
+    className='my-3'
+    allowDecimal={allowDecimal}
+    {...extraClassname}
+
+  />
+);
 
 export default TextInputNumber;

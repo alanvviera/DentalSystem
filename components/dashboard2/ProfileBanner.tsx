@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
-import { Avatar, Box, ActionIcon, Group, Text } from '@mantine/core';
+import React from 'react';
+import { EditFilled, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Box, ActionIcon, Group, Text, Flex, Divider, Button } from '@mantine/core';
 
 type ProfileBannerProps = {
   children?: React.ReactNode;
@@ -25,29 +25,30 @@ const ProfileBanner = ({
   bg = 'blue.7',
   textColor = 'white',
 }: ProfileBannerProps) => (
-    <Box bg={bg} c={textColor}>
+  <Box bg={bg} c={textColor} px="xl" py="lg" style={{ borderRadius: "8px" }}>
+    <Flex gap={15} direction={{ base: "column", md: "row" }} align="center">
+      {showAvatar && <Avatar src={avatarImageUrl || undefined} size="110px" variant="filled" />}
+      <Box w="100%" ta={{base: "center", md: "left"}}>
+        <Text size="30px" fw={700}>
+          {title}
+        </Text>
+        <Text size="lg" fw={500}>
+          {description}
+        </Text>
+      </Box>
       {showSettingsButton && (
-        <Box ta="right">
-          <ActionIcon variant="transparent" component="a" href={settingsLink} c="white" mr="20px" mt="15px">
-            <SettingOutlined style={{ fontSize: '25px' }} />
+        <>
+          <ActionIcon variant="subtle" component="a" href={settingsLink} c="white" display={{base: "none", md:"block"}}>
+            <EditOutlined style={{ fontSize: '25px' }} />
           </ActionIcon>
-        </Box>
+          <Button variant='subtle' c="white" leftSection={<EditOutlined style={{ fontSize: '25px'}}/>} display={{base: "block", md:"none"}}>Editar</Button>
+        </>
       )}
-      <Group w="100%" px="30px" pt="20px" pb="40px">
-        {showAvatar && <Avatar src={avatarImageUrl || undefined} size="20vh" variant="filled" />}
-        <Box w="80%">
-          <Text size="30px" fw={700} truncate="end">
-            {title}
-          </Text>
-          <Text size="xl" fw={500} truncate="end">
-            {description}
-          </Text>
-        </Box>
-        <Box w="100%" mt={15}>
-          {children}
-        </Box>
-      </Group>
+    </Flex>
+    <Box w="100%">
+      {children}
     </Box>
-  );
+  </Box>
+);
 
 export default ProfileBanner;

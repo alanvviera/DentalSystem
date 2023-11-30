@@ -1,8 +1,8 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/core';
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
+import {LogoutOutlined } from "@ant-design/icons"
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
 
@@ -35,15 +35,16 @@ export const NavMenu = ({
   logoutButton,
   logoutTextColor
 }: NavMenuProps) => {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(true);
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+  const [opened, { toggle }] = useDisclosure();
   let filter: Route[] | undefined;
   let tl: string | undefined;
 
-  function namePath(): React.ReactNode {
-    filter = routes.filter(x => x.url == usePathname())
-    filter.map((t) => {tl = t.title})
-    return <></>
+  function namePath(): string {
+    const path = usePathname();
+    filter = routes.filter(x => path.includes(x.url));
+    filter.map((t) => { tl = t.title });
+    return tl;
   }
 
   return (
@@ -52,20 +53,17 @@ export const NavMenu = ({
       navbar={{
         width: 300,
         breakpoint: 'sm',
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
+        collapsed: { mobile: !opened},
       }}
       padding="md"
     >
-      <AppShell.Header bg={headerBg} c={headerTextColor}>
+      <AppShell.Header bg={headerBg} c={headerTextColor} withBorder={false}>
         <Group h="100%" px="md" gap={'lg'}>
-          <Burger color={burgerColor} opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
-          <Burger color={burgerColor} opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-          <UserOutlined />
-          {
-            namePath()
-          }
+          <Burger color={burgerColor} opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Text fw={500} size="lg">
-            {tl}
+            {
+              namePath()
+            }
           </Text>
         </Group>
       </AppShell.Header>
@@ -81,7 +79,7 @@ export const NavMenu = ({
               href={item.url}
               leftSection={item.icon}
               variant='subtles'
-              onClick={toggleMobile}
+              onClick={toggle}
             />
           ))}
           <Button leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>

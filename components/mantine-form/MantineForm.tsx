@@ -8,9 +8,10 @@ import TextInputPassword from './inputs/TextInputPassword';
 import { typeInputForm } from './customMantineInput';
 import TextDataPicker from './inputs/TextDataPicker';
 import TextTimePicker from './inputs/TextTimePicker';
+import SelectItems from './inputs/SelectItems';
 
 type MantineFormProps = {
-  initialValuesForKeys?: {  };
+  initialValuesForKeys?: {};
   validateForKeys?: {
 
   };
@@ -19,6 +20,7 @@ type MantineFormProps = {
   labelSubmit?: string;
   colorSubmit?: string;
   title?: string;
+  extraClassName?: Object
 }
 
 const MantineForm = ({
@@ -26,11 +28,12 @@ const MantineForm = ({
   validateForKeys = {
 
   },
-  onSubmit = (value:any) => {},
+  onSubmit = (value: any) => { },
   listCustomInputMantine = [],
   labelSubmit,
   colorSubmit = "blue",
-  title
+  title,
+  extraClassName
 }: MantineFormProps) => {
   const form = useForm({
     initialValues: { ...initialValuesForKeys },
@@ -51,6 +54,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -61,6 +65,9 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  allowDecimal={inputMantine.allowDecimal}
+                  maxValue={inputMantine.maxValue}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -71,6 +78,7 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
 
@@ -81,6 +89,8 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
+                  minDate={inputMantine.minDate}
                 />
               );
 
@@ -91,8 +101,23 @@ const MantineForm = ({
                   {...inputMantine}
                   {...inputMantine.extraClassname}
                   form={form}
+                  extraClassname={extraClassName}
                 />
               );
+
+
+            case typeInputForm.SELECTITEMS:
+              return (
+                <SelectItems
+                  key={inputMantine.valueKey}
+                  {...inputMantine}
+                  {...inputMantine.extraClassname}
+                  form={form}
+                  extraClassname={extraClassName}
+                  dataList={inputMantine.listItems}
+                />
+              );
+
 
             default:
               return <p>This typeInputForm doesn't exist: ${inputMantine.typeInputForm}</p>;

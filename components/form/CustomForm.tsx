@@ -3,8 +3,8 @@ import React from 'react'
 
 const CustomForm = ({ onSubmit, title, subTile, textSubmit, textForgetPassword, inputsForm = [], bottomComponent, topComponent }) => {
     return (
-        <section className="flex flex-col justify-center min-h-[100vh] bg-secondary lg:bg-transparent">
-            <article className="relative  w-full lg:max-w-[30vw] lg:min-h-min lg:rounded-2xl overflow-hidden m-auto lg:bg-secondary">
+        <section className="relative z-10 flex flex-col justify-center min-h-[100vh] bg-secondary xl:bg-transparent lg:bg-transparent md:bg-transparent sm:bg-transparent py-10">
+            <article className="w-full xl:max-w-[600px] lg:max-w-[500px] md:max-w-[450px] sm:max-w-[400px] lg:min-h-min xl:rounded-2xl lg:rounded-2xl md:rounded-2xl sm:rounded-2xl overflow-hidden m-auto xl:bg-secondary lg:bg-secondary md:bg-secondary sm:bg-secondary">
                 <form
                     className="flex flex-col items-center justify-center gap-4 text-center pt-8 px-6 pb-6 group"
                     onSubmit={onSubmit}

@@ -16,10 +16,10 @@ const CustomCard = ({
   title,
   children,
   showAddButton,
-  addButtonLink = '#',
+  addButtonLink = '',
   showMoreButton,
   moreButtonPosition = 'bottom',
-  moreButtonLink = '#',
+  moreButtonLink = '',
 }: CustomCardProps) => (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Flex align="center" justify="space-between">

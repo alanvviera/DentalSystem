@@ -22,6 +22,8 @@ const TextInputPassword = ({
       {...form.getInputProps(valueKey)}
       {...extraClassname}
       className='my-3'
+      {...extraClassname}
+
     />
   );
 export default TextInputPassword;

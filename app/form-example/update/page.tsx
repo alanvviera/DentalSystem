@@ -32,7 +32,7 @@ const FormExampleUpdate = () => (
           new CustomInputMantine("Tipo de la cita", "Tipo de la cita", "appointmentType", typeInputForm.TEXT),
           new CustomInputMantine("Nombre del dentista", "El nombre del dentista", "nameDentist", typeInputForm.TEXT),
           new CustomInputMantine("Fecha", "Fecha", "date", typeInputForm.DATEPICKER, new Date(1701388800000)),
-          new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME, 14640000),
+          new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME, new Date(14640000)),
           new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
         ]}
         onSubmit={(form: any) => {
