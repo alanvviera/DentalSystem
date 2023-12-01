@@ -11,7 +11,7 @@ const EmployeeAppointmentCreate = ({clinicList, typeList}) => (
     <Button
       px={0}
       component="a"
-      href="/employee-menu/appointments"
+      href="/menu/appointments"
       leftSection={<ArrowLeftOutlined />}
       variant="subtle"
     >
@@ -124,7 +124,7 @@ const EmployeeAppointmentCreate = ({clinicList, typeList}) => (
     <Button
       variant="default"
       component="a"
-      href="/employee-menu/appointments"
+      href="/menu/appointments"
       fullWidth
       mt={10}
     >

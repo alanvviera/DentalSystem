@@ -7,7 +7,7 @@ const EmployeeAppointmentDelete = ({ appointmentId }) => {
   const router = useRouter();
   const deleteAppointment = async (id: string) => {
     //const delete = await fetch(`${route}/${id}`)
-    router.push("/employee-menu/appointments");
+    router.push("/menu/appointments");
   };
   return (
     <Container ta="center">
