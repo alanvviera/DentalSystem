@@ -3,9 +3,22 @@ import React from 'react';
 import MantineForm from '../../../../components/mantine-form/MantineForm';
 import CustomInputMantine, { typeInputForm } from '../../../../components/mantine-form/customMantineInput';
 import { allValuesAvailable, validateDate, validateName, validateNumber } from '../../../../components/mantine-form/valuesValidate';
+import { Button, Title } from '@mantine/core';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const Page = () => (
     <div className='m-5'>
+    <>
+    <Button
+      px={0}
+      component="a"
+      href="/client-menu/appointments"
+      leftSection={<ArrowLeftOutlined />}
+      variant="subtle"
+    >
+      Volver a Citas
+    </Button>
+    <Title>Programar cita</Title>
         <MantineForm
             initialValuesForKeys={{
                 client: "",
@@ -41,6 +54,7 @@ const Page = () => (
             }}
             labelSubmit='Crear'
         />
+        </>
     </div>
 );
 

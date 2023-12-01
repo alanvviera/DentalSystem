@@ -1,4 +1,4 @@
-'use client';
+
 import React from "react";
 import "@mantine/core/styles.css";
 import { Grid, GridCol, Text } from "@mantine/core";

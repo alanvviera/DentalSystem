@@ -3,9 +3,9 @@ import { Modal, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 type VisualizeDataButtonProps = {
-  showComponent: React.ReactNode;
+  showComponent?: React.ReactNode;
   title: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   titleModal?: string;
   classNameButton?: Object | undefined;
 }
