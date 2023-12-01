@@ -13,7 +13,7 @@ const page = ({ params }) => {
         return <ClientId clinicId={clinicId} />
     }
     else {
-        return <p>No tiene acceso a esta pagina</p>
+        return <p>No tiene acceso a esta página.</p>
     }
 
 }

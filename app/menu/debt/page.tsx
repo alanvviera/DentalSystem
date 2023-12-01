@@ -11,7 +11,7 @@ const page = () => {
         return <ClientDebt />
     }
     else {
-        return <p>No tiene acceso a esta pagina</p>
+        return <p>No tiene acceso a esta página.</p>
     }
 
 }
