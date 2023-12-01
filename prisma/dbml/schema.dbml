@@ -2,179 +2,233 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table doctor {
+Table User {
   id Int [pk, increment]
-  id_doctor String [unique, not null]
-  id_user_FK String [unique, not null]
-  license String
-  specialty String
-  school String
-  appointment appointment [not null]
-  client_doctor client_doctor [not null]
-  debt debt [not null]
-  user_data user_data [not null]
-}
-
-Table employee {
-  id Int [pk, increment]
-  id_employee String [unique, not null]
-  id_user_FK String [unique, not null]
-  id_local_FK String [unique, not null]
-  charge String
-  study_level String
-  document Bytes
-  local local [not null]
-  user_data user_data [not null]
-}
-
-Table inventory {
-  id Int [pk, increment]
-  id_inventory String [unique, not null]
-  id_local_FK String [unique, not null]
-  product_name String [not null]
-  qr Bytes
-  category String [not null]
-  provider String
-  acquisition_date DateTime
-  expiration_date DateTime
-  cost Float [not null]
-  stock_quantity Int
-  minimum_stock Int
-  maximum_stock Int
-  observation String
-  local local [not null]
-}
-
-Table local {
-  id Int [pk, increment]
-  id_local String [unique, not null]
-  name String [not null]
-  address String
-  map String
-  building_number Int
-  phone_number String
-  photos Bytes
-  status String
-  appointment appointment [not null]
-  employee employee
-  inventory inventory
-}
-
-Table user_data {
-  id Int [pk, increment]
-  id_user String [unique, not null]
+  type String [not null]
   name String [not null]
   last_name String [not null]
+  phone String
+  birthday DateTime
   email String [unique, not null]
   password String [not null]
+  sex String [not null]
+  address String
   curp String [unique]
-  phone_number String
-  home_address String
-  birthday DateTime
-  gender String
-  profile_image String
-  type_user user_type [not null]
-  appointment appointment [not null]
-  client client
-  client_doctor client_doctor [not null]
-  debt debt [not null]
-  doctor doctor
-  employee employee
+  doctors Doctor [not null]
+  employees Employee [not null]
+  clients Client [not null]
+  appointments Appointment [not null]
+  administrators Administrator [not null]
+  documents Document [not null]
+  photos Photo [not null]
 }
 
-Table appointment {
+Table Doctor {
   id Int [pk, increment]
-  id_appointment String [unique, not null]
-  id_doctor_FK String [not null]
-  id_user_FK String [not null]
-  id_local_FK String [not null]
-  type String
-  doctor_name String
-  client_name String
-  local_name String
-  date DateTime
-  hour DateTime
-  subject String
-  status String
-  user_data user_data [not null]
-  doctor doctor
-  local local
+  study_degree String [not null]
+  license String [not null]
+  schedule_start DateTime
+  schedule_end DateTime
+  user_fk Int [unique, not null]
+  user User [not null]
+  clinics DoctorClinic [not null]
+  services DoctorService [not null]
 }
 
-Table client {
+Table Employee {
   id Int [pk, increment]
-  id_user_FK String [unique, not null]
+  study_degree String [not null]
+  schedule_start DateTime
+  schedule_end DateTime
+  role String [not null]
+  user_fk Int [unique, not null]
+  user User [not null]
+  clinics EmployeeClinic [not null]
+  services EmployeeService [not null]
+}
+
+Table EmployeeService {
+  employee_fk Int [not null]
+  service_fk Int [not null]
+  employee Employee [not null]
+  service Service [not null]
+
+  indexes {
+    (employee_fk, service_fk) [pk]
+  }
+}
+
+Table DoctorService {
+  doctor_fk Int [not null]
+  service_fk Int [not null]
+  doctor Doctor [not null]
+  service Service [not null]
+
+  indexes {
+    (doctor_fk, service_fk) [pk]
+  }
+}
+
+Table Service {
+  id Int [pk, increment]
+  name String [unique, not null]
+  doctors DoctorService [not null]
+  employees EmployeeService [not null]
+}
+
+Table Client {
+  id Int [pk, increment]
   allergies String
-  emergency_name String
   emergency_number String
-  health_problems Bytes
-  health_insurance_number String
-  medical_history Bytes
-  radiographs Bytes
-  photo_history Bytes
-  medical_conditions Bytes
-  user_data user_data [not null]
+  health_problems String
+  user_fk Int [unique, not null]
+  user User [not null]
+  payments Payment [not null]
+  debts Debt [not null]
+  appointments Appointment [not null]
 }
 
-Table client_doctor {
+Table Payment {
   id Int [pk, increment]
-  id_client_FK String [not null]
-  id_doctor_FK String [not null]
-  client user_data [not null]
-  doctor doctor [not null]
-}
-
-Table debt {
-  id Int [pk, increment]
-  id_debt String [unique, not null]
-  id_client_FK String [not null]
-  amount_debt Float [not null]
-  id_doctor_FK String [not null]
-  completed String
-  doctor doctor [not null]
-  client user_data [not null]
-  payment payment [not null]
   date DateTime [not null]
+  ammount Float [not null]
+  description String [not null]
+  client_fk Int [not null]
+  client Client [not null]
 }
 
-Table payment {
+Table Document {
   id Int [pk, increment]
-  id_payment String [unique, not null]
-  id_debt_fk String [not null]
-  amount Float [not null]
+  type String [not null]
+  file String [not null]
+  user_fk Int [not null]
+  user User [not null]
+}
+
+Table Photo {
+  id Int [pk, increment]
+  type String [not null]
+  image String [not null]
+  user_fk Int [not null]
+  user User [not null]
+}
+
+Table Debt {
+  id Int [pk, increment]
   date DateTime [not null]
-  debt debt [not null]
+  ammount Float [not null]
+  paid Boolean [not null]
+  description String [not null]
+  client_fk Int [not null]
+  client Client [not null]
 }
 
-Enum user_type {
-  CLIENT
-  EMPLOYEE
-  DOCTOR
-  ADMIN
+Table Clinic {
+  id Int [pk, increment]
+  name String [not null]
+  phone String [not null]
+  opening_times String [not null]
+  address String [not null]
+  building_number Int [not null]
+  doctors DoctorClinic [not null]
+  employees EmployeeClinic [not null]
+  administrators Administrator [not null]
+  notifications Notification [not null]
 }
 
-Ref: doctor.id_user_FK - user_data.id_user
+Table DoctorClinic {
+  doctor_fk Int [not null]
+  clinic_fk Int [not null]
+  doctor Doctor [not null]
+  clinic Clinic [not null]
 
-Ref: employee.id_local_FK - local.id_local
+  indexes {
+    (doctor_fk, clinic_fk) [pk]
+  }
+}
 
-Ref: employee.id_user_FK - user_data.id_user
+Table EmployeeClinic {
+  employee_fk Int [not null]
+  clinic_fk Int [not null]
+  employee Employee [not null]
+  clinic Clinic [not null]
 
-Ref: inventory.id_local_FK - local.id_local
+  indexes {
+    (employee_fk, clinic_fk) [pk]
+  }
+}
 
-Ref: appointment.id_user_FK > user_data.id_user
+Table Administrator {
+  user_fk Int [not null]
+  clinic_fk Int [not null]
+  user User [not null]
+  clinic Clinic [not null]
 
-Ref: appointment.id_doctor_FK > doctor.id_doctor [delete: No Action]
+  indexes {
+    (user_fk, clinic_fk) [pk]
+  }
+}
 
-Ref: appointment.id_local_FK > local.id_local [delete: No Action]
+Table Appointment {
+  id Int [pk, increment]
+  client_fk Int [not null]
+  in_charge_fk Int [not null]
+  type String [not null]
+  date DateTime [not null]
+  hour DateTime [not null]
+  subject String [not null]
+  status String [not null, default: 'CONFIRMATION PENDING']
+  client Client [not null]
+  in_charge User [not null]
+  notification Notification [not null]
+}
 
-Ref: client.id_user_FK - user_data.id_user
+Table Notification {
+  id Int [pk, increment]
+  clinic_fk Int [not null]
+  appointment_fk Int [not null]
+  clinic Clinic [not null]
+  cita Appointment [not null]
+}
 
-Ref: client_doctor.id_client_FK > user_data.id_user
+Ref: Doctor.user_fk > User.id
 
-Ref: client_doctor.id_doctor_FK > doctor.id_doctor [delete: No Action]
+Ref: Employee.user_fk > User.id
 
-Ref: debt.id_doctor_FK > doctor.id_doctor [delete: No Action]
+Ref: EmployeeService.employee_fk > Employee.id
 
-Ref: debt.id_client_FK > user_data.id_user
+Ref: EmployeeService.service_fk > Service.id
 
-Ref: payment.id_debt_fk > debt.id_debt [delete: No Action]
+Ref: DoctorService.doctor_fk > Doctor.id
+
+Ref: DoctorService.service_fk > Service.id
+
+Ref: Client.user_fk > User.id
+
+Ref: Payment.client_fk > Client.id
+
+Ref: Document.user_fk > User.id
+
+Ref: Photo.user_fk > User.id
+
+Ref: Debt.client_fk > Client.id
+
+Ref: DoctorClinic.doctor_fk > Doctor.id
+
+Ref: DoctorClinic.clinic_fk > Clinic.id
+
+Ref: EmployeeClinic.employee_fk > Employee.id
+
+Ref: EmployeeClinic.clinic_fk > Clinic.id
+
+Ref: Administrator.user_fk > User.id
+
+Ref: Administrator.clinic_fk > Clinic.id
+
+Ref: Appointment.client_fk > Client.id
+
+Ref: Appointment.in_charge_fk > User.id
+
+Ref: Notification.clinic_fk > Clinic.id
+
+Ref: Notification.appointment_fk > Appointment.id

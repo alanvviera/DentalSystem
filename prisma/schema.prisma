@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,174 +14,176 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model doctor {
-  id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_doctor     String          @unique(map: "id_doctor_UNIQUE") @default(uuid())
-  id_user_FK    String          @unique(map: "id_user_FK_UNIQUE")
-  license       String?         @db.VarChar(75)
-  specialty     String?         @db.VarChar(75)
-  school        String?         @db.VarChar(50)
-  appointment  appointment[]
-  client_doctor client_doctor[]
-  debt          debt[]
-  user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user")
-
-  @@index([id_user_FK], map: "user_data_fk_idx")
+model User {
+  id                Int       @id @default(autoincrement())
+  type              String
+  name              String
+  last_name         String
+  phone             String?
+  birthday          DateTime?
+  email             String    @unique
+  password          String
+  sex               String
+  address           String?
+  curp              String?    @unique
+  doctors           Doctor[]
+  employees         Employee[]
+  clients           Client[]
+  appointments      Appointment[]
+  administrators    Administrator[]
+  documents        Document[]
+  photos             Photo[]
 }
 
-model employee {
-  id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_employee  String    @unique(map: "id_employee_UNIQUE") @default(uuid())
-  id_user_FK   String    @unique(map: "id_user_FK_UNIQUE")
-  id_local_FK  String    @unique(map: "id_local_FK_UNIQUE")
-  charge       String?   @db.VarChar(45)
-  study_level  String?   @db.MediumText
-  document     Bytes?    @db.MediumBlob
-  local        local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_employee_FK")
-  user_data    user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "id_user_FK")
-
-  @@index([id_user_FK], map: "id_user_FK_idx")
+model Doctor {
+  id                     Int         @id @default(autoincrement())
+  study_degree           String
+  license                String
+  schedule_start         DateTime?
+  schedule_end           DateTime?
+  user_fk                Int         @unique
+  user                   User    @relation(fields: [user_fk], references: [id])
+  clinics                DoctorClinic[]
+  services               DoctorService[]
 }
 
-model inventory {
-  id               Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_inventory     String    @unique(map: "id_inventory_UNIQUE") @default(uuid())
-  id_local_FK      String    @unique(map: "id_local_FK_UNIQUE")
-  product_name     String    @db.VarChar(45)
-  qr               Bytes?    @db.MediumBlob
-  category         String    @db.MediumText
-  provider         String?   @db.MediumText
-  acquisition_date DateTime? @db.DateTime(0)
-  expiration_date  DateTime? @db.DateTime(0)
-  cost             Float     @db.Float
-  stock_quantity   Int?
-  minimum_stock    Int?
-  maximum_stock    Int?
-  observation      String?   @db.LongText
-  local            local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_inventory_FK")
-
-  @@index([id_local_FK], map: "id_inventory_FK_idx")
+model Employee {
+  id                  Int          @id @default(autoincrement())
+  study_degree        String
+  schedule_start      DateTime?
+  schedule_end        DateTime?
+  role                String
+  user_fk             Int          @unique
+  user                User     @relation(fields: [user_fk], references: [id])
+  clinics             EmployeeClinic[]
+  services            EmployeeService[]
 }
 
-model local {
-  id              Int            @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_local        String         @unique(map: "id_local_UNIQUE") @default(uuid())
-  name            String         @db.VarChar(75)
-  address         String?        @db.LongText
-  map             String?        @db.MediumText
-  building_number Int?
-  phone_number    String?        @db.VarChar(20)
-  photos          Bytes?         @db.MediumBlob
-  status          String?        @db.VarChar(45)
-  appointment    appointment[]
-  employee       employee?
-  inventory       inventory?
+model EmployeeService {
+  employee_fk Int      @map("employee_fk")
+  service_fk Int      @map("service_fk")
+  employee    Employee @relation(fields: [employee_fk], references: [id])
+  service     Service @relation(fields: [service_fk], references: [id])
+  @@id([employee_fk, service_fk], name: "EmployeeServiceId")
 }
 
-model user_data {
-  id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_user       String          @unique(map: "id_user_UNIQUE") @default(uuid())
-  name          String          @db.VarChar(45)
-  last_name     String          @db.VarChar(45)
-  email         String          @unique(map: "email_UNIQUE") @db.VarChar(60)
-  password      String          @db.MediumText
-  curp          String?         @unique(map: "curp_UNIQUE") @db.VarChar(19)
-  phone_number  String?         @db.VarChar(20)
-  home_address  String?         @db.MediumText
-  birthday      DateTime?       @db.Date
-  gender        String?         @db.VarChar(45)
-  profile_image String?         @db.TinyText
-  type_user     user_type
-  appointment  appointment[]
-  client        client?
-  client_doctor client_doctor[]
-  debt          debt[]
-  doctor        doctor?
-  employee     employee?
+model DoctorService {
+  doctor_fk   Int      @map("doctor_fk")
+  service_fk Int      @map("service_fk")
+  doctor      Doctor @relation(fields: [doctor_fk], references: [id])
+  service     Service @relation(fields: [service_fk], references: [id])
+  @@id([doctor_fk, service_fk], name: "DoctorServiceId")
 }
 
-enum user_type {
-  CLIENT
-  EMPLOYEE
-  DOCTOR
-  ADMIN
+model Service {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique
+  doctors DoctorService[]
+  employees EmployeeService[]
 }
 
-model appointment {
-  id                    Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_appointment        String     @unique(map: "id_appointment_UNIQUE") @default(uuid())
-  id_doctor_FK          String
-  id_user_FK            String
-  id_local_FK           String
-  type                  String?    @db.VarChar(45)
-  doctor_name           String?    @db.VarChar(45)
-  client_name           String?    @db.VarChar(45)
-  local_name            String?    @db.VarChar(45)
-  date                  DateTime?  @db.Date
-  hour                  DateTime?  @db.Time(0)
-  subject               String?    @db.MediumText
-  status                String?    @db.VarChar(45)
-  user_data             user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
-  doctor                doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
-  local                 local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
-
-  @@index([id_doctor_FK], map: "doctor_idx")
-  @@index([id_local_FK], map: "local_idx")
-  @@index([id_user_FK], map: "client_idx")
+model Client {
+  id               Int      @id @default(autoincrement())
+  allergies         String?
+  emergency_number String?
+  health_problems  String?
+  user_fk          Int      @unique
+  user            User @relation(fields: [user_fk], references: [id])
+  payments        Payment[]
+  debts           Debt[]
+  appointments    Appointment[]
 }
 
-model client {
-  id                      Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_user_FK              String    @unique(map: "id_user_FK_UNIQUE")
-  allergies               String?   @db.VarChar(45)
-  emergency_name          String?   @db.MediumText
-  emergency_number        String?   @db.VarChar(45)
-  health_problems         Bytes?    @db.MediumBlob
-  health_insurance_number String?   @db.VarChar(50)
-  medical_history         Bytes?
-  radiographs             Bytes?    @db.MediumBlob
-  photo_history           Bytes?    @db.MediumBlob
-  medical_conditions      Bytes?
-  user_data               user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_id_user")
-
-  @@index([id_user_FK], map: "fk_id_user_idx")
+model Payment {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  ammount     Float
+  description String
+  client_fk   Int
+  client      Client @relation(fields: [client_fk], references: [id])
 }
 
-model client_doctor {
-  id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_client_FK String
-  id_doctor_FK String
-  client       user_data @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "idclient")
-  doctor       doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "iddoctor")
-
-  @@index([id_doctor_FK], map: "id_doctor_FK_idx")
-  @@index([id_client_FK], map: "idclient_idx")
-  @@map("client_doctor")
+model Document {
+  id          Int      @id @default(autoincrement())
+  type        String
+  file        String
+  user_fk     Int
+  user        User @relation(fields: [user_fk], references: [id])
 }
 
-model debt {
-  id           Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_debt      String     @unique(map: "id_patient_payments_UNIQUE") @default(uuid())
-  id_client_FK String
-  amount_debt  Float      @db.Float
-  id_doctor_FK String
-  completed    String?    @db.TinyText
-  doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "ID_DOCTOR_FK")
-  client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "id_CLIENT_FK")
-  payment      payment[]
-  date         DateTime   @db.Date
-
-  @@index([id_doctor_FK], map: "ID_DOCTOR_FK_idx")
-  @@index([id_client_FK], map: "id_CLIENT_FK_idx")
+model Photo {
+  id         Int      @id @default(autoincrement())
+  type      String
+  image     String
+  user_fk   Int
+  user      User @relation(fields: [user_fk], references: [id])
 }
 
-model payment {
-  id          Int      @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_payment  String   @unique(map: "idpayment_UNIQUE") @default(uuid())
-  id_debt_fk  String
-  amount      Float    @db.Float
-  date        DateTime @db.Date
-  debt        debt     @relation(fields: [id_debt_fk], references: [id_debt], onDelete: NoAction, onUpdate: NoAction, map: "id_payment")
+model Debt {
+  id             Int      @id @default(autoincrement())
+  date           DateTime
+  ammount        Float
+  paid           Boolean
+  description    String
+  client_fk      Int
+  client         Client @relation(fields: [client_fk], references: [id])
+}
 
-  @@index([id_debt_fk], map: "id_payment_idx")
+model Clinic {
+  id              Int               @id @default(autoincrement())
+  name            String
+  phone           String
+  opening_times   String
+  address         String
+  building_number Int
+  doctors         DoctorClinic[]
+  employees       EmployeeClinic[]
+  administrators  Administrator[]
+  notifications   Notification[]
+}
+
+model DoctorClinic {
+  doctor_fk  Int       @map("doctor_fk")
+  clinic_fk  Int       @map("clinic_fk")
+  doctor     Doctor  @relation(fields: [doctor_fk], references: [id])
+  clinic     Clinic  @relation(fields: [clinic_fk], references: [id])
+  @@id([doctor_fk, clinic_fk], name: "DoctorClinicId")
+}
+
+model EmployeeClinic {
+  employee_fk Int      @map("employee_fk")
+  clinic_fk   Int      @map("clinic_fk")
+  employee    Employee @relation(fields: [employee_fk], references: [id])
+  clinic     Clinic  @relation(fields: [clinic_fk], references: [id])
+  @@id([employee_fk, clinic_fk], name: "EmployeeClinicId")
+}
+
+model Administrator {
+  user_fk    Int      @map("user_fk")
+  clinic_fk  Int      @map("clinic_fk")
+  user       User   @relation(fields: [user_fk], references: [id])
+  clinic     Clinic @relation(fields: [clinic_fk], references: [id])
+  @@id([user_fk, clinic_fk], name: "AdministratorClinicId")
+}
+
+model Appointment {
+  id                  Int       @id @default(autoincrement())
+  client_fk           Int
+  in_charge_fk        Int
+  type                String
+  date                DateTime
+  hour                DateTime
+  subject             String
+  status              String   @default("CONFIRMATION PENDING")
+  client              Client @relation(fields: [client_fk], references: [id])
+  in_charge           User   @relation(fields: [in_charge_fk], references: [id])
+  notification        Notification[]
+}
+
+model Notification {
+  id               Int            @id @default(autoincrement())
+  clinic_fk        Int            @map("clinic_fk")
+  appointment_fk   Int            @map("appointment_fk")
+  clinic           Clinic         @relation(fields: [clinic_fk], references: [id])
+  cita             Appointment    @relation(fields: [appointment_fk], references: [id])
 }
