@@ -243,7 +243,7 @@ function SignUpDoctor() {
 
                 bottomComponent={<div>
                     <LoginAccount extraClass="pt-3 pb-3" />
-                    <LoginAccount title="Registrate como paciente " subtile="Registrate" href="/signup" />
+                    <LoginAccount title="Registrate como empleado " subtile="Registrate" href="/signup" />
                 </div>}
                 topComponent={<CustomAlert
                     showAlert={showPasswordNotMatch}
