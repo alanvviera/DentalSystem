@@ -7,8 +7,6 @@ import { CustomInputPassword } from "../../components/form/CustomInputPassword";
 import { patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
-import { Space } from "@mantine/core";
-
 
 function SignUp() {
   const {
@@ -16,6 +14,7 @@ function SignUp() {
     password,
     confirmPassword,
     user,
+    lastName,
     showPassword,
     showConfirmPassword,
     showPasswordNotMatch,
@@ -27,6 +26,7 @@ function SignUp() {
     password: "",
     confirmPassword: "",
     user: "",
+    lastName: "",
     showPassword: false,
     showConfirmPassword: false,
     showPasswordNotMatch: false,
@@ -108,13 +108,22 @@ function SignUp() {
         inputsForm={[
           <CustomInput
             type={"text"}
-            placeholder={"Nombre completo"}
+            placeholder={"Nombre"}
             name={"user"}
             formTextError={"El nombre debe de contener mínimo 4 caracteres."}
             onChange={onChange}
             value={user}
             pattern={patternUser}
           />,
+          <CustomInput
+          type={"text"}
+          placeholder={"Apellidos"}
+          name={"lastName"}
+          formTextError={"El apellido debe de contener mínimo 4 caracteres."}
+          onChange={onChange}
+          value={lastName}
+          pattern={patternUser}
+        />,
           <CustomInput
             type={"email"}
             placeholder={"Correo electrónico"}
