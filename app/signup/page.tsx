@@ -4,7 +4,7 @@ import Background from "../../components/Background";
 import CustomForm from "../../components/form/CustomForm";
 import { CustomInput } from "../../components/form/CustomInput";
 import { CustomInputPassword } from "../../components/form/CustomInputPassword";
-import { patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
+import { patternDate, patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
 
@@ -20,7 +20,10 @@ function SignUp() {
     showPasswordNotMatch,
     onChange,
     cleanFields,
+    address,
+    dateBirthday,
     numTel,
+    sex,
   } = useForm({
     email: "",
     password: "",
@@ -30,7 +33,10 @@ function SignUp() {
     showPassword: false,
     showConfirmPassword: false,
     showPasswordNotMatch: false,
-    numTel: ""
+    dateBirthday: "",
+    address: "",
+    numTel: "",
+    sex: ""
   });
 
   const toggleShowPassword = (name, value) => {
@@ -53,6 +59,17 @@ function SignUp() {
 
   async function onSubmit(e) {
     e.preventDefault();
+
+    console.log({
+      email,
+      password,
+      user,
+      lastName,
+      address,
+      dateBirthday,
+      numTel,
+      sex,
+    });
 
     if (password !== confirmPassword) {
       showMessageOfError(true);
@@ -116,14 +133,14 @@ function SignUp() {
             pattern={patternUser}
           />,
           <CustomInput
-          type={"text"}
-          placeholder={"Apellidos"}
-          name={"lastName"}
-          formTextError={"El apellido debe de contener mínimo 4 caracteres."}
-          onChange={onChange}
-          value={lastName}
-          pattern={patternUser}
-        />,
+            type={"text"}
+            placeholder={"Apellidos"}
+            name={"lastName"}
+            formTextError={"El apellido debe de contener mínimo 4 caracteres."}
+            onChange={onChange}
+            value={lastName}
+            pattern={patternUser}
+          />,
           <CustomInput
             type={"email"}
             placeholder={"Correo electrónico"}
@@ -142,6 +159,32 @@ function SignUp() {
             value={numTel}
             pattern={patternNumberTel}
           />,
+          <CustomInput
+            type={"text"}
+            placeholder={"Fecha de nacimiento; DD/MM/YYYY"}
+            name={"dateBirthday"}
+            formTextError={"Ingrese una fecha valida por favor"}
+            onChange={onChange}
+            value={dateBirthday}
+            pattern={patternDate}
+          />,
+          <CustomInput
+            type={"text"}
+            placeholder={"Dirección"}
+            name={"address"}
+            formTextError={"Este campo no puede estar vació"}
+            onChange={onChange}
+            value={address}
+            pattern={patternUser}
+          />,
+          <CustomInput
+            type={"text"}
+            placeholder={"Sexo"}
+            name={"sex"}
+            formTextError={"Este campo no puede estar vació"}
+            onChange={onChange}
+            value={sex}
+            pattern={patternUser} />,
           <CustomInputPassword
             showPassword={showPassword}
             name={"password"}
@@ -174,7 +217,7 @@ function SignUp() {
 
         bottomComponent={<div>
           <LoginAccount extraClass="pt-3 pb-3" />
-          <LoginAccount title="Registrate como doctor " subtile="Registrate" href="/signup-doctor"/>
+          <LoginAccount title="Registrate como doctor " subtile="Registrate" href="/signup-doctor" />
         </div>}
         topComponent={<CustomAlert
           showAlert={showPasswordNotMatch}

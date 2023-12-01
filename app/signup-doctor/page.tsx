@@ -24,8 +24,8 @@ function SignUpDoctor() {
         medicalLicense,
         address,
         dateBirthday,
-        gender,
-        state,
+        sex,
+        placeOfStudy,
         specialty
     } = useForm({
         email: "",
@@ -40,8 +40,8 @@ function SignUpDoctor() {
         medicalLicense: "",
         address: "",
         dateBirthday: "",
-        gender: "",
-        state: "",
+        sex: "",
+        placeOfStudy: "",
         specialty: ""
     });
 
@@ -81,8 +81,8 @@ function SignUpDoctor() {
             medicalLicense,
             address,
             dateBirthday,
-            gender,
-            state,
+            sex,
+            placeOfStudy,
             specialty
         });
 
@@ -198,19 +198,19 @@ function SignUpDoctor() {
                     />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Genero"}
-                        name={"gender"}
+                        placeholder={"Sexo"}
+                        name={"sex"}
                         formTextError={"Este campo no puede estar vació"}
                         onChange={onChange}
-                        value={gender}
+                        value={sex}
                         pattern={patternUser} />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Lugar de estado"}
-                        name={"state"}
+                        placeholder={"Lugar de estudio"}
+                        name={"placeOfStudy"}
                         formTextError={"Este campo no puede estar vació"}
                         onChange={onChange}
-                        value={state}
+                        value={placeOfStudy}
                         pattern={patternUser}
                     />,
                     <CustomInput
