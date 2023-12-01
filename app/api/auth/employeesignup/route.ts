@@ -1,4 +1,3 @@
-// pages/api/auth/signup.js
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
@@ -44,7 +43,7 @@ export async function POST (req: NextRequest){
                 home_address,
                 birthday,
                 gender,
-                type_user: 'DOCTOR'
+                type_user: 'EMPLOYEE'
             },
         });
         

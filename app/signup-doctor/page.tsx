@@ -14,6 +14,7 @@ function SignUpDoctor() {
         password,
         confirmPassword,
         user,
+        lastName,
         showPassword,
         showConfirmPassword,
         showPasswordNotMatch,
@@ -23,14 +24,15 @@ function SignUpDoctor() {
         medicalLicense,
         address,
         dateBirthday,
-        gender,
-        state,
+        sex,
+        placeOfStudy,
         specialty
     } = useForm({
         email: "",
         password: "",
         confirmPassword: "",
         user: "",
+        lastName: "",
         showPassword: false,
         showConfirmPassword: false,
         showPasswordNotMatch: false,
@@ -38,8 +40,8 @@ function SignUpDoctor() {
         medicalLicense: "",
         address: "",
         dateBirthday: "",
-        gender: "",
-        state: "",
+        sex: "",
+        placeOfStudy: "",
         specialty: ""
     });
 
@@ -74,13 +76,13 @@ function SignUpDoctor() {
             email,
             password,
             user,
-            cleanFields,
+            lastName,
             numTel,
             medicalLicense,
             address,
             dateBirthday,
-            gender,
-            state,
+            sex,
+            placeOfStudy,
             specialty
         });
 
@@ -133,11 +135,20 @@ function SignUpDoctor() {
                 inputsForm={[
                     <CustomInput
                         type={"text"}
-                        placeholder={"Nombre completo"}
+                        placeholder={"Nombre"}
                         name={"user"}
                         formTextError={"El nombre debe de contener mínimo 4 caracteres."}
                         onChange={onChange}
                         value={user}
+                        pattern={patternUser}
+                    />,
+                    <CustomInput
+                        type={"text"}
+                        placeholder={"Apellidos"}
+                        name={"lastName"}
+                        formTextError={"El apellido debe de contener mínimo 4 caracteres."}
+                        onChange={onChange}
+                        value={lastName}
                         pattern={patternUser}
                     />,
                     <CustomInput
@@ -187,19 +198,19 @@ function SignUpDoctor() {
                     />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Genero"}
-                        name={"gender"}
+                        placeholder={"Sexo"}
+                        name={"sex"}
                         formTextError={"Este campo no puede estar vació"}
                         onChange={onChange}
-                        value={gender}
+                        value={sex}
                         pattern={patternUser} />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Lugar de estado"}
-                        name={"state"}
+                        placeholder={"Lugar de estudio"}
+                        name={"placeOfStudy"}
                         formTextError={"Este campo no puede estar vació"}
                         onChange={onChange}
-                        value={state}
+                        value={placeOfStudy}
                         pattern={patternUser}
                     />,
                     <CustomInput
@@ -243,7 +254,7 @@ function SignUpDoctor() {
 
                 bottomComponent={<div>
                     <LoginAccount extraClass="pt-3 pb-3" />
-                    <LoginAccount title="Registrate como paciente " subtile="Registrate" href="/signup" />
+                    <LoginAccount title="Registrate como empleado " subtile="Registrate" href="/signup" />
                 </div>}
                 topComponent={<CustomAlert
                     showAlert={showPasswordNotMatch}
