@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 
 interface TableClinicClientsProps {
     headers: string[];
-    elements: Element[]
+    elements: Element[];
+    clinicId: string;
 }
 
 interface Element {
@@ -17,7 +18,7 @@ interface Element {
 
 }
 
-const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elements }) => {
+const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elements,clinicId }) => {
     const [filteredData, setFilteredData] = useState<Element[]>(elements);
     const router = useRouter();
 
@@ -30,7 +31,7 @@ const TableClinicClients: React.FC<TableClinicClientsProps> = ({ headers, elemen
 
     const rows = filteredData.map((element) => (
         <Table.Tr style={{ cursor: 'pointer' }} key={element.id.toString()} onClick={(data) => {
-            router.push(`clients/${element.id.toString()}`)
+            router.push(`/menu/clinics/${clinicId}/clients/${element.id.toString()}`)
         }} >
             {columns.map((column, index) => (
                 <Table.Td key={column.toString()}>{element[column]}</Table.Td>

@@ -27,7 +27,7 @@ const EmployeeAppointmentView = ({ appointment, clinicList, typeList }) => {
           <>
             <Button
               component="a"
-              href="/employee-menu/appointments"
+              href="/menu/appointments"
               leftSection={<ArrowLeftOutlined />}
               variant="subtle"
             >
