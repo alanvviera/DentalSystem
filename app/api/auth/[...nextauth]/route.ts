@@ -12,14 +12,13 @@ export const authOptions = {
     CredentialsProvider({
       type: 'credentials',
       credentials: {
-        username: { label: "Username", type: "text" },
+        email: { label: "Username", type: "text" },
         password: {  label: "Password", type: "password" }
       },
       authorize: async (credentials) => {
-        const { username, password } = credentials;
-        
-        const user = await prisma.user_data.findUnique({ where: { email: username } });
-        
+        const { email, password } = credentials;
+
+        const user = await prisma.user_data.findUnique({ where: { email: email } });
         if (user && (await bcrypt.compare(password, user.password))) {
           return { 
             id: user.id_user, 
@@ -44,16 +43,13 @@ export const authOptions = {
     signIn: "/login"
   },
   callbacks: {
-    async session({ session, user}) {
-      session.user = user;
+    async session({ session, user, token}) {
+      session.user = token.user;
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
-        token.type_user = user.type_user;
+        token.user = user;
       }
       return token;
     }
