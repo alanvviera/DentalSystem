@@ -15,7 +15,7 @@ export async function GET (req: NextRequest) {
     
     // Obtener detalles de la cita específica
     const debt = await prisma.debt.findUnique({
-      where: { id_user_FK: session.user.id,id: parseInt(appointmentId), },
+      where: { id_client_FK : session.user.id,id: parseInt(appointmentId), },
       select: {
         id: true,
         amount_debt: true,
