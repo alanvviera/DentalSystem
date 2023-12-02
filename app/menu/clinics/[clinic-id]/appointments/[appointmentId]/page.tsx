@@ -3,13 +3,15 @@ import { useRouter } from 'next/navigation';
 
 import ClinicAppointmentId from '../../../../../../components/employee-menu/clinics/[clinic-id]/appointments/[appointment-id]/ClinicAppointmentId';
 import fakeTypeUser from '../../../../../../constants/fakeTypeUser';
+import { getCookie } from 'cookies-next';
+import {cookies} from 'next/headers'
 
 
 const page = ({ params }) => {
     
     const clinicId = params["clinic-id"];
     const appointmentId = params["appointment-id"];
-    const typeUser = fakeTypeUser;
+    const typeUser = getCookie("userType", { cookies });
 
 
     if (typeUser === "EMPLOYEE") {

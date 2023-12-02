@@ -1,18 +1,17 @@
-import React from 'react'
 import EmployeeMenu from '../../components/employee-menu/EmployeeMenu';
-import ClienMenu from '../../components/client-menu/ClientMenu';
 import fakeTypeUser from '../../constants/fakeTypeUser';
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
+import ClientMenu from '../../components/client-menu/ClientMenu';
+import { cookies } from 'next/headers';
 
 const page = () => {
-    
-    const typeUser = fakeTypeUser;
-
-
+    const typeUser = getCookie("userType", { cookies });
     if (typeUser === "EMPLOYEE") {
         return <EmployeeMenu />
     }
     else {
-        return <ClienMenu />
+        return <ClientMenu />
     }
 
 }

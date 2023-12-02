@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/core';
 import {LogoutOutlined } from "@ant-design/icons"
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Route = {
   title: string;
@@ -39,6 +40,7 @@ export const NavMenu = ({
   const [opened, { toggle }] = useDisclosure();
   let filter: Route[] | undefined;
   let tl: string | undefined;
+  const router = useRouter();
 
   function namePath(): string {
     const path = usePathname();
@@ -82,7 +84,18 @@ export const NavMenu = ({
               onClick={toggle}
             />
           ))}
-          <Button leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>
+          <Button onClick={
+            async (e) => {
+                const res = await fetch(
+                  `/alt-api/logout`,
+                );
+                if (res.ok) {
+                  router.push("/login");
+                } else {
+                  console.error(res.body);
+                }
+            }
+          } leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>
         </Box>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>

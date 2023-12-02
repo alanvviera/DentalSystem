@@ -4,13 +4,11 @@ import EmployeeProfileForm from "./EmployeeProfileForm";
 const getData = async () => {
   //const res = await fetch(route);
   const res = {
-    name: "Elton Tito",
+    name: "Usuario uno",
     email: "example@contoso.com",
     phone: "6462537892",
-    password: "ricardomilos",
     birthDate: 1701388800000,
-    address: "Colonita",
-    license: "Licencia medica",
+    address: "Colonita"
   };
   return res;
 };

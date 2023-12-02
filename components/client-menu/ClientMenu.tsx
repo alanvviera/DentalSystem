@@ -4,26 +4,27 @@ import ProfileBanner from "../dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
-type Appoint = {
-  descripcion?: string;
-  fecha: string;
-  hora: string;
-  doctor: string;
+const getData = async () => {
+  try {
+    const response = await fetch(`/alt-api/client-dashboard/`);
+    if (response.ok) {
+      console.log(await response.json());
+    } else {
+      const responseData = await response.json();
+      console.error("Fetch data error:", responseData);
+    }
+  } catch (error) {
+    console.error("Request error:", error);
+  }
 }
 
-type DebtData = {
-  debt: number;
-  date: string;
-
-}
-
-const ClienMenu = () => {
+const ClientMenu = async () => {
   const headers = ["Tipo de cita", "Fecha", "Hora", "Doctor Asignado"];
-  const citas: Appoint[] = [
+  const citas = [
     { descripcion: "Valoración ortodoncia", fecha: "2023-11-25", hora: "10:30", doctor: "Eladio Carreon"},
   ];
 
-  const debtData: DebtData = {
+  const debtData = {
     debt: 3405,
     date: "2023-02-04",
   };
@@ -45,4 +46,4 @@ const ClienMenu = () => {
   );
 };
 
-export default ClienMenu;
+export default ClientMenu;

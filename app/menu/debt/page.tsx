@@ -2,12 +2,12 @@ import React from 'react'
 import ClientDashboard from '../../../components/client-menu/dashboard/ClientDashboard';
 import ClientDebt from '../../../components/client-menu/debt/ClientDebt';
 import fakeTypeUser from '../../../constants/fakeTypeUser';
-
+import { getCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
 
 const page = () => {
-    const typeUser = fakeTypeUser;
-
-    if (typeUser === "CLIENT") {
+    const typeUser = getCookie("userType", { cookies });
+    if (typeUser !== "EMPLOYEE") {
         return <ClientDebt />
     }
     else {

@@ -1,13 +1,12 @@
 import React from 'react'
 import ClientDebtId from '../../../../components/client-menu/debt/[debtId]/ClientDebtId';
 import fakeTypeUser from '../../../../constants/fakeTypeUser';
-
-
+import { getCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
 
 const page = () => {
-    const typeUser = fakeTypeUser;
-
-    if (typeUser === "CLIENT") {
+    const typeUser = getCookie("userType", {cookies});
+    if (typeUser !== "EMPLOYEE") {
         return <ClientDebtId />
     }
     else {

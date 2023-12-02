@@ -1,19 +1,22 @@
-"use client";
-import { signOut, useSession } from "next-auth/react";
+"use client"
+import { getCookie } from "cookies-next"
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  const { data: session} = useSession();
-
+  const router = useRouter();
+  useEffect(() => {
+    const session = getCookie("userType");
+    if(session) {
+      router.push("/menu");
+    }
+    else{
+      router.push("/login");
+    }  
+  }, [])
   return (
-    <section>
-      {session ? (
-        <section>
-          <h1>{session.user.name}</h1>
-          <button onClick={() => signOut()}>Cerrar sesión</button>
-        </section>
-      ) : (
-        <p>Esperando inicio de sesión</p>
-      )}
-    </section>
+    <p>
+      Esperando inicio de sesión
+    </p>
   );
 }

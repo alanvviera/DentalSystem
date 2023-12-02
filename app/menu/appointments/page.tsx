@@ -1,14 +1,13 @@
-import React from 'react'
 import ClientAppointments from '../../../components/client-menu/appointments/ClientAppointments';
+import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 import EmployeeAppointments from '../../../components/employee-menu/appointments/page';
-import fakeTypeUser from '../../../constants/fakeTypeUser';
+import { cookies } from 'next/headers'
 
 const page = () => {
-    
-    const typeUser = fakeTypeUser;
-
-
-    if (typeUser === "EMPLOYEE") {
+    const typeUser = getCookie("userType", { cookies });
+    console.log(typeUser);
+    if (typeUser === "EMPLOYEE"){
         return <EmployeeAppointments />
     }
     else {

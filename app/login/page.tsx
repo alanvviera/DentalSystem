@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Background from "../../components/Background";
@@ -8,7 +7,8 @@ import { CustomInput } from "../../components/form/CustomInput";
 import { patternEmail, patternPassword } from "../../constants/formPattern";
 import { CustomInputPassword } from "../../components/form/CustomInputPassword";
 import { SignInOptions } from "../../components/login/SignInOptions";
-import { signIn } from "next-auth/react";
+import { getCookie } from "cookies-next";
+import { CustomAlert } from "../../components/CustomAlert";
 
 export default function Login() {
   const { push } = useRouter();
@@ -16,13 +16,12 @@ export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setShowError(false);
     //const {ok} = await signIn('credentials', {email, password, redirect: false})
-    console.log(email);
-    console.log(password);
     const { ok } = await fetch(
       `/alt-api/login`,
       {
@@ -30,18 +29,16 @@ export default function Login() {
         body: JSON.stringify( {email, password})
       }
     );
-
     if (ok) {
-      push("/ruta");
+      push("/menu");
     } else {
-      console.log("No son tus credenciales pendejo");
+      setShowError(true);
     }
   };
 
   return (
     <main>
       <Background />
-      {/* form */}
       <CustomForm
         topComponent={null}
         onSubmit={handleSubmit}
@@ -71,8 +68,9 @@ export default function Login() {
             password={password}
             onChange={(event) => setPassword(event.target.value)}
           />,
+          <CustomAlert showAlert={showError} title={"Error"} subtile={"Usuario y/o contraseña incorrectos"} />
         ]}
-        bottomComponent={<SignInOptions callbackUrl="/" />}
+        bottomComponent={<SignInOptions />}
       />
     </main>
   );

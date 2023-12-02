@@ -15,7 +15,7 @@ import CustomInputMantine, {
   typeInputForm,
 } from "../../mantine-form/customMantineInput";
 
-const EmployeeProfileForm = ({ profile }) => {
+const ClientProfileForm = ({ profile }) => {
   return (
     <div style={{ margin: "20px" }}>
       <Title>Perfil</Title>
@@ -63,8 +63,10 @@ const EmployeeProfileForm = ({ profile }) => {
             name,
             email,
             phone,
+            password,
             birthDate,
             address,
+            license,
           } = form.values;
           /*
           const response = await fetch(route, {
@@ -93,4 +95,4 @@ const EmployeeProfileForm = ({ profile }) => {
   );
 };
 
-export default EmployeeProfileForm;
+export default ClientProfileForm;

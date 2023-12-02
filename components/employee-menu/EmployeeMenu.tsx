@@ -5,25 +5,7 @@ import ProfileBanner from "../dashboard2/ProfileBanner";
 import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
 
-type Appointment = {
-  id: number;
-  client: string;
-  type: string;
-  date: string;
-  hour: string;
-}
-
-type Clinic = {
-  id: number;
-  name: string;
-}
-type User = {
-  name: string;
-  email: string;
-  role: string;
-}
-
-const getData = () => {
+const getData = async () => {
   return {
     user: { name: "Usuario uno", email: "example@contoso.com", role: "Doctor" },
     pendingAppointments: [
@@ -46,8 +28,8 @@ const getData = () => {
   };
 }
 
-const EmployeeMenu = () => {
-  const { user, appointments, pendingAppointments, clinics } = getData();
+const EmployeeMenu = async () => {
+  const { user, appointments, pendingAppointments, clinics } = await getData();
   const { name, email, role } = user
 
   const topPendingAppointments = pendingAppointments.map((appointment) => 

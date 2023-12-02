@@ -7,6 +7,9 @@ import { CustomInputPassword } from "../../components/form/CustomInputPassword";
 import { patternDate, patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 function SignUpDoctor() {
     const {
@@ -21,12 +24,8 @@ function SignUpDoctor() {
         onChange,
         cleanFields,
         numTel,
-        medicalLicense,
         address,
-        dateBirthday,
         sex,
-        placeOfStudy,
-        specialty
     } = useForm({
         email: "",
         password: "",
@@ -37,14 +36,18 @@ function SignUpDoctor() {
         showConfirmPassword: false,
         showPasswordNotMatch: false,
         numTel: "",
-        medicalLicense: "",
         address: "",
-        dateBirthday: "",
         sex: "",
-        placeOfStudy: "",
-        specialty: ""
     });
 
+    const router = useRouter();
+
+    useEffect(() => {
+        const session = getCookie("userType");
+        if(session) {
+          router.push("/menu");
+        }  
+      }, [])
 
     const toggleShowPassword = (name, value) => {
         onChange({
@@ -72,20 +75,6 @@ function SignUpDoctor() {
             return;
         }
 
-        console.log({
-            email,
-            password,
-            user,
-            lastName,
-            numTel,
-            medicalLicense,
-            address,
-            dateBirthday,
-            sex,
-            placeOfStudy,
-            specialty
-        });
-
         showMessageOfError(false);
 
         // Crear un objeto que represente los datos del nuevo usuario
@@ -93,33 +82,30 @@ function SignUpDoctor() {
             name: user,
             email,
             password,
+            last_name: lastName,
+            phone: numTel,
+            address,
+            sex
         };
 
         try {
-            // Realiza una solicitud POST a la API utilizando fetch
-            const response = await fetch("api/auth/signup", {
+            const response = await fetch("alt-api/signup/client", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(newUser),
             });
-
-            // Verifica la respuesta de la API
             if (response.status === 201) {
-                // Registro exitoso, puedes redirigir al usuario a la página de inicio de sesión u realizar otras acciones
                 console.log("Registro exitoso");
                 cleanFields();
+                router.push("/login");
             } else {
-                // La API respondió con un error, muestra un mensaje de error al usuario
-                const responseData = await response.json(); // Lee el cuerpo de la respuesta en formato JSON si lo hay
+                const responseData = await response.json();
                 console.error("Error en el registro:", responseData);
-                // Puedes mostrar el mensaje de error en un componente de alerta, por ejemplo.
             }
         } catch (error) {
-            // Ocurrió un error en la solicitud
             console.error("Error en la solicitud:", error);
-            // Puedes mostrar un mensaje de error genérico en este caso.
         }
     }
 
@@ -128,7 +114,7 @@ function SignUpDoctor() {
             <Background />
             <CustomForm
                 onSubmit={onSubmit}
-                title={"Regístrate como doctor"}
+                title={"Regístrate como cliente"}
                 subTile={"Crea una cuenta gratis con tu correo."}
                 textSubmit={"Regístrate"}
                 textForgetPassword={false}
@@ -171,15 +157,6 @@ function SignUpDoctor() {
                     />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Licencia médica"}
-                        name={"medicalLicense"}
-                        formTextError={"Este campo no puede estar vació"}
-                        onChange={onChange}
-                        value={medicalLicense}
-                        pattern={patternUser}
-                    />,
-                    <CustomInput
-                        type={"text"}
                         placeholder={"Dirección"}
                         name={"address"}
                         formTextError={"Este campo no puede estar vació"}
@@ -189,39 +166,12 @@ function SignUpDoctor() {
                     />,
                     <CustomInput
                         type={"text"}
-                        placeholder={"Fecha de nacimiento; DD/MM/YYYY"}
-                        name={"dateBirthday"}
-                        formTextError={"Ingrese una fecha valida por favor"}
-                        onChange={onChange}
-                        value={dateBirthday}
-                        pattern={patternDate}
-                    />,
-                    <CustomInput
-                        type={"text"}
                         placeholder={"Sexo"}
                         name={"sex"}
                         formTextError={"Este campo no puede estar vació"}
                         onChange={onChange}
                         value={sex}
                         pattern={patternUser} />,
-                    <CustomInput
-                        type={"text"}
-                        placeholder={"Lugar de estudio"}
-                        name={"placeOfStudy"}
-                        formTextError={"Este campo no puede estar vació"}
-                        onChange={onChange}
-                        value={placeOfStudy}
-                        pattern={patternUser}
-                    />,
-                    <CustomInput
-                        type={"text"}
-                        placeholder={"Especialidad"}
-                        name={"specialty"}
-                        formTextError={"Este campo no puede estar vació"}
-                        onChange={onChange}
-                        value={specialty}
-                        pattern={patternUser}
-                    />,
                     <CustomInputPassword
                         showPassword={showPassword}
                         name={"password"}

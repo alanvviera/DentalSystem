@@ -24,9 +24,7 @@ export default function RootLayout({ children }) {
       <body className={montserrat.className}>
         <MantineProvider theme={theme}>
           <ModalsProvider>
-            <AuthProvider>
               {children}
-            </AuthProvider>
           </ModalsProvider>
         </MantineProvider>
       </body>

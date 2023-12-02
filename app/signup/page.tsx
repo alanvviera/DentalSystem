@@ -7,6 +7,9 @@ import { CustomInputPassword } from "../../components/form/CustomInputPassword";
 import { patternDate, patternEmail, patternNumberTel, patternPassword, patternUser } from "../../constants/formPattern";
 import { LoginAccount } from "../../components/signup/LoginAccount";
 import { CustomAlert } from "../../components/CustomAlert";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 function SignUp() {
   const {
@@ -21,9 +24,10 @@ function SignUp() {
     onChange,
     cleanFields,
     address,
-    dateBirthday,
     numTel,
     sex,
+    role,
+    studyDegree
   } = useForm({
     email: "",
     password: "",
@@ -33,11 +37,21 @@ function SignUp() {
     showPassword: false,
     showConfirmPassword: false,
     showPasswordNotMatch: false,
-    dateBirthday: "",
     address: "",
     numTel: "",
-    sex: ""
+    sex: "",
+    studyDegree:"",
+    role:""
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const session = getCookie("userType");
+    if(session) {
+      router.push("/menu");
+    }
+  }, [])
 
   const toggleShowPassword = (name, value) => {
     onChange({
@@ -60,17 +74,6 @@ function SignUp() {
   async function onSubmit(e) {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-      user,
-      lastName,
-      address,
-      dateBirthday,
-      numTel,
-      sex,
-    });
-
     if (password !== confirmPassword) {
       showMessageOfError(true);
       return;
@@ -81,35 +84,35 @@ function SignUp() {
     // Crear un objeto que represente los datos del nuevo usuario
     const newUser = {
       name: user,
+      last_name: lastName,
       email,
       password,
+      phone: numTel,
+      sex,
+      address,
+      role,
+      study_degree: studyDegree
     };
 
     try {
-      // Realiza una solicitud POST a la API utilizando fetch
-      const response = await fetch("api/auth/signup", {
+      const response = await fetch("alt-api/signup/employee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
       });
-
-      // Verifica la respuesta de la API
       if (response.status === 201) {
-        // Registro exitoso, puedes redirigir al usuario a la página de inicio de sesión u realizar otras acciones
         console.log("Registro exitoso");
         cleanFields();
+        router.push("/login");
+
       } else {
-        // La API respondió con un error, muestra un mensaje de error al usuario
-        const responseData = await response.json(); // Lee el cuerpo de la respuesta en formato JSON si lo hay
+        const responseData = await response.json();
         console.error("Error en el registro:", responseData);
-        // Puedes mostrar el mensaje de error en un componente de alerta, por ejemplo.
       }
     } catch (error) {
-      // Ocurrió un error en la solicitud
       console.error("Error en la solicitud:", error);
-      // Puedes mostrar un mensaje de error genérico en este caso.
     }
   }
 
@@ -161,18 +164,9 @@ function SignUp() {
           />,
           <CustomInput
             type={"text"}
-            placeholder={"Fecha de nacimiento; DD/MM/YYYY"}
-            name={"dateBirthday"}
-            formTextError={"Ingrese una fecha valida por favor"}
-            onChange={onChange}
-            value={dateBirthday}
-            pattern={patternDate}
-          />,
-          <CustomInput
-            type={"text"}
             placeholder={"Dirección"}
             name={"address"}
-            formTextError={"Este campo no puede estar vació"}
+            formTextError={"Este campo no puede estar vacio"}
             onChange={onChange}
             value={address}
             pattern={patternUser}
@@ -181,10 +175,29 @@ function SignUp() {
             type={"text"}
             placeholder={"Sexo"}
             name={"sex"}
-            formTextError={"Este campo no puede estar vació"}
+            formTextError={"Este campo no puede estar vacio"}
             onChange={onChange}
             value={sex}
             pattern={patternUser} />,
+
+          <CustomInput
+            type={"text"}
+            placeholder={"Nivel de estudios"}
+            name={"studyDegree"}
+            formTextError={"Este campo no puede estar vacio."}
+            onChange={onChange}
+            value={studyDegree}
+            pattern={patternUser}
+          />,
+          <CustomInput
+            type={"text"}
+            placeholder={"Cargo"}
+            name={"role"}
+            formTextError={"Este campo no puede estar vacio."}
+            onChange={onChange}
+            value={role}
+            pattern={patternUser}
+          />,
           <CustomInputPassword
             showPassword={showPassword}
             name={"password"}
@@ -214,17 +227,15 @@ function SignUp() {
           />
         ]
         }
-
         bottomComponent={<div>
           <LoginAccount extraClass="pt-3 pb-3" />
-          <LoginAccount title="Registrate como doctor " subtile="Registrate" href="/signup-doctor" />
+          <LoginAccount title="Registrate como cliente " subtile="Registrate" href="/signup-client" />
         </div>}
         topComponent={<CustomAlert
           showAlert={showPasswordNotMatch}
           title={"Lo sentimos"}
           subtile={"Las contraseñas no coinciden."}
         />
-
         }
       />
     </main>
