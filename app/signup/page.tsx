@@ -14,7 +14,7 @@ function SignUp() {
     password,
     confirmPassword,
     user,
-    lastName,
+    last_name,
     showPassword,
     showConfirmPassword,
     showPasswordNotMatch,
@@ -22,20 +22,20 @@ function SignUp() {
     cleanFields,
     address,
     dateBirthday,
-    numTel,
+    phone_number,
     sex,
   } = useForm({
     email: "",
     password: "",
     confirmPassword: "",
     user: "",
-    lastName: "",
+    last_name: "",
     showPassword: false,
     showConfirmPassword: false,
     showPasswordNotMatch: false,
     dateBirthday: "",
     address: "",
-    numTel: "",
+    phone_number: "",
     sex: ""
   });
 
@@ -64,10 +64,10 @@ function SignUp() {
       email,
       password,
       user,
-      lastName,
+      last_name,
       address,
       dateBirthday,
-      numTel,
+      phone_number,
       sex,
     });
 
@@ -80,14 +80,20 @@ function SignUp() {
 
     // Crear un objeto que represente los datos del nuevo usuario
     const newUser = {
-      name: user,
       email,
       password,
+      name: user,
+      last_name,
+      address,
+      dateBirthday,
+      phone_number,
+      gender: sex,
+
     };
 
     try {
       // Realiza una solicitud POST a la API utilizando fetch
-      const response = await fetch("api/auth/signup", {
+      const response = await fetch("api/auth/employeesignup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,10 +141,10 @@ function SignUp() {
           <CustomInput
             type={"text"}
             placeholder={"Apellidos"}
-            name={"lastName"}
+            name={"last_name"}
             formTextError={"El apellido debe de contener mínimo 4 caracteres."}
             onChange={onChange}
-            value={lastName}
+            value={last_name}
             pattern={patternUser}
           />,
           <CustomInput
@@ -153,10 +159,10 @@ function SignUp() {
           <CustomInput
             type={"tel"}
             placeholder={"Número de telefono; ejem: 646-123-45-67"}
-            name={"numTel"}
+            name={"phone_number"}
             formTextError={"Por favor ingrese un telefono válido."}
             onChange={onChange}
-            value={numTel}
+            value={phone_number}
             pattern={patternNumberTel}
           />,
           <CustomInput

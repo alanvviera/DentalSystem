@@ -21,9 +21,9 @@ export async function POST (req: NextRequest){
         const existingUser = await prisma.user_data.findUnique({ where: { email } });
 
         // Validación de datos de entrada
-        if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender) {
-            return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
-        }
+        // if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender) {
+        //     return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
+        // }
 
         // Verificacion de usuario existente
         if (existingUser) {
