@@ -93,11 +93,19 @@ function SignUpDoctor() {
             name: user,
             email,
             password,
+            last_name: lastName,
+            phone_number: numTel,
+            home_address :address,
+            //birthday :dateBirthday,
+            gender: sex,
+            license: medicalLicense,
+            school : placeOfStudy,
+            specialty,
         };
 
         try {
             // Realiza una solicitud POST a la API utilizando fetch
-            const response = await fetch("api/auth/signup", {
+            const response = await fetch("api/auth/doctorsignup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

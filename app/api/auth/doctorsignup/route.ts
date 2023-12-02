@@ -17,12 +17,15 @@ export async function POST (req: NextRequest){
             home_address,
             birthday,
             gender,
+            license,
+            school,
+            specialty
         } = await req.json();
 
         const existingUser = await prisma.user_data.findUnique({ where: { email } });
 
         // Validación de datos de entrada
-        if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender) {
+        if (!name || !last_name|| !email || !password || !phone_number || !home_address /*|| !birthday*/ || !gender || !license|| !school|| !specialty) {
             return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
         }
 
@@ -33,18 +36,25 @@ export async function POST (req: NextRequest){
 
         const hashedPassword = bcrypt.hashSync(password, 10);
     
-        const newUser = await prisma.user_data.create({
+        const newUser = await prisma.doctor.create({
             data: {
+                user_data:{
+                    create:{
+                        name,
+                        last_name,
+                        email,
+                        password: hashedPassword,
+                        phone_number,
+                        home_address,
+                        birthday,
+                        gender,
+                        type_user: 'DOCTOR',
+                    }
+                },
                 //id_user, es un dato generado de manera aleatoria
-                name,
-                last_name,
-                email,
-                password: hashedPassword,
-                phone_number,
-                home_address,
-                birthday,
-                gender,
-                type_user: 'DOCTOR'
+                license,
+                school,
+                specialty,
             },
         });
         
