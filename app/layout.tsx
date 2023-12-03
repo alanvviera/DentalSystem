@@ -1,10 +1,9 @@
-import AuthProvider from '../components/authprovider/AuthProvider'; // Import AuthProvider component
+import AuthProvider from '../context/AuthProvider'; // Import AuthProvider component
 import '@mantine/core/styles.css'; //Import Mantine Styles
 import './globals.css'; // Import global CSS styles
 import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
 import '@mantine/dates/styles.css'; //Import package Matine dates styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
-import { ColorSchemeScript } from '@mantine/core'; //For server-side rendering.
 import { ModalsProvider } from '@mantine/modals';
 
 const montserrat = Montserrat({ subsets: ['latin'] })

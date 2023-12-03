@@ -26,12 +26,12 @@ export async function POST (req: NextRequest){
 
         // Validación de datos de entrada
         if (!name || !last_name|| !email || !password || !phone_number || !home_address /*|| !birthday*/ || !gender || !license|| !school|| !specialty) {
-            return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
+            return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
         }
 
         // Verificacion de usuario existente
         if (existingUser) {
-            return NextResponse.json({ message: 'User already exists. Please Log in.' }, {status: 202});
+            return NextResponse.json({ error: 'User already exists. Please Log in.' }, {status: 202});
         }
 
         const hashedPassword = bcrypt.hashSync(password, 10);

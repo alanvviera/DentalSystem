@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import SearchComponent from '../../../../SearchComponent'; // Ajusta la ruta según tu estructura de archivos
+import SearchComponent from '../../../../table/SearchComponent'; // Ajusta la ruta según tu estructura de archivos
 import { Table } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 

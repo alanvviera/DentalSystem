@@ -46,9 +46,9 @@ const getData = () => {
   };
 }
 
-const EmployeeMenu = () => {
-  const { user, appointments, pendingAppointments, clinics } = getData();
-  const { name, email, role } = user
+const EmployeeMenu = ({user}) => {
+  const { appointments, pendingAppointments, clinics } = getData();
+  const { name, email, type_user } = user;
 
   const topPendingAppointments = pendingAppointments.map((appointment) => 
   ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
@@ -61,7 +61,7 @@ const EmployeeMenu = () => {
 
   return (
     <main>
-      <ProfileBanner title={`${name}`} description={`${role} | ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/menu/profile">
+      <ProfileBanner title={`${name}`} description={`${type_user} | ${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/menu/profile">
       </ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
         <GridCol span={{ base: 12, md: 6, lg: 12 }}>

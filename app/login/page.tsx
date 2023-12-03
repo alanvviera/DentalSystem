@@ -1,76 +1,140 @@
 "use client";
-import { useSession } from 'next-auth/react'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import { useForm } from '../../hooks';
-import { useState } from 'react';
-import Background from "../../components/Background";
-import CustomForm from "../../components/form/CustomForm";
-import { CustomInput } from "../../components/form/CustomInput";
-import { patternEmail, patternPassword } from "../../constants/formPattern";
-import { CustomInputPassword } from "../../components/form/CustomInputPassword";
-import { SignInOptions } from "../../components/login/SignInOptions";
-import { signIn } from 'next-auth/react';
+import React, { useState } from "react";
+import {
+  Alert,
+  Anchor,
+  Card,
+  Flex,
+  LoadingOverlay,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+import MantineForm from "../../components/mantine-form/MantineForm";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../components/mantine-form/valuesValidate";
+import CustomInputMantine, {
+  typeInputForm,
+} from "../../components/mantine-form/customMantineInput";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { useDisclosure } from "@mantine/hooks";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export default function Login() {
-
-  const {push} = useRouter()
-
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [showPassword, setShowPassword] = useState<boolean>(false)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const {ok} = await signIn('credentials', {email, password, redirect: false})
-
-    if(ok)
-    {
-      push('/dashboard')
-    }
-    else
-    {
-      console.log('No son tus credenciales pendejo')
-    }
-  };
-
+const LoginPage = () => {
+  const [error, setError] = useState(null);
+  const [visible, { open, close }] = useDisclosure(false);
+  const router = useRouter();
   return (
-    <main>
-      <Background />
-      {/* form */}
-      <CustomForm
-        topComponent={null}
-        onSubmit={handleSubmit}
-        title={"Inicia sesión"}
-        subTile={"Con una cuenta existente."}
-        textSubmit={"Inicia sesión"}
-        textForgetPassword={"¿Olvidaste tu contraseña?"}
-        inputsForm={[
-          <CustomInput
-            type={"email"}
-            placeholder={"Correo electrónico"}
-            name={"email"}
-            formTextError={"Por favor ingrese un correo válido."}
-            pattern={patternEmail}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />,
-          <CustomInputPassword
-            showPassword={showPassword}
-            name={"password"}
-            placeholder={"Contraseña"}
-            pattern={patternPassword}
-            placeholderError={"La contraseña debe contener mínimo ocho caracteres, una letra, un número y un carácter especial."}
-            toggleShowPassword={() => setShowPassword(!showPassword)}
-            password={password}
-            onChange={(event) => setPassword (event.target.value)}
-          />
-        ]
-        }
-        bottomComponent={<SignInOptions callbackUrl="/"/>}
+    <main style={{ height: "100%", backgroundColor: "rgba(224,236,251,0.7" }}>
+      <LoadingOverlay
+        visible={visible}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
       />
+      <Flex pos="relative" h="100%" direction="column" justify="center">
+        <Card
+          style={{ overflowY: "auto" }}
+          shadow="sm"
+          padding="lg"
+          radius="md"
+          withBorder
+          w={{ base: "100%", md: "40%" }}
+          m="auto"
+          h={{ base: "100%", md: "auto" }}
+          py="xl"
+        >
+          <Stack align="center" gap={3}>
+            <Title order={1} c="blue">
+              Inicia sesión
+            </Title>
+            <Text>Con una cuenta existente</Text>
+          </Stack>
+          <MantineForm
+            initialValuesForKeys={{
+              email: "",
+              password: "",
+            }}
+            validateForKeys={{
+              email: validateEmail,
+              password: validatePassword,
+            }}
+            listCustomInputMantine={[
+              new CustomInputMantine(
+                "Correo electrónico",
+                "Introduce tu correo electrónico",
+                "email",
+                typeInputForm.TEXT
+              ),
+              new CustomInputMantine(
+                "Contraseña",
+                "Introduce tu contraseña",
+                "password",
+                typeInputForm.PASSWORD
+              ),
+            ]}
+            onSubmit={async (form: any) => {
+              setError(null);
+              const {
+                values: { email, password },
+              } = form;
+              open();
+              const response = await fetch(`/api/auth/login`, {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ email, password }),
+              });
+              const login = await response.json();
+              if (login.error) {
+                setError(login.error);
+              }
+              else{
+                const responseNextAuth = await signIn("credentials", {
+                  email,
+                  password,
+                  redirect: false,
+                });
+                if(responseNextAuth.error) {
+                  setError("Error al generar la sesión. Vuelve a intentarlo más tarde.")
+                }
+                else{
+                  router.push("/menu");
+                }
+              }
+              close();
+            }}
+            labelSubmit="Iniciar sesión"
+          />
+          <Flex mt="lg" justify="center" gap={7}>
+            <Anchor fw={500} href="/passwordforgot" underline="never">
+              ¿Olvidaste tu contraseña?
+            </Anchor>
+          </Flex>
+          {error && (
+            <Alert
+              mt="lg"
+              variant="light"
+              color="red"
+              title="Error"
+              icon={<InfoCircleOutlined />}
+            >
+              {error}
+            </Alert>
+          )}
+          <Card.Section mt="lg" inheritPadding>
+            <Flex justify="center" gap={7}>
+              <Text>¿No tienes una cuenta?</Text>
+              <Anchor fw={700} href="/signup" underline="never">
+                Crea una
+              </Anchor>
+            </Flex>
+          </Card.Section>
+        </Card>
+      </Flex>
     </main>
   );
-}
+};
 
+export default LoginPage;

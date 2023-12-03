@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import Background from "../../components/Background";
+import Background from "../../components/legacy/Background";
 import { useForm } from "../../hooks/useForm";
-import CustomForm from "../../components/form/CustomForm";
 import { patternPassword } from "../../constants/formPattern";
-import { LoginAccount } from "../../components/signup/LoginAccount";
-import { CustomInputPassword } from "../../components/form/CustomInputPassword";
-import { CustomAlert } from "../../components/CustomAlert";
+import { CustomAlert } from "../../components/legacy/CustomAlert";
+import CustomForm from "../../components/legacy/form/CustomForm";
+import { CustomInputPassword } from "../../components/legacy/form/CustomInputPassword";
+import { LoginAccount } from "../../components/legacy/signup/LoginAccount";
 
 export default function NewPassword() {
   const {

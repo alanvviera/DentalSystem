@@ -1,4 +1,4 @@
-import AuthProvider from '../../components/authprovider/AuthProvider';
+import AuthProvider from '../../context/AuthProvider';
 import '@mantine/core/styles.css';
 import { NavMenu } from '../../components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined } from "@ant-design/icons"
@@ -12,7 +12,7 @@ import fakeTypeUser from '../../constants/fakeTypeUser';
  * @property {string} description - A description of the application.
  */
 export const metadata: object = {
-    title: 'Empleado',
+    title: 'Sistema dental',
     description:
         'Menu de navegación para empleado.',
 };
@@ -100,7 +100,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     else {
         return (
             <NavMenu routes={routesClientMenu} headerBg={'blue.5'}
-                headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.2'} navbarTextColor={'dark'}
+                headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.1'} navbarTextColor={'dark'}
                 logoutButton={'blue.4'} logoutTextColor={'dark'}
             >
                 {children}

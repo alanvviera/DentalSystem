@@ -27,7 +27,7 @@ export async function POST (req: NextRequest){
 
         // Verificacion de usuario existente
         if (existingUser) {
-            return NextResponse.json({ message: 'User already exists. Please Log in.' }, {status: 202});
+            return NextResponse.json({ error: 'User already exists. Please Log in.' }, {status: 202});
         }
 
         const hashedPassword = bcrypt.hashSync(password, 10);

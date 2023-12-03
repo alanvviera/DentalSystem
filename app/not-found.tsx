@@ -2,7 +2,7 @@
  * Error 404 Page.
  * @returns {JSX.Element} JSX Element that represents Error 404 page.
  */
-import Background from "../components/Background";
+import Background from "../components/legacy/Background";
 
 export default function NotFoundPage() {
   return (
