@@ -108,7 +108,7 @@ const LoginPage = () => {
             labelSubmit="Iniciar sesión"
           />
           <Flex mt="lg" justify="center" gap={7}>
-            <Anchor fw={500} href="/passwordforgot" underline="never">
+            <Anchor fw={500} href="/password-forgot" underline="never">
               ¿Olvidaste tu contraseña?
             </Anchor>
           </Flex>
