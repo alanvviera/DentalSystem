@@ -14,7 +14,7 @@ export async function GET (req: NextRequest) {
     
     
     const appointment = await prisma.appointment.findUnique({
-      where: { id_user_fk: session.user.id,
+      where: { id_user_FK: session.user.id,
         id: parseInt(appointmentId), },
       select: {
         doctor: true,
@@ -29,13 +29,13 @@ export async function GET (req: NextRequest) {
     });
 
     if (!appointment) {
-      return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Cita no encontrada' }, { status: 404 });
     }
 
     return NextResponse.json({ appointment }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching appointment:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status:500 });
+    console.error('Error al buscar la cita:', error);
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status:500 });
   }
 };
 
@@ -66,13 +66,13 @@ export async function PUT (req: NextRequest) {
     });
 
     if (!appointment) {
-      return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Cita no encontrada' }, { status: 404 });
     }
 
     return NextResponse.json({ appointment }, { status: 200 });
   } catch (error) {
-    console.error('Error updating appointment:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status:500 });
+    console.error('Error actualizando cita:', error);
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status:500 });
   }
 };
 
@@ -83,16 +83,16 @@ export async function DELETE (req: NextRequest) {
 
   try {
     const appointment = await prisma.appointment.delete({
-      where: { id_user_fk: session.user.id,id: parseInt(appointmentId), },
+      where: { id_user_FK: session.user.id,id: parseInt(appointmentId), },
     });
 
     if (!appointment) {
-      return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Cita no encontrada' }, { status: 404 });
     }
 
-    return NextResponse.json({ message: 'Appointment deleted successfully' }, { status: 200 });
+    return NextResponse.json({ message: 'Cita borrada exitosamente' }, { status: 200 });
   } catch (error) {
-    console.error('Error deleting appointment:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error eliminando la cita:', error);
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
 }

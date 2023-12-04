@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
   }
 
   try {
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Usuario no encontrado' }, { status: 404 });
     }
 
     // Obtener las 5 citas más próximas del usuario
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ dashboardData }, { status: 200 });
   } catch (error) {
-    console.error({ errorString: 'Error fetching dashboard data: ', error });
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error({ errorString: 'Error al obtener datos del panel: ', error });
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
   }
 }

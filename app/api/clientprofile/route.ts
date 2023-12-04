@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
     })
 
     if (!userProfile) {
-        return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
+        return NextResponse.json({ error: 'Perfil de usuario no encontrado' }, { status: 404 });
     }
     return NextResponse.json({ userProfile }, { status: 200 });
 }
@@ -89,7 +89,7 @@ export async function PUT (req: NextRequest) {
         });
         return NextResponse.json({ updatedProfile }, { status: 200 });  
     } catch (error) {
-        console.log('Error updating user profile: ', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        console.log('Error al actualizar el perfil de usuario: ', error);
+        return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
     }
 }

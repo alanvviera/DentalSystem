@@ -28,7 +28,7 @@ export async function GET (req: NextRequest) {
   } catch (error) {
 
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
     
   }
 
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       const { type, date, hour, subject, id_doctor_FK, id_user_FK, id_local_FK } = await req.json();
 
       if (!type || !date || !hour || !subject || !id_doctor_FK || !id_user_FK || !id_local_FK) {
-        return NextResponse.json({ error: 'You must fill all the data' }, { status: 400 });
+        return NextResponse.json({ error: 'Debes llenar todos los datos.' }, { status: 400 });
       }
 
       //Preguntar la estructura para saber que datos esperar y crear la cita
@@ -59,12 +59,12 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      return NextResponse.json({ message: 'Appointment registered succesfully', newAppointment }, { status: 201 });
+      return NextResponse.json({ message: 'Cita registrada exitosamente', newAppointment }, { status: 201 });
     }
 
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+    return NextResponse.json({ error: 'Método no permitido' }, { status: 405 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
   }
 }

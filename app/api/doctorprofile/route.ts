@@ -72,7 +72,7 @@ export async function PUT (req: NextRequest) {
         });
         return NextResponse.json({ updatedProfile }, { status: 200 });  
     } catch (error) {
-        console.log('Error updating user profile: ', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        console.log('Error actualizando el perfil de usuario: ', error);
+        return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
     }
 }

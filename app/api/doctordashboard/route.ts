@@ -32,13 +32,13 @@ export async function GET(req: NextRequest) {
     });
 
     if (!dashboardData) {
-      return NextResponse.json({ error: 'Dashboard data not found' }, { status: 404});
+      return NextResponse.json({ error: 'Datos del panel no encontrados' }, { status: 404});
     }
 
     return NextResponse.json({dashboardData}, { status: 200 });
 
   } catch (error) {
-    console.error({ errorString: 'Error fetching dashboard data: ', error});
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error({ errorString: 'Error al obtener datos del panel: ', error});
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
   }
 }

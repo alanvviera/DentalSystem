@@ -43,9 +43,9 @@ export async function POST(req: NextRequest) {
       }
     });
     
-    return NextResponse.json({ message: 'Successfully appointment', cita: newAppointment }, { status: 201 });
+    return NextResponse.json({ message: 'Cita exitosa', cita: newAppointment }, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status: 500 });
   }
 }

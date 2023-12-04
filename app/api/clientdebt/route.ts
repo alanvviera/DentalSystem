@@ -58,6 +58,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ debtsCompleted, debtsNotcompleted }, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: error.message || 'Error de servidor' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Error Interno del servidor' }, { status: 500 });
   }
 }

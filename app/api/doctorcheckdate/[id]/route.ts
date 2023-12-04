@@ -30,13 +30,13 @@ export async function GET (req: NextRequest) {
     });
 
     if (!appointment) {
-      return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Cita no encontrada' }, { status: 404 });
     }
 
     return NextResponse.json({ appointment }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching appointment:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status:500 });
+    console.error('Error al buscar citas:', error);
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status:500 });
   }
 };
 

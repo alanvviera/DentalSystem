@@ -15,7 +15,7 @@ export async function GET (req: NextRequest) {
     
     // Obtener detalles de la cita específica
     const debt = await prisma.debt.findUnique({
-      where: { id_user_FK: session.user.id,id: parseInt(appointmentId), },
+      where: { id_client_FK : session.user.id,id: parseInt(appointmentId), },
       select: {
         id: true,
         amount_debt: true,
@@ -29,12 +29,12 @@ export async function GET (req: NextRequest) {
     });
 
     if (!debt) {
-      return NextResponse.json({ error: 'Debt not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Adeudo no encontrado' }, { status: 404 });
     }
 
     return NextResponse.json({ debt }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching debt:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status:500 });
+    console.error('Error al recuperar la deuda:', error);
+    return NextResponse.json({ error: 'Error Interno del Servidor' }, { status:500 });
   }
 };
