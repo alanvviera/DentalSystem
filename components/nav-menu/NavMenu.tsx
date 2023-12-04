@@ -5,6 +5,7 @@ import { AppShell, Burger, Button, Group, Text, Box, NavLink } from '@mantine/co
 import {LogoutOutlined } from "@ant-design/icons"
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 type Route = {
   title: string;
@@ -82,7 +83,7 @@ export const NavMenu = ({
               onClick={toggle}
             />
           ))}
-          <Button leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>
+          <Button onClick={async () => await signOut()} leftSection={<LogoutOutlined />} py={10} my={15} fullWidth={true} variant='filled' color={logoutButton} c={logoutTextColor}>Cerrar Sesión</Button>
         </Box>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>

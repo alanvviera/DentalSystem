@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "../../hooks/useForm";
-import Background from "../../components/Background";
-import CustomForm from "../../components/form/CustomForm";
-import { CustomInput } from "../../components/form/CustomInput";
+import Background from "../../components/legacy/Background";
 import { patternEmail } from "../../constants/formPattern";
 import { useRouter } from "next/navigation";
+import CustomForm from "../../components/legacy/form/CustomForm";
+import { CustomInput } from "../../components/legacy/form/CustomInput";
 
 export default function PasswordForgot() {
   const router = useRouter();

@@ -6,3 +6,8 @@ input::-ms-reveal,
 input::-ms-clear {
     display: none;
 }
+
+html,body {
+    height: 100%;
+	margin: 0;
+}

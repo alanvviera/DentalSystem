@@ -5,17 +5,15 @@ import { authOptions } from '../../auth/[...nextauth]/route';
 
 const prisma = new PrismaClient();
 
-export async function GET (req: NextRequest) {
+export async function GET (req: NextRequest, {params: {id}}) {
 
   const session = await getServerSession(authOptions);
-  const appointmentId = req.nextUrl.searchParams.get('id')
 
   try {
     
     
     const appointment = await prisma.appointment.findUnique({
-      where: { id_user_FK: session.user.id,
-        id: parseInt(appointmentId), },
+      where: { id_user_FK : session.user.id, id},
       select: {
         doctor: true,
         id: true,
@@ -39,10 +37,9 @@ export async function GET (req: NextRequest) {
   }
 };
 
-export async function PUT (req: NextRequest) {
+export async function PUT (req: NextRequest, {params: {id}}) {
 
   const session = await getServerSession(authOptions);
-  const appointmentId = req.nextUrl.searchParams.get('id')
 
   const {
     type,
@@ -55,8 +52,7 @@ export async function PUT (req: NextRequest) {
   try {
 
     const appointment = await prisma.appointment.update({
-      where: { id_user_FK: session.user.id,
-        id: parseInt(appointmentId), },
+      where: { id_user_FK: session.user.id, id },
       data: {
         type,
         date,
@@ -76,14 +72,13 @@ export async function PUT (req: NextRequest) {
   }
 };
 
-export async function DELETE (req: NextRequest) {
+export async function DELETE (req: NextRequest, {params: {id}}) {
 
   const session = await getServerSession(authOptions);
-  const appointmentId = req.nextUrl.searchParams.get('id')
 
   try {
     const appointment = await prisma.appointment.delete({
-      where: { id_user_FK: session.user.id,id: parseInt(appointmentId), },
+      where: { id_user_FK : session.user.id,id: id, },
     });
 
     if (!appointment) {

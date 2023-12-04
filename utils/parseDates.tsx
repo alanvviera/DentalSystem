@@ -1,5 +1,3 @@
-
-
 const dateToString = (date: Date) => {
     const dateToUtc: Date = convertDateToUTC(date);
     const dateStr: String =
@@ -13,9 +11,7 @@ const dateToString = (date: Date) => {
     return dateStr;
 }
 
-
 function convertDateToUTC(date: Date) { return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); }
-
 
 export {
     dateToString
