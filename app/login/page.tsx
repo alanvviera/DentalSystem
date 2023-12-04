@@ -20,13 +20,18 @@ import CustomInputMantine, {
 } from "../../components/mantine-form/customMantineInput";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useDisclosure } from "@mantine/hooks";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
   const [error, setError] = useState(null);
   const [visible, { open, close }] = useDisclosure(false);
+
   const router = useRouter();
+  // Get search parameters from the URL
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || "/menu";
+
   return (
     <main style={{ height: "100%"}}>
       <LoadingOverlay
@@ -100,7 +105,7 @@ const LoginPage = () => {
                   setError("Error al generar la sesión. Vuelve a intentarlo más tarde.")
                 }
                 else{
-                  router.push("/menu");
+                  router.push(callbackUrl);
                 }
               }
               close();

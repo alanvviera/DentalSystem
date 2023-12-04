@@ -26,7 +26,6 @@ const page = () => {
     );
   }
   const typeUser = session.user?.type_user;
-  console.log(session);
   if (typeUser === "EMPLOYEE") {
     return <EmployeeMenu user={session.user} />;
   } else {
