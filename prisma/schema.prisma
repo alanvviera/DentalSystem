@@ -15,15 +15,18 @@ model doctor {
   id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
   id_doctor     String          @unique(map: "id_doctor_UNIQUE") @default(uuid())
   id_user_FK    String          @unique(map: "id_user_FK_UNIQUE")
+  id_local_FK   String          @unique(map: "id_local_FK_UNIQUE")
   license       String?         @db.VarChar(75)
   specialty     String?         @db.VarChar(75)
   school        String?         @db.VarChar(50)
-  appointment  appointment[]
+  appointment   appointment[]
   client_doctor client_doctor[]
   debt          debt[]
   user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user")
+  local         local?          @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "fk_local")
 
   @@index([id_user_FK], map: "user_data_fk_idx")
+  @@index([id_local_FK], map: "local_fk_idx")
 }
 
 model employee {
@@ -63,6 +66,7 @@ model inventory {
 model local {
   id              Int            @id @unique(map: "id_UNIQUE") @default(autoincrement())
   id_local        String         @unique(map: "id_local_UNIQUE") @default(uuid())
+  id_doctor_FK     String        @unique(map: "id_doctor_FK_UNIQUE")
   name            String         @db.VarChar(75)
   address         String?        @db.LongText
   map             String?        @db.MediumText
@@ -70,9 +74,12 @@ model local {
   phone_number    String?        @db.VarChar(20)
   photos          Bytes?         @db.MediumBlob
   status          String?        @db.VarChar(45)
-  appointment    appointment[]
-  employee       employee?
+  appointment     appointment[]
+  employee        employee?
   inventory       inventory?
+  owner           owner         @relation(fields: [id_doctor_FK], references: [id_doctor], onUpdate: Restrict, map: "id_doctor_FK")
+
+  @@index([id_doctor_FK], map: "id_doctor_FK_idx")
 }
 
 model user_data {
@@ -89,12 +96,12 @@ model user_data {
   gender        String?         @db.VarChar(45)
   profile_image String?         @db.TinyText
   type_user     user_type
-  appointment  appointment[]
+  appointment   appointment[]
   client        client?
   client_doctor client_doctor[]
   debt          debt[]
   doctor        doctor?
-  employee     employee?
+  employee      employee?
 }
 
 enum user_type {
@@ -105,22 +112,22 @@ enum user_type {
 }
 
 model appointment {
-  id                    Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  id_appointment        String     @unique(map: "id_appointment_UNIQUE") @default(uuid())
-  id_doctor_FK          String
-  id_user_FK            String
-  id_local_FK           String
-  type                  String?    @db.VarChar(45)
-  doctor_name           String?    @db.VarChar(45)
-  client_name           String?    @db.VarChar(45)
-  local_name            String?    @db.VarChar(45)
-  date                  DateTime?  @db.Date
-  hour                  DateTime?  @db.Time(0)
-  subject               String?    @db.MediumText
-  status                String?    @db.VarChar(45)
-  user_data             user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
-  doctor                doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
-  local                 local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
+  id                Int        @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id_appointment    String     @unique(map: "id_appointment_UNIQUE") @default(uuid())
+  id_doctor_FK      String
+  id_user_FK        String
+  id_local_FK       String
+  type              String?    @db.VarChar(45)
+  doctor_name       String?    @db.VarChar(45)
+  client_name       String?    @db.VarChar(45)
+  local_name        String?    @db.VarChar(45)
+  date              DateTime?  @db.Date
+  hour              DateTime?  @db.Time(0)
+  subject           String?    @db.MediumText
+  status            String?    @db.VarChar(45)
+  user_data         user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
+  doctor            doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
+  local             local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
 
   @@index([id_doctor_FK], map: "doctor_idx")
   @@index([id_local_FK], map: "local_idx")
