@@ -3,6 +3,9 @@ import '@mantine/core/styles.css';
 import { NavMenu } from '../../components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined } from "@ant-design/icons"
 import fakeTypeUser from '../../constants/fakeTypeUser';
+import { getSession } from 'next-auth/react';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 
 /**
  * Object containing metadata for the application.
@@ -30,11 +33,9 @@ type RootLayoutProps = {
     children: React.ReactNode
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => {
-
-    const typeUser = fakeTypeUser;
-    
-
+const RootLayout = async ({ children }: RootLayoutProps) => {
+    const session = await getServerSession(authOptions);
+    const {user: {name, email, type_user}} = session;
     const routesEmployeeMenu = [
         {
             title: "Inicio",
@@ -88,10 +89,11 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         }
     ];
 
-    if (typeUser === "EMPLOYEE") {
+    if (type_user === "EMPLOYEE") {
         return (
             <NavMenu routes={routesEmployeeMenu} headerBg={'blue.5'}
-                headerTextColor={'white'} burgerColor={'white'} navbarBg={'gray.1'} navbarTextColor={'dark'}
+                headerTextColor={'white'} burgerColor={'white'} navbarBg={'gray.0'} navbarTextColor={'dark'}
+                user={{name, email}}
             >
                 {children}
             </NavMenu>
@@ -101,7 +103,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         return (
             <NavMenu routes={routesClientMenu} headerBg={'blue.5'}
                 headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.1'} navbarTextColor={'dark'}
-                logoutButton={'blue.4'} logoutTextColor={'dark'}
+                user={{name, email}}
             >
                 {children}
             </NavMenu>

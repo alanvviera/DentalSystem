@@ -1,7 +1,7 @@
 import AuthProvider from '../context/AuthProvider'; // Import AuthProvider component
 import '@mantine/core/styles.css'; //Import Mantine Styles
 import './globals.css'; // Import global CSS styles
-import { MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
+import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
 import '@mantine/dates/styles.css'; //Import package Matine dates styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ModalsProvider } from '@mantine/modals';
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es-MX">
       <body className={montserrat.className}>
+        <ColorSchemeScript defaultColorScheme='auto' />
         <MantineProvider theme={theme}>
           <ModalsProvider>
             <AuthProvider>

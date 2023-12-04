@@ -20,16 +20,17 @@ const SignUpPage = () => {
   const [visible, { open, close }] = useDisclosure(false);
   const [userForm, setUserForm] = useState("Empleado");
   return (
-    <main style={{ height: "100%", backgroundColor: "rgba(224,236,251,0.7" }}>
+    <main style={{ height: "100%" }}>
       <LoadingOverlay
         visible={visible}
         zIndex={1000}
         overlayProps={{ radius: "sm", blur: 2 }}
       />
-      <Flex pos="relative" h="100%" direction="column" justify="center">
+      <Flex bg="gray.1" pos="relative" h="100%" direction="column" justify="center">
         <Card
           style={{ overflowY: "auto" }}
           shadow="sm"
+          my={{base: "0", md:"30px"}}
           padding="lg"
           radius="md"
           withBorder
