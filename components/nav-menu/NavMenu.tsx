@@ -17,6 +17,7 @@ import { LogoutOutlined } from "@ant-design/icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { notifications } from "@mantine/notifications";
 
 type Route = {
   title: string;
@@ -32,7 +33,7 @@ type NavMenuProps = {
   burgerColor?: string;
   navbarBg?: string;
   navbarTextColor?: string;
-  user: {name: string, email: string}
+  user: { name: string; email: string };
 };
 
 export const NavMenu = ({
@@ -70,7 +71,12 @@ export const NavMenu = ({
       layout="alt"
       padding="md"
     >
-      <AppShell.Header hiddenFrom="sm" bg={headerBg} c={headerTextColor} withBorder={false}>
+      <AppShell.Header
+        hiddenFrom="sm"
+        bg={headerBg}
+        c={headerTextColor}
+        withBorder={false}
+      >
         <Group h="100%" px="md" gap={"lg"}>
           <Burger
             color={burgerColor}
@@ -121,21 +127,33 @@ export const NavMenu = ({
             ))}
           </Box>
           <Box>
-          <Divider mb={10} />
-          <NavLink
-            label={user.name}
-            description={user.email}
-            leftSection={
-              <Avatar size="md" variant="filled" p={0}>
-              </Avatar>
-            }
-          >
-            <NavLink onClick={async () => {signOut()}} rightSection={<LogoutOutlined />} label="Cerrar sesión" />
-          </NavLink>
+            <Divider mb={10} />
+            <NavLink
+              label={user.name}
+              description={user.email}
+              leftSection={<Avatar size="md" variant="filled" p={0}></Avatar>}
+            >
+              <NavLink
+                onClick={async () => {
+                  signOut();
+                  notifications.show({
+                    title: user.email,
+                    message: "ha cerrado sesión.",
+                  });
+                }}
+                rightSection={<LogoutOutlined />}
+                label="Cerrar sesión"
+              />
+            </NavLink>
           </Box>
         </Stack>
       </AppShell.Navbar>
-      <AppShell.Main pt={{base:`calc(${rem(60)} + var(--mantine-spacing-md))`, sm: "20px"}}>
+      <AppShell.Main
+        pt={{
+          base: `calc(${rem(60)} + var(--mantine-spacing-md))`,
+          sm: "20px",
+        }}
+      >
         {children}
       </AppShell.Main>
     </AppShell>

@@ -21,6 +21,7 @@ import CustomInputMantine, {
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useDisclosure } from "@mantine/hooks";
 import { signIn } from "next-auth/react";
+import { notifications } from "@mantine/notifications";
 
 const LoginForm = () => {
   const [error, setError] = useState(null);
@@ -103,6 +104,12 @@ const LoginForm = () => {
                   setError(
                     "Error al generar la sesión. Vuelve a intentarlo más tarde."
                   );
+                }
+                else{
+                  notifications.show({
+                    title: email,
+                    message: "ha iniciado sesión.",
+                  })
                 }
               }
               close();

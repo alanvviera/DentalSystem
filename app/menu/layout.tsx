@@ -75,13 +75,11 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
             url: "/menu/appointments",
             icon: <TagsOutlined />
         },
-        ,
         {
             title: "Adeudo",
             url: "/menu/debt",
             icon: <TagsOutlined />
         },
-
         {
             title: "Historial clínico",
             url: "/menu/medicalHistory",
@@ -108,10 +106,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 {children}
             </NavMenu>
         );
-
     }
-
-
 }
 
 export default RootLayout;
