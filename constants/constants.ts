@@ -37,6 +37,13 @@ export const doctorInfo = {
   ],
 };
 
+const TYPELISTAPPOINTMENTS = ["Examen dental de rutina", "Limpieza dental", "Tratamiento de caries", "Extracciones dentales", "Blanqueamiento dental", "Implantes dentales", "Tratamientos de conducto", "Colocación de brackets o aparatos ortodónticos", "Consulta para dolor o emergencia dental", "Adaptación y ajuste de prótesis dentales"];
+const CLINICLIST = ["Bienestar dental", "Dental solutions","Dental navarro"];
+export {
+  TYPELISTAPPOINTMENTS,
+  CLINICLIST
+}
+
 export const employeeInfo = {
   CLINIC_POSITIONS: [
     "Jefe de Departamento",
@@ -63,3 +70,4 @@ export const employeeInfo = {
     "Maestría en Bioética Médica",
   ],
 };
+

@@ -21,9 +21,9 @@ const EmployeeAppointmentUpdate = ({ appointment, clinicList, typeList }) => (
         local_name: validaFieldsNotEmpty,
         type: validaFieldsNotEmpty,
         doctor_name: validateName,
-        date: allValuesAvailable,
+        date: validateDate,
         status: validaFieldsNotEmpty,
-        hour: allValuesAvailable,
+        hour: validateNumber,
         subject: allValuesAvailable,
       }}
       listCustomInputMantine={[
@@ -59,8 +59,9 @@ const EmployeeAppointmentUpdate = ({ appointment, clinicList, typeList }) => (
           "doctor_name",
           typeInputForm.TEXT
         ),
-        new CustomInputMantine("Fecha", "", "date", typeInputForm.TEXT),
-        new CustomInputMantine("Hora", "", "hour", typeInputForm.TEXT),
+        new CustomInputMantine("Fecha de cita", "", "date", typeInputForm.DATEPICKER, new Date(appointment.date), undefined, undefined, undefined, new Date()),
+        new CustomInputMantine("Hora de cita", "", "hour", typeInputForm.DATETIME, new Date(appointment.hour)),
+
         new CustomInputMantine(
           "Estado de la cita",
           "Estado...",

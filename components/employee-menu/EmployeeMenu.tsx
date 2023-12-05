@@ -1,3 +1,4 @@
+import { CLINICLIST } from "../../constants/constants";
 import AppointmentCard from "../dashboard2/AppointmentCard";
 import ClinicsCard from "../dashboard2/ClinicsCard";
 import PendingAppointmentsCard from "../dashboard2/PendingAppointmentsCard";
@@ -27,35 +28,34 @@ const getData = () => {
   return {
     user: { name: "Usuario uno", email: "example@contoso.com", role: "Doctor" },
     pendingAppointments: [
-      { id: 2347, client: "Paulino Casals", type: "Capacitación", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Carme Acuña", type: "Cita médico", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Aurelio Amador", type: "Cita médico", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Marino Castaño", type: "Servicios", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Debora Arenas", type: "Cita médico", date: "19/10/2023", hour: "10:30" }],
+      { id: 2347, client: "Paulino Casals", type: "Examen dental de rutina", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Carme Acuña", type: "Blanqueamiento dental", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Aurelio Amador", type: "Tratamientos de conducto", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Marino Castaño", type: "Tratamiento de caries", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Debora Arenas", type: "Implantes dentales", date: "19/10/2023", hour: "10:30" }],
     appointments: [
-      { id: 2347, client: "Alessandro Tomas", type: "Capacitación", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Vicente Jose Tomas", type: "Cita médico", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Zoe Sacristan", type: "Cita médico", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Emiliano Mir", type: "Servicios", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Trinidad Barranco", type: "Cita médico", date: "19/10/2023", hour: "10:30" },
+      { id: 2347, client: "Alessandro Tomas", type: "Blanqueamiento dental", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Vicente Jose Tomas", type: "Tratamientos de conducto", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Zoe Sacristan", type: "Tratamientos de conducto", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Emiliano Mir", type: "Tratamiento de caries", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Trinidad Barranco", type: "Colocación de brackets o aparatos ortodónticos", date: "19/10/2023", hour: "10:30" },
     ],
-    clinics: [
-      { id: 2347, name: "Bienestar dental" },
-      { id: 2347, name: "Dental solutions" },
-    ]
+    clinics: CLINICLIST.map((value, index) => {
+      return { id: 2347 + index, name: value };
+    })
   };
 }
 
-const EmployeeMenu = ({user}) => {
+const EmployeeMenu = ({ user }) => {
   const { appointments, pendingAppointments, clinics } = getData();
   const { name, email, type_user } = user;
 
-  const topPendingAppointments = pendingAppointments.map((appointment) => 
-  ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
-  const topAppointments = appointments.map((appointment) => 
-  ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
+  const topPendingAppointments = pendingAppointments.map((appointment) =>
+    ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
+  const topAppointments = appointments.map((appointment) =>
+    ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
   const topClinics = clinics.map((clinic) => ({ id: clinic.id, name: clinic.name }));
-  
+
   const appointmentHeaders = ["Cliente", "Tipo", "Fecha", "Hora"];
   const clinicHeaders = ["Nombre"];
 

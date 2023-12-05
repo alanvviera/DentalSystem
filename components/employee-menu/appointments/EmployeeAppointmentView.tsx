@@ -7,6 +7,7 @@ import VisualizeDataButton from "../../visualize-data/buttonsData/VisualizeDataB
 import LabelDataText from "../../visualize-data/labelsData/LabelDataText";
 import EmployeeAppointmentUpdate from "./EmployeeAppointmentUpdate";
 import EmployeeAppointmentDelete from "./EmployeeAppointmentDelete";
+import { dateToString, dateToStringWithOnlyTime, dateToStringWithoutTime } from "../../../utils/parseDates";
 
 const EmployeeAppointmentView = ({ appointment, clinicList, typeList }) => {
   const {
@@ -67,8 +68,8 @@ const EmployeeAppointmentView = ({ appointment, clinicList, typeList }) => {
             <LabelDataText title={local_name} type="Clinica" />
             <LabelDataText title={type} type="Tipo de cita" />
             <LabelDataText title={doctor_name} type="Atiende" />
-            <LabelDataText title={date} type="Fecha" />
-            <LabelDataText title={hour} type="Hora" />
+            <LabelDataText title={dateToStringWithoutTime(new Date(date))} type="Fecha" />
+            <LabelDataText title={dateToStringWithOnlyTime(new Date(hour))} type="Hora" />
             <LabelDataText title={status} type="Estado de la cita" />
             <LabelDataText title={subject} type="Descripción" />
           </>
