@@ -18,6 +18,7 @@ import { useState } from "react";
 import { doctorInfo } from "../../constants/constants";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { notifications } from "@mantine/notifications";
 
 const DoctorForm = ({spinner}) => {
   const [error, setError] = useState(null);
@@ -160,15 +161,24 @@ const DoctorForm = ({spinner}) => {
           const login = await response.json();
           if (login.error) {
             setError(login.error);
+            notifications.show({
+              color: "red",
+              title: "Error",
+              message: "Al intentar crear el usuario.",
+            })
           }
           else{
+            notifications.show({
+              title: email,
+              message: "Usuario creado exitosamente.",
+            })
             const responseNextAuth = await signIn("credentials", {
               email,
               password,
               redirect: false,
             });
             if(responseNextAuth.error) {
-              setError("Error al generar la sesión. Vuelve a intentarlo más tarde.")
+              setError("Error al generar la sesión. Vuelve a intentarlo más tarde.");
             }
             else{
               router.push("/menu");

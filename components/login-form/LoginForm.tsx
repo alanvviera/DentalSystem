@@ -104,12 +104,17 @@ const LoginForm = () => {
                   setError(
                     "Error al generar la sesión. Vuelve a intentarlo más tarde."
                   );
+                  notifications.show({
+                    color: "red",
+                    title: "Error",
+                    message: "Al intentar iniciar sesión.",
+                  });
                 }
                 else{
                   notifications.show({
                     title: email,
                     message: "ha iniciado sesión.",
-                  })
+                  });
                 }
               }
               close();

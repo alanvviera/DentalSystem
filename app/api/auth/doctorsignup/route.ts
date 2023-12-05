@@ -31,7 +31,7 @@ export async function POST (req: NextRequest){
 
         // Verificacion de usuario existente
         if (existingUser) {
-            return NextResponse.json({ message: 'El usuario ya existe. Por favor Iniciar sesión.' }, {status: 202});
+            return NextResponse.json({ error: 'El usuario ya existe. Por favor Iniciar sesión.' }, {status: 202});
         }
 
         const hashedPassword = bcrypt.hashSync(password, 10);
@@ -60,7 +60,7 @@ export async function POST (req: NextRequest){
         
         return NextResponse.json({ message: 'Usuario registrado exitosamente', user: newUser }, {status: 201});
     } catch (error) {
-        return NextResponse.json({ message: 'Error al crear usuario', error: error.message }, { status: 500 });
+        return NextResponse.json({ error: 'Error al crear usuario', message: error.message }, { status: 500 });
     }
 
 }

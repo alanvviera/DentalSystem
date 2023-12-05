@@ -18,6 +18,7 @@ import { useState } from "react";
 import { employeeInfo } from "../../constants/constants";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { notifications } from "@mantine/notifications";
 
 const EmployeeForm = ({spinner}) => {
   const router = useRouter();
@@ -146,8 +147,17 @@ const EmployeeForm = ({spinner}) => {
           const login = await response.json();
           if (login.error) {
             setError(login.error);
+            notifications.show({
+              color: "red",
+              title: "Error",
+              message: "Al intentar crear el usuario.",
+            })
           }
           else{
+            notifications.show({
+              title: email,
+              message: "Usuario creado exitosamente.",
+            })
             const responseNextAuth = await signIn("credentials", {
               email,
               password,
