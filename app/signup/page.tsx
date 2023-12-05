@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Anchor,
@@ -15,8 +15,17 @@ import {
 import EmployeeForm from "../../components/signup-form/EmployeeForm";
 import DoctorForm from "../../components/signup-form/DoctorForm";
 import { useDisclosure } from "@mantine/hooks";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
+  const session = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/menu");
+    }
+  }, [session]);
   const [visible, { open, close }] = useDisclosure(false);
   const [userForm, setUserForm] = useState("Empleado");
   return (
