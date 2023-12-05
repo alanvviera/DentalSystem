@@ -109,7 +109,7 @@ const EmployeeForm = ({spinner}) => {
             undefined,
             undefined,
             undefined,
-            ["Masculino", "Femenino"]
+            ["Hombre", "Mujer"]
           ),
           new CustomInputMantine(
             "Cargo *",
@@ -154,10 +154,6 @@ const EmployeeForm = ({spinner}) => {
             })
           }
           else{
-            notifications.show({
-              title: email,
-              message: "Usuario creado exitosamente.",
-            })
             const responseNextAuth = await signIn("credentials", {
               email,
               password,
@@ -167,6 +163,10 @@ const EmployeeForm = ({spinner}) => {
               setError("Error al generar la sesión. Vuelve a intentarlo más tarde.")
             }
             else{
+              notifications.show({
+                title: "Usuario creado exitosamente",
+                message: "Redirigiendo a menu...",
+              })
               router.push("/menu");
             }
           }
