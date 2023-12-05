@@ -40,11 +40,11 @@ const SignUpPage = () => {
           style={{ overflowY: "auto" }}
           shadow="sm"
           my={{base: "0", md:"30px"}}
+          mx="auto"
           padding="lg"
           radius="md"
           withBorder
           w={{ base: "100%", md: "40%" }}
-          m="auto"
           h={{ base: "100%", md: "auto" }}
           py="xl"
         >

@@ -1,3 +1,4 @@
+"use client"
 import { MailOutlined } from "@ant-design/icons";
 import {
   Anchor,
@@ -8,7 +9,15 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import React from "react";
+
+const pushNotification = () => {
+  notifications.show({
+    title: "Enlace enviado exitosamente",
+    message: "Revisa tu correo de confirmación."
+  })
+}
 
 const ConfirmationPage = () => {
   return (
@@ -28,6 +37,7 @@ const ConfirmationPage = () => {
           withBorder
           w={{ base: "100%", md: "40%" }}
           m="auto"
+          mih="380px"
           h={{ base: "100%", md: "auto" }}
         >
           <Stack ta="center" align="center" gap={10}>
@@ -35,7 +45,7 @@ const ConfirmationPage = () => {
             <Text fw={500} size="xl">
               Se ha enviado un enlace de confirmación a tu correo electrónico.
             </Text>
-            <Button mt={20} fullWidth>Reenviar</Button>
+            <Button onClick={pushNotification} mt={20} fullWidth>Reenviar</Button>
           </Stack>
           <CardSection mt="lg" inheritPadding>
             <Flex justify="center" gap={7}>
