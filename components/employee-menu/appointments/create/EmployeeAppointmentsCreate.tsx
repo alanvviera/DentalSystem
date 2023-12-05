@@ -1,10 +1,11 @@
 import React from 'react'
 import EmployeeAppointmentCreate from '../EmployeeAppointmentCreate';
+import { CLINICLIST, TYPELISTAPPOINTMENTS } from '../../../../constants/constants';
 
 const getData = async () => {
   //const res = await fetch(`route/${id}`);
-  const clinicList = ["Clinica sin dientes", "Clinica dos"];
-  const typeList = ["Extraccion de muelas", "tipo dos"];
+  const clinicList = [...CLINICLIST];
+  const typeList = [...TYPELISTAPPOINTMENTS];
 
   const res = {clinicList, typeList}
 

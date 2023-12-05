@@ -10,6 +10,7 @@ export const doctorInfo = {
     "Urología",
     "Endocrinología",
     "Psiquiatría",
+    "No disponible"
   ],
   FACULTIES: [
     "Facultad de Ciencias Médicas Avanzadas",
@@ -22,6 +23,7 @@ export const doctorInfo = {
     "Instituto de Ciencias Biomédicas Progresivas",
     "Facultad de Salud Global",
     "Escuela de Medicina Avanzada",
+    "No disponible"
   ],
   MEDICAL_LICENSES: [
     "Licencia Médica General",
@@ -34,6 +36,7 @@ export const doctorInfo = {
     "Licencia de Medicina Preventiva",
     "Licencia de Radiología Médica",
     "Licencia de Medicina Deportiva",
+    "No disponible"
   ],
 };
 
@@ -56,6 +59,8 @@ export const employeeInfo = {
     "Especialista en Emergencias",
     "Jefe de Laboratorio",
     "Director de Salud Mental",
+    "Jefe de Recursos Humanos",
+    "No disponible"
   ],
   ACADEMIC_DEGREES: [
     "Doctor en Medicina",
@@ -68,6 +73,7 @@ export const employeeInfo = {
     "Doctorado en Genética Médica",
     "Especialización en Medicina Deportiva",
     "Maestría en Bioética Médica",
+    "No disponible"
   ],
 };
 
