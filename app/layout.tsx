@@ -1,10 +1,12 @@
 import AuthProvider from '../context/AuthProvider'; // Import AuthProvider component
 import '@mantine/core/styles.css'; //Import Mantine Styles
+import '@mantine/notifications/styles.css'; //Import Notification Styles
 import './globals.css'; // Import global CSS styles
 import { ColorSchemeScript, MantineProvider, createTheme } from '@mantine/core'; //Import MantineProvider
 import '@mantine/dates/styles.css'; //Import package Matine dates styles
 import { Montserrat } from 'next/font/google'; // Import Montserrat font
 import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from '@mantine/notifications';
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -25,6 +27,7 @@ export default function RootLayout({ children }) {
         <MantineProvider theme={theme}>
           <ModalsProvider>
             <AuthProvider>
+            <Notifications />
               {children}
             </AuthProvider>
           </ModalsProvider>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Anchor,
@@ -18,11 +18,18 @@ import CustomInputMantine, {
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const ForgotPage = () => {
+  const session = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/menu");
+    }
+  }, [session])
   const [error, setError] = useState(null);
   const [visible, { open, close }] = useDisclosure(false);
-  const router = useRouter();
   return (
     <main style={{ height: "100%" }}>
       <LoadingOverlay

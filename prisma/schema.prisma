@@ -23,7 +23,7 @@ model doctor {
   client_doctor client_doctor[]
   debt          debt[]
   user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user")
-  local         local?          @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "fk_local")
+  local         local?
 
   @@index([id_user_FK], map: "user_data_fk_idx")
   @@index([id_local_FK], map: "local_fk_idx")
@@ -77,7 +77,7 @@ model local {
   appointment     appointment[]
   employee        employee?
   inventory       inventory?
-  owner           owner         @relation(fields: [id_doctor_FK], references: [id_doctor], onUpdate: Restrict, map: "id_doctor_FK")
+  owner           doctor      @relation(fields: [id_doctor_FK], references: [id_doctor], onUpdate: Restrict, map: "id_doctor_FK")
 
   @@index([id_doctor_FK], map: "id_doctor_FK_idx")
 }
