@@ -3,31 +3,68 @@ import React from 'react';
 import { Button, Flex, Title, Text } from "@mantine/core";
 import { ArrowLeftOutlined, DeleteFilled } from "@ant-design/icons";
 import MantineForm from '../../../../../../components/mantine-form/MantineForm';
-import { validaFieldsNotEmpty, validateNumberInteger, validatePrice, } from '../../../../../../components/mantine-form/valuesValidate';
+import { validaFieldsNotEmpty, validateDate, validateNumberInteger, validatePrice, } from '../../../../../../components/mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../../components/mantine-form/customMantineInput';
 import { modals, } from '@mantine/modals';
+import { MEDICATIONCATEGORIES } from '../../../../../../constants/constants';
 
 
 const getDataProductId = async (idProduct: String) => {
 
-    return {
-        idProduct: "",
-        name: "Paracetamol",
-        qr: "26da24ax",
-        category: "Calmante",
-        provider: "Empresa Gitra",
-        acquisitionDate: "1577865600000",
-        expirationDate: "1735718400000",
-        cost: 1000.59,
-        price: 250.59,
-        stock: 100,
-        maxStock: 150,
-        minStock: 30,
-        observations: "Producto para venta sin receta"
-    };
+    const listMedicaments = [
+        {
+            idProduct: "dkjNehujf",
+            name: "Cloroquina",
+            acquisitionDate: "1700436088000",
+            expirationDate: "1725062400000",
+            cost: 75.56,
+            stock: 25,
+            qr: "4ad345a24b",
+            category: "Analgésicos",
+            provider: "Provedor GITA",
+            price: 560.59,
+            maxStock: 250,
+            minStock: 50,
+            observations: "Producto para venta sin receta",
+        },
+        {
+            idProduct: "200dsajn2xall4",
+            name: "Aspirina",
+            acquisitionDate: "1699744888000",
+            expirationDate: "1746662400000",
+            cost: 10.56,
+            stock: 36,
+            qr: "565262dsd242jy",
+            category: "Antiinflamatorios",
+            provider: "Farmacéutica estrella",
+            price: 100.99,
+            maxStock: 300,
+            minStock: 50,
+            observations: "Producto para venta sin receta",
+        },
+        {
+            idProduct: "fmk23xlp2l3",
+            name: "Amoxicilina",
+            acquisitionDate: "1642461688000",
+            expirationDate: "1754611200000",
+            cost: 16.59,
+            stock: 5,
+            qr: "43ada43vad23",
+            category: "Antibióticos",
+            provider: "Farmaceutica Green",
+            price: 300.59,
+            maxStock: 90,
+            minStock: 15,
+            observations: "Producto para venta con receta",
+        }
+    ];
+
+    return listMedicaments.find((element) => element.idProduct === idProduct);
+
+
 }
 
-const ClinicInventoryId = async ({ clinicId ,inventoryId}) => {
+const ClinicInventoryId = async ({ clinicId, inventoryId }) => {
     // const clinicId = params["clinic-id"];
     // const inventoryId = params["inventory-id"];
 
@@ -58,6 +95,13 @@ const ClinicInventoryId = async ({ clinicId ,inventoryId}) => {
             onConfirm: () => onDelete(),
         });
 
+    if (productExample === undefined) {
+        return <main>
+            <p>{`No existe un medicamento con el ID: ${inventoryId}`}</p>
+        </main>
+    }
+
+
     return (
         <main style={{ margin: "20px" }}>
             <Flex justify={"space-between"}>
@@ -79,8 +123,8 @@ const ClinicInventoryId = async ({ clinicId ,inventoryId}) => {
                     qr: validaFieldsNotEmpty,
                     category: validaFieldsNotEmpty,
                     provider: validaFieldsNotEmpty,
-                    acquisitionDate: validaFieldsNotEmpty,
-                    expirationDate: validaFieldsNotEmpty,
+                    acquisitionDate: validateDate,
+                    expirationDate: validateDate,
                     cost: validatePrice,
                     price: validatePrice,
                     stock: validateNumberInteger,
@@ -92,7 +136,14 @@ const ClinicInventoryId = async ({ clinicId ,inventoryId}) => {
                     //1- Title, 2- Subtile, 3-Is this same key that in validateForKeys, 4- TypeText, 5 -allowDecimal, 6 - maxValue
                     new CustomInputMantine("Nombre del medicamento", "Nombre del medicamento", "name", typeInputForm.TEXT),
                     new CustomInputMantine("Codigo QR", "QR", "qr", typeInputForm.TEXT),
-                    new CustomInputMantine("Categoria del medicamento", "Categoria", "category", typeInputForm.TEXT),
+                    new CustomInputMantine(
+                        "Categoria del medicamento", "Categoria", "category",
+                        typeInputForm.SELECTITEMS,
+                        undefined,
+                        undefined,
+                        undefined,
+                        MEDICATIONCATEGORIES
+                    ),
                     new CustomInputMantine("Proveedor", "Proveedor", "provider", typeInputForm.TEXT),
                     new CustomInputMantine("Fecha de adquisición", "Fecha de adquisición", "acquisitionDate", typeInputForm.DATEPICKER, new Date(Number(productExample.acquisitionDate))),
                     new CustomInputMantine("Fecha de expiración", "Fecha de expiración", "expirationDate", typeInputForm.DATEPICKER, new Date(Number(productExample.expirationDate))),

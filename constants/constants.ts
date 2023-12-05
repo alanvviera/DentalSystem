@@ -56,7 +56,8 @@ const MEDICATIONCATEGORIES = [
 ]
 export {
   TYPELISTAPPOINTMENTS,
-  CLINICLIST
+  CLINICLIST,
+  MEDICATIONCATEGORIES
 }
 
 export const employeeInfo = {
