@@ -1,10 +1,10 @@
 
 const validateName = (value) => {
-    return (value.length < 2 ? 'El nombre debe de tener mínimo 5 letras' : null);
+    return (value.trim().length < 2 ? 'El nombre debe de tener mínimo 5 letras' : null);
 }
 
 const validaFieldsNotEmpty = (value) => {
-    return (value.length < 4 ? "Por favor llene el campo solicitado" : null);
+    return (value.trim().length < 4 ? "Por favor llene el campo solicitado" : null);
 }
 
 const validateEmail = (value) => {
@@ -24,7 +24,7 @@ const validatePrice = (value) => {
 }
 
 const validatePassword = (value, values) => {
-    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.length === 0 || values.password.length === 0) ? "Las contraseñas no pueden estar vacías" : (value.length < 8 || values.password.length < 8) ? "La contraseña debe de tener mínimo 8 caracteres" : null);
+    return (value !== values.password ? 'Las contraseñas no coinciden' : (value.trim().length === 0 || values.password.trim().length === 0) ? "Las contraseñas no pueden estar vacías" : (value.trim().length < 8 || values.password.trim().length < 8) ? "La contraseña debe de tener mínimo 8 caracteres" : null);
 }
 
 const allValuesAvailable = (value) => null;
