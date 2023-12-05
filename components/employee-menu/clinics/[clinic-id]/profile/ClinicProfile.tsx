@@ -9,8 +9,8 @@ import MantineForm from '../../../../mantine-form/MantineForm';
 
 const getData = async (clinicId) => {
     return {
-        addressClinic: "Calle buenos aires",
-        buildingNumber: "28",
+        addressClinic: "Av. Reforma 8133-L4, Ex-Ejido Chapultepec, 22785 Ensenada, B.C.",
+        buildingNumber: "#28",
         tel: "646-123-45-67",
         status: "Activo"
     };
