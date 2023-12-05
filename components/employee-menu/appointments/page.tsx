@@ -21,25 +21,25 @@ const getData = async () => {
   const pendingData: Appointment[] = [
     {
       id: 1,
-      client_name: "Jose Arturo Castro Jimenez",
+      client_name: "Jose David Cantero",
       date: "2023-11-17",
       hour: "15:30",
     },
     {
       id: 4,
-      client_name: "Alice Johnson",
+      client_name: "Tania Saura",
       date: "2023-11-17",
       hour: "12:20",
     },
     {
       id: 7,
-      client_name: "Daniel Brown",
+      client_name: "Angel Maria Galvan",
       date: "2023-11-20",
       hour: "11:15",
     },
     {
       id: 10,
-      client_name: "Alexander White",
+      client_name: "Ander Portela",
       date: "2023-11-23",
       hour: "17:30",
     },
@@ -47,19 +47,19 @@ const getData = async () => {
   const completedData: Appointment[] = [
     {
       id: 2,
-      client_name: "Maria Rodriguez",
+      client_name: "Sofia Calatayud",
       date: "2023-11-15",
       hour: "10:00",
     },
     {
       id: 5,
-      client_name: "Carlos Sanchez",
+      client_name: "Lucio Frias",
       date: "2023-11-18",
       hour: "09:30",
     },
     {
       id: 8,
-      client_name: "Sophia Davis",
+      client_name: "Florentina Solis",
       date: "2023-11-21",
       hour: "13:45",
     },
@@ -67,19 +67,19 @@ const getData = async () => {
   const inProgressData: Appointment[] = [
     {
       id: 3,
-      client_name: "John Smith",
+      client_name: "Casimiro Bonilla",
       date: "2023-11-16",
       hour: "14:45",
     },
     {
       id: 6,
-      client_name: "Laura Martinez",
+      client_name: "Bernabe Sales",
       date: "2023-11-16",
       hour: "16:00",
     },
     {
       id: 9,
-      client_name: "Emma Wilson",
+      client_name: "Vanesa de la Torre",
       date: "2023-11-16",
       hour: "08:45",
     },
