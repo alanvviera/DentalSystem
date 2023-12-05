@@ -3,6 +3,7 @@ CREATE TABLE `doctor` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `id_doctor` VARCHAR(191) NOT NULL,
     `id_user_FK` VARCHAR(191) NOT NULL,
+    `id_local_FK` VARCHAR(191) NULL,
     `license` VARCHAR(75) NULL,
     `specialty` VARCHAR(75) NULL,
     `school` VARCHAR(50) NULL,
@@ -10,7 +11,9 @@ CREATE TABLE `doctor` (
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_doctor_UNIQUE`(`id_doctor`),
     UNIQUE INDEX `id_user_FK_UNIQUE`(`id_user_FK`),
-    INDEX `user_data_fk_idx`(`id_user_FK`),
+    UNIQUE INDEX `id_local_FK_UNIQUE`(`id_local_FK`),
+    INDEX `fk_user_doctor_idx`(`id_user_FK`),
+    INDEX `fk_local_doctor_idx`(`id_local_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -28,7 +31,8 @@ CREATE TABLE `employee` (
     UNIQUE INDEX `id_employee_UNIQUE`(`id_employee`),
     UNIQUE INDEX `id_user_FK_UNIQUE`(`id_user_FK`),
     UNIQUE INDEX `id_local_FK_UNIQUE`(`id_local_FK`),
-    INDEX `id_user_FK_idx`(`id_user_FK`),
+    INDEX `fk_user_employee_idx`(`id_user_FK`),
+    INDEX `fk_local_employee_idx`(`id_local_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -52,7 +56,7 @@ CREATE TABLE `inventory` (
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_inventory_UNIQUE`(`id_inventory`),
     UNIQUE INDEX `id_local_FK_UNIQUE`(`id_local_FK`),
-    INDEX `id_inventory_FK_idx`(`id_local_FK`),
+    INDEX `fk_local_inventory_idx`(`id_local_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -60,6 +64,7 @@ CREATE TABLE `inventory` (
 CREATE TABLE `local` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `id_local` VARCHAR(191) NOT NULL,
+    `id_doctor_FK` VARCHAR(191) NOT NULL,
     `name` VARCHAR(75) NOT NULL,
     `address` LONGTEXT NULL,
     `map` MEDIUMTEXT NULL,
@@ -70,6 +75,8 @@ CREATE TABLE `local` (
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_local_UNIQUE`(`id_local`),
+    UNIQUE INDEX `id_doctor_FK_UNIQUE`(`id_doctor_FK`),
+    INDEX `fk_doctor_local_idx`(`id_doctor_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -114,9 +121,9 @@ CREATE TABLE `appointment` (
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_appointment_UNIQUE`(`id_appointment`),
-    INDEX `doctor_idx`(`id_doctor_FK`),
-    INDEX `local_idx`(`id_local_FK`),
-    INDEX `client_idx`(`id_user_FK`),
+    INDEX `fk_doctor_appointment_idx`(`id_doctor_FK`),
+    INDEX `fk_local_appointment_idx`(`id_local_FK`),
+    INDEX `fk_user_appointment_idx`(`id_user_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -136,7 +143,7 @@ CREATE TABLE `client` (
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_user_FK_UNIQUE`(`id_user_FK`),
-    INDEX `fk_id_user_idx`(`id_user_FK`),
+    INDEX `fk_user_client_idx`(`id_user_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -147,8 +154,8 @@ CREATE TABLE `client_doctor` (
     `id_doctor_FK` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
-    INDEX `id_doctor_FK_idx`(`id_doctor_FK`),
-    INDEX `idclient_idx`(`id_client_FK`),
+    INDEX `fk_doctor_clientdoctor_idx`(`id_doctor_FK`),
+    INDEX `fk_client_clientdoctor_idx`(`id_client_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -164,8 +171,8 @@ CREATE TABLE `debt` (
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_patient_payments_UNIQUE`(`id_debt`),
-    INDEX `ID_DOCTOR_FK_idx`(`id_doctor_FK`),
-    INDEX `id_CLIENT_FK_idx`(`id_client_FK`),
+    INDEX `fk_doctor_debt_idx`(`id_doctor_FK`),
+    INDEX `fk_client_debt_idx`(`id_client_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -179,45 +186,48 @@ CREATE TABLE `payment` (
 
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `idpayment_UNIQUE`(`id_payment`),
-    INDEX `id_payment_idx`(`id_debt_fk`),
+    INDEX `fk_debt_payment_idx`(`id_debt_fk`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `doctor` ADD CONSTRAINT `fk_user` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `doctor` ADD CONSTRAINT `fk_user_doctor` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `employee` ADD CONSTRAINT `id_employee_FK` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `employee` ADD CONSTRAINT `fk_local_employee` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `employee` ADD CONSTRAINT `id_user_FK` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `employee` ADD CONSTRAINT `fk_user_employee` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `inventory` ADD CONSTRAINT `id_inventory_FK` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `inventory` ADD CONSTRAINT `fk_local_inventory` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `appointment` ADD CONSTRAINT `client` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `local` ADD CONSTRAINT `fk_doctor_local` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `appointment` ADD CONSTRAINT `doctor` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `appointment` ADD CONSTRAINT `fk_user_appointment` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `appointment` ADD CONSTRAINT `local` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `appointment` ADD CONSTRAINT `fk_doctor_appointment` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE `client` ADD CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `appointment` ADD CONSTRAINT `fk_local_appointment` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE `client_doctor` ADD CONSTRAINT `idclient` FOREIGN KEY (`id_client_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `client` ADD CONSTRAINT `fk_user_client` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `client_doctor` ADD CONSTRAINT `iddoctor` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `client_doctor` ADD CONSTRAINT `fk_client_clientdoctor` FOREIGN KEY (`id_client_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `debt` ADD CONSTRAINT `ID_DOCTOR_FK` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `client_doctor` ADD CONSTRAINT `fk_doctor_clientdoctor` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE `debt` ADD CONSTRAINT `id_CLIENT_FK` FOREIGN KEY (`id_client_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `debt` ADD CONSTRAINT `fk_doctor_debt` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE `payment` ADD CONSTRAINT `id_payment` FOREIGN KEY (`id_debt_fk`) REFERENCES `debt`(`id_debt`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `debt` ADD CONSTRAINT `fk_client_debt` FOREIGN KEY (`id_client_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- AddForeignKey
+ALTER TABLE `payment` ADD CONSTRAINT `fk_debt_payment` FOREIGN KEY (`id_debt_fk`) REFERENCES `debt`(`id_debt`) ON DELETE NO ACTION ON UPDATE NO ACTION;

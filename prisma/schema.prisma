@@ -15,18 +15,18 @@ model doctor {
   id            Int             @id @unique(map: "id_UNIQUE") @default(autoincrement())
   id_doctor     String          @unique(map: "id_doctor_UNIQUE") @default(uuid())
   id_user_FK    String          @unique(map: "id_user_FK_UNIQUE")
-  id_local_FK   String          @unique(map: "id_local_FK_UNIQUE")
+  id_local_FK   String?         @unique(map: "id_local_FK_UNIQUE")
   license       String?         @db.VarChar(75)
   specialty     String?         @db.VarChar(75)
   school        String?         @db.VarChar(50)
   appointment   appointment[]
   client_doctor client_doctor[]
   debt          debt[]
-  user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user")
-  local         local?
+  user_data     user_data       @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user_doctor")
+  local         local[]
 
-  @@index([id_user_FK], map: "user_data_fk_idx")
-  @@index([id_local_FK], map: "local_fk_idx")
+  @@index([id_user_FK], map: "fk_user_doctor_idx")
+  @@index([id_local_FK], map: "fk_local_doctor_idx")
 }
 
 model employee {
@@ -37,10 +37,11 @@ model employee {
   charge       String?   @db.VarChar(45)
   study_level  String?   @db.MediumText
   document     Bytes?    @db.MediumBlob
-  local        local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_employee_FK")
-  user_data    user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "id_user_FK")
+  local        local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "fk_local_employee")
+  user_data    user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user_employee")
 
-  @@index([id_user_FK], map: "id_user_FK_idx")
+  @@index([id_user_FK], map: "fk_user_employee_idx")
+  @@index([id_local_FK], map: "fk_local_employee_idx")
 }
 
 model inventory {
@@ -58,15 +59,15 @@ model inventory {
   minimum_stock    Int?
   maximum_stock    Int?
   observation      String?   @db.LongText
-  local            local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "id_inventory_FK")
+  local            local     @relation(fields: [id_local_FK], references: [id_local], onUpdate: Restrict, map: "fk_local_inventory")
 
-  @@index([id_local_FK], map: "id_inventory_FK_idx")
+  @@index([id_local_FK], map: "fk_local_inventory_idx")
 }
 
 model local {
   id              Int            @id @unique(map: "id_UNIQUE") @default(autoincrement())
   id_local        String         @unique(map: "id_local_UNIQUE") @default(uuid())
-  id_doctor_FK     String        @unique(map: "id_doctor_FK_UNIQUE")
+  id_doctor_FK    String         @unique(map: "id_doctor_FK_UNIQUE")
   name            String         @db.VarChar(75)
   address         String?        @db.LongText
   map             String?        @db.MediumText
@@ -77,9 +78,9 @@ model local {
   appointment     appointment[]
   employee        employee?
   inventory       inventory?
-  owner           doctor      @relation(fields: [id_doctor_FK], references: [id_doctor], onUpdate: Restrict, map: "id_doctor_FK")
+  owner           doctor          @relation(fields: [id_doctor_FK], references: [id_doctor], onUpdate: Restrict, map: "fk_doctor_local")
 
-  @@index([id_doctor_FK], map: "id_doctor_FK_idx")
+  @@index([id_doctor_FK], map: "fk_doctor_local_idx")
 }
 
 model user_data {
@@ -125,13 +126,13 @@ model appointment {
   hour              DateTime?  @db.Time(0)
   subject           String?    @db.MediumText
   status            String?    @db.VarChar(45)
-  user_data         user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "client")
-  doctor            doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "doctor")
-  local             local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "local")
+  user_data         user_data  @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user_appointment")
+  doctor            doctor?    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "fk_doctor_appointment")
+  local             local?     @relation(fields: [id_local_FK], references: [id_local], onDelete: NoAction, onUpdate: NoAction, map: "fk_local_appointment")
 
-  @@index([id_doctor_FK], map: "doctor_idx")
-  @@index([id_local_FK], map: "local_idx")
-  @@index([id_user_FK], map: "client_idx")
+  @@index([id_doctor_FK], map: "fk_doctor_appointment_idx")
+  @@index([id_local_FK], map: "fk_local_appointment_idx")
+  @@index([id_user_FK], map: "fk_user_appointment_idx")
 }
 
 model client {
@@ -146,20 +147,20 @@ model client {
   radiographs             Bytes?    @db.MediumBlob
   photo_history           Bytes?    @db.MediumBlob
   medical_conditions      Bytes?
-  user_data               user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_id_user")
+  user_data               user_data @relation(fields: [id_user_FK], references: [id_user], onUpdate: Restrict, map: "fk_user_client")
 
-  @@index([id_user_FK], map: "fk_id_user_idx")
+  @@index([id_user_FK], map: "fk_user_client_idx")
 }
 
 model client_doctor {
   id           Int       @id @unique(map: "id_UNIQUE") @default(autoincrement())
   id_client_FK String
   id_doctor_FK String
-  client       user_data @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "idclient")
-  doctor       doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "iddoctor")
+  client       user_data @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "fk_client_clientdoctor")
+  doctor       doctor    @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "fk_doctor_clientdoctor")
 
-  @@index([id_doctor_FK], map: "id_doctor_FK_idx")
-  @@index([id_client_FK], map: "idclient_idx")
+  @@index([id_doctor_FK], map: "fk_doctor_clientdoctor_idx")
+  @@index([id_client_FK], map: "fk_client_clientdoctor_idx")
   @@map("client_doctor")
 }
 
@@ -170,13 +171,13 @@ model debt {
   amount_debt  Float      @db.Float
   id_doctor_FK String
   completed    String?    @db.TinyText
-  doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "ID_DOCTOR_FK")
-  client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "id_CLIENT_FK")
+  doctor       doctor     @relation(fields: [id_doctor_FK], references: [id_doctor], onDelete: NoAction, onUpdate: NoAction, map: "fk_doctor_debt")
+  client       user_data  @relation(fields: [id_client_FK], references: [id_user], onUpdate: Restrict, map: "fk_client_debt")
   payment      payment[]
   date         DateTime   @db.Date
 
-  @@index([id_doctor_FK], map: "ID_DOCTOR_FK_idx")
-  @@index([id_client_FK], map: "id_CLIENT_FK_idx")
+  @@index([id_doctor_FK], map: "fk_doctor_debt_idx")
+  @@index([id_client_FK], map: "fk_client_debt_idx")
 }
 
 model payment {
@@ -185,7 +186,7 @@ model payment {
   id_debt_fk  String
   amount      Float    @db.Float
   date        DateTime @db.Date
-  debt        debt     @relation(fields: [id_debt_fk], references: [id_debt], onDelete: NoAction, onUpdate: NoAction, map: "id_payment")
+  debt        debt     @relation(fields: [id_debt_fk], references: [id_debt], onDelete: NoAction, onUpdate: NoAction, map: "fk_debt_payment")
 
-  @@index([id_debt_fk], map: "id_payment_idx")
+  @@index([id_debt_fk], map: "fk_debt_payment_idx")
 }

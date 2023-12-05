@@ -6,7 +6,7 @@ Table doctor {
   id Int [pk, increment]
   id_doctor String [unique, not null]
   id_user_FK String [unique, not null]
-  id_local_FK String [unique, not null]
+  id_local_FK String [unique]
   license String
   specialty String
   school String
@@ -14,7 +14,7 @@ Table doctor {
   client_doctor client_doctor [not null]
   debt debt [not null]
   user_data user_data [not null]
-  local local
+  local local [not null]
 }
 
 Table employee {
@@ -165,7 +165,7 @@ Ref: employee.id_user_FK - user_data.id_user
 
 Ref: inventory.id_local_FK - local.id_local
 
-Ref: local.id_doctor_FK - doctor.id_doctor
+Ref: local.id_doctor_FK > doctor.id_doctor
 
 Ref: appointment.id_user_FK > user_data.id_user
 
