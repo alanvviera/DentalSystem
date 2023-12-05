@@ -15,7 +15,7 @@ type ClinicsCardProps = {
 
 const ClinicsCard = ({ headers, items, baseLink, addButtonLink, moreButtonLink, itemId, showItemsId}:ClinicsCardProps) => (
     <CustomCard title="Clínicas" showAddButton addButtonLink={addButtonLink} moreButtonLink={moreButtonLink} showMoreButton moreButtonPosition='bottom'>
-      {items.length > 0 ? (<TableScrollContainer type="native" minWidth={500}>
+      {items.length > 0 ? (<TableScrollContainer type="native" minWidth={200}>
           <CustomTable headers={headers} items={items} baseLink={baseLink} itemId={itemId} showItemId={showItemsId} />
         </TableScrollContainer>) : (
           <Text>Sin elementos para mostrar</Text>

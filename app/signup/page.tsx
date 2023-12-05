@@ -17,6 +17,7 @@ import DoctorForm from "../../components/signup-form/DoctorForm";
 import { useDisclosure } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ClientForm from "../../components/signup-form/ClientForm";
 
 const SignUpPage = () => {
   const session = useSession();
@@ -35,11 +36,17 @@ const SignUpPage = () => {
         zIndex={1000}
         overlayProps={{ radius: "sm", blur: 2 }}
       />
-      <Flex bg="gray.1" pos="relative" h="100%" direction="column" justify="center">
+      <Flex
+        bg="gray.1"
+        pos="relative"
+        h="100%"
+        direction="column"
+        justify="center"
+      >
         <Card
           style={{ overflowY: "auto" }}
           shadow="sm"
-          my={{base: "0", md:"30px"}}
+          my={{ base: "0", md: "30px" }}
           mx="auto"
           padding="lg"
           radius="md"
@@ -58,14 +65,20 @@ const SignUpPage = () => {
                 size="md"
                 //variant="unstyled"
                 maw="150px"
-                data={["Empleado", "Doctor"]}
+                data={["Empleado", "Doctor", "Cliente"]}
                 allowDeselect={false}
                 value={userForm}
                 onChange={setUserForm}
               />
             </Group>
           </Stack>
-          {userForm === "Empleado" ? <EmployeeForm spinner={{open, close}} /> : <DoctorForm spinner={{open, close}} />}
+          {userForm === "Empleado" ? (
+            <EmployeeForm spinner={{ open, close }} />
+          ) : userForm === "Cliente" ? (
+            <ClientForm spinner={{ open, close }} />
+          ) : (
+            <DoctorForm spinner={{ open, close }} />
+          )}
           <Card.Section mt="lg" inheritPadding>
             <Flex justify="center" gap={7}>
               <Text>Regresar al</Text>
