@@ -111,7 +111,7 @@ const DoctorForm = ({spinner}) => {
             undefined,
             undefined,
             undefined,
-            ["Masculino", "Femenino"]
+            ["Hombre", "Mujer"]
           ),
           new CustomInputMantine(
             "Especialidad *",
@@ -168,10 +168,6 @@ const DoctorForm = ({spinner}) => {
             })
           }
           else{
-            notifications.show({
-              title: email,
-              message: "Usuario creado exitosamente.",
-            })
             const responseNextAuth = await signIn("credentials", {
               email,
               password,
@@ -181,6 +177,10 @@ const DoctorForm = ({spinner}) => {
               setError("Error al generar la sesión. Vuelve a intentarlo más tarde.");
             }
             else{
+              notifications.show({
+                title: "Usuario creado exitosamente",
+                message: "Redirigiendo a menu...",
+              })
               router.push("/menu");
             }
           }
