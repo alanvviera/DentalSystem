@@ -1,13 +1,23 @@
 import React from 'react'
 import ClientId from '../../../../../../components/employee-menu/clinics/[clinic-id]/clients/[client-id]/ClientId';
 import fakeTypeUser from '../../../../../../constants/fakeTypeUser';
+import { getServerSession } from 'next-auth';
+import SkeletonForm from '../../../../../../components/custom-skeleton/SkeletonForm';
+import { authOptions } from '../../../../../api/auth/[...nextauth]/route';
 
 
-const page = ({ params }) => {
-    
+const page = async ({ params }) => {
+
     const clinicId = params["clinic-id"];
-    const typeUser = fakeTypeUser;
 
+    const session = await getServerSession(authOptions);
+    const { user: { name, email, type_user } } = session;
+
+    if ( !session) {
+        return <SkeletonForm />
+    }
+
+    const typeUser = session.user?.type_user;
 
     if (typeUser === "EMPLOYEE") {
         return <ClientId clinicId={clinicId} />
