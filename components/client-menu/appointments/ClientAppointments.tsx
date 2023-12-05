@@ -13,24 +13,26 @@ type Appoint = {
   doctor_name: string;
 };
 
-const ClientAppointments = () => {
-  const [appointmentsPending, setAppointmentsPending] = useState<Appoint[]>([]);
-  const [appointmentsCompleted, setAppointmentsCompleted] = useState<Appoint[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/clientcheckappointment"); // Reemplaza "/tu-endpoint" con la URL correcta
-        const data = await response.json();
-        setAppointmentsPending(data.appointmentsPending);
-        setAppointmentsCompleted(data.appointmentsCompleted);
-      } catch (error) {
-        console.error("Error al obtener datos:", error);
+
+const ClientAppointments = async () => {
+
+
+  const getData = async () => {
+    try {
+      const response = await fetch("/api/clientcheckappointment"); // Reemplaza "/tu-endpoint" con la URL correcta
+      const data = await response.json();
+      return {
+        appointmentsPending: data.appointmentsPending,
+        appointmentsCompleted: data.appointmentsCompleted
       }
-    };
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+      throw new Error(error);
+    }
+  }
 
-    fetchData();
-  }, []); // El array vacío [] asegura que la solicitud se realice solo una vez al montar el componente
+  const { appointmentsPending, appointmentsCompleted } = await getData();
 
   return (
     <div style={{ margin: "20px" }}>
