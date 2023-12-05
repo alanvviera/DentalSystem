@@ -27,21 +27,21 @@ const getData = () => {
   return {
     user: { name: "Usuario uno", email: "example@contoso.com", role: "Doctor" },
     pendingAppointments: [
-      { id: 2347, client: "Jack Storm", type: "Capacitacion", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Juan Manuel Lopez Perez", type: "Cita medica", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Matilda Castro", type: "Cita medica", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Gilabert Torres", type: "Servicios", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Maria", type: "Cita medica", date: "19/10/2023", hour: "10:30" }],
+      { id: 2347, client: "Paulino Casals", type: "Capacitación", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Carme Acuña", type: "Cita médico", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Aurelio Amador", type: "Cita médico", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Marino Castaño", type: "Servicios", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Debora Arenas", type: "Cita médico", date: "19/10/2023", hour: "10:30" }],
     appointments: [
-      { id: 2347, client: "Jack Storm", type: "Capacitacion", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Juan Manuel Lopez Perez", type: "Cita medica", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Matilda Castro", type: "Cita medica", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Gilabert Torres", type: "Servicios", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Maria", type: "Cita medica", date: "19/10/2023", hour: "10:30" },
+      { id: 2347, client: "Alessandro Tomas", type: "Capacitación", date: "04/01/2024", hour: "10:30" },
+      { id: 2677, client: "Vicente Jose Tomas", type: "Cita médico", date: "20/12/2023", hour: "11:30" },
+      { id: 8920, client: "Zoe Sacristan", type: "Cita médico", date: "16/11/2023", hour: "09:30" },
+      { id: 4839, client: "Emiliano Mir", type: "Servicios", date: "23/10/2023", hour: "14:20" },
+      { id: 5931, client: "Trinidad Barranco", type: "Cita médico", date: "19/10/2023", hour: "10:30" },
     ],
     clinics: [
-      { id: 2347, name: "Clinica uno" },
-      { id: 2347, name: "Clinica dos" },
+      { id: 2347, name: "Bienestar dental" },
+      { id: 2347, name: "Dental solutions" },
     ]
   };
 }
