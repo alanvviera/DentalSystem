@@ -129,26 +129,33 @@ Menú principal.
 El proceso inició con la creación de esbozos detallados para cada pantalla de usuario. Con el objetivo de facilitar la comprensión y la asignación de tareas, se dividió el conjunto de pantallas en diferentes escenarios: el inicio de sesión, registro de usuarios, las vistas destinadas a clientes y las destinadas a empleados, estas últimas compartidas con los doctores. Se destacó especialmente la gestión de las clínicas por parte de doctores y empleados como una actividad fundamental, abordándola como un caso aparte.
 
 ![Menu Demostrativo de Clinica](/images/Imagen2.png)
+
 Bosquejo de las pantallas del inicio de sesión.
 
 ![Menu Demostrativo de Clinica](/images/Imagen3.png)
+
 Bosquejo de la pantalla de registro de empleados y doctores.
 
 ![Menu Demostrativo de Clinica](/images/Imagen4.png)
+
 Bosquejo de las pantallas destinadas al cliente.
 
 ![Menu Demostrativo de Clinica](/images/Imagen5.png)
+
 Bosquejo de las pantallas destinadas a los empleados y doctores.
 
 ![Menu Demostrativo de Clinica](/images/Imagen6.png)
+
 Bosquejo de las pantallas de administración de clínica.
 
 Se adoptó una estrategia fundamentada en la filosofía "Mobile First", destacando la prioridad dada a la responsividad del diseño. Este enfoque se materializó inicialmente mediante la elaboración de esquemas concebidos para la visualización en dispositivos móviles, para luego adaptar de manera cuidadosa estos bosquejos a pantallas de mayor tamaño. La consideración meticulosa de la experiencia del usuario en dispositivos móviles no solo garantizó una presentación eficiente en estas plataformas, sino que también facilitó una transición fluida y coherente a pantallas más grandes.
 
 ![Menu Demostrativo de Clinica](/images/Imagen7.png)
+
 Menú principal en modo escritorio.
 
 ![Menu Demostrativo de Clinica](/images/Imagen8.png)
+
 Menú principal en modo móvil.
 
 La fase subsiguiente implicó la maquetación de las pantallas previamente esbozadas. Con el objetivo de acelerar el desarrollo y facilitar la corrección de errores, se desarrollaron componentes reutilizables para aquellas pantallas con diseños similares, como formularios, el panel principal y el menú de navegación.
