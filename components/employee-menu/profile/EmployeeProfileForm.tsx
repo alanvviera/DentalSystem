@@ -14,6 +14,7 @@ import {
 import CustomInputMantine, {
   typeInputForm,
 } from "../../mantine-form/customMantineInput";
+import { doctorInfo } from "../../../constants/constants";
 
 const EmployeeProfileForm = ({ profile }) => {
   return (
@@ -23,18 +24,27 @@ const EmployeeProfileForm = ({ profile }) => {
         initialValuesForKeys={profile}
         validateForKeys={{
           name: validateName,
+          last_name: validateName,
           email: validateEmail,
           phone: validateNumberTel,
           password: validatePassword,
           birthDate: validateDate,
           address: allValuesAvailable,
           license: allValuesAvailable,
+          speciality: allValuesAvailable,
+          school: allValuesAvailable
         }}
         listCustomInputMantine={[
           new CustomInputMantine(
-            "Nombre completo",
+            "Nombre",
             "",
             "name",
+            typeInputForm.TEXT
+          ),
+          new CustomInputMantine(
+            "Apellido",
+            "",
+            "last_name",
             typeInputForm.TEXT
           ),
           new CustomInputMantine(
@@ -55,7 +65,9 @@ const EmployeeProfileForm = ({ profile }) => {
             "",
             "birthDate",
             typeInputForm.DATEPICKER,
-            new Date(1701388800000)
+            new Date(profile.birthDate),
+            undefined,
+            undefined, undefined,
           ),
           new CustomInputMantine(
             "Dirección",
@@ -64,10 +76,34 @@ const EmployeeProfileForm = ({ profile }) => {
             typeInputForm.TEXT
           ),
           new CustomInputMantine(
+            "Especialidad *",
+            "Especialidad",
+            "specialty",
+            typeInputForm.SELECTITEMS,
+            undefined,
+            undefined,
+            undefined,
+            doctorInfo.SPECIALTIES
+          ),
+          new CustomInputMantine(
+            "Licencia médica *",
             "Licencia médica",
-            "",
             "license",
-            typeInputForm.TEXT
+            typeInputForm.SELECTITEMS,
+            undefined,
+            undefined,
+            undefined,
+            doctorInfo.MEDICAL_LICENSES
+          ),
+          new CustomInputMantine(
+            "Facultad *",
+            "Facultad",
+            "school",
+            typeInputForm.SELECTITEMS,
+            undefined,
+            undefined,
+            undefined,
+            doctorInfo.FACULTIES
           ),
         ]}
         onSubmit={(form: any) => {
@@ -76,11 +112,14 @@ const EmployeeProfileForm = ({ profile }) => {
           const {
             name,
             email,
+            last_name,
             phone,
             password,
             birthDate,
             address,
             license,
+            specialty,
+            school
           } = form.values;
           /*
           const response = await fetch(route, {
