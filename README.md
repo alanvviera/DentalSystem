@@ -4,9 +4,9 @@
 <br />
 
 <div align="center">
-  <h3 align="center">Dental System</h3>
+  <h3 align="center">ClinicMaster</h3>
   <p align="center">
-    Un sistema de Utilidad para Dentista
+    Un sistema de Utilidad para Dentista y mas.
   </p>
 </div>
 <!--TABLE OF CONTENTS-->
