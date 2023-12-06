@@ -12,7 +12,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export const metadata = {
   title: "Clinic Master",
   description:
-    "Plataforma tecnológica avanzada diseñada específicamente para satisfacer las necesidades de las clínicas modernas. Esta solución integral está destinada a mejorar la eficiencia operativa, agilizar la atención al paciente y permitir una administración efectiva de todos los aspectos relacionados con la práctica odontológica.",
+    "Plataforma tecnológica avanzada diseñada para satisfacer las necesidades de las clínicas modernas. Esta solución integral está destinada a mejorar la eficiencia operativa, agilizar la atención al paciente y permitir una administración efectiva de todos los aspectos relacionados con la práctica odontológica.",
 };
 
 export default function RootLayout({ children }) {
