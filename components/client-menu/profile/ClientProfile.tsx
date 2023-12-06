@@ -72,7 +72,6 @@ const ClientProfile = () => {
     getData().then((profile) => {
       const { userProfile } = profile;
       const { user_data } = userProfile;
-      console.log(profile)
       setdataProfile(
         {
           client: user_data.name,
@@ -83,7 +82,7 @@ const ClientProfile = () => {
           email: user_data.email ?? "angelo@gmail.com",
           phone_number: user_data.phone_number ?? "646-123-23-23",
           home_address: user_data.home_address ?? "Bella vista #23",
-          birthday: user_data.birthday != null ? user_data.birthday.getTime() : 944463754000,
+          birthday: user_data.birthday != null ? new Date(user_data.birthday).getTime() : 944463754000,
           gender: user_data.gender ?? "Hombre",
           password: user_data.password
         }

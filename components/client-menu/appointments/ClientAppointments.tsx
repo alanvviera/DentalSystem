@@ -4,6 +4,7 @@ import TilesSection from "../../tiles-viewer/TileSection";
 import CustomTile from "../../tiles-viewer/CustomTile";
 import { Title, Group, Button } from "@mantine/core";
 import { PlusOutlined } from "@ant-design/icons";
+import { checkEnvironment } from "../../../libs/checkEnvironment";
 
 type Appoint = {
   id: number;
@@ -19,8 +20,17 @@ const ClientAppointments = async () => {
 
 
   const getData = async () => {
+
+    const url = `${checkEnvironment()}/api/clientcheckappointment`;
     try {
-      const response = await fetch("/api/clientcheckappointment"); // Reemplaza "/tu-endpoint" con la URL correcta
+      const response = await fetch(url, {
+        method: "GET", // o "POST" si lo prefieres
+        headers: {
+          "Content-Type": "application/json",
+          // Agrega cualquier encabezado adicional que pueda necesitar (como tokens de autorización, etc.)
+        }
+      }); // Reemplaza "/tu-endpoint" con la URL correcta
+
       const data = await response.json();
       return {
         appointmentsPending: data.appointmentsPending,
@@ -28,11 +38,15 @@ const ClientAppointments = async () => {
       }
     } catch (error) {
       console.error("Error al obtener datos:", error);
-      throw new Error(error);
+      return { appointmentsPending: undefined, appointmentsCompleted: undefined }
     }
   }
 
   const { appointmentsPending, appointmentsCompleted } = await getData();
+
+  if (!appointmentsPending || !appointmentsCompleted) {
+    return <p>Lo sentimos, ocurrió un error.</p>;
+  }
 
   return (
     <div style={{ margin: "20px" }}>
