@@ -4,7 +4,7 @@ import CustomCard from './CustomCard';
 
 type DebtCardProps = {
   data: {
-    debt: number;
+    debt?: number;
     date?: string;
   };
   moreButtonLink?: string;
