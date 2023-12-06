@@ -4,6 +4,7 @@ import ClientProfile from '../../../components/client-menu/profile/ClientProfile
 import SkeletonForm from '../../../components/custom-skeleton/SkeletonForm';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../api/auth/[...nextauth]/route';
+import DoctorProfile from '../../../components/employee-menu/profile/DoctorProfile';
 
 const page = async () => {
 
@@ -18,6 +19,9 @@ const page = async () => {
 
     if (typeUser === "EMPLOYEE") {
         return <EmployeeProfile />
+    }
+    else if (typeUser === "DOCTOR") {
+        return <DoctorProfile />
     }
     else {
         return <ClientProfile />

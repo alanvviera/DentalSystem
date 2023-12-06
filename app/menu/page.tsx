@@ -26,10 +26,10 @@ const page = () => {
     );
   }
   const typeUser = session.user?.type_user;
-  if (typeUser === "EMPLOYEE") {
+  if (typeUser === "EMPLOYEE" || typeUser==="DOCTOR") {
     return <EmployeeMenu user={session.user} />;
   } else {
-    return <ClienMenu />;
+    return <ClienMenu user={session.user}/>;
   }
 };
 

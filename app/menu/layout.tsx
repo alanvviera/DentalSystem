@@ -1,5 +1,5 @@
 import { NavMenu } from '../../components/nav-menu/NavMenu';
-import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined } from "@ant-design/icons"
+import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined, EditOutlined, MoneyCollectOutlined } from "@ant-design/icons"
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
@@ -64,7 +64,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         {
             title: "Perfil",
             url: "/menu/profile",
-            icon: <SettingOutlined />
+            icon: <EditOutlined />
         },
         {
             title: "Citas",
@@ -74,7 +74,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         {
             title: "Adeudo",
             url: "/menu/debt",
-            icon: <TagsOutlined />
+            icon: <MoneyCollectOutlined />
         },
         {
             title: "Historial clínico",
@@ -83,7 +83,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
         }
     ];
 
-    if (type_user === "EMPLOYEE") {
+    if (type_user === "EMPLOYEE" || type_user==="DOCTOR") {
         return (
             <NavMenu routes={routesEmployeeMenu} headerBg={'blue.5'}
                 headerTextColor={'white'} burgerColor={'white'} navbarBg={'gray.0'} navbarTextColor={'dark'}
@@ -96,7 +96,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
     else {
         return (
             <NavMenu routes={routesClientMenu} headerBg={'blue.5'}
-                headerTextColor={'white'} burgerColor={'dark'} navbarBg={'gray.1'} navbarTextColor={'dark'}
+                headerTextColor={'white'} burgerColor={'white'} navbarBg={'gray.1'} navbarTextColor={'dark'}
                 user={{name, email}}
             >
                 {children}

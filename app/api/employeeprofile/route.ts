@@ -11,14 +11,13 @@ export async function GET(req: NextRequest) {
     //const user = await req.json();
 
     //obtener datos del perfil del usuario
-    const userProfile = await prisma.doctor.findUnique({
+    const userProfile = await prisma.employee.findUnique({
         where: {
             id_user_FK: session.user.id
         },
         select : {
             user_data: true,
-            license: true,
-            school: true,  
+            study_level: true,  
         }
     })
 
@@ -46,7 +45,7 @@ export async function PUT (req: NextRequest) {
     } = await req.json();
 
     try {
-        const updatedProfile = await prisma.doctor.update({
+        const updatedProfile = await prisma.employee.update({
             where: { 
                 id_user_FK: session.user.id 
             },

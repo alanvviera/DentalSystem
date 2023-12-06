@@ -14,9 +14,9 @@ type Debt = {
 const getData = async (id: number) => {
   // Simulando la obtención de datos de una deuda específica
   const res = [
-    { id: 1, debt: 50, date: '2023-11-14', descripcion: 'Se realizo una limpieza completa' },
-    { id: 2, debt: 100, date: '2023-11-15', descripcion: 'Se realizaron distintas radiografias para diagnostico' },
-    { id: 3, debt: 150, date: '2023-11-15', descripcion: 'Se realizo extraccion dental de las muelas del juicio' },
+    { id: 1, debt: 1500, date: '2023-11-14', descripcion: 'Se realizo una limpieza completa' },
+    { id: 2, debt: 1500, date: '2023-11-15', descripcion: 'Se realizaron distintas radiografias para diagnostico' },
+    { id: 3, debt: 1500, date: '2023-11-15', descripcion: 'Se realizo extraccion dental de las muelas del juicio' },
   ].find(debt => debt.id === id);
 
   return res;

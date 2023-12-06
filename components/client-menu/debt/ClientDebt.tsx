@@ -23,7 +23,7 @@ const ClientDebt = () => {
       id: 1,
       title: "Limpieza Dental",
       imageUrl: "url1",
-      total: 150,
+      total: 1500,
       adeudo: 50,
       fechaHora: "2023-11-14 15:30",
     },
@@ -31,7 +31,7 @@ const ClientDebt = () => {
       id: 2,
       title: "Radiografías macilofacial ",
       imageUrl: "url1",
-      total: 150,
+      total: 1500,
       adeudo: 50,
       fechaHora: "2023-11-15 16:00",
     },
@@ -39,7 +39,7 @@ const ClientDebt = () => {
       id: 3,
       imageUrl: "url1",
       title: "Extracción Dental",
-      total: 150,
+      total: 405,
       adeudo: 50,
       fechaHora: "2023-11-15 16:00",
     },
@@ -47,11 +47,8 @@ const ClientDebt = () => {
 
   const debtData: DebtData = {
     debt: 3405,
-    date: "2023-02-04",
+    date: "2023-12-07",
   };
-
-  // Calcular la suma de los adeudos pendientes
-  const sumaAdeudos = upcomingAppointments.reduce((total, appt) => total + (appt.adeudo || 0), 0);
 
   return (
     <div>
@@ -61,7 +58,7 @@ const ClientDebt = () => {
       </Title>
       {/* Mostrar la suma de los adeudos pendientes */}
       <Title order={2} ta="center" style={{ color: '#333333' }}>
-        {`Total Adeudos: ${sumaAdeudos}`}
+        {`Total Adeudos: ${debtData.debt}`}
       </Title>
       {/* Mostrar las citas pendientes con CustomStack y CustomTile */}
       <Grid>
@@ -71,7 +68,6 @@ const ClientDebt = () => {
               baseLink={`/menu/debt/${appt.id}`}
               title={appt.title}
               topRightText={appt.fechaHora}
-              bottomRightText1={appt.adeudo && `Adeudo: ${appt.adeudo}`}
               bottomRightText2={appt.total && `Total: ${appt.total}`}
               topRightFontSize="20px"
               // Personalizar el tamaño de la fuente para bottomRightText1 y bottomRightText2

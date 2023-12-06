@@ -8,19 +8,17 @@ import { notifications } from "@mantine/notifications";
 
 const onSubmit = async (body) => {
   const bodyParse = {
- 
     name: body.client,
     last_name: body.last_name,
     email: body.email,
     password: body.password,
-    curp: body.curp,
     phone_number: body.phone_number,
     home_address: body.home_address,
     birthday: new Date(body.birthday),
     gender: body.gender
   };
 
-  const response = await fetch(`/api/clientprofile`, {
+  const response = await fetch(`/api/doctorprofile`, {
     method: "PUT",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(bodyParse),
@@ -45,7 +43,7 @@ const onSubmit = async (body) => {
 
 const getData = async () => {
   try {
-    const response = await fetch("/api/clientprofile", {
+    const response = await fetch("/api/doctorprofile", {
       method: "GET", // o "POST" si lo prefieres
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +62,7 @@ const getData = async () => {
   }
 }
 
-const ClientProfile = () => {
+const DoctorProfile = () => {
   const [dataProfile, setdataProfile] = useState(null);
 
   useEffect(() => {
@@ -135,5 +133,4 @@ const ClientProfile = () => {
   </div>
 };
 
-export default ClientProfile;
-
+export default DoctorProfile;
