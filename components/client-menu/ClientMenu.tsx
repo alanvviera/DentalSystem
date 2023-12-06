@@ -113,10 +113,12 @@ const ClienMenu = () => {
       ></ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
         <GridCol span={{ base: 12, sm: 12, lg: 4 }}>
-          <DebtCard
-            data={{ debt: dashboardData.lastDebt.debt, date: dashboardData.lastDebt.date }}
-            moreButtonLink="menu/debt"
-          />
+          {
+            (dashboardData.lastDebt != null) && <DebtCard
+              data={{ debt: dashboardData.lastDebt.debt, date: dashboardData.lastDebt.date }}
+              moreButtonLink="menu/debt"
+            />
+          }
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
           <AppointmentCard
