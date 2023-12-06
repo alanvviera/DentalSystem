@@ -107,7 +107,7 @@ export const NavMenu = ({
                 size="sm"
               />
               <Text fw={500} size="xl">
-                Sistema Dental
+                Clinic Master
               </Text>
             </Group>
             <Divider my={10} />

@@ -1,4 +1,3 @@
-import '@mantine/core/styles.css';
 import { NavMenu } from '../../components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined } from "@ant-design/icons"
 import { authOptions } from '../api/auth/[...nextauth]/route';
@@ -12,9 +11,9 @@ import { getServerSession } from 'next-auth';
  * @property {string} description - A description of the application.
  */
 export const metadata: object = {
-    title: 'Sistema dental',
+    title: 'Clinic Master',
     description:
-        'Menu de navegación para empleado.',
+        'Menu de navegación.',
 };
 
 /**
