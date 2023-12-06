@@ -8,54 +8,32 @@ import { ArrowLeftOutlined, EditFilled } from '@ant-design/icons';
 import VisualizeDataButton from '../../../visualize-data/buttonsData/VisualizeDataButton';
 import EmployeeAppointmentUpdate from '../../../employee-menu/appointments/EmployeeAppointmentUpdate';
 import LabelDataText from '../../../visualize-data/labelsData/LabelDataText';
+import { headers } from 'next/headers';
 
-
-
-type Appoint = {
-  id: number;
-  descripcion?: string;
-  fecha: string;
-  hora: string;
-  doctor: string;
-};
 
 const getData = async (id: number) => {
-  // Simulando la obtención de datos de una cita específica
-  const res = [
-    { id: 1, descripcion: 'Valoración ortodoncia', fecha: '2023-11-25', hora: '10:30', doctor: 'Eladio Carreon' },
-    { id: 2, descripcion: 'Extracción de muela', fecha: '2023-11-28', hora: '10:30', doctor: 'Duki Gonzales' },
-    { id: 5, descripcion: 'Radiografias dentales', fecha: '2023-12-01', hora: '11:30', doctor: 'Chalino Sanchez' },
-    { id: 3, descripcion: "Valoración ortodoncia", fecha: "2023-01-25", hora: "10:30", doctor: "Eladio Carreon" },
-    { id: 6, descripcion: "Extracción de muela", fecha: "2023-07-28", hora: "10:30", doctor: "Duki Gonzales" },
-    { id: 7, descripcion: "Radiografias dentales", fecha: "2023-05-01", hora: "11:30", doctor: "Chalino Sanchez" },
-  ].find(appointment => appointment.id == id);
+  try {
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/clientcheckappointment/${id}`, {
+      method: "GET", // o "POST" si lo prefieres
+      headers: headers(),
+    });
 
-  return res;
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error al realizar la solicitud:", error);
+  }
 };
 
 const ClientAppointmentDetails = async ({ appointmentId }) => {
-
-  const fetchData = async () => {
-    try {
-      // Obtener appointmentId desde location.pathname
-
-      if (isNaN(appointmentId)) {
-        throw new Error('Invalid appointmentId');
-      }
-
-      const res = await getData(appointmentId);
-
-      return {
-        appointment: res
-      }
-    } catch (error) {
-      console.error('Error obteniendo detalles de la cita', error);
-      throw new Error(error);
+    const clientData = await getData(appointmentId);
+    if(!clientData){
+      return <p>No tiene acceso a esta página.</p>
     }
-  }
-
-  try {
-    const { appointment } = await fetchData();
+    const { appointment } = clientData;
     return (
       <div style={{ marginLeft: "20px", marginRight: "20px" }}>
         <VisualizeData
@@ -75,20 +53,15 @@ const ClientAppointmentDetails = async ({ appointmentId }) => {
           content={
             <>
               <Title>Detalles de la cita</Title>
-              <LabelDataText title={appointment.descripcion} type="Procedimiento:" />
-              <LabelDataText title={appointment.fecha} type="Fecha:" />
+              <LabelDataText title={appointment.subject} type="Procedimiento:" />
+              <LabelDataText title={appointment.date} type="Fecha:" />
               <LabelDataText title={appointment.hora} type="Hora:" />
-              <LabelDataText title={appointment.doctor} type="Doctor Asignado:" />
+              <LabelDataText title={appointment.doctor_name} type="Atiende:" />
             </>
           }
         />
       </div>
     );
-
-  } catch (error) {
-    return <p>Cita no encontrada</p>;
-  }
-
 };
 
 export default ClientAppointmentDetails;

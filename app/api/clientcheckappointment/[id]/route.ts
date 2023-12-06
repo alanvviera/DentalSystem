@@ -10,10 +10,8 @@ export async function GET (req: NextRequest, {params: {id}}) {
   const session = await getServerSession(authOptions);
 
   try {
-    
-    
     const appointment = await prisma.appointment.findUnique({
-      where: { id_user_FK : session.user.id, id},
+      where: { id_user_FK : session.user.id, id: Number(id)},
       select: {
         doctor: true,
         id: true,

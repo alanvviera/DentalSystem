@@ -55,17 +55,6 @@ import DebtCard from "../dashboard2/DebtCard";
 import ProfileBanner from "../dashboard2/ProfileBanner";
 import { Grid, GridCol } from "@mantine/core";
 
-type Appoint = {
-  descripcion?: string;
-  fecha: string;
-  hora: string;
-  doctor: string;
-};
-
-type DebtData = {
-  debt: number;
-  date: string;
-};
 
 const ClienMenu = () => {
   const headers = ["Tipo de cita", "Fecha", "Hora", "Doctor Asignado"];
@@ -100,12 +89,12 @@ const ClienMenu = () => {
     // Puedes mostrar un indicador de carga mientras se realiza la solicitud
     return <div>Cargando...</div>;
   }
-
+  console.log(dashboardData);
   return (
     <div>
       <ProfileBanner
-        title={`Bienvenido, ${dashboardData.name}`} // Asegúrate de tener la propiedad correcta
-        description=""
+        title={`${dashboardData.name}`} // Asegúrate de tener la propiedad correcta
+        description={`${dashboardData.email}`}
         showAvatar
         avatarImageUrl={null}
         showSettingsButton
@@ -113,19 +102,20 @@ const ClienMenu = () => {
       ></ProfileBanner>
       <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
         <GridCol span={{ base: 12, sm: 12, lg: 4 }}>
-          {
-            (dashboardData.lastDebt != null) && <DebtCard
-              data={{ debt: dashboardData.lastDebt.debt, date: dashboardData.lastDebt.date }}
+            <DebtCard
+              data={{
+                debt: 3405,
+                date: "2023-12-07",
+              }}
               moreButtonLink="menu/debt"
             />
-          }
         </GridCol>
         <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
           <AppointmentCard
             baseLink="/menu/appointments"
             moreButtonLink="/menu/appointments"
             addButtonLink="/menu/appointments/create"
-            itemId="position"
+            itemId="id_appointment"
             headers={headers}
             items={dashboardData.appointments}
           />

@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
           date,
           hour,
           subject,
+          status: "pending",
           id_doctor_FK,
           id_user_FK : session.user.id,
           id_local_FK,

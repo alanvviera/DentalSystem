@@ -8,7 +8,6 @@ import { notifications } from "@mantine/notifications";
 
 const onSubmit = async (body) => {
   const bodyParse = {
- 
     name: body.client,
     last_name: body.last_name,
     email: body.email,
@@ -87,6 +86,7 @@ const ClientProfile = () => {
           password: user_data.password
         }
       )
+      console.log(dataProfile);
     });
   }, [])
 

@@ -1,62 +1,58 @@
-"use client";
-import React from 'react';
-import MantineForm from '../../../mantine-form/MantineForm';
-import CustomInputMantine, { typeInputForm } from '../../../mantine-form/customMantineInput';
-import { allValuesAvailable, validateDate, validateName, validateNumber } from '../../../mantine-form/valuesValidate';
-import { Button, Title } from '@mantine/core';
-import { ArrowLeftOutlined } from '@ant-design/icons';
+import React from "react";
+import ClientAppointmentCreateForm from "../ClientAppointmentCreateForm";
+import {
+  CLINICLIST,
+  TYPELISTAPPOINTMENTS,
+} from "../../../../constants/constants";
+import { headers } from "next/headers";
 
-const ClientAppointmentCreate = () => (
-    <div className='m-5'>
-    <>
-    <Button
-      px={0}
-      component="a"
-      href="/menu/appointments"
-      leftSection={<ArrowLeftOutlined />}
-      variant="subtle"
-    >
-      Volver a Citas
-    </Button>
-    <Title>Programar cita</Title>
-        <MantineForm
-            initialValuesForKeys={{
-                client: "",
-                clinic: "",
-                appointmentType: "",
-                nameDentist: "",
-                date: "",
-                hours: "",
-                description: ""
-            }}
-            validateForKeys={{
-                client: validateName,
-                clinic: allValuesAvailable,
-                appointmentType: allValuesAvailable,
-                nameDentist: validateName,
-                date: validateDate,
-                hours: validateNumber,
-                description: allValuesAvailable
-            }}
-            listCustomInputMantine={[
-                new CustomInputMantine("Nombre del paciente", "Un nombre", "client", typeInputForm.TEXT),
-                new CustomInputMantine("Nombre de la clinica", "Clinica", "clinic", typeInputForm.TEXT),
-                new CustomInputMantine("Tipo de la cita", "Tipo de la cita", "appointmentType", typeInputForm.TEXT),
-                new CustomInputMantine("Nombre del dentista", "El nombre del dentista", "nameDentist", typeInputForm.TEXT),
-                new CustomInputMantine("Fecha", "Fecha", "date", typeInputForm.DATEPICKER),
-                new CustomInputMantine("Hora", "Hora", "hours", typeInputForm.DATETIME),
-                new CustomInputMantine("Descripción", "Descripción de la cita", "description", typeInputForm.TEXT),
-            ]}
-            onSubmit={(form: any) => {
-                // All fields were validated
-                console.log(form.values);
-                form.setInitialValues();
-            }}
-            labelSubmit='Crear'
-        />
-        </>
-    </div>
-);
+const getData = async () => {
+  //const res = await fetch(`route/${id}`);
+  const typeList = [...TYPELISTAPPOINTMENTS];
+  try {
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/doctorlist`, {
+      method: "GET",
+      headers: headers(),
+    });
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const { doctorList } = await response.json();
+    const doctorData = doctorList.map(
+      (doctor) => ({label: doctor.user_data.name + " " + doctor.user_data.last_name, value: doctor.id_doctor})
+    );
+
+    const response2 = await fetch(
+      `${process.env.NEXTAUTH_URL}/api/cliniclist`,
+      {
+        method: "GET",
+        headers: headers(),
+      }
+    );
+    if (!response2.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const { doctorList: clinicData } = await response2.json();
+    const clinicList = clinicData.map((clinic) => ({label: clinic.name, value: clinic.id_local}));
+
+    return { clinicList, typeList, doctorData};
+  } catch (error) {
+    console.error("Error al realizar la solicitud:", error);
+  }
+};
+
+const ClientAppointmentCreate = async () => {
+  const { clinicList, typeList, doctorData} =
+    await getData();
+  return (
+    <main style={{ marginLeft: "20px", marginRight: "20px" }}>
+      <ClientAppointmentCreateForm
+        doctorList={doctorData}
+        clinicList={clinicList}
+        typeList={typeList}
+      />
+    </main>
+  );
+};
 
 export default ClientAppointmentCreate;
-

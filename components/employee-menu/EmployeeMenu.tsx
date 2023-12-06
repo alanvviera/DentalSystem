@@ -1,80 +1,72 @@
-import { CLINICLIST } from "../../constants/constants";
+"use client"
+import React, { useState, useEffect } from "react";
 import AppointmentCard from "../dashboard2/AppointmentCard";
-import ClinicsCard from "../dashboard2/ClinicsCard";
-import PendingAppointmentsCard from "../dashboard2/PendingAppointmentsCard";
 import ProfileBanner from "../dashboard2/ProfileBanner";
-import { Grid, GridCol, Text } from "@mantine/core";
-import React from "react";
+import { Grid, GridCol } from "@mantine/core";
+import ClinicsCard from "../dashboard2/ClinicsCard";
 
-type Appointment = {
-  id: number;
-  client: string;
-  type: string;
-  date: string;
-  hour: string;
-}
+const EmployeeMenu = ({user}) => {
+  const headers = ["Tipo de cita", "Fecha", "Hora", "Doctor Asignado"];
+  const [dashboardData, setDashboardData] = useState<any>(null); // Usar el tipo correcto si es posible
 
-type Clinic = {
-  id: number;
-  name: string;
-}
-type User = {
-  name: string;
-  email: string;
-  role: string;
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/doctordashboard", {
+          method: "GET", // o "POST" si lo prefieres
+          headers: {
+            "Content-Type": "application/json",
+            // Agrega cualquier encabezado adicional que pueda necesitar (como tokens de autorización, etc.)
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+        const data = await response.json();
+        setDashboardData(data.dashboardData);
+      } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-const getData = () => {
-  return {
-    user: { name: "Usuario uno", email: "example@contoso.com", role: "Doctor" },
-    pendingAppointments: [
-      { id: 2347, client: "Paulino Casals", type: "Examen dental de rutina", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Carme Acuña", type: "Blanqueamiento dental", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Aurelio Amador", type: "Tratamientos de conducto", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Marino Castaño", type: "Tratamiento de caries", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Debora Arenas", type: "Implantes dentales", date: "19/10/2023", hour: "10:30" }],
-    appointments: [
-      { id: 2347, client: "Alessandro Tomas", type: "Blanqueamiento dental", date: "04/01/2024", hour: "10:30" },
-      { id: 2677, client: "Vicente Jose Tomas", type: "Tratamientos de conducto", date: "20/12/2023", hour: "11:30" },
-      { id: 8920, client: "Zoe Sacristan", type: "Tratamientos de conducto", date: "16/11/2023", hour: "09:30" },
-      { id: 4839, client: "Emiliano Mir", type: "Tratamiento de caries", date: "23/10/2023", hour: "14:20" },
-      { id: 5931, client: "Trinidad Barranco", type: "Colocación de brackets o aparatos ortodónticos", date: "19/10/2023", hour: "10:30" },
-    ],
-    clinics: CLINICLIST.map((value, index) => {
-      return { id: 2347 + index, name: value };
-    })
-  };
-}
-
-const EmployeeMenu = ({ user }) => {
-  const { appointments, pendingAppointments, clinics } = getData();
-  const { name, email, type_user } = user;
-
-  const topPendingAppointments = pendingAppointments.map((appointment) =>
-    ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
-  const topAppointments = appointments.map((appointment) =>
-    ({ id: appointment.id, client: appointment.client, type: appointment.type, date: appointment.date, hour: appointment.hour }));
-  const topClinics = clinics.map((clinic) => ({ id: clinic.id, name: clinic.name }));
-
-  const appointmentHeaders = ["Cliente", "Tipo", "Fecha", "Hora"];
-  const clinicHeaders = ["Nombre"];
-
+  if (!dashboardData) {
+    // Puedes mostrar un indicador de carga mientras se realiza la solicitud
+    return <div>Cargando...</div>;
+  }
   return (
-    <main>
-      <ProfileBanner title={`${name}`} description={`${email} `} showAvatar avatarImageUrl={null} showSettingsButton settingsLink="/menu/profile">
-      </ProfileBanner>
-      <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "lg" }}>
-        <GridCol span={{ base: 12, md: 6, lg: 12 }}>
-          <PendingAppointmentsCard headers={appointmentHeaders} items={topPendingAppointments} baseLink="/menu/appointments" itemId="id" moreButtonLink="/menu/appointments" />
+    <div>
+      <ProfileBanner
+        title={`${user.name}`} // Asegúrate de tener la propiedad correcta
+        description={`${user.email}`}
+        showAvatar
+        avatarImageUrl={null}
+        showSettingsButton
+        settingsLink="/menu/profile"
+      ></ProfileBanner>
+      <Grid px="15px" py="20px" gutter={{ base: 10, xs: "md", md: "xl" }}>
+      <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
+          <ClinicsCard
+            baseLink="/menu/appointments"
+            moreButtonLink="/menu/appointments"
+            itemId="id_appointment"
+            headers={headers}
+            items={dashboardData.clinics}
+          />
         </GridCol>
-        <GridCol span={{ base: 12, md: 6, lg: 6 }}>
-          <AppointmentCard headers={appointmentHeaders} items={topAppointments} baseLink="/menu/appointments" itemId="id" moreButtonLink="/menu/appointments" addButtonLink="/menu/appointments/create" />
-        </GridCol>
-        <GridCol span={{ base: 12, md: 12, lg: 6 }}>
-          <ClinicsCard headers={clinicHeaders} items={topClinics} baseLink="/menu/clinics" itemId="id" moreButtonLink="/menu/clinics" addButtonLink="/menu/clinics/register" />
+        <GridCol span={{ base: 12, sm: 6, lg: 8 }}>
+          <AppointmentCard
+            baseLink="/menu/appointments"
+            moreButtonLink="/menu/appointments"
+            addButtonLink="/menu/appointments/create"
+            itemId="id_appointment"
+            headers={headers}
+            items={dashboardData.appointments}
+          />
         </GridCol>
       </Grid>
-    </main>
+    </div>
   );
 };
 

@@ -4,7 +4,8 @@ import TilesSection from "../../tiles-viewer/TileSection";
 import CustomTile from "../../tiles-viewer/CustomTile";
 import { Title, Group, Button } from "@mantine/core";
 import { PlusOutlined } from "@ant-design/icons";
-import { checkEnvironment } from "../../../libs/checkEnvironment";
+import { headers } from "next/headers";
+import CustomStack from "../../tiles-viewer/CustomStack";
 
 type Appoint = {
   id: number;
@@ -14,37 +15,44 @@ type Appoint = {
   doctor_name: string;
 };
 
+const viewAppointments = (appt) => (
+  <CustomTile
+    key={appt.id}
+    baseLink={`/menu/appointments/${appt.id}`}
+    title={appt.client_name}
+    topRightText={`${new Date(appt.date).toLocaleDateString("es-mx", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })} - ${appt.hour}`}
+  />
+);
 
+const getData = async () => {
+  const url = `${process.env.NEXTAUTH_URL}/api/clientcheckappointment`;
+  try {
+    const response = await fetch(url, {
+      method: "GET", // o "POST" si lo prefieres
+      headers: headers(),
+    }); // Reemplaza "/tu-endpoint" con la URL correcta
+
+    const data = await response.json();
+    return {
+      appointmentsPending: data.appointmentsPending,
+      appointmentsCompleted: data.appointmentsCompleted,
+      appointmentsCancel: data.appointmentsCancel,
+    };
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    return { appointmentsPending: undefined, appointmentsCompleted: undefined };
+  }
+};
 
 const ClientAppointments = async () => {
+  const { appointmentsCancel, appointmentsPending, appointmentsCompleted } = await getData();
 
-
-  const getData = async () => {
-
-    const url = `${checkEnvironment()}/api/clientcheckappointment`;
-    try {
-      const response = await fetch(url, {
-        method: "GET", // o "POST" si lo prefieres
-        headers: {
-          "Content-Type": "application/json",
-          // Agrega cualquier encabezado adicional que pueda necesitar (como tokens de autorización, etc.)
-        }
-      }); // Reemplaza "/tu-endpoint" con la URL correcta
-
-      const data = await response.json();
-      return {
-        appointmentsPending: data.appointmentsPending,
-        appointmentsCompleted: data.appointmentsCompleted
-      }
-    } catch (error) {
-      console.error("Error al obtener datos:", error);
-      return { appointmentsPending: undefined, appointmentsCompleted: undefined }
-    }
-  }
-
-  const { appointmentsPending, appointmentsCompleted } = await getData();
-
-  if (!appointmentsPending || !appointmentsCompleted) {
+  if (!appointmentsCancel || !appointmentsPending || !appointmentsCompleted) {
     return <p>Lo sentimos, ocurrió un error.</p>;
   }
 
@@ -62,55 +70,45 @@ const ClientAppointments = async () => {
       </Group>
       <TilesSection title="Pendientes" />
       <Grid>
-        {appointmentsPending.map((appt: Appoint, index: number) => (
-          <GridCol span={12} key={index}>
-            <CustomTile
-              key={index}
-              title={appt.descripcion || ""}
-              baseLink={`/menu/appointments/${appt.id}`}
-            >
-              <Text size="md">
-                <strong>Fecha:</strong> {appt.fecha}
-              </Text>
-              <Text size="md">
-                <strong>Hora:</strong> {appt.hora}
-              </Text>
-              <Text size="md">
-                <strong>Doctor Asignado:</strong> {appt.doctor_name}
-              </Text>
-            </CustomTile>
-          </GridCol>
-        ))}
+        {appointmentsPending.length > 0 ? (
+          <CustomStack>
+            {appointmentsPending.map((appt) => viewAppointments(appt))}
+          </CustomStack>
+        ) : (
+          <Text size="xl" fw={500} ml={10} c="gray.7">
+            No hay citas pendientes
+          </Text>
+        )}
       </Grid>
       <TilesSection title="Realizadas" />
       <Grid>
-        {appointmentsCompleted.map((appt: Appoint, index: number) => (
-          <GridCol span={12} key={index}>
-            <CustomTile
-              key={index}
-              title={appt.descripcion || ""}
-              baseLink={`/menu/appointments/${appt.id}`}
-            >
-              <Text size="md">
-                <strong>Fecha:</strong> {appt.fecha}
-              </Text>
-              <Text size="md">
-                <strong>Hora:</strong> {appt.hora}
-              </Text>
-              <Text size="md">
-                <strong>Doctor Asignado:</strong> {appt.doctor_name}
-              </Text>
-            </CustomTile>
-          </GridCol>
-        ))}
+        {appointmentsCompleted.length > 0 ? (
+          <CustomStack>
+            {appointmentsCompleted.map((appt) => viewAppointments(appt))}
+          </CustomStack>
+        ) : (
+          <Text size="xl" fw={500} ml={10} c="gray.7">
+            No hay citas pendientes
+          </Text>
+        )}
+      </Grid>
+      <TilesSection title="Canceladas" />
+      <Grid>
+        {appointmentsCancel.length > 0 ? (
+          <CustomStack>
+            {appointmentsCancel.map((appt) => viewAppointments(appt))}
+          </CustomStack>
+        ) : (
+          <Text size="xl" fw={500} ml={10} c="gray.7">
+            No hay citas pendientes
+          </Text>
+        )}
       </Grid>
     </div>
   );
 };
 
 export default ClientAppointments;
-
-
 
 /*import { Grid, GridCol, Text } from "@mantine/core";
 import React from "react";
