@@ -16,12 +16,14 @@ export async function POST (req: NextRequest){
             home_address,
             birthday,
             gender,
+            charge,
+            study_level
         } = await req.json();
 
         const existingUser = await prisma.user_data.findUnique({ where: { email } });
 
         // Validación de datos de entrada
-        if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender) {
+        if (!name || !last_name|| !email || !password || !phone_number || !home_address || !birthday || !gender || !charge || !study_level) {
             return NextResponse.json({ error: 'Todos los campos son obligatorios.' }, { status: 400 });
         }
 
@@ -32,18 +34,24 @@ export async function POST (req: NextRequest){
 
         const hashedPassword = bcrypt.hashSync(password, 10);
     
-        const newUser = await prisma.user_data.create({
+        const newUser = await prisma.employee.create({
             data: {
-                //id_user, es un dato generado de manera aleatoria
-                name,
-                last_name,
-                email,
-                password: hashedPassword,
-                phone_number,
-                home_address,
-                birthday,
-                gender,
-                type_user: 'EMPLOYEE'
+                charge,
+                study_level,
+                user_data: {
+                    create: {
+                        //id_user, es un dato generado de manera aleatoria
+                        name,
+                        last_name,
+                        email,
+                        password: hashedPassword,
+                        phone_number,
+                        home_address,
+                        birthday,
+                        gender,
+                        type_user: 'EMPLOYEE'
+                    }
+                },
             },
         });
         
