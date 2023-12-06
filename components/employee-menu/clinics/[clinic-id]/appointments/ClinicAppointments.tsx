@@ -10,24 +10,24 @@ import { dateToString } from '../../../../../utils/parseDates';
 const getData = async () => {
     return [
         {
-            idClient: "dsdaxXe2mmadfasd23",
-            name: "Son goku",
-            date: new Date(1592712920000)
+            idClient: "238umj02x214db23",
+            name: "José Gonzalez",
+            date: new Date(1701996588000)
         },
         {
-            idClient: "xmLñ23%42dax62321f",
-            name: "Broly",
-            date: new Date(1638077001000)
+            idClient: "2893u9u3v2544a23",
+            name: "Alicia Martinez",
+            date: new Date(1702018188000)
         },
         {
-            idClient: "KbVrrox156134&52-23sx",
-            name: "Gohan",
-            date: new Date(1638077001000)
+            idClient: "2652b23adw424453",
+            name: "María Gomez",
+            date: new Date(1702099848000)
         },
         {
-            idClient: "Xmendsa323232aXkmk2ñ5.lplm",
-            name: "Goten's",
-            date: new Date(1638077001000)
+            idClient: "34dv5645323412s",
+            name: "Martín Suarez",
+            date: new Date(1702177200000)
         }
 
     ];
