@@ -1,18 +1,63 @@
 "use client";
 import React from 'react';
-import { Button, Flex, Title , Text} from "@mantine/core";
+import { Button, Flex, Title, Text } from "@mantine/core";
 import { ArrowLeftOutlined, DeleteFilled } from "@ant-design/icons";
 import MantineForm from '../../../../../mantine-form/MantineForm';
 import { validaFieldsNotEmpty, validateDate, validateNumber, } from '../../../../../mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../mantine-form/customMantineInput';
 import { modals, } from '@mantine/modals';
+import { CLINICLIST, TYPELISTAPPOINTMENTS } from '../../../../../../constants/constants';
 
 
 const getData = async (clinicId, appointmentId) => {
-    const dataClinict = {
-        listClinics: ["Clinica lopez", "Clinica mariano"],
-        listTypeAppointments: ["Extracción de muelas", "Limpieza dental"],
-    };
+
+    const listAppointments = [
+        {
+            idAppointment: "238umj02x214db23",
+            nameClient: "José Gonzalez",
+            selectClinic: "Dental solutions",
+            typeAppointment: "Limpieza dental",
+            dateAppointment: new Date(1701996588000).getTime(),
+            timeAppointment: new Date(2940000).getTime(),
+            description: "El paciente es alérgico al paracetamol",
+            nameDentist: "Julio Flores",
+        },
+        {
+            idAppointment: "2893u9u3v2544a23",
+            nameClient: "Alicia Martinez",
+            selectClinic: "Dental solutions",
+            typeAppointment: "Tratamiento de caries",
+            dateAppointment: new Date(1702018188000).getTime(),
+            timeAppointment: new Date(24540000).getTime(),
+            description: "Paciente con primer molar infectada",
+            nameDentist: "Graciela Rodriguez",
+        },
+        {
+            idAppointment: "2652b23adw424453",
+            nameClient: "María Gomez",
+            selectClinic: "Dental solutions",
+            typeAppointment: "Blanqueamiento dental",
+            dateAppointment: new Date(1702099848000).getTime(),
+            timeAppointment: new Date(19800000).getTime(),
+            description: "Blanqueamiento dental con tratamiento no invasivo",
+            nameDentist: "Natalia Gomez",
+        },
+        {
+            idAppointment: "34dv5645323412s",
+            nameClient: "Martín Suarez",
+            dateAppointment: new Date(1702177200000),
+            selectClinic: "Dental solutions",
+            typeAppointment: "Implantes dentales",
+            timeAppointment: new Date(10800000).getTime(),
+            description: "Implementación de implantes dentales con pernos metálicos",
+            nameDentist: "Julio Flores",
+        }
+
+    ];
+
+    const findAppointment = listAppointments.find((element) => {
+        return element.idAppointment === appointmentId
+    })
 
     const dataAppointment = {
         idAppointment: "dasdk20,30xa34a",
@@ -26,12 +71,15 @@ const getData = async (clinicId, appointmentId) => {
     }
 
     return {
-        dataClinict,
-        dataAppointment
+        dataClinict: {
+            listClinics: CLINICLIST,
+            listTypeAppointments: TYPELISTAPPOINTMENTS,
+        },
+        dataAppointment: findAppointment
     }
 }
 
-const ClinicAppointmentId = async ({clinicId,appointmentId}) => {
+const ClinicAppointmentId = async ({ clinicId, appointmentId }) => {
     // const clinicId = params["clinic-id"];
     // const appointmentId = params["appointment-id"];
 
@@ -50,19 +98,25 @@ const ClinicAppointmentId = async ({clinicId,appointmentId}) => {
     }
 
     const openDeleteModal = () =>
-    modals.openConfirmModal({
-        title: '¿Estas seguro de eliminar esta cita?',
-        centered: true,
-        children: (
-            <Text size="sm">
-                Esta opción no es reversible.
-            </Text>
-        ),
-        labels: { confirm: 'Eliminar cita', cancel: "Cancelar" },
-        confirmProps: { color: 'red' },
-        onCancel: () => { },
-        onConfirm: () => onDelete(),
-});
+        modals.openConfirmModal({
+            title: '¿Estas seguro de eliminar esta cita?',
+            centered: true,
+            children: (
+                <Text size="sm">
+                    Esta opción no es reversible.
+                </Text>
+            ),
+            labels: { confirm: 'Eliminar cita', cancel: "Cancelar" },
+            confirmProps: { color: 'red' },
+            onCancel: () => { },
+            onConfirm: () => onDelete(),
+        });
+
+    if (dataClinicExample.dataAppointment === undefined) {
+        return <main>
+            <p>{`No existe una cita con el ID: ${appointmentId}`}</p>
+        </main>
+    }
 
     return (
         <main style={{ margin: "20px" }}>
