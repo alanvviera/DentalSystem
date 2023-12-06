@@ -21,12 +21,11 @@ Table employee {
   id Int [pk, increment]
   id_employee String [unique, not null]
   id_user_FK String [unique, not null]
-  id_local_FK String [unique, not null]
   charge String
   study_level String
   document Bytes
-  local local [not null]
   user_data user_data [not null]
+  local local [not null]
 }
 
 Table inventory {
@@ -51,6 +50,7 @@ Table local {
   id Int [pk, increment]
   id_local String [unique, not null]
   id_doctor_FK String [unique, not null]
+  id_employee_FK String [unique, not null]
   name String [not null]
   address String
   map String
@@ -59,9 +59,9 @@ Table local {
   photos Bytes
   status String
   appointment appointment [not null]
-  employee employee
   inventory inventory
-  owner doctor [not null]
+  doctor doctor
+  employee employee
 }
 
 Table user_data {
@@ -159,13 +159,13 @@ Enum user_type {
 
 Ref: doctor.id_user_FK - user_data.id_user
 
-Ref: employee.id_local_FK - local.id_local
-
 Ref: employee.id_user_FK - user_data.id_user
 
 Ref: inventory.id_local_FK - local.id_local
 
 Ref: local.id_doctor_FK > doctor.id_doctor
+
+Ref: local.id_employee_FK > employee.id_employee
 
 Ref: appointment.id_user_FK > user_data.id_user
 

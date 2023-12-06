@@ -22,7 +22,6 @@ CREATE TABLE `employee` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `id_employee` VARCHAR(191) NOT NULL,
     `id_user_FK` VARCHAR(191) NOT NULL,
-    `id_local_FK` VARCHAR(191) NOT NULL,
     `charge` VARCHAR(45) NULL,
     `study_level` MEDIUMTEXT NULL,
     `document` MEDIUMBLOB NULL,
@@ -30,9 +29,7 @@ CREATE TABLE `employee` (
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_employee_UNIQUE`(`id_employee`),
     UNIQUE INDEX `id_user_FK_UNIQUE`(`id_user_FK`),
-    UNIQUE INDEX `id_local_FK_UNIQUE`(`id_local_FK`),
     INDEX `fk_user_employee_idx`(`id_user_FK`),
-    INDEX `fk_local_employee_idx`(`id_local_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -65,6 +62,7 @@ CREATE TABLE `local` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `id_local` VARCHAR(191) NOT NULL,
     `id_doctor_FK` VARCHAR(191) NOT NULL,
+    `id_employee_FK` VARCHAR(191) NOT NULL,
     `name` VARCHAR(75) NOT NULL,
     `address` LONGTEXT NULL,
     `map` MEDIUMTEXT NULL,
@@ -76,7 +74,9 @@ CREATE TABLE `local` (
     UNIQUE INDEX `id_UNIQUE`(`id`),
     UNIQUE INDEX `id_local_UNIQUE`(`id_local`),
     UNIQUE INDEX `id_doctor_FK_UNIQUE`(`id_doctor_FK`),
+    UNIQUE INDEX `id_employee_FK_UNIQUE`(`id_employee_FK`),
     INDEX `fk_doctor_local_idx`(`id_doctor_FK`),
+    INDEX `fk_employee_local_idx`(`id_employee_FK`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -194,9 +194,6 @@ CREATE TABLE `payment` (
 ALTER TABLE `doctor` ADD CONSTRAINT `fk_user_doctor` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
-ALTER TABLE `employee` ADD CONSTRAINT `fk_local_employee` FOREIGN KEY (`id_local_FK`) REFERENCES `local`(`id_local`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
--- AddForeignKey
 ALTER TABLE `employee` ADD CONSTRAINT `fk_user_employee` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
@@ -204,6 +201,9 @@ ALTER TABLE `inventory` ADD CONSTRAINT `fk_local_inventory` FOREIGN KEY (`id_loc
 
 -- AddForeignKey
 ALTER TABLE `local` ADD CONSTRAINT `fk_doctor_local` FOREIGN KEY (`id_doctor_FK`) REFERENCES `doctor`(`id_doctor`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- AddForeignKey
+ALTER TABLE `local` ADD CONSTRAINT `fk_employee_local` FOREIGN KEY (`id_employee_FK`) REFERENCES `employee`(`id_employee`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 -- AddForeignKey
 ALTER TABLE `appointment` ADD CONSTRAINT `fk_user_appointment` FOREIGN KEY (`id_user_FK`) REFERENCES `user_data`(`id_user`) ON DELETE RESTRICT ON UPDATE RESTRICT;
