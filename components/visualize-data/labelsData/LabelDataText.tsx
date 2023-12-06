@@ -10,7 +10,7 @@ type LabelDataTextProps = {
 }
 
 const LabelDataText = ({ type = "", title = "", subIcon = <DownOutlined />, subTileIcon }: LabelDataTextProps) => (
-  <Card shadow="sm" padding="sm" radius="md" withBorder className='m-3'>
+  <Card shadow="sm" padding="sm" radius="md" withBorder m={8}>
     <Group justify="space-between">
       <Text fw={500} size='sm'>
         {type}
