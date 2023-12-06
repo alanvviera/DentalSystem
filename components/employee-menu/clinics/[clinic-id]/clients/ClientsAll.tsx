@@ -7,24 +7,24 @@ const getData = async () => {
 
     return [
         {
-            id: "daikpjdkoman",
-            name: "Bob esponja",
+            id: "23da23bada453",
+            name: "Ramón Gutierrez",
             tel: "646-127-78-95",
-            email: "bobesponja56@gmail.com"
+            email: "gutierrez@gmail.com"
 
 
         },
         {
-            id: "o2m3i29mc9f3252",
-            name: "Patricio estrella",
+            id: "o2m3i29mc9f32",
+            name: "Roberto Fernandez",
             tel: "664-187-54-32",
-            email: "mar13@hotmail.com"
+            email: "robert59@hotmail.com"
         },
         {
-            id: "0123mmb694cad304onn",
-            name: "Don cangrejo",
+            id: "0123mmb64cad",
+            name: "Marta Alvarez",
             tel: "662-154-56-85",
-            email: "d1nero56@gmail.com"
+            email: "marta13@gmail.com"
 
         }
     ]
