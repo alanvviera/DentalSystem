@@ -1,9 +1,6 @@
-import AuthProvider from '../../context/AuthProvider';
 import '@mantine/core/styles.css';
 import { NavMenu } from '../../components/nav-menu/NavMenu';
 import { HomeOutlined, TagsOutlined, AccountBookOutlined, BuildOutlined, SettingOutlined, FileTextOutlined } from "@ant-design/icons"
-import fakeTypeUser from '../../constants/fakeTypeUser';
-import { getSession } from 'next-auth/react';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 
