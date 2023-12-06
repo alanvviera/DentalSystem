@@ -10,16 +10,16 @@ const getData = async () => {
             id: "dkjNehujf",
             name: "Cloroquina",
             acquisitionDate: "1700436088000",
-            expirationDate: "1731532841",
+            expirationDate: "1725062400000",
             cost: 75.56,
             stock: 25,
 
         },
         {
             id: "200dsajn2xall4",
-            name: "Parecetamol",
+            name: "Aspirina",
             acquisitionDate: "1699744888000",
-            expirationDate: "1763068841",
+            expirationDate: "1746662400000",
             cost: 10.56,
             stock: 36,
 
@@ -28,7 +28,7 @@ const getData = async () => {
             id: "fmk23xlp2l3",
             name: "Amoxicilina",
             acquisitionDate: "1642461688000",
-            expirationDate: "1708118441",
+            expirationDate: "1754611200000",
             cost: 16.59,
             stock: 2,
 

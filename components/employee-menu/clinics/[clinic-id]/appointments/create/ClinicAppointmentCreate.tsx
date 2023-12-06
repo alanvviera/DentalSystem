@@ -5,11 +5,12 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../../mantine-form/MantineForm';
 import { validaFieldsNotEmpty, validateDate, validateNumber,  } from '../../../../../mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../mantine-form/customMantineInput';
+import { CLINICLIST, TYPELISTAPPOINTMENTS } from '../../../../../../constants/constants';
 
 const getData =async (clinicId)=>{
     return {
-        listClinics: ["Clinica lopez", "Clinica mariano"],
-        listTypeAppointments: ["Extracción de muelas", "Limpieza dental"],
+        listClinics: [...CLINICLIST],
+        listTypeAppointments: [...TYPELISTAPPOINTMENTS],
     }
 }
 

@@ -5,6 +5,7 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import MantineForm from '../../../../../mantine-form/MantineForm';
 import { validaFieldsNotEmpty, validateDate, validateEmail, validateNumberTel } from '../../../../../mantine-form/valuesValidate';
 import CustomInputMantine, { typeInputForm } from '../../../../../mantine-form/customMantineInput';
+import { doctorInfo, employeeInfo } from '../../../../../../constants/constants';
 
 const ClinicEmployeesRegister = ({ clinicId }) => {
 
@@ -56,13 +57,36 @@ const ClinicEmployeesRegister = ({ clinicId }) => {
                     new CustomInputMantine("Correo electrónico", "Correo electrónico", "email", typeInputForm.TEXT),
                     new CustomInputMantine("Número de teléfono", "Ejem: 646-123-45-67", "numTel", typeInputForm.TEXT),
                     new CustomInputMantine("CURP", "Ingrese el curp", "curp", typeInputForm.TEXT),
-                    new CustomInputMantine("Cargo", "Cargo", "activity", typeInputForm.TEXT),
-                    new CustomInputMantine("Licencia medica", "Licencia medica", "medicalDegree", typeInputForm.TEXT),
+                    new CustomInputMantine(
+                        "Cargo *",
+                        "Cargo",
+                        "activity",
+                        typeInputForm.SELECTITEMS,
+                        undefined,
+                        undefined,
+                        undefined,
+                        employeeInfo.CLINIC_POSITIONS
+                    ),
+                    new CustomInputMantine(
+                        "Licencia medica", "Licencia medica", "medicalDegree",
+                        typeInputForm.SELECTITEMS,
+                        undefined,
+                        undefined,
+                        undefined,
+                        employeeInfo.ACADEMIC_DEGREES
+                    ),
                     new CustomInputMantine("Dirección", "Dirección", "addrress", typeInputForm.TEXT),
-                    new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER, ),
-                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sex", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre","Mujer"] ),
+                    new CustomInputMantine("Fecha de nacimiento", "Fecha de nacimiento", "dateBirthday", typeInputForm.DATEPICKER,),
+                    new CustomInputMantine("Sexo", "Seleccione el sexo", "sex", typeInputForm.SELECTITEMS, undefined, undefined, undefined, ["Hombre", "Mujer"]),
                     new CustomInputMantine("Lugar de estado", "Lugar de estado", "state", typeInputForm.TEXT),
-                    new CustomInputMantine("Especialidad", "Especialidad", "speciality", typeInputForm.TEXT),
+                    new CustomInputMantine(
+                        "Especialidad", "Especialidad", "speciality",
+                        typeInputForm.SELECTITEMS,
+                        undefined,
+                        undefined,
+                        undefined,
+                        doctorInfo.SPECIALTIES
+                      ),
                 ]}
                 onSubmit={(form: any) => {
                     onSubmit(form);

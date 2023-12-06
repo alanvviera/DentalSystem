@@ -47,7 +47,7 @@ export const NavMenu = ({
   user,
 }: NavMenuProps) => {
   const pinned = useHeadroom({ fixedAt: 120 });
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
   const path = usePathname();
   let filter: Route[] | undefined;
   let tl: string | undefined;
@@ -121,7 +121,7 @@ export const NavMenu = ({
                 href={item.url}
                 leftSection={item.icon}
                 variant="subtles"
-                onClick={toggle}
+                onClick={close}
                 active={path === item.url}
               />
             ))}

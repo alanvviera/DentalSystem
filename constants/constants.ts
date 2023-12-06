@@ -10,6 +10,7 @@ export const doctorInfo = {
     "Urología",
     "Endocrinología",
     "Psiquiatría",
+    "No disponible"
   ],
   FACULTIES: [
     "Facultad de Ciencias Médicas Avanzadas",
@@ -22,6 +23,7 @@ export const doctorInfo = {
     "Instituto de Ciencias Biomédicas Progresivas",
     "Facultad de Salud Global",
     "Escuela de Medicina Avanzada",
+    "No disponible"
   ],
   MEDICAL_LICENSES: [
     "Licencia Médica General",
@@ -34,14 +36,28 @@ export const doctorInfo = {
     "Licencia de Medicina Preventiva",
     "Licencia de Radiología Médica",
     "Licencia de Medicina Deportiva",
+    "No disponible"
   ],
 };
 
 const TYPELISTAPPOINTMENTS = ["Examen dental de rutina", "Limpieza dental", "Tratamiento de caries", "Extracciones dentales", "Blanqueamiento dental", "Implantes dentales", "Tratamientos de conducto", "Colocación de brackets o aparatos ortodónticos", "Consulta para dolor o emergencia dental", "Adaptación y ajuste de prótesis dentales"];
 const CLINICLIST = ["Bienestar dental", "Dental solutions","Dental navarro","Vitalia clínica"];
+const MEDICATIONCATEGORIES = [
+  "Analgésicos",
+  "Antipiréticos",
+  "Antibióticos",
+  "Antihistamínicos",
+  "Antiinflamatorios",
+  "Antidepresivos",
+  "Antiacidos",
+  "Anticonvulsivos",
+  "Anticoagulantes",
+  "Antidiabéticos"
+]
 export {
   TYPELISTAPPOINTMENTS,
-  CLINICLIST
+  CLINICLIST,
+  MEDICATIONCATEGORIES
 }
 
 export const employeeInfo = {
@@ -56,6 +72,8 @@ export const employeeInfo = {
     "Especialista en Emergencias",
     "Jefe de Laboratorio",
     "Director de Salud Mental",
+    "Jefe de Recursos Humanos",
+    "No disponible"
   ],
   ACADEMIC_DEGREES: [
     "Doctor en Medicina",
@@ -68,6 +86,7 @@ export const employeeInfo = {
     "Doctorado en Genética Médica",
     "Especialización en Medicina Deportiva",
     "Maestría en Bioética Médica",
+    "No disponible"
   ],
 };
 

@@ -10,19 +10,19 @@ const getData = async ()=>{
 return  [
     {
         idEmployee: "dsdaxXe2mmadfasd23",
-        name: "Son goku",
+        name: "Julio Flores",
     },
     {
-        idEmployee: "xmLñ23%42dax62321f",
-        name: "Broly"
+        idEmployee: "xmL2342dax62321f",
+        name: "Graciela Rodriguez"
     },
     {
-        idEmployee: "KbVrrox156134&52-23sx",
-        name: "Gohan"
+        idEmployee: "KbVrrox156sd345223sx",
+        name: "Natalia Gomez"
     },
     {
-        idEmployee: "Xmendsa323232aXkmk2ñ5.lplm",
-        name: "Goten's"
+        idEmployee: "fds3acd326as235",
+        name: "Nicolás Benitez"
     }
 
 ];
