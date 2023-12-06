@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Group, Title } from "@mantine/core";
 import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 import TableInventory from '../../../../tables/employee-menu/clinic/inventory/TableInventory';
+import { dateToStringWithoutTime } from '../../../../../utils/parseDates';
 
 const getData = async () => {
 
@@ -37,7 +38,7 @@ const getData = async () => {
 }
 
 
-const ClinicInventaryAll = async ({clinicId}) => {
+const ClinicInventaryAll = async ({ clinicId }) => {
     // const clinicId = params["clinic-id"];
     const dataExampleFromServer = await getData();
 
@@ -61,7 +62,13 @@ const ClinicInventaryAll = async ({clinicId}) => {
                     Agregar
                 </Button>
             </Group>
-            <TableInventory headers={headers} elements={dataExampleFromServer} />
+            <TableInventory headers={headers} elements={dataExampleFromServer.map((element) => {
+                return {
+                    ...element,
+                    acquisitionDate: dateToStringWithoutTime(new Date(Number(element.acquisitionDate))),
+                    expirationDate: dateToStringWithoutTime(new Date(Number(element.expirationDate))),
+                }
+            })} />
         </main>
     )
 }

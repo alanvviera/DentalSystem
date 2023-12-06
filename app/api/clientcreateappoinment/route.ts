@@ -39,9 +39,9 @@ export async function POST(req: NextRequest) {
 
   try {
     if (req.method === 'POST') {
-      const { type, date, hour, subject, id_doctor_FK, id_user_FK, id_local_FK } = await req.json();
+      const { type, date, hour, subject, id_doctor_FK, id_local_FK } = await req.json();
 
-      if (!type || !date || !hour || !subject || !id_doctor_FK || !id_user_FK || !id_local_FK) {
+      if (!type || !date || !hour || !subject /*|| !id_doctor_FK*/ || !id_local_FK) {
         return NextResponse.json({ error: 'Debes llenar todos los datos.' }, { status: 400 });
       }
 
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
           hour,
           subject,
           id_doctor_FK,
-          id_user_FK,
+          id_user_FK : session.user.id,
           id_local_FK,
         },
       });

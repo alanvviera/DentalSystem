@@ -21,7 +21,7 @@ const page = async ({ params }) => {
     const typeUser = session.user?.type_user;
 
 
-    if (typeUser === "EMPLOYEE") {
+    if (typeUser === "EMPLOYEE" || typeUser === "DOCTOR") {
         return <ClientsAll clinicId={clinicId} />
     }
     else {

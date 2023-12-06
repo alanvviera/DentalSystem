@@ -1,28 +1,28 @@
 import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth"
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '../../auth/[...nextauth]/route';
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest){
 
     const session = await getServerSession(authOptions);
+    const appointmentId = req.nextUrl.searchParams.get('id')
 
     try {
 
-        const dashboardData = await prisma.appointment.findMany({
+        const dashboardData = await prisma.local.findUnique({
           where: {
-            id_user_FK : session.user.id
+            id : parseInt(appointmentId),
           },
-          select: {
-            date: true,
-            hour: true,
-            user_data: {
-              select: {
-                name: true
-              }
-            }
+          select:{
+            id: true,
+            id_local: true,
+            address: true,
+            building_number: true,
+            phone_number: true,
+            status: true,
           }
         });
     
