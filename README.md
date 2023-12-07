@@ -57,6 +57,13 @@ Para ejecutar el proyecto es necesario, es necesario instalar y configurar lo si
   ```sh
   npm install npm@latest -g
   ```
+- MySQL y dentro Crear un Usuario con todos los privilegios y una base de datos vacia:
+  ```sh
+    CREATE USER 'Nombre_Usuario'@'localhost' IDENTIFIED BY 'Contraseña';
+    GRANT ALL PRIVILEGES ON *.* TO 'Nombre_Usuario'@'localhost';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE nombre_basedatos;
+  ```
 
 ### Instalacion
 
@@ -64,21 +71,40 @@ Para ejecutar el proyecto es necesario, es necesario instalar y configurar lo si
    ```sh
    git clone https://github.com/alanvviera/DentalSystem.git
    ```
-2. Go to the project folder.
+2. Vea a la Carpeta
    ```sh
     cd DentalSystem/
    ```
-3. Install NPM packages.
+3. Crea un archivo .env y configuralo:
+   ```sh
+    NEXTAUTH_URL = "http://localhost:3000"
+    NEXTAUTH_SECRET = ""
+    DATABASE_URL="mysql://Nombre_Usuario:Contraseña@localhost:3306/nombre_basedatos"
+   ```
+4. Instala los paquetes NPM.
    ```sh
    npm install
    ```
-4. Run the project.
+5. Genera y Migra el schema de Base de datos.
+   ```sh
+    npx prisma migrate dev
+    npx prisma migrate deploy
+    npx prisma generate
+   ```
+6. Ejecuta el proyecto.
    ```sh
     npm run dev
    ```
    <p align="right">(<a href="#readme-top">Back to top</a>)</p>
 
 <!-- System Function -->
+
+## Librerias Instalados
+
+- Bcrypt para encriptar las contraseñas.
+- Prisma para manejar la BBDD.
+- NextAuth para autenticaciones.
+- Mantine para Diseño de FrontEnd
 
 ## Funciones-Generales
 
@@ -248,14 +274,25 @@ Vea `Cronograma de actividades sistema dental.pdf` para visualizar el Diagrama d
 
 Direcciones Github de integrantes de Proyecto:
 
-- Alan Cordova Viera [https://github.com/alanvviera](https://github.com/alanvviera)
-- Andre Axel Cadena Zepeda [https://github.com/AndreCaze](https://github.com/AndreCaze)
-- Zack Vadhir Dragostinovis Solis [https://github.com/Nerovelic](https://github.com/Nerovelic)
-- Alberto Oswaldo Cisneros Torres [https://github.com/Waldo72k](https://github.com/Waldo72k)
+FRONTEND
+
 - Jesus Jeovany Bonilla Martinez [https://github.com/JeovanyBon](https://github.com/JeovanyBon)
 - Cesar del Angel Ramon Lozano [https://github.com/AngelSilent](https://github.com/AngelSilent)
-- Miguel Argote Reyes [https://github.com/Miwi64](https://github.com/Miwi64)
+- Miguel Argote Reyes - 19760557 [https://github.com/Miwi64](https://github.com/Miwi64)
+
+BACKEND
+
+- Alberto Oswaldo Cisneros Torres [https://github.com/Waldo72k](https://github.com/Waldo72k)
 - Juan Ernesto Diaz Osuna [https://github.com/tparadyse](https://github.com/tparadyse)
+
+DATABASE
+
+- Zack Vadhir Dragostinovis Solis - 19760512 [https://github.com/Nerovelic](https://github.com/Nerovelic)
 - Edgar Alejandro Gonzalez Aviles [https://github.com/Edgar-Glez](https://github.com/Edgar-Glez)
+
+QA
+
+- Alan Cordova Viera - 17760217 [https://github.com/alanvviera](https://github.com/alanvviera)
+- Andre Axel Cadena Zepeda - 19760606 [https://github.com/AndreCaze](https://github.com/AndreCaze)
 
 <p align="right">(<a href="#readme-top">Back to top</a>)</p>
