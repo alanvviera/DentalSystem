@@ -276,14 +276,14 @@ Direcciones Github de integrantes de Proyecto:
 
 FRONTEND
 
-- Jesus Jeovany Bonilla Martinez [https://github.com/JeovanyBon](https://github.com/JeovanyBon)
+- Jesus Jeovany Bonilla Martinez - 19760613 [https://github.com/JeovanyBon](https://github.com/JeovanyBon)
 - Cesar del Angel Ramon Lozano [https://github.com/AngelSilent](https://github.com/AngelSilent)
 - Miguel Argote Reyes - 19760557 [https://github.com/Miwi64](https://github.com/Miwi64)
 
 BACKEND
 
-- Alberto Oswaldo Cisneros Torres [https://github.com/Waldo72k](https://github.com/Waldo72k)
-- Juan Ernesto Diaz Osuna [https://github.com/tparadyse](https://github.com/tparadyse)
+- Alberto Oswaldo Cisneros Torres - 23760004 [https://github.com/Waldo72k](https://github.com/Waldo72k)
+- Juan Ernesto Diaz Osuna - 19760726 [https://github.com/tparadyse](https://github.com/tparadyse)
 
 DATABASE
 
